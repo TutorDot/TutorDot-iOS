@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SWn-Nz-7EO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aqn-9I-DME">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -268,6 +268,7 @@
                                     <constraint firstItem="G3B-gq-SCb" firstAttribute="height" secondItem="sYc-1k-x0p" secondAttribute="height" priority="250" id="J24-xK-k7G"/>
                                     <constraint firstAttribute="bottom" secondItem="oaM-FP-c4h" secondAttribute="bottom" id="KXw-3a-bQO"/>
                                     <constraint firstAttribute="trailing" secondItem="oaM-FP-c4h" secondAttribute="trailing" id="LPG-Pz-Djd"/>
+                                    <constraint firstAttribute="height" constant="391" id="Ulr-jl-mz2"/>
                                     <constraint firstItem="G3B-gq-SCb" firstAttribute="width" secondItem="sYc-1k-x0p" secondAttribute="width" id="dnL-X0-ObE"/>
                                     <constraint firstItem="oaM-FP-c4h" firstAttribute="leading" secondItem="sYc-1k-x0p" secondAttribute="leading" id="fOM-e1-LzY"/>
                                     <constraint firstItem="oaM-FP-c4h" firstAttribute="top" secondItem="sYc-1k-x0p" secondAttribute="top" id="hOc-7g-R2w"/>
@@ -310,11 +311,47 @@
                         <outlet property="rightButton" destination="Wrn-6R-Jo3" id="giU-5q-tk6"/>
                         <outlet property="topDateButton" destination="sx2-t5-cf7" id="wDH-FX-VVE"/>
                         <outlet property="tutorCollectionView" destination="hDe-Zy-BfX" id="9dR-VD-uIv"/>
+                        <outlet property="tutorView" destination="sYc-1k-x0p" id="ggt-a4-yhw"/>
+                        <outlet property="tutorViewHeightConstraint" destination="Ulr-jl-mz2" id="cuA-HX-M1e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjm-xV-vyE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1034.4000000000001" y="67.241379310344826"/>
+        </scene>
+        <!--TestVC-->
+        <scene sceneID="tOf-qy-Smx">
+            <objects>
+                <viewController id="Aqn-9I-DME" customClass="testVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oHE-fG-ORY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zn-tH-L9P">
+                                <rect key="frame" x="67" y="152" width="240" height="128"/>
+                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="pu5-wt-VA9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qdR-b8-GPS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2zn-tH-L9P" firstAttribute="top" secondItem="qdR-b8-GPS" secondAttribute="top" constant="108" id="QnB-FE-bKB"/>
+                            <constraint firstItem="qdR-b8-GPS" firstAttribute="bottom" secondItem="2zn-tH-L9P" secondAttribute="bottom" constant="498" id="kgS-Zf-eBi"/>
+                            <constraint firstItem="2zn-tH-L9P" firstAttribute="leading" secondItem="qdR-b8-GPS" secondAttribute="leading" constant="67" id="mrJ-5W-pt5"/>
+                            <constraint firstItem="qdR-b8-GPS" firstAttribute="trailing" secondItem="2zn-tH-L9P" secondAttribute="trailing" constant="68" id="vLg-iL-imu"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="panHeight" destination="pu5-wt-VA9" id="wvZ-f0-mAp"/>
+                        <outlet property="panView" destination="2zn-tH-L9P" id="qw3-Ir-gag"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tgL-Lf-3pe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1110" y="-672"/>
         </scene>
         <!--Class EditVC-->
         <scene sceneID="X2w-j8-F6y">
@@ -844,6 +881,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

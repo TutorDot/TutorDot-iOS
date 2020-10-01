@@ -58,6 +58,7 @@
 		01CAC65F24BB508400400654 /* SignUpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAC65E24BB508400400654 /* SignUpService.swift */; };
 		01CAC66124BB525300400654 /* SignUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CAC66024BB525300400654 /* SignUpData.swift */; };
 		01D9FDF524BEF622009104DE /* Extensions+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D9FDF424BEF622009104DE /* Extensions+Date.swift */; };
+		01E4A840252619DC00B5B485 /* testVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4A83F252619DC00B5B485 /* testVC.swift */; };
 		01EFFF1924B9D78100518DE6 /* OnBoardingImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF1824B9D78100518DE6 /* OnBoardingImageInfo.swift */; };
 		01EFFF2024B9E72C00518DE6 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF1F24B9E72C00518DE6 /* APIConstants.swift */; };
 		01EFFF2224B9E73D00518DE6 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF2124B9E73D00518DE6 /* NetworkResult.swift */; };
@@ -157,6 +158,7 @@
 		01CAC65E24BB508400400654 /* SignUpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpService.swift; sourceTree = "<group>"; };
 		01CAC66024BB525300400654 /* SignUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpData.swift; sourceTree = "<group>"; };
 		01D9FDF424BEF622009104DE /* Extensions+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Date.swift"; sourceTree = "<group>"; };
+		01E4A83F252619DC00B5B485 /* testVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testVC.swift; sourceTree = "<group>"; };
 		01EFFF1824B9D78100518DE6 /* OnBoardingImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingImageInfo.swift; sourceTree = "<group>"; };
 		01EFFF1F24B9E72C00518DE6 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		01EFFF2124B9E73D00518DE6 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				F4D1A0CB24B7CA3000B13D65 /* MyClassAddVC.swift */,
 				F4D1A0CD24B7D52B00B13D65 /* OnboardingVC.swift */,
 				F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */,
+				01E4A83F252619DC00B5B485 /* testVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				012E887C24B5ABCF00EF81FB /* NotesModifyVC.swift in Sources */,
 				014703C424B316960074D4E2 /* AlertTableHeaderViewCell.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
+				01E4A840252619DC00B5B485 /* testVC.swift in Sources */,
 				F471772C24B2036B0098C827 /* MonthJournalCell.swift in Sources */,
 				F4200E0724BE4FFA00EA1D6F /* ClassConnectCell.swift in Sources */,
 				F4200E0524BE09D700EA1D6F /* AddRegularClassTimeCell.swift in Sources */,
