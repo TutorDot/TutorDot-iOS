@@ -4,7 +4,7 @@
 //
 //  Created by Sehwa Ryu on 29/06/2020.
 //  Copyright © 2020 Sehwa Ryu. All rights reserved.
-//
+
 import UIKit
 import DropDown
 import Foundation
@@ -17,7 +17,6 @@ class CalendarVC: UIViewController {
     
     static let identifier: String = "CalendarVC"
     
-    // 변수 설정
     var dropDown: DropDown?
     var classList: [CalendarData] = [] // 수업 더미 데이터
     var classDateList: [CalendarData] = [] // 날짜별 일정 리턴 데이터
@@ -26,7 +25,12 @@ class CalendarVC: UIViewController {
     var classListToggle: [CalendarData] = [] // 토글 버튼 누르면 새로 수업 정보 데이터 저장되는 리스트
     var classList2Copy: [CalendarData] = [] // 서버에서 받아오는 날짜 데이터 백업
     
-    // 캘린더
+    var translation: CGPoint!
+    var startPosition: CGPoint! //Start position for the gesture transition
+    var originalHeight: CGFloat = 0 // Initial Height for the UIView
+    var difference: CGFloat!
+    
+    // MARK: Calendar variables
     var index: IndexPath? // 오늘 날짜 인덱스 저장 변수
     var nextDate : Int = 0 // 다음 날짜 초기화
     var returnvalue: Int = 0
@@ -37,15 +41,15 @@ class CalendarVC: UIViewController {
     var presentMonthIndex = 0
     var presentYear = 0
     var todaysDate = 0
-    var firstWeekDayOfMonth = 0 //(일-토: 1-7)
+    var firstWeekDayOfMonth = 0
     var lastWeekDayOfMonth = 0
     var currentMonthIndexConstant = 0
     var delegate: CalendarViewControllerDeleagte?
     
     @IBOutlet weak var dateCollectionView: UICollectionView!
+    @IBOutlet weak var tutorView: UIView!
     @IBOutlet weak var tutorCollectionView: UICollectionView!
     
-    // Button settings
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var dropDownButton: UIButton!
@@ -60,7 +64,8 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var calendarCollectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var calendarViewHeightConstraint: NSLayoutConstraint!
     
-    // calendarView 전체 모양 설정
+    @IBOutlet weak var tutorViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var calendarView: UIView! {
         didSet {
             calendarView.layer.cornerRadius = 20
@@ -71,24 +76,36 @@ class CalendarVC: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllerUI()
         setupCalendar()
-        
-        self.view.bringSubviewToFront(calendarView)
-        //setClassList()
         setUpView()
         getClassList()
-        
-        //print("드랍다운2", dropDownList)
         setListDropDown()
-        
-        print("같을까", classList2)
-        
+        self.view.bringSubviewToFront(tutorView)
+    
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.pan(_:)))
+            tutorView.addGestureRecognizer(gesture)
     }
     
-    // 서버통신: 토글에서 수업리스트 가져오기
+    @objc func pan(_ pan: UIPanGestureRecognizer) {
+        let translation = pan.translation(in: tutorView)
+        if pan.state == .began {
+        } else if pan.state == .changed {
+            tutorViewHeightConstraint.constant = tutorViewHeightConstraint.constant - translation.y
+            pan.setTranslation(CGPoint.zero, in: tutorView)
+        } else if pan.state == .ended {
+            // You can handle this how you want.
+        }
+    }
+    
+    
+    
+
+    
+    // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
         var dropList : [String] = ["전체"]
         dropDown = DropDown()
@@ -98,21 +115,19 @@ class CalendarVC: UIViewController {
         self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
         self.dropDown?.cellHeight = 41
         DropDown.appearance().setupCornerRadius(7)
-        
-        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
-        
-        // 서버통신: 토글에서 수업리스트 가져오기
+        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)! + 6)
+        /// 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
-        switch networkResult {
+            switch networkResult {
             case .success(let resultData):
-            guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-            for index in 0..<data.count {
-                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
-                dropList.append(item.lectureName)
-                self.dropDown?.dataSource = dropList
-                print("toggleList", dropList)
-            }
-            
+                guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
+                for index in 0..<data.count {
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    dropList.append(item.lectureName)
+                    self.dropDown?.dataSource = dropList
+                    print("toggleList", dropList)
+                }
+                
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)
@@ -120,7 +135,6 @@ class CalendarVC: UIViewController {
                 print("networkFail")
             }
         }
-        
         // 드롭박스 목록 내역
         dropDownButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
         dropDownLabelButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
@@ -145,17 +159,12 @@ class CalendarVC: UIViewController {
                     if self.dropDownLabelButton.title(for: .normal) == self.classList2[i].lectureName {
                         self.classListToggle.append(self.classList2[i])
                     }
-                    print("새 리스트", self.classListToggle)
-
                 }
                 self.classList2.removeAll()
                 self.classList2 = self.classListToggle
                 self.dateCollectionView.reloadData()
                 self.tutorCollectionView.reloadData()
-                
             }
-            
-            
         }
         // 드롭박스 내 text 가운데 정렬
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -167,7 +176,6 @@ class CalendarVC: UIViewController {
         self.headerView.sendSubviewToBack(anchorView)
         anchorView.frame.size.width = headerView.frame.size.width / 1.2
         headerViewHeightConstraint.constant = view.frame.height * 94/812
-        
         if self.view.frame.size.height > 800 {
             self.calendarCollectionViewHeightConstraint.constant = 290
             self.calendarViewHeightConstraint.constant = 400
@@ -176,28 +184,21 @@ class CalendarVC: UIViewController {
             self.calendarViewHeightConstraint.constant = 400
         }
     }
-    
-    
     @objc func dropDownToggleButton(){
         self.dropDown?.reloadAllComponents()
         dropDown?.show()
-        
     }
-
+    
     // 서버 통신 : 캘린더 전체 데이터 가져오기
     func getClassList() {
         ClassInfoService.classInfoServiceShared.getAllClassInfo() { networkResult in
             switch networkResult {
             case .success(let resultData):
-                print("successssss")
-                //guard let data = resultData as? [CalendarData] else { return }
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
-                print("try")
                 for index in 0..<data.count {
                     let item = CalendarData(classId: data[index].classId, lectureName: data[index].lectureName, color: data[index].color, times: data[index].times, hour: data[index].hour, location: data[index].location, classDate: data[index].classDate, startTime: data[index].startTime, endTime: data[index].endTime)
                     self.classList2.append(item)
                     self.classList2Copy = self.classList2
-
                 }
                 self.dateCollectionView.reloadData()
                 self.tutorCollectionView.reloadData()
@@ -244,7 +245,6 @@ class CalendarVC: UIViewController {
             currentYear += 1
         }
         topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
-        
         // 2월 일 수 처리
         if currentMonthIndex == 1 {
             if currentYear % 4 == 0 {
@@ -259,36 +259,12 @@ class CalendarVC: UIViewController {
     }
     
     
-    
     @IBAction func plusButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassAddVC.identifier) as? ClassAddVC else {return}
         
         receiveViewController.modalPresentationStyle = .fullScreen
         self.present(receiveViewController, animated: true, completion: nil)
-        
-       
-        }
-
-    
-
-    // 더미데이터
-    func setClassList() {
-        let info1 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "blue", times: 3, hour: 4, location: "강남역", classDate: "2020-7-20", startTime: "3:00pm", endTime: "3:00pm")
-        let info2 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "red", times: 3, hour: 4, location: "강남역", classDate: "2020-7-2", startTime: "3:00pm", endTime: "3:00pm")
-        let info3 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "green", times: 3, hour: 4, location: "강남역", classDate: "2020-7-21", startTime: "3:00pm", endTime: "3:00pm")
-        let info4 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "red", times: 3, hour: 4, location: "강남역", classDate: "2020-7-30", startTime: "3:00pm", endTime: "3:00pm")
-        let info5 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "red", times: 3, hour: 4, location: "강남역", classDate: "2020-7-20", startTime: "3:00pm", endTime: "3:00pm")
-        let info6 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "yellow", times: 3, hour: 4, location: "강남역", classDate: "2020-7-17", startTime: "3:00pm", endTime: "3:00pm")
-        let info7 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "blue", times: 3, hour: 4, location: "강남역", classDate: "2020-7-19", startTime: "3:00pm", endTime: "3:00pm")
-        let info8 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "yellow", times: 3, hour: 4, location: "강남역", classDate: "2020-7-20", startTime: "3:00pm", endTime: "3:00pm")
-        let info9 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "blue", times: 3, hour: 4, location: "강남역", classDate: "2020-7-26", startTime: "3:00pm", endTime: "3:00pm")
-        let info10 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "blue", times: 3, hour: 4, location: "강남역", classDate: "2020-7-23", startTime: "3:00pm", endTime: "3:00pm")
-        let info11 = CalendarData(classId: 0, lectureName: "류세화님의 수학과외", color: "blue", times: 3, hour: 4, location: "강남역", classDate: "2020-7-20", startTime: "3:00pm", endTime: "3:00pm")
-        
-        classList = [info1, info2, info3, info4, info5, info6, info7, info8, info9, info10, info11]
-        //classList = []
     }
-    
 }
 
 extension CalendarVC {
@@ -306,9 +282,8 @@ extension CalendarVC {
         todaysDate = Calendar.current.component(.day, from: Date()) // 오늘 날짜
         currentMonthIndex -= 1
         
-        firstWeekDayOfMonth = getFirstWeekDay() //4
+        firstWeekDayOfMonth = getFirstWeekDay()
         lastWeekDayOfMonth = getLastWeekDay()
-        print("마지막 요일", lastWeekDayOfMonth)
         
         // 2월 날짜 처리
         if currentMonthIndex == 1 && currentYear % 4 == 0 {
@@ -325,10 +300,12 @@ extension CalendarVC {
         dateHeaderLabel.text = String(todaysDate)
         monthHeaderLabel.text = String("\(presentMonthIndex+1)월")
     }
+    
     func getFirstWeekDay() -> Int {
         let day = ("\(currentYear)-\(currentMonthIndex+1)-01".date?.firstDayOfTheMonth.weekday)!
         return day
     }
+    
     func getLastWeekDay() -> Int {
         let lastDay = ("\(currentYear)-\(currentMonthIndex+1)-01".date?.lastDayOfTheMonth.weekday)!
         return lastDay
@@ -348,7 +325,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if classDateList.count == 0 {
                 return 1
             } else {
-                print("섹션 수", classDateList.count)
                 return classDateList.count
             }
             
@@ -360,12 +336,9 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         let calendarCell = CalendarCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorInfoCell = TutorCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorBlankCell = TutorBlankCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
-        
         let currentMonthCalendarIndex = currentMonthIndex + 1
         let currentDateCalendarIndex = todaysDate
-        print("바뀔때", currentMonthCalendarIndex, currentDateCalendarIndex)
         
-
         // CalendarCollectionView
         if collectionView == self.dateCollectionView {
             // 다음 달로 넘어가면 선택한 날짜 색 초기화
@@ -375,7 +348,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.isHidden = false
                 calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
                 let prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex-1]+2)
-                print("첫째 요일", firstWeekDayOfMonth)
                 calendarCell.dateLabel.text="\(prevDate)"
                 calendarCell.isUserInteractionEnabled = false
                 
@@ -410,7 +382,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.dateLabel.textColor = UIColor.black
                 calendarCell.isUserInteractionEnabled = true
                 calendarCell.backgroundColor = UIColor.white
-                
                 calendarCell.image1.image = nil
                 calendarCell.image2.image = nil
                 calendarCell.image3.image = nil
@@ -428,9 +399,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     let todaysDate = String(format: "%02d", Int(calendarCell.dateLabel.text!) as! CVarArg)
                     let classDateMonthZeros = self.classList2[i].classDate.components(separatedBy: "-")[1] // with zero month
                     let classDateDay = self.classList2[i].classDate.components(separatedBy: "-")[2] // with zero day
-                    
-                    print("오늘 월, 오늘 일, 데이터 월, 데이터 일", dayMove, todaysDate, classDateMonthZeros, classDateDay)
-                    
                     // 셀의 월, 일과 일치할때 점 찍기
                     if classDateMonthZeros == dayMove && classDateDay == todaysDate {
                         let imageName = classList2[i].color
@@ -454,7 +422,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 tutorBlankCell.isUserInteractionEnabled = false
                 return tutorBlankCell
                 
-            // 해당 날짜에 수업이 있을 경우
+                // 해당 날짜에 수업이 있을 경우
             } else {
                 tutorInfoCell.infoView.frame.size.width = tutorInfoCell.frame.size.width/2
                 tutorInfoCell.set(classDateList[indexPath.row])
@@ -472,12 +440,9 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         // 캘린더 컬렉션 뷰
         if collectionView == self.dateCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
-            
-            //collectionView.selectItem(at: index, animated: true, scrollPosition: [])
             // 날짜 선택시 셀 색깔 바뀌기
             cell?.dateView.backgroundColor = UIColor.veryLightPinkTwo
             cell?.dateLabel.textColor = UIColor.black
-            print("indexpath", indexPath[1])
             
             if let date = cell?.dateLabel.text! {
                 print("\(currentYear)-\(currentMonthIndex+1)-\(date)")
@@ -488,7 +453,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 // 선택된 날짜 다른 뷰컨에서 쓰기
                 self.delegate?.didSelectDate(dateString: "\(currentYear)-\(currentMonthIndex+1)-\(date)")
                 tutorCollectionView.reloadData() // 다른 날짜 클릭시 초기화
-    
+                
                 // 날짜별로 해당하는 수업 리턴하기
                 // 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
                 for index in 0..<classList2.count {
@@ -508,9 +473,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
             let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
-            
             guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassEditVC.identifier) as? ClassEditVC else {return}
-            
             // 과외 리스트가 있을 때에만
             if classList2.count > 0 {
                 
@@ -550,13 +513,8 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if let imageIcon = cell?.colorImage.image {
                     receiveViewController.classImage.image = imageIcon
                 }
-                
             }
-            
-            
-            
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -573,8 +531,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             // 클래스 리스트 한 번 초기화
             classDateList.removeAll()
         }
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -585,12 +541,9 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         }
         
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
