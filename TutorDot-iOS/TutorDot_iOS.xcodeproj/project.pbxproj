@@ -100,6 +100,7 @@
 		F4D1A0D624BA9CDE00B13D65 /* BlankMyClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D1A0D424BA9CDE00B13D65 /* BlankMyClassCell.xib */; };
 		F4D1A0D924BA9D5000B13D65 /* BlankClassJournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D1A0D724BA9D5000B13D65 /* BlankClassJournalCell.swift */; };
 		F4D1A0DA24BA9D5000B13D65 /* BlankClassJournalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D1A0D824BA9D5000B13D65 /* BlankClassJournalCell.xib */; };
+		F4E51D212526182700626670 /* Extensions+OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51D202526182600626670 /* Extensions+OSLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +202,7 @@
 		F4D1A0D424BA9CDE00B13D65 /* BlankMyClassCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankMyClassCell.xib; sourceTree = "<group>"; };
 		F4D1A0D724BA9D5000B13D65 /* BlankClassJournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankClassJournalCell.swift; sourceTree = "<group>"; };
 		F4D1A0D824BA9D5000B13D65 /* BlankClassJournalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankClassJournalCell.xib; sourceTree = "<group>"; };
+		F4E51D202526182600626670 /* Extensions+OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+OSLog.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 				F4200DFC24BCB01200EA1D6F /* Extension+ViewController.swift */,
 				F4200E0224BDB80200EA1D6F /* Extentions+UIImageView.swift */,
 				01D9FDF424BEF622009104DE /* Extensions+Date.swift */,
+				F4E51D202526182600626670 /* Extensions+OSLog.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				013B73C024C0BF83002E60C4 /* LidData.swift in Sources */,
 				F4200E0124BDA57A00EA1D6F /* ProfileData.swift in Sources */,
 				0126398524AA034F009EA0BA /* TabbarVC.swift in Sources */,
+				F4E51D212526182700626670 /* Extensions+OSLog.swift in Sources */,
 				01EFFF2024B9E72C00518DE6 /* APIConstants.swift in Sources */,
 				F4D1A09A24B4FD0600B13D65 /* MypageInfoCell.swift in Sources */,
 				F4B517DC24C06054007438DE /* AddLectureData.swift in Sources */,
