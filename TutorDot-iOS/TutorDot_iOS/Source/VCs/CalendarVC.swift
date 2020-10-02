@@ -76,6 +76,15 @@ class CalendarVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var buttonShadown: UIButton! {
+        didSet {
+            buttonShadown.layer.shadowOffset = CGSize(width: 0, height: 3)
+            buttonShadown.layer.shadowOpacity = 0.5
+            buttonShadown.layer.shadowRadius = 5.0
+            buttonShadown.layer.masksToBounds = false
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +99,7 @@ class CalendarVC: UIViewController {
             tutorView.addGestureRecognizer(gesture)
     }
     
+    
     @objc func pan(_ pan: UIPanGestureRecognizer) {
         let translation = pan.translation(in: tutorView)
         if pan.state == .began {
@@ -102,8 +112,6 @@ class CalendarVC: UIViewController {
     }
     
     
-    
-
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){

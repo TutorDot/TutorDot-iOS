@@ -296,6 +296,7 @@
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
                         <outlet property="anchorView" destination="Nk9-5D-dvS" id="jwn-38-BJr"/>
+                        <outlet property="buttonShadown" destination="OeA-09-Kft" id="twt-bC-9dx"/>
                         <outlet property="calendarCollectionViewHeightConstraint" destination="KeG-8Q-V4E" id="PIy-u7-hNf"/>
                         <outlet property="calendarView" destination="o2t-nI-yDl" id="5bV-oi-KlD"/>
                         <outlet property="calendarViewHeightConstraint" destination="4Oo-es-iib" id="yeP-29-OJZ"/>
@@ -328,7 +329,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zn-tH-L9P">
-                                <rect key="frame" x="67" y="152" width="240" height="128"/>
+                                <rect key="frame" x="67" y="650" width="240" height="128"/>
                                 <color key="backgroundColor" systemColor="systemPurpleColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="pu5-wt-VA9"/>
@@ -338,8 +339,8 @@
                         <viewLayoutGuide key="safeArea" id="qdR-b8-GPS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="2zn-tH-L9P" firstAttribute="top" secondItem="qdR-b8-GPS" secondAttribute="top" constant="108" id="QnB-FE-bKB"/>
-                            <constraint firstItem="qdR-b8-GPS" firstAttribute="bottom" secondItem="2zn-tH-L9P" secondAttribute="bottom" constant="498" id="kgS-Zf-eBi"/>
+                            <constraint firstItem="qdR-b8-GPS" firstAttribute="bottom" secondItem="2zn-tH-L9P" secondAttribute="bottom" id="KZM-nw-odM"/>
+                            <constraint firstItem="2zn-tH-L9P" firstAttribute="top" secondItem="qdR-b8-GPS" secondAttribute="top" constant="606" id="ah4-oU-YQH"/>
                             <constraint firstItem="2zn-tH-L9P" firstAttribute="leading" secondItem="qdR-b8-GPS" secondAttribute="leading" constant="67" id="mrJ-5W-pt5"/>
                             <constraint firstItem="qdR-b8-GPS" firstAttribute="trailing" secondItem="2zn-tH-L9P" secondAttribute="trailing" constant="68" id="vLg-iL-imu"/>
                         </constraints>
@@ -347,6 +348,7 @@
                     <connections>
                         <outlet property="panHeight" destination="pu5-wt-VA9" id="wvZ-f0-mAp"/>
                         <outlet property="panView" destination="2zn-tH-L9P" id="qw3-Ir-gag"/>
+                        <outlet property="topConstraint" destination="ah4-oU-YQH" id="8N9-jt-9gC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tgL-Lf-3pe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
