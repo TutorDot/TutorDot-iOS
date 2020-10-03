@@ -85,7 +85,6 @@ class CalendarVC: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllerUI()
@@ -98,10 +97,11 @@ class CalendarVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: .centeredHorizontally)
-        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+        print(index, "indexxx")
+        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
+        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0, 0])
     }
-
+    
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
@@ -338,6 +338,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         let currentMonthCalendarIndex = currentMonthIndex + 1
         let currentDateCalendarIndex = todaysDate
         
+        
         // CalendarCollectionView
         if collectionView == self.dateCollectionView {
             // 다음 달로 넘어가면 선택한 날짜 색 초기화
@@ -391,7 +392,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
                     print(index, "오늘날짜")
-                    //dateCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
                     
                 }
                 // 달력에 날짜 별 일정 점 찍기
@@ -400,7 +400,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     let todaysDate = String(format: "%02d", Int(calendarCell.dateLabel.text!) as! CVarArg)
                     let classDateMonthZeros = self.classList2[i].classDate.components(separatedBy: "-")[1] // with zero month
                     let classDateDay = self.classList2[i].classDate.components(separatedBy: "-")[2] // with zero day
-                    
                     // 셀의 월, 일과 일치할때 점 찍기
                     if classDateMonthZeros == dayMove && classDateDay == todaysDate {
                         let imageName = classList2[i].color
@@ -550,6 +549,3 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         return 0.0
     }
 }
-
-
-
