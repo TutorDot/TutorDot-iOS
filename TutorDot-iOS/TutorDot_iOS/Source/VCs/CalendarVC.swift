@@ -94,24 +94,14 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.bringSubviewToFront(tutorView)
-    
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.pan(_:)))
-            tutorView.addGestureRecognizer(gesture)
+
     }
     
-    
-    @objc func pan(_ pan: UIPanGestureRecognizer) {
-        let translation = pan.translation(in: tutorView)
-        if pan.state == .began {
-        } else if pan.state == .changed {
-            tutorViewHeightConstraint.constant = tutorViewHeightConstraint.constant - translation.y
-            pan.setTranslation(CGPoint.zero, in: tutorView)
-        } else if pan.state == .ended {
-            // You can handle this how you want.
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: .centeredHorizontally)
+        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
     }
-    
-    
+
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
@@ -340,6 +330,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         
     }
     
+    // MARK: 문제의 그 부분!!!!!!!!!
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let calendarCell = CalendarCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorInfoCell = TutorCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
@@ -355,7 +346,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if indexPath.item <= firstWeekDayOfMonth - 2 {
                 calendarCell.isHidden = false
                 calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                let prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex-1]+2)
+                let prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex-1] + 2)
                 calendarCell.dateLabel.text="\(prevDate)"
                 calendarCell.isUserInteractionEnabled = false
                 
@@ -364,15 +355,13 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.image3.image = nil
                 
                 return calendarCell
-            } // 이후 달 표시
+            } // 이후 달 cell 표시
             else if indexPath.item >= firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex]-1) {
                 
                 calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                
                 calendarCell.image1.image = nil
                 calendarCell.image2.image = nil
                 calendarCell.image3.image = nil
-                //34
                 
                 // 셀이 그 배열의 달 날짜 일수와 레이블이 일치하면 그 자리의 인덱스 리턴
                 // 그 인덱스 + 1 인 자리부터 1++ 해주기
@@ -394,12 +383,16 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.image2.image = nil
                 calendarCell.image3.image = nil
                 
-                // 오늘 날짜인 셀 찾아서 셀렉해놓기
+                // 오늘 날짜인 셀 찾아서 셀렉해놓기: 문제의 그 부분!!!
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateView.backgroundColor = UIColor.softBlue
                     calendarCell.dateLabel.textColor = UIColor.white
+
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
+                    print(index, "오늘날짜")
+                    //dateCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+                    
                 }
                 // 달력에 날짜 별 일정 점 찍기
                 for i in 0..<self.classList2.count {
@@ -407,6 +400,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     let todaysDate = String(format: "%02d", Int(calendarCell.dateLabel.text!) as! CVarArg)
                     let classDateMonthZeros = self.classList2[i].classDate.components(separatedBy: "-")[1] // with zero month
                     let classDateDay = self.classList2[i].classDate.components(separatedBy: "-")[2] // with zero day
+                    
                     // 셀의 월, 일과 일치할때 점 찍기
                     if classDateMonthZeros == dayMove && classDateDay == todaysDate {
                         let imageName = classList2[i].color
@@ -543,7 +537,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.dateCollectionView {
-            return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/7.5 )
+            return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/8 )
         } else {
             return CGSize(width: collectionView.frame.width , height: collectionView.frame.height/1.5 )
         }
