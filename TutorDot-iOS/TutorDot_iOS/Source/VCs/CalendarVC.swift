@@ -4,7 +4,6 @@
 //
 //  Created by Sehwa Ryu on 29/06/2020.
 //  Copyright © 2020 Sehwa Ryu. All rights reserved.
-
 import UIKit
 import DropDown
 import Foundation
@@ -98,8 +97,7 @@ class CalendarVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print(index, "indeexx")
-        //self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
+        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
         self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
     }
     
@@ -231,6 +229,7 @@ class CalendarVC: UIViewController {
         firstWeekDayOfMonth = getFirstWeekDay()
         dateCollectionView.reloadData()
         classDateList.removeAll()
+        tutorCollectionView.reloadData()
     }
     
     
@@ -254,6 +253,7 @@ class CalendarVC: UIViewController {
         firstWeekDayOfMonth = getFirstWeekDay()
         dateCollectionView.reloadData()
         classDateList.removeAll()
+        tutorCollectionView.reloadData()
     }
     
     
@@ -410,6 +410,13 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                         }
                     }
                 }
+                if currentMonthIndex != presentMonthIndex {
+                    let newCell = collectionView.cellForItem(at: [0, 0]) as? CalendarCollectionViewCell
+                    newCell?.dateView.backgroundColor = UIColor.softBlue
+                    self.dateCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: [])
+                    self.collectionView(self.dateCollectionView, didSelectItemAt: [0,0])
+                    
+                }
             }
             return calendarCell
         }
@@ -443,6 +450,11 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             cell?.dateView.backgroundColor = UIColor.veryLightPinkTwo
             cell?.dateLabel.textColor = UIColor.black
             classDateList.removeAll()
+            
+            if indexPath == index {
+                cell?.dateView.backgroundColor = UIColor.softBlue
+                cell?.dateLabel.textColor = UIColor.white
+            }
             if let date = cell?.dateLabel.text! {
                 print("\(currentYear)-\(currentMonthIndex+1)-\(date)")
                 // 날짜 선택시 헤더 날짜 레이블 바뀌기
@@ -536,7 +548,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.dateCollectionView {
-            return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/7.5 )
+            return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/8.5 )
         } else {
             return CGSize(width: collectionView.frame.width , height: collectionView.frame.height/1.5 )
         }

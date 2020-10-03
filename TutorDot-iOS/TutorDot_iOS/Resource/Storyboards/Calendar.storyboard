@@ -148,14 +148,14 @@
                                             <constraint firstAttribute="height" constant="30" id="hKJ-Gh-o5F"/>
                                         </constraints>
                                     </stackView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-rm-NLU" userLabel="DateCollectionView">
+                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-rm-NLU" userLabel="DateCollectionView">
                                         <rect key="frame" x="5" y="80" width="365" height="300"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="KeG-8Q-V4E"/>
                                         </constraints>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eNw-tA-C6k">
-                                            <size key="itemSize" width="33" height="32"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bR4-X3-3Wz">
+                                            <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -228,7 +228,7 @@
                                                         <rect key="frame" x="90.333333333333343" y="41.333333333333371" width="284.66666666666663" height="1.6666666666666643"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeA-09-Kft">
-                                                        <rect key="frame" x="302" y="316" width="53" height="53"/>
+                                                        <rect key="frame" x="307" y="316" width="53" height="53"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="53" id="OR6-SD-52Q"/>
                                                             <constraint firstAttribute="width" constant="53" id="Zml-5F-lV8"/>
@@ -241,7 +241,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="journalColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="OeA-09-Kft" secondAttribute="trailing" constant="20" id="1hf-fT-HRt"/>
+                                                    <constraint firstAttribute="trailing" secondItem="OeA-09-Kft" secondAttribute="trailing" constant="15" id="1hf-fT-HRt"/>
                                                     <constraint firstAttribute="bottom" secondItem="OeA-09-Kft" secondAttribute="bottom" constant="22" id="4pL-h7-jvu"/>
                                                     <constraint firstItem="hDe-Zy-BfX" firstAttribute="top" secondItem="G3B-gq-SCb" secondAttribute="top" constant="60" id="G4X-Pf-ypm"/>
                                                     <constraint firstItem="RrB-A6-QCn" firstAttribute="centerY" secondItem="x7O-58-mAU" secondAttribute="centerY" id="bBY-VX-Owc"/>
