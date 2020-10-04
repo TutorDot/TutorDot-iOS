@@ -19,87 +19,68 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAc-Oh-INb" userLabel="HeaderView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BX6-GH-RmG">
-                                        <rect key="frame" x="171.66666666666666" y="55" width="32" height="34"/>
+                                        <rect key="frame" x="307" y="30" width="32" height="34"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="전체">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="필터">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40f-vH-b7O">
-                                        <rect key="frame" x="217.66666666666666" y="61" width="12" height="22"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="353" y="36" width="12" height="22"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="calenderUnselectedBtnSubjectsection">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nk9-5D-dvS">
-                                        <rect key="frame" x="62.666666666666657" y="8" width="249.99999999999997" height="86"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="6mz-fX-G7S"/>
-                                        </constraints>
-                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx2-t5-cf7" userLabel="topDateButton">
+                                        <rect key="frame" x="63" y="82" width="118" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="2020년  7월">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-fv-ddV">
+                                        <rect key="frame" x="0.0" y="90" width="48" height="32"/>
+                                        <state key="normal" image="calenderBtnPreviousMonth">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="leftButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="xXH-QJ-bBG"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrn-6R-Jo3">
+                                        <rect key="frame" x="196" y="90" width="48" height="32"/>
+                                        <state key="normal" image="calenderBtnNextMonth">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rightButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="ZTO-jw-TzW"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.40784313725490196" green="0.45882352941176469" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
-                                    <constraint firstItem="Nk9-5D-dvS" firstAttribute="centerX" secondItem="bAc-Oh-INb" secondAttribute="centerX" id="GSo-v5-Nnr"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nk9-5D-dvS" secondAttribute="bottom" id="J1I-aJ-1sp"/>
-                                    <constraint firstItem="Nk9-5D-dvS" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="top" constant="8" id="PtX-eB-DfM"/>
+                                    <constraint firstItem="OME-fv-ddV" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" id="17q-7f-IFW"/>
+                                    <constraint firstItem="BX6-GH-RmG" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="top" constant="30" id="55q-eh-Xb2"/>
+                                    <constraint firstAttribute="trailing" secondItem="40f-vH-b7O" secondAttribute="trailing" constant="10" id="6UQ-Fv-00a"/>
+                                    <constraint firstAttribute="bottom" secondItem="sx2-t5-cf7" secondAttribute="bottom" constant="8" id="AzR-Cc-L1g"/>
+                                    <constraint firstItem="sx2-t5-cf7" firstAttribute="leading" secondItem="OME-fv-ddV" secondAttribute="trailing" constant="15" id="UWq-mH-r6c"/>
+                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="bAc-Oh-INb" secondAttribute="centerY" constant="41" id="Z2w-Zt-3Hw"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="centerY" secondItem="BX6-GH-RmG" secondAttribute="centerY" id="ZP1-87-hsn"/>
-                                    <constraint firstItem="BX6-GH-RmG" firstAttribute="centerX" secondItem="bAc-Oh-INb" secondAttribute="centerX" id="d70-71-S25"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="leading" secondItem="BX6-GH-RmG" secondAttribute="trailing" constant="14" id="fxk-ZP-dme"/>
-                                    <constraint firstAttribute="bottom" secondItem="BX6-GH-RmG" secondAttribute="bottom" constant="5" id="gZz-sI-h1V"/>
-                                    <constraint firstAttribute="height" constant="94" id="qaW-1K-SR8"/>
+                                    <constraint firstItem="OME-fv-ddV" firstAttribute="centerY" secondItem="bAc-Oh-INb" secondAttribute="centerY" constant="41" id="gql-Yl-CdH"/>
+                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="sx2-t5-cf7" secondAttribute="trailing" constant="15" id="mlg-KQ-ZXh"/>
+                                    <constraint firstAttribute="height" constant="130" id="qaW-1K-SR8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o2t-nI-yDl" userLabel="CalendarView">
-                                <rect key="frame" x="0.0" y="94" width="375" height="380"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="380"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQT-jl-z4l" userLabel="TopDateView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx2-t5-cf7" userLabel="topDateButton">
-                                                <rect key="frame" x="145.66666666666666" y="9" width="84" height="32"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" title="2020년  7월">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-fv-ddV">
-                                                <rect key="frame" x="89.666666666666671" y="9" width="48.000000000000014" height="32"/>
-                                                <state key="normal" image="calenderBtnPreviousMonth">
-                                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="leftButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="xXH-QJ-bBG"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrn-6R-Jo3">
-                                                <rect key="frame" x="237.66666666666663" y="9" width="48" height="32"/>
-                                                <state key="normal" image="calenderBtnNextMonth">
-                                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="rightButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="ZTO-jw-TzW"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="sx2-t5-cf7" firstAttribute="centerX" secondItem="hQT-jl-z4l" secondAttribute="centerX" id="1Cc-58-wc8"/>
-                                            <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="sx2-t5-cf7" secondAttribute="trailing" constant="8" id="DAc-dv-DGp"/>
-                                            <constraint firstAttribute="height" constant="50" id="OGo-1g-Wxc"/>
-                                            <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="hQT-jl-z4l" secondAttribute="centerY" id="T32-Yx-PKb"/>
-                                            <constraint firstItem="sx2-t5-cf7" firstAttribute="centerY" secondItem="hQT-jl-z4l" secondAttribute="centerY" id="Tj3-im-H43"/>
-                                            <constraint firstItem="OME-fv-ddV" firstAttribute="centerY" secondItem="hQT-jl-z4l" secondAttribute="centerY" id="jmJ-wC-BKd"/>
-                                            <constraint firstItem="sx2-t5-cf7" firstAttribute="leading" secondItem="OME-fv-ddV" secondAttribute="trailing" constant="8" id="sfs-St-AzC"/>
-                                        </constraints>
-                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cIE-z5-z2d" userLabel="DateView">
-                                        <rect key="frame" x="5" y="50" width="365" height="30"/>
+                                        <rect key="frame" x="5" y="0.0" width="365" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYE-C0-5Jn">
                                                 <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
@@ -149,7 +130,7 @@
                                         </constraints>
                                     </stackView>
                                     <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-rm-NLU" userLabel="DateCollectionView">
-                                        <rect key="frame" x="5" y="80" width="365" height="300"/>
+                                        <rect key="frame" x="5" y="30" width="365" height="300"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="KeG-8Q-V4E"/>
@@ -167,13 +148,10 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="380" id="4Oo-es-iib"/>
                                     <constraint firstItem="N3n-rm-NLU" firstAttribute="top" secondItem="cIE-z5-z2d" secondAttribute="bottom" id="DhO-su-YRp"/>
-                                    <constraint firstItem="hQT-jl-z4l" firstAttribute="leading" secondItem="o2t-nI-yDl" secondAttribute="leading" id="KWu-wS-lPt"/>
-                                    <constraint firstAttribute="trailing" secondItem="hQT-jl-z4l" secondAttribute="trailing" id="KcP-dV-4kJ"/>
+                                    <constraint firstItem="cIE-z5-z2d" firstAttribute="top" secondItem="o2t-nI-yDl" secondAttribute="top" id="DiA-xF-1Eq"/>
                                     <constraint firstAttribute="trailing" secondItem="cIE-z5-z2d" secondAttribute="trailing" constant="5" id="Qr5-X8-Thq"/>
                                     <constraint firstItem="cIE-z5-z2d" firstAttribute="leading" secondItem="o2t-nI-yDl" secondAttribute="leading" constant="5" id="XHB-i2-FkT"/>
-                                    <constraint firstItem="cIE-z5-z2d" firstAttribute="top" secondItem="hQT-jl-z4l" secondAttribute="bottom" id="cbd-Sb-TwG"/>
                                     <constraint firstItem="N3n-rm-NLU" firstAttribute="leading" secondItem="o2t-nI-yDl" secondAttribute="leading" constant="5" id="n6b-2U-EgF"/>
-                                    <constraint firstItem="hQT-jl-z4l" firstAttribute="top" secondItem="o2t-nI-yDl" secondAttribute="top" id="nXr-I3-WVs"/>
                                     <constraint firstAttribute="trailing" secondItem="N3n-rm-NLU" secondAttribute="trailing" constant="5" id="u9I-R9-g34"/>
                                 </constraints>
                             </view>
@@ -295,7 +273,6 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
-                        <outlet property="anchorView" destination="Nk9-5D-dvS" id="jwn-38-BJr"/>
                         <outlet property="buttonShadown" destination="OeA-09-Kft" id="twt-bC-9dx"/>
                         <outlet property="calendarCollectionViewHeightConstraint" destination="KeG-8Q-V4E" id="PIy-u7-hNf"/>
                         <outlet property="calendarView" destination="o2t-nI-yDl" id="5bV-oi-KlD"/>
@@ -883,6 +860,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -22,11 +22,11 @@
                         <rect key="frame" x="14" y="13" width="22" height="22"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7i-6a-Yt4">
-                                <rect key="frame" x="9" y="5.5" width="4.5" height="11"/>
+                                <rect key="frame" x="8.5" y="5.5" width="5" height="11"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="11" id="vIh-3e-WvR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="12"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
