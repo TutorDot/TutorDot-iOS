@@ -15,6 +15,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var imageContainer: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,6 +33,8 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         image3.image = UIImage(named:calendarInformation.color)
         image2.image = UIImage(named:calendarInformation.color)
         dateLabel.text = calendarInformation.classDate
+        
+    
     }
     
     

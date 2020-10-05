@@ -51,13 +51,11 @@ class CalendarVC: UIViewController {
     
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-    @IBOutlet weak var dropDownButton: UIButton!
     @IBOutlet weak var dropDownLabelButton: UIButton!
     @IBOutlet weak var topDateButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var dateHeaderLabel: UILabel!
     @IBOutlet weak var monthHeaderLabel: UILabel!
-    @IBOutlet weak var anchorView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var calendarCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -72,6 +70,8 @@ class CalendarVC: UIViewController {
             calendarView.layer.shadowColor = UIColor.gray.cgColor
             calendarView.layer.shadowOffset = CGSize(width: 1, height: 1)
             calendarView.layer.shadowOpacity = 0.5
+            calendarView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            
         }
     }
     
@@ -92,7 +92,8 @@ class CalendarVC: UIViewController {
         setUpView()
         getClassList()
         setListDropDown()
-        self.view.bringSubviewToFront(tutorView)
+        //self.view.bringSubviewToFront(tutorView)
+        self.view.bringSubviewToFront(headerView)
 
     }
     
@@ -105,13 +106,11 @@ class CalendarVC: UIViewController {
     func setListDropDown(){
         var dropList : [String] = ["전체"]
         dropDown = DropDown()
-        //dropDown?.anchorView = anchorView
         self.dropDown?.width = 270
         self.dropDown?.backgroundColor = UIColor.white
         self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
         self.dropDown?.cellHeight = 41
         DropDown.appearance().setupCornerRadius(7)
-        //dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)! + 6)
         // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
             switch networkResult {
@@ -131,7 +130,6 @@ class CalendarVC: UIViewController {
             }
         }
         // 드롭박스 목록 내역
-        dropDownButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
         dropDownLabelButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
         self.dateCollectionView.reloadData()
         self.tutorCollectionView.reloadData()
@@ -168,8 +166,6 @@ class CalendarVC: UIViewController {
     }
     
     func setUpView() {
-        //self.headerView.sendSubviewToBack(anchorView)
-        //anchorView.frame.size.width = headerView.frame.size.width / 1.2
         headerViewHeightConstraint.constant = view.frame.height * 130/812
         if self.view.frame.size.height > 800 {
             self.calendarCollectionViewHeightConstraint.constant = 290
@@ -406,10 +402,21 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                         }
                     }
                 }
+                
+                // 점들 가운데 정렬을 위한 분기처리
+//                if calendarCell.image2.image == nil && calendarCell.image3.image == nil {
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
+//                }
+//                else if calendarCell.image3.image == nil {
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//                }
+                
                 // 캘린더를 다음달로 전환 했을 때 1일 셀렉해놓기
                 if currentMonthIndex != presentMonthIndex {
-                    self.dateCollectionView.selectItem(at: [0,0], animated: true, scrollPosition: [])
-                    self.collectionView(self.dateCollectionView, didSelectItemAt: [0,0])
+                    let firstWeekDayIndex  = getFirstWeekDay() - 1
+                    self.dateCollectionView.selectItem(at: [0, firstWeekDayIndex], animated: true, scrollPosition: [])
+                    self.collectionView(self.dateCollectionView, didSelectItemAt: [0,firstWeekDayIndex])
                 } else {
                     self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
                     self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
@@ -425,12 +432,12 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 tutorBlankCell.isUserInteractionEnabled = false
                 return tutorBlankCell
                 
-                // 해당 날짜에 수업이 있을 경우
+            // 해당 날짜에 수업이 있을 경우
             } else {
                 tutorInfoCell.infoView.frame.size.width = tutorInfoCell.frame.size.width/2
                 tutorInfoCell.set(classDateList[indexPath.row])
                 for i in 0..<self.classDateList.count {
-                    let hourTimes =  "\(self.classDateList[i].times)회차, \(self.classDateList[i].hour)시간"
+                    let hourTimes =  "\(self.classDateList[i].times)회차/ \(self.classDateList[i].hour)시간"
                     tutorInfoCell.classHourLabel.text = hourTimes
                 }
                 return tutorInfoCell
@@ -448,6 +455,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             cell?.dateLabel.textColor = UIColor.black
             classDateList.removeAll()
             
+            // 오늘 날짜 선택 해놓기
             if indexPath == index {
                 cell?.dateLabel.textColor = UIColor.softBlue
                 cell?.dateView.backgroundColor = UIColor.white
@@ -456,15 +464,9 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 // 날짜 선택시 헤더 날짜 레이블 바뀌기
                 dateHeaderLabel.text = date
                 monthHeaderLabel.text = "\(currentMonthIndex+1)월"
-                
-                // 선택된 날짜 다른 뷰컨에서 쓰기
-                self.delegate?.didSelectDate(dateString: "\(currentYear)-\(currentMonthIndex+1)-\(date)")
-                tutorCollectionView.reloadData() // 다른 날짜 클릭시 초기화
-                
-                // 날짜별로 해당하는 수업 리턴하기
-                // 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
+            
+                // 날짜별로 해당하는 수업 리턴: 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
                 for index in 0..<classList2.count {
-                    print(classList2[index].classDate)
                     let dateMonthInt = currentMonthIndex + 1
                     let date2 = Int(date)
                     let dayMove = String(format: "%02d", arguments: [dateMonthInt])
@@ -494,10 +496,8 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     receiveViewController.classLabel.text = className
                     receiveViewController.classHeaderLabel.text = className
                 }
-                
                 // CalendarView 선택된 날짜 가쟈오기
                 if let date = calendarCell?.dateLabel.text! {
-                    print("\(currentYear)-\(currentMonthIndex+1)-\(date)")
                     // 날짜 선택시 헤더 날짜 레이블 바뀌기
                     dateHeaderLabel.text = date
                     monthHeaderLabel.text = "\(currentMonthIndex+1)월"
@@ -527,17 +527,14 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
         
-        // 다른 날짜 선택 시 다시 색 원래대로 바뀌기
-        // 오늘 날짜일때는 다시 보라색으로 돌아오기
+        // 다른 날짜 선택 시 다시 색 원래대로 바뀌기: 오늘 날짜일때는 다시 보라색으로 돌아오기
         if indexPath == index {
             cell?.dateView.backgroundColor = UIColor.white
             cell?.dateLabel.textColor = UIColor.softBlue
-            // 클래스 리스트 한 번 초기화
             classDateList.removeAll()
         } else {
             cell?.dateView.backgroundColor = UIColor.white
             cell?.dateLabel.textColor = UIColor.black
-            // 클래스 리스트 한 번 초기화
             classDateList.removeAll()
         }
     }
