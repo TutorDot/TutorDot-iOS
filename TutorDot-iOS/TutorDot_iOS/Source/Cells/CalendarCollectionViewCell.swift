@@ -15,28 +15,28 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var imageContainer: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        dateView.layer.cornerRadius = dateView.frame.width/2.2
+        dateView.layer.cornerRadius = dateView.frame.width/2.1
         dateView.clipsToBounds = true
         dateView.backgroundColor = UIColor.white
-        //backgroundColor = UIColor.black
         image1.image = UIImage(named: "")
+        image2.image = UIImage(named: "")
+        image3.image = UIImage(named: "")
         
     }
 
     func set (_ calendarInformation: Tutor) {
         image1.image = UIImage(named:calendarInformation.color)
+        image3.image = UIImage(named:calendarInformation.color)
+        image2.image = UIImage(named:calendarInformation.color)
         dateLabel.text = calendarInformation.classDate
+        
+    
     }
     
-
-    
-//    func setClassJournalInfo(classLog : String, date: String){
-//        image1.image = UIImage(named: classLog)
-//        dateLabel.text = date
-//    }
     
     
     // XIB 연결해주기
