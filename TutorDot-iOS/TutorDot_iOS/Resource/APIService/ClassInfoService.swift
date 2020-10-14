@@ -20,7 +20,7 @@ struct ClassInfoService {
         // 토큰 가져오기
         //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg2LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDEyMDU1OTksImV4cCI6MTYwMjQxNTE5OSwiaXNzIjoib3VyLXNvcHQifQ.f02FKJWOkSMNzyo6MNjGUDcKvezvGBzXKvKmJl3evjc"]
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg3LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDI1MDk2MjQsImV4cCI6MTYwMzcxOTIyNCwiaXNzIjoib3VyLXNvcHQifQ.6wClHXqF_nL68BdlksLIBORSW29CZhfmycsZEdnUwEs"]
         
         let dataRequest = Alamofire.request(APIConstants.calendarURL, headers: header)
         
@@ -45,7 +45,7 @@ struct ClassInfoService {
         // 토큰 가져오기
         //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg2LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDEyMDU1OTksImV4cCI6MTYwMjQxNTE5OSwiaXNzIjoib3VyLXNvcHQifQ.f02FKJWOkSMNzyo6MNjGUDcKvezvGBzXKvKmJl3evjc"]
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg3LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDI1MDk2MjQsImV4cCI6MTYwMzcxOTIyNCwiaXNzIjoib3VyLXNvcHQifQ.6wClHXqF_nL68BdlksLIBORSW29CZhfmycsZEdnUwEs"]
         
         let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .post, parameters: makeParameter(lectureId, date, startTime, endTime, location), headers: header)
         
