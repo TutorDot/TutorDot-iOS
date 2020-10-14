@@ -15,8 +15,6 @@ class NotesVC: UIViewController {
     
     
 
-    
-
     // MARK: - Views
     
     @IBOutlet weak var ClassHeaderView: UIView! //class progress bar
@@ -57,7 +55,7 @@ class NotesVC: UIViewController {
     }
     
     
-    // MARK: - init
+    // MARK: - Init
     
     func setProgress(){
         progressView.layer.cornerRadius = 9
@@ -110,8 +108,6 @@ class NotesVC: UIViewController {
     }
    
    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -219,6 +215,8 @@ class NotesVC: UIViewController {
     
 }
 
+
+// MARK: - Extension
 
 extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,

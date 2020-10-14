@@ -9,10 +9,10 @@
 import Foundation
 
 struct ClassData: Codable {
-    var status : Int
-    var success : Bool
-    var message : String
-    var data : [CalendarData]
+    var status: Int
+    var success: Bool
+    var message: String
+    var data: [CalendarData]
     
     enum CodingKeys: String, CodingKey{
         case status = "status"
