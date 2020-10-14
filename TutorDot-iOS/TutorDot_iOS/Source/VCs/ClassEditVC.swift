@@ -78,7 +78,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             print(className)
             receiveViewController.classLabel.text = className
             
-            //ClassInfoVC에 해당 내용들 넘겨주기
+            // ClassInfoVC에 해당 내용들 넘겨주기
             // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
             if let startHour = self.startTextField.text {
                 receiveViewController.startTextField.text = startHour
