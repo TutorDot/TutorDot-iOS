@@ -101,22 +101,18 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     // 수정 반영 버튼: 서버 통신
     @IBAction func editButtonSelected(_ sender: Any) {
         // 데이터 추가하기
-        //guard let calendarVC = self.storyboard?.instantiateViewController(identifier: CalendarVC.identifier) as? CalendarVC else {return}
-        
-        addClassSchedule()
-        
-        let alertViewController = UIAlertController(title: "일정추가 성공", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-            alertViewController.addAction(action)
-            self.present(alertViewController, animated: true, completion: nil)
-    
-    
         
         // 위치 정보 비어있을 경우
         if locationTexField.text!.isEmpty {
             let alert = UIAlertController(title: "일정추가 실패", message: "일정 정보를 모두 입력해주세요.", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        } else {
+            addClassSchedule()
+            let alertViewController = UIAlertController(title: "일정추가 성공", message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
             
         }
         
@@ -124,11 +120,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     
     // 수정 취소 버튼
     @IBAction func cancelButtonSelected(_ sender: Any) {
-        let storyboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        guard let receiveViewController = storyboard.instantiateViewController(identifier: TabbarVC.identifier) as? TabbarVC else {return}
-        
-        receiveViewController.modalPresentationStyle = .fullScreen
-        self.present(receiveViewController, animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // POST : 수업 일정 추가
@@ -165,12 +157,9 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    
-    
+
     
     @IBAction func pickerButton(_ sender: Any) {
-        //let calendar = Calendar.current
-        //createDatePicker()
         
         // 서버 저장용 데이터
         let formatterForData = DateFormatter()
@@ -196,9 +185,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         // 레이블용 데이터
         let formatterForLabel = DateFormatter()
         formatterForLabel.dateFormat = "M월 d일 h:mm a"
-        //pickLabel2.text = formatterForLabel.string(from: testPickerView2.date)
-        //setTextField()
-        //createDatePicker()
     }
     
     
@@ -208,9 +194,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         pickLabel.placeholder = "월요일 01:00pm ~ 03:00pm"
         pickLabel.addLeftPadding()
     }
-    
-    
-    
     
     
     func setListDropDown(){
@@ -259,7 +242,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         // Action triggered on selection
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
             self.classInfoButton.setTitle(item, for: .normal)
- 
         }
         
         // 드롭박스 내 text 가운데 정렬
@@ -423,22 +405,11 @@ extension ClassAddVC: UIPickerViewDelegate, UIPickerViewDataSource {
         if inputMonth!.count == 1 {
             let classStartD: String? = "2020-0" + inputMonth! + "-" + inputDate!
             classStartDate = classStartD
-            //print("여기", classStartDate)
         } else {
             let classStartD: String? = "2020-" + inputMonth! + "-" + inputDate!
             classStartDate = classStartD
-            //print("여기", classStartDate)
         }
-        
-        
-        print("여기", classStartDate, classStartTime)
-        //classTime.text = formatter.string(from: datePicker.date)
-        
-        //let dateRaw2 = pickLabel2.text?.components(separatedBy: "일")[0]
-        //            let dateRawTime2 = pickLabel2.text?.components(separatedBy: "일")[1] // 끝나는 시간
-        //            let dateRawTimeEnd = dateRawTime2?.components(separatedBy: " ")[1] // 끝나는 시간 스페이스바 제외
-        //
-        //            print("여기", dateRawTimeEnd)
+    
         self.view.endEditing(true)
     }
     

@@ -29,12 +29,9 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
 
     
     func setUpView() {
-        startTextField.addLeftPadding()
-        endTextField.addLeftPadding()
-        locationTextField.addLeftPadding()
-        startTextField.textColor = UIColor.brownishGrey
-        endTextField.textColor = UIColor.brownishGrey
-        locationTextField.textColor = UIColor.brownishGrey
+        startTextField.textColor = UIColor.black
+        endTextField.textColor = UIColor.black
+        locationTextField.textColor = UIColor.black
 
     }
     
@@ -68,7 +65,6 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         }
 
         
-        
     
 }
     
@@ -82,7 +78,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             print(className)
             receiveViewController.classLabel.text = className
             
-            //ClassInfoVC에 해당 내용들 넘겨주기
+            // ClassInfoVC에 해당 내용들 넘겨주기
             // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
             if let startHour = self.startTextField.text {
                 receiveViewController.startTextField.text = startHour
@@ -103,19 +99,12 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             
         }
     }
-    
-    func deleteClass() {
-        
-    }
-    
+
     
     
     @IBAction func backButton(_ sender: Any) {
-        let storyboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        guard let receiveViewController = storyboard.instantiateViewController(identifier: TabbarVC.identifier) as? TabbarVC else {return}
+        self.dismiss(animated: true, completion: nil)
         
-        receiveViewController.modalPresentationStyle = .fullScreen
-        self.present(receiveViewController, animated: false, completion: nil)
         
     }
     
