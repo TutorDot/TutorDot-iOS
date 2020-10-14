@@ -230,14 +230,14 @@
                                                             <constraint firstAttribute="height" constant="280" id="uXP-m5-nHc"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popUpTableViewCell" rowHeight="59" id="DY8-Kh-trN" customClass="PopUpTableViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popUpTableViewCell" rowHeight="59" id="nWW-vx-1eN" customClass="PopUpTableViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="28" width="375" height="59"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DY8-Kh-trN" id="XLz-Pf-UeU">
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nWW-vx-1eN" id="ohZ-fy-9sP">
                                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXZ-Ae-OeK">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-lD-AVt">
                                                                             <rect key="frame" x="167" y="19" width="41.333333333333343" height="21"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
@@ -245,16 +245,17 @@
                                                                         </label>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottomMargin" secondItem="KXZ-Ae-OeK" secondAttribute="bottom" constant="8" id="Ms1-GZ-Ip5"/>
-                                                                        <constraint firstItem="KXZ-Ae-OeK" firstAttribute="centerX" secondItem="XLz-Pf-UeU" secondAttribute="centerX" id="P7N-rd-yqn"/>
-                                                                        <constraint firstItem="KXZ-Ae-OeK" firstAttribute="top" secondItem="XLz-Pf-UeU" secondAttribute="topMargin" constant="8" id="aDz-kX-Tjc"/>
+                                                                        <constraint firstItem="jyh-lD-AVt" firstAttribute="centerX" secondItem="ohZ-fy-9sP" secondAttribute="centerX" id="Jl1-CU-lDM"/>
+                                                                        <constraint firstAttribute="bottomMargin" secondItem="jyh-lD-AVt" secondAttribute="bottom" constant="8" id="O1s-TA-MRy"/>
+                                                                        <constraint firstItem="jyh-lD-AVt" firstAttribute="top" secondItem="ohZ-fy-9sP" secondAttribute="topMargin" constant="8" id="rna-QP-ero"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
                                                                 <connections>
-                                                                    <outlet property="popUpLabel" destination="KXZ-Ae-OeK" id="YTK-zD-q9B"/>
+                                                                    <outlet property="popUpLabel" destination="jyh-lD-AVt" id="sZQ-vd-OiU"/>
                                                                 </connections>
                                                             </tableViewCell>
                                                         </prototypes>
+                                                        <sections/>
                                                     </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" name="journalColor"/>

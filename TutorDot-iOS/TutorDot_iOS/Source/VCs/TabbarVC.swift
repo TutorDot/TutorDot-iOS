@@ -11,12 +11,15 @@ import UIKit
 class TabbarVC: UITabBarController {
 
     static let identifier:String = "TabbarVC"
-        
+            
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = UIColor.clear
+        self.tabBar.tintColor = UIColor.white
         tabBarSetUp()
+        viewDidLayoutSubviews()
+        self.tabBar.backgroundColor = UIColor.white
+       
     }
     
     override func viewDidLayoutSubviews() {
@@ -31,32 +34,10 @@ class TabbarVC: UITabBarController {
             tabFrame.origin.y = self.view.frame.size.height - 68
             self.tabBar.frame = tabFrame
         }
-       
-        
-
+    
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        let proportion = view.frame.height / 11
-//        tabBar.frame.size.height = proportion
-//        tabBar.frame.origin.y = view.frame.height - proportion
-//
-//
-//    }
-    
-//    override func viewWillLayoutSubviews() {
-//        var tabFrame = self.tabBar.frame
-//        tabFrame.size.height = 100
-//        tabFrame.origin.y = self.view.frame.size.height - 100
-//        self.tabBar.frame = tabFrame
-//    }
-    
-    
-    
-    
     func tabBarSetUp(){
-    
         // Calendar Tab
         let calendarStoryboard = UIStoryboard.init(name: "Calendar", bundle: nil)
 
@@ -67,12 +48,13 @@ class TabbarVC: UITabBarController {
         
         if self.view.frame.size.height > 800 {
             firstTab.tabBarItem.image = UIImage(named: "tabbarIcCalenderUnpick")?.withRenderingMode(.alwaysOriginal)
-            firstTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcCalenderPick")?.withRenderingMode(.alwaysOriginal)
-            
+            firstTab.tabBarItem.selectedImage = UIImage(named: "calenderBalnkIcnCalender")?.withRenderingMode(.alwaysOriginal)
+
             print(#function)
         } else {
             firstTab.tabBarItem.image = UIImage(named: "classLogMathIcCalenderPick")?.withRenderingMode(.alwaysOriginal)
-            firstTab.tabBarItem.selectedImage = UIImage(named: "calenderMathSectionIcCalenderPick")?.withRenderingMode(.alwaysOriginal)
+            firstTab.tabBarItem.selectedImage = UIImage(named: "calenderBalnkIcnCalender")?.withRenderingMode(.alwaysOriginal)
+
         }
         
         
@@ -83,10 +65,10 @@ class TabbarVC: UITabBarController {
             return
         }
         if self.view.frame.size.height > 800 {
-        secondTab.tabBarItem.image = UIImage(named: "tabbarIcClassLogUnpick")?.withRenderingMode(.alwaysOriginal)
+        secondTab.tabBarItem.image = UIImage(named: "calenderBalnkIcnClasslog")?.withRenderingMode(.alwaysOriginal)
         secondTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcClassLogPick")?.withRenderingMode(.alwaysOriginal)
         } else {
-            secondTab.tabBarItem.image = UIImage(named: "calenderMathSectionIcUnpick")?.withRenderingMode(.alwaysOriginal)
+            secondTab.tabBarItem.image = UIImage(named: "calenderBalnkIcnClasslog")?.withRenderingMode(.alwaysOriginal)
             secondTab.tabBarItem.selectedImage = UIImage(named: "classLogMathIcClassLogPick")?.withRenderingMode(.alwaysOriginal)
         }
         // Alert Tab
@@ -96,10 +78,10 @@ class TabbarVC: UITabBarController {
             return
         }
         if self.view.frame.size.height > 800 {
-        thirdTab.tabBarItem.image = UIImage(named: "tabbarIcNoticeUnpick")?.withRenderingMode(.alwaysOriginal)
+        thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
         thirdTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcNoticePick")?.withRenderingMode(.alwaysOriginal)
         } else {
-            thirdTab.tabBarItem.image = UIImage(named: "calenderMathSectionIcNoticeUnpick")?.withRenderingMode(.alwaysOriginal)
+            thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
             thirdTab.tabBarItem.selectedImage = UIImage(named: "noticeBlankIcNoticePick")?.withRenderingMode(.alwaysOriginal)
         }
         
@@ -112,10 +94,10 @@ class TabbarVC: UITabBarController {
 
         if self.view.frame.size.height > 800 {
 
-        fourthTab.tabBarItem.image = UIImage(named: "tabbarIcMyUnpick")
+        fourthTab.tabBarItem.image = UIImage(named: "calenderBalnkIcnMy")
         fourthTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcMyPick")?.withRenderingMode(.alwaysOriginal)
         } else {
-            fourthTab.tabBarItem.image = UIImage(named: "calenderMathSectionIcMyUnpick")
+            fourthTab.tabBarItem.image = UIImage(named: "calenderBalnkIcnMy")
             fourthTab.tabBarItem.selectedImage = UIImage(named: "myIcMyPick")?.withRenderingMode(.alwaysOriginal)
         }
         let tabs =  [firstTab, secondTab, thirdTab, fourthTab]
@@ -127,15 +109,13 @@ class TabbarVC: UITabBarController {
     }
 }
 
-extension UIWindow {
-    static var key: UIWindow? {
-        if #available(iOS 13, *) {
-            return UIApplication.shared.windows.first { $0.isKeyWindow }
-        } else {
-            return UIApplication.shared.keyWindow
-        }
+class CustomTabbar: UITabBar {
+    func setup() {
+        backgroundColor = .green
     }
 }
+
+
 
 
 
