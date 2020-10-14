@@ -129,32 +129,8 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
     
     // 취소 버튼 클릭 시 ClassEditVC로 그냥 돌아오기
     @IBAction func editCancelButton(_ sender: Any) {
-        let calendarStoryboard = UIStoryboard.init(name: "Calendar", bundle:nil)
-        guard let controller = calendarStoryboard.instantiateViewController(withIdentifier: ClassEditVC.identifier) as? ClassEditVC else { return }
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: false, completion: nil)
-    
-        
-        // 데이터 ClassEditVC에 다시 보내주기
-        if let className = self.classLabel.text {
-            controller.classHeaderLabel.text = className
-            controller.classLabel.text = className
-        }
-        if let startHour = self.startTextField.text {
-            controller.startTextField.text = startHour
-        }
-        
-        if let endHour = self.endTextField.text {
-            controller.endTextField.text = endHour
-        }
-        
-        if let location = self.locationTextField.text {
-            controller.locationTextField.text = location
-        }
-        
-        if let image = self.imageLabel.image {
-            controller.classImage.image = image
-        }
+        self.dismiss(animated: false, completion: nil)
+
     }
     
     // 탭했을 때 키보드 action
@@ -225,7 +201,6 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
    
-    
 }
 
 extension ClassInfoVC: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -286,9 +261,7 @@ extension ClassInfoVC: UIPickerViewDelegate, UIPickerViewDataSource {
         
      endTextField.inputAccessoryView = toolbar
      endTextField.inputView = pickerView2
-     
-     print("pickerView2")
-        
+             
     }
     
     //toolbar actions

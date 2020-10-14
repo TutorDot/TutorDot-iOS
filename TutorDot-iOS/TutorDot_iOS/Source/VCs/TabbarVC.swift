@@ -17,12 +17,6 @@ class TabbarVC: UITabBarController {
         super.viewDidLoad()
         self.tabBar.tintColor = UIColor.clear
         tabBarSetUp()
-        //self.tabBar.frame.size.height = 100
-        //sizeThatFits(CGSize(width:300,height: 80))
-        //viewWillLayoutSubviews()
-        print (self.view.frame.size.height)
-        //812
-        //667
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,6 +59,7 @@ class TabbarVC: UITabBarController {
     
         // Calendar Tab
         let calendarStoryboard = UIStoryboard.init(name: "Calendar", bundle: nil)
+
         guard let firstTab = calendarStoryboard.instantiateViewController(identifier: "CalendarVC")
             as? CalendarVC  else {
             return
