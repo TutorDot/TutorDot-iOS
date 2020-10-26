@@ -7,6 +7,7 @@
 import UIKit
 import DropDown
 import Foundation
+import Sheeeeeeeeet
 
 protocol CalendarViewControllerDeleagte {
     func didSelectDate(dateString: String)
@@ -46,12 +47,12 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
+
     
     
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var tutorView: UIView!
     @IBOutlet weak var tutorCollectionView: UICollectionView!
-    @IBOutlet weak var popUpTableView: UITableView!
     
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
@@ -66,8 +67,7 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var calendarViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var tutorViewHeightConstraint: NSLayoutConstraint!
-    var blackView = UIView()
-    
+    @IBOutlet var totalView: UIView!
     @IBOutlet weak var calendarView: UIView! {
         didSet {
             calendarView.layer.cornerRadius = 20
@@ -97,11 +97,8 @@ class CalendarVC: UIViewController {
         setUpView()
         getClassList()
         setListDropDown()
-        self.view.bringSubviewToFront(headerView)
-        self.view.bringSubviewToFront(popUpTableView)
-        popUpTableView.transform = CGAffineTransform(translationX: 0, y: popUpTableView.frame.height)
-        
-        
+        self.view.sendSubviewToBack(calendarView)
+   
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -269,34 +266,9 @@ class CalendarVC: UIViewController {
         
     }
     
-    // MARK: -- POPUPTableView
-    @IBAction func popUpButton(_ sender: Any) {
-        blackView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        blackView.frame = self.view.frame
-        self.view.bringSubviewToFront(popUpTableView)
-        self.view.addSubview(blackView)
-        //self.view.bringSubviewToFront(blackView)
-        UIView.animate(withDuration: 0.3) {
-            self.popUpTableView.transform = .identity
-            self.onClickBlackView()
-            self.view.bringSubviewToFront(self.popUpTableView)
-        }
-
-        self.view.bringSubviewToFront(popUpTableView)
-    }
     
-    func onClickBlackView() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onGesture))
-        blackView.addGestureRecognizer(tapGesture)
-    }
     
-    @objc func onGesture() {
-        UIView.animate(withDuration: 0.3) {
-            self.popUpTableView.transform = CGAffineTransform(translationX: 0, y: self.popUpTableView.frame.height)
-                //self.setTabBarVisible(visible: false, animated: true)
-                self.blackView.removeFromSuperview()
-        }
-    }
+    
 }
 
 extension CalendarVC {
@@ -305,8 +277,6 @@ extension CalendarVC {
         dateCollectionView.dataSource = self
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
-        popUpTableView.dataSource = self
-        popUpTableView.delegate = self
     }
     
     // MARK: - Calendar Initial setup
@@ -346,7 +316,6 @@ extension CalendarVC {
         return lastDay
     }
     
-    // MARK: -- popUpTableView
     
 }
 
@@ -624,20 +593,3 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     }
 }
 
-extension CalendarVC: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        4
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let popUpCell = tableView.dequeueReusableCell(withIdentifier: "popUpTableViewCell") as? PopUpTableViewCell else {return UITableViewCell()}
-        return popUpCell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
-    }
-    
-}

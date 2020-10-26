@@ -26,9 +26,6 @@
                                         <state key="normal" image="calenderBtnFillter">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="popUpButton:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="Uf7-vf-RCa"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx2-t5-cf7" userLabel="topDateButton">
                                         <rect key="frame" x="20" y="82" width="120" height="40"/>
@@ -223,50 +220,13 @@
                                                             <action selector="plusButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="IDx-mS-N7m"/>
                                                         </connections>
                                                     </button>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qSc-BL-l5b">
-                                                        <rect key="frame" x="0.0" y="111" width="375" height="280"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="280" id="uXP-m5-nHc"/>
-                                                        </constraints>
-                                                        <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popUpTableViewCell" rowHeight="59" id="nWW-vx-1eN" customClass="PopUpTableViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="28" width="375" height="59"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nWW-vx-1eN" id="ohZ-fy-9sP">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-lD-AVt">
-                                                                            <rect key="frame" x="167" y="19" width="41.333333333333343" height="21"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstItem="jyh-lD-AVt" firstAttribute="centerX" secondItem="ohZ-fy-9sP" secondAttribute="centerX" id="Jl1-CU-lDM"/>
-                                                                        <constraint firstAttribute="bottomMargin" secondItem="jyh-lD-AVt" secondAttribute="bottom" constant="8" id="O1s-TA-MRy"/>
-                                                                        <constraint firstItem="jyh-lD-AVt" firstAttribute="top" secondItem="ohZ-fy-9sP" secondAttribute="topMargin" constant="8" id="rna-QP-ero"/>
-                                                                    </constraints>
-                                                                </tableViewCellContentView>
-                                                                <connections>
-                                                                    <outlet property="popUpLabel" destination="jyh-lD-AVt" id="sZQ-vd-OiU"/>
-                                                                </connections>
-                                                            </tableViewCell>
-                                                        </prototypes>
-                                                        <sections/>
-                                                    </tableView>
                                                 </subviews>
                                                 <color key="backgroundColor" name="journalColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="OeA-09-Kft" secondAttribute="trailing" constant="15" id="1hf-fT-HRt"/>
-                                                    <constraint firstAttribute="bottom" secondItem="qSc-BL-l5b" secondAttribute="bottom" id="4Ma-kY-HqF"/>
                                                     <constraint firstAttribute="bottom" secondItem="OeA-09-Kft" secondAttribute="bottom" constant="22" id="4pL-h7-jvu"/>
-                                                    <constraint firstAttribute="trailing" secondItem="qSc-BL-l5b" secondAttribute="trailing" id="8KL-EL-ISa"/>
                                                     <constraint firstItem="hDe-Zy-BfX" firstAttribute="top" secondItem="G3B-gq-SCb" secondAttribute="top" constant="30" id="G4X-Pf-ypm"/>
                                                     <constraint firstItem="57W-ab-Yom" firstAttribute="leading" secondItem="G3B-gq-SCb" secondAttribute="leading" constant="15" id="bkC-gX-X1f"/>
-                                                    <constraint firstItem="qSc-BL-l5b" firstAttribute="leading" secondItem="G3B-gq-SCb" secondAttribute="leading" id="oK3-1r-XRn"/>
                                                     <constraint firstAttribute="bottom" secondItem="hDe-Zy-BfX" secondAttribute="bottom" id="s2V-2d-09I"/>
                                                     <constraint firstItem="57W-ab-Yom" firstAttribute="top" secondItem="G3B-gq-SCb" secondAttribute="top" id="t7r-jy-7rc"/>
                                                     <constraint firstAttribute="trailing" secondItem="hDe-Zy-BfX" secondAttribute="trailing" id="wC9-Pq-M6B"/>
@@ -327,9 +287,9 @@
                         <outlet property="leftButton" destination="OME-fv-ddV" id="iOa-EL-oE7"/>
                         <outlet property="monthHeaderLabel" destination="fU6-Kr-p5i" id="49h-sZ-R3d"/>
                         <outlet property="plusButton" destination="OeA-09-Kft" id="5dg-KS-u3h"/>
-                        <outlet property="popUpTableView" destination="qSc-BL-l5b" id="8D6-vT-Cfb"/>
                         <outlet property="rightButton" destination="Wrn-6R-Jo3" id="giU-5q-tk6"/>
                         <outlet property="topDateButton" destination="sx2-t5-cf7" id="wDH-FX-VVE"/>
+                        <outlet property="totalView" destination="Zt4-lF-jPS" id="LRZ-fv-J4F"/>
                         <outlet property="tutorCollectionView" destination="hDe-Zy-BfX" id="9dR-VD-uIv"/>
                         <outlet property="tutorView" destination="sYc-1k-x0p" id="ggt-a4-yhw"/>
                         <outlet property="tutorViewHeightConstraint" destination="Ulr-jl-mz2" id="cuA-HX-M1e"/>
