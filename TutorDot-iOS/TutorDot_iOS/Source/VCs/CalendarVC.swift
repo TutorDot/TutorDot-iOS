@@ -47,7 +47,10 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
-
+    
+    let item1 = MenuItem(title: "Int", value: 1)
+    let item2 = MenuItem(title: "Car", value: 2)
+    let button = OkButton(title: "OK")
     
     
     @IBOutlet weak var dateCollectionView: UICollectionView!
@@ -89,6 +92,20 @@ class CalendarVC: UIViewController {
         }
     }
     
+    @IBAction func filterButton(_ sender: Any) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let classList22 = ["수업", "수업2", "수업3"]
+        
+        //actionSheet.view.backgroundColor = UIColor.white
+        actionSheet.addAction(UIAlertAction(title: classList22[0], style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: classList22[1], style: .default, handler: nil))
+            //actionSheet.addAction(UIAlertAction(title: "수업3", style: .default, handler: nil))
+
+        actionSheet.addAction(UIAlertAction(title: classList22[2], style: .default, handler: nil))
+        present(actionSheet, animated: true, completion: nil)
+    
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,7 +199,7 @@ class CalendarVC: UIViewController {
     
     @objc func dropDownToggleButton(){
         self.dropDown?.reloadAllComponents()
-        //dropDown?.show()
+        dropDown?.show()
     }
     
     // MARK: - 서버통신: 캘린더 전체 데이터 가져요기
