@@ -11,7 +11,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.8.2)
   - BEMCheckBox
-  - DropDown (~> 2.3.13)
+  - DropDown (~> 2.3.2)
   - Kingfisher (~> 5.0)
   - lottie-ios
   - Sheeeeeeeeet
@@ -33,6 +33,6 @@ SPEC CHECKSUMS:
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   Sheeeeeeeeet: d4808c23c1d0aca2ccba13353ec7fa17ada2f129
 
-PODFILE CHECKSUM: 9f88f6d8ebc5bd9d28189160cd78d5dd4eb08f97
+PODFILE CHECKSUM: 21ea28e7578428f1048f816fd9e0ddbec45e6cc6
 
 COCOAPODS: 1.9.3

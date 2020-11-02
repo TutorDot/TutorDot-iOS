@@ -20,7 +20,7 @@ struct ClassInfoService {
         // 토큰 가져오기
         //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg3LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDI1MDk2MjQsImV4cCI6MTYwMzcxOTIyNCwiaXNzIjoib3VyLXNvcHQifQ.6wClHXqF_nL68BdlksLIBORSW29CZhfmycsZEdnUwEs"]
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg4LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDQxMzM3NDcsImV4cCI6MTYwNTM0MzM0NywiaXNzIjoib3VyLXNvcHQifQ.1Eim6UVc96pE151ZuR419cQA_GEQLkjVFKrwOnYvJOs"]
         
         let dataRequest = Alamofire.request(APIConstants.calendarURL, headers: header)
         
@@ -45,7 +45,7 @@ struct ClassInfoService {
         // 토큰 가져오기
         //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg3LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDI1MDk2MjQsImV4cCI6MTYwMzcxOTIyNCwiaXNzIjoib3VyLXNvcHQifQ.6wClHXqF_nL68BdlksLIBORSW29CZhfmycsZEdnUwEs"]
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg4LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDQxMzM3NDcsImV4cCI6MTYwNTM0MzM0NywiaXNzIjoib3VyLXNvcHQifQ.1Eim6UVc96pE151ZuR419cQA_GEQLkjVFKrwOnYvJOs"]
         
         let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .post, parameters: makeParameter(lectureId, date, startTime, endTime, location), headers: header)
         
@@ -66,6 +66,24 @@ struct ClassInfoService {
     func getOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         let dataRequest = Alamofire.request(APIConstants.calendarLidURL)
         
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judge(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    // DELETE: 특정 수업 일정 하나 삭제 by CID
+    func deleteOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg4LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDQxMzM3NDcsImV4cCI6MTYwNTM0MzM0NywiaXNzIjoib3VyLXNvcHQifQ.1Eim6UVc96pE151ZuR419cQA_GEQLkjVFKrwOnYvJOs"]
+        let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .delete, headers: header)
+
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success :

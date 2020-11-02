@@ -6,7 +6,7 @@ target 'TutorDot_iOS' do
   use_frameworks!
 
   # Pods for TutorDot_iOS
-pod 'DropDown', '~> 2.3.13'
+pod 'DropDown', '~> 2.3.2'
 pod 'Alamofire', '~> 4.8.2'
 pod 'Kingfisher', '~> 5.0'
 pod 'BEMCheckBox'

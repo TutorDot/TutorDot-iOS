@@ -52,8 +52,8 @@
                                             <action selector="rightButtonSelected:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="ZTO-jw-TzW"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세화님의 전체캘린더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmY-l1-8zM">
-                                        <rect key="frame" x="20" y="64" width="121" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세화님의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmY-l1-8zM">
+                                        <rect key="frame" x="20" y="64" width="52" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -65,22 +65,41 @@
                                         <state key="normal" image="calenderBtnNotice">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="alertTabButton:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="OAe-is-MVd"/>
+                                        </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKF-Pf-9Ea">
+                                        <rect key="frame" x="75" y="64" width="26" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캘린더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hX-GT-WOX">
+                                        <rect key="frame" x="104" y="64" width="39" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="GKF-Pf-9Ea" firstAttribute="leading" secondItem="MmY-l1-8zM" secondAttribute="trailing" constant="3" id="00q-tW-m2g"/>
                                     <constraint firstAttribute="trailing" secondItem="40f-vH-b7O" secondAttribute="trailing" id="6UQ-Fv-00a"/>
                                     <constraint firstAttribute="bottom" secondItem="OME-fv-ddV" secondAttribute="bottom" constant="8" id="8Ty-l1-RYj"/>
                                     <constraint firstAttribute="bottom" secondItem="sx2-t5-cf7" secondAttribute="bottom" constant="8" id="AzR-Cc-L1g"/>
                                     <constraint firstItem="OME-fv-ddV" firstAttribute="leading" secondItem="sx2-t5-cf7" secondAttribute="trailing" constant="5" id="QXV-Qu-smD"/>
                                     <constraint firstItem="sx2-t5-cf7" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" constant="20" id="WOF-bs-gdM"/>
+                                    <constraint firstItem="4hX-GT-WOX" firstAttribute="leading" secondItem="GKF-Pf-9Ea" secondAttribute="trailing" constant="3" id="WXG-rg-JWW"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="centerY" secondItem="BX6-GH-RmG" secondAttribute="centerY" id="ZP1-87-hsn"/>
                                     <constraint firstItem="sx2-t5-cf7" firstAttribute="top" secondItem="MmY-l1-8zM" secondAttribute="bottom" id="abR-cJ-CuQ"/>
                                     <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="OME-fv-ddV" secondAttribute="trailing" constant="18" id="dCQ-29-YJ4"/>
+                                    <constraint firstItem="GKF-Pf-9Ea" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="fhB-lD-W1f"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="leading" secondItem="BX6-GH-RmG" secondAttribute="trailing" constant="3" id="fxk-ZP-dme"/>
                                     <constraint firstItem="MmY-l1-8zM" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" constant="20" id="n7e-s1-Vm7"/>
                                     <constraint firstAttribute="height" constant="130" id="qaW-1K-SR8"/>
                                     <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="OME-fv-ddV" secondAttribute="centerY" id="qoN-2G-7km"/>
+                                    <constraint firstItem="4hX-GT-WOX" firstAttribute="centerY" secondItem="GKF-Pf-9Ea" secondAttribute="centerY" id="twm-Ag-6TT"/>
                                     <constraint firstItem="BX6-GH-RmG" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="wuo-BW-Pud"/>
                                 </constraints>
                             </view>
@@ -254,15 +273,25 @@
                                     <constraint firstItem="oaM-FP-c4h" firstAttribute="leading" secondItem="sYc-1k-x0p" secondAttribute="leading" id="fOM-e1-LzY"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slI-iF-jnc">
+                                <rect key="frame" x="0.0" y="895" width="375" height="5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="AvE-wE-NVR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="90q-SI-Dnx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bAc-Oh-INb" firstAttribute="trailing" secondItem="90q-SI-Dnx" secondAttribute="trailing" id="2zH-q9-0eU"/>
                             <constraint firstItem="o2t-nI-yDl" firstAttribute="leading" secondItem="90q-SI-Dnx" secondAttribute="leading" id="4g2-ha-zb4"/>
+                            <constraint firstItem="slI-iF-jnc" firstAttribute="leading" secondItem="90q-SI-Dnx" secondAttribute="leading" id="F22-W3-tVY"/>
                             <constraint firstItem="90q-SI-Dnx" firstAttribute="bottom" secondItem="sYc-1k-x0p" secondAttribute="bottom" id="H6g-rA-xeX"/>
+                            <constraint firstAttribute="bottom" secondItem="slI-iF-jnc" secondAttribute="bottom" id="Sn1-8n-IzU"/>
                             <constraint firstItem="bAc-Oh-INb" firstAttribute="leading" secondItem="90q-SI-Dnx" secondAttribute="leading" id="Svd-a8-2Tm"/>
                             <constraint firstItem="o2t-nI-yDl" firstAttribute="trailing" secondItem="90q-SI-Dnx" secondAttribute="trailing" id="W41-Z6-9JD"/>
+                            <constraint firstItem="90q-SI-Dnx" firstAttribute="trailing" secondItem="slI-iF-jnc" secondAttribute="trailing" id="aBq-9h-Eiw"/>
                             <constraint firstItem="90q-SI-Dnx" firstAttribute="trailing" secondItem="sYc-1k-x0p" secondAttribute="trailing" id="e5N-o4-5io"/>
                             <constraint firstItem="bAc-Oh-INb" firstAttribute="top" secondItem="Zt4-lF-jPS" secondAttribute="top" id="hVP-vf-J3w"/>
                             <constraint firstItem="o2t-nI-yDl" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="bottom" id="ohx-j4-24N"/>
@@ -275,13 +304,16 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="900"/>
                     <connections>
+                        <outlet property="anchorView" destination="slI-iF-jnc" id="crj-UI-YI0"/>
                         <outlet property="buttonShadown" destination="OeA-09-Kft" id="twt-bC-9dx"/>
                         <outlet property="calendarCollectionViewHeightConstraint" destination="KeG-8Q-V4E" id="PIy-u7-hNf"/>
                         <outlet property="calendarView" destination="o2t-nI-yDl" id="5bV-oi-KlD"/>
                         <outlet property="calendarViewHeightConstraint" destination="4Oo-es-iib" id="yeP-29-OJZ"/>
                         <outlet property="dateCollectionView" destination="N3n-rm-NLU" id="nLN-cS-jUY"/>
                         <outlet property="dateHeaderLabel" destination="x7O-58-mAU" id="sd7-qx-Eqe"/>
-                        <outlet property="dropDownLabelButton" destination="BX6-GH-RmG" id="Z0m-UN-aAc"/>
+                        <outlet property="dropDownLabelButton" destination="BX6-GH-RmG" id="iyM-IF-HGo"/>
+                        <outlet property="headerClassNameLabel" destination="GKF-Pf-9Ea" id="Jvf-ib-Dl5"/>
+                        <outlet property="headerUserNameLabel" destination="MmY-l1-8zM" id="WoE-sm-sb5"/>
                         <outlet property="headerView" destination="bAc-Oh-INb" id="0Tl-xa-Acb"/>
                         <outlet property="headerViewHeightConstraint" destination="qaW-1K-SR8" id="DCe-pf-baz"/>
                         <outlet property="leftButton" destination="OME-fv-ddV" id="iOa-EL-oE7"/>
@@ -297,7 +329,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjm-xV-vyE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1976.8" y="67.241379310344826"/>
+            <point key="canvasLocation" x="2919.1999999999998" y="67.241379310344826"/>
         </scene>
         <!--TestVC-->
         <scene sceneID="tOf-qy-Smx">
@@ -467,6 +499,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYX-Fj-ENK">
                                 <rect key="frame" x="172.66666666666666" y="519" width="30" height="30"/>
                                 <state key="normal" title="삭제"/>
+                                <connections>
+                                    <action selector="deleteButtonSelected:" destination="Aaj-KY-eqb" eventType="touchUpInside" id="Yah-Ge-qAm"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="A6Y-G7-M69"/>
@@ -520,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPN-I3-a9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2791.1999999999998" y="-120.44334975369459"/>
+            <point key="canvasLocation" x="3733.5999999999999" y="-120.44334975369459"/>
         </scene>
         <!--Class InfoVC-->
         <scene sceneID="MN8-Wk-UZT">
@@ -681,7 +716,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YbR-cB-qjh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3487.1999999999998" y="-115.27093596059113"/>
+            <point key="canvasLocation" x="4429.6000000000004" y="-115.27093596059113"/>
         </scene>
         <!--Class AddVC-->
         <scene sceneID="OcD-dZ-8xq">
@@ -882,7 +917,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15g-46-muN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="543.8423645320197"/>
+            <point key="canvasLocation" x="3738.4000000000001" y="543.8423645320197"/>
         </scene>
     </scenes>
     <resources>

@@ -108,6 +108,24 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    func deleteOneClass() {
+        ClassInfoService.classInfoServiceShared.deleteOneClassInfo() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [CalendarData] else { return print(Error.self) }
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+    
+    @IBAction func deleteButtonSelected(_ sender: Any) {
+        deleteOneClass()
+    }
+    
     
 
 

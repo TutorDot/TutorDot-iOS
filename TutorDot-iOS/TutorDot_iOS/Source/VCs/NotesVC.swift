@@ -142,23 +142,22 @@ class NotesVC: UIViewController {
         DropDown.appearance().setupCornerRadius(7)
        
         
-        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!)
-    
-        /// 토글에서 수업리스트 가져오기
+        var idList : [Int] = []
+        
+        // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
         switch networkResult {
-        case .success(let resultData): os_log("success", log: .note)
-                guard let data = resultData as? [LidToggleData] else {
-                    return os_log("error") }
+            case .success(let resultData):
+            guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
+            print("success")
+            for index in 0..<data.count {
+                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                dropList.append(item.lectureName)
+                idList.append(item.lectureId)
+                self.dropDown?.dataSource = dropList
+                print("여기", idList)
                 
-                for index in 0 ..< data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId,
-                                             lectureName: data[index].lectureName,
-                                             color: data[index].color,
-                                             profileUrls: data[index].profileUrls)
-                    dropList.append(item.lectureName)
-                    self.dropDown?.dataSource = dropList
-                }
+            }
             
         case .pathErr: os_log("Patherr", log: .network)
         case .serverErr: os_log("ServerErr", log: .network)
