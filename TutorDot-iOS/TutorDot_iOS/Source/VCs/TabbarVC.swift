@@ -60,8 +60,8 @@ class TabbarVC: UITabBarController {
         
         // Notes Tab
         let notesStoryboard = UIStoryboard.init(name: "Notes", bundle: nil)
-        guard let secondTab = notesStoryboard.instantiateViewController(identifier: "NotesVC")
-            as? NotesVC  else {
+        guard let secondTab = notesStoryboard.instantiateViewController(identifier: "NotesMainVC")
+            as? NotesMainVC  else {
             return
         }
         if self.view.frame.size.height > 800 {
