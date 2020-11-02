@@ -9,10 +9,10 @@
 import Foundation
 
 struct LidData: Codable {
-    var status : Int
-    var success : Bool
-    var message : String
-    var data : [LidToggleData]
+    var status: Int
+    var success: Bool
+    var message: String
+    var data: [LidToggleData]
     
     enum CodingKeys: String, CodingKey{
         case status = "status"
@@ -32,8 +32,8 @@ struct LidData: Codable {
 }
 
 struct LidToggleData: Codable {
-    var lectureId:Int
-    var lectureName:String
+    var lectureId: Int
+    var lectureName: String
     var color: String
     var profileUrls: [String]
     

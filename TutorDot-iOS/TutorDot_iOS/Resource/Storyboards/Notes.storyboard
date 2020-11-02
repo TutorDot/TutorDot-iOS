@@ -7,6 +7,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -515,6 +516,144 @@
             </objects>
             <point key="canvasLocation" x="1606" y="38"/>
         </scene>
+        <!--Notes MainVC-->
+        <scene sceneID="AjC-SD-Lac">
+            <objects>
+                <viewController id="6sZ-g7-ay9" customClass="NotesMainVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PTK-9m-sUl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mNX-Yc-xvj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufD-FU-0GW">
+                                        <rect key="frame" x="332" y="46" width="43" height="48"/>
+                                        <state key="normal" image="classlogBtnNotice"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVa-1w-Fgt">
+                                        <rect key="frame" x="284" y="46" width="43" height="48"/>
+                                        <state key="normal" image="classlogBtnFillter"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csw-7S-B5x">
+                                        <rect key="frame" x="77.666666666666686" y="62" width="220" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="220" id="GYG-KC-JKf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ufD-FU-0GW" secondAttribute="trailing" id="4Ke-jp-N7r"/>
+                                    <constraint firstAttribute="height" constant="94" id="7X5-GL-JqJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="csw-7S-B5x" secondAttribute="bottom" constant="14" id="Btl-zy-Q65"/>
+                                    <constraint firstItem="csw-7S-B5x" firstAttribute="centerX" secondItem="mNX-Yc-xvj" secondAttribute="centerX" id="CkD-4o-CZ7"/>
+                                    <constraint firstAttribute="bottom" secondItem="ufD-FU-0GW" secondAttribute="bottom" id="Y8z-FO-NAX"/>
+                                    <constraint firstAttribute="bottom" secondItem="zVa-1w-Fgt" secondAttribute="bottom" id="hVy-ZE-wIz"/>
+                                    <constraint firstItem="ufD-FU-0GW" firstAttribute="leading" secondItem="zVa-1w-Fgt" secondAttribute="trailing" constant="5" id="llo-2O-gJP"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gVI-uo-qF9">
+                                <rect key="frame" x="0.0" y="94" width="375" height="170"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DaR-wj-5yv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="progress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jKk-tq-cPr">
+                                                <rect key="frame" x="22" y="8" width="68" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="aNN-dZ-tPp"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYw-bl-f6D">
+                                        <rect key="frame" x="0.0" y="115" width="375" height="55"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7.5" translatesAutoresizingMaskIntoConstraints="NO" id="OUS-n5-PBn">
+                                                <rect key="frame" x="89.666666666666686" y="9" width="196" height="37"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nij-To-n5N">
+                                                        <rect key="frame" x="0.0" y="0.0" width="54.333333333333336" height="37"/>
+                                                        <state key="normal" image="classlogBtnNextMonthPick"/>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="7월 수업일지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-7A-B6k">
+                                                        <rect key="frame" x="61.999999999999993" y="0.0" width="72.333333333333314" height="37"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="867-vS-qia">
+                                                        <rect key="frame" x="142" y="0.0" width="54" height="37"/>
+                                                        <state key="normal" image="classlogBtnNextMonthUnpick"/>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="196" id="Tiv-GS-NH9"/>
+                                                    <constraint firstAttribute="height" constant="37" id="hjC-f3-J6E"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="OUS-n5-PBn" firstAttribute="centerY" secondItem="LYw-bl-f6D" secondAttribute="centerY" id="1Z3-Mp-2BV"/>
+                                            <constraint firstItem="OUS-n5-PBn" firstAttribute="centerX" secondItem="LYw-bl-f6D" secondAttribute="centerX" id="qmx-bl-zZM"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="1PM-Ay-dYC"/>
+                                </constraints>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iIr-aa-gO7">
+                                <rect key="frame" x="0.0" y="264" width="375" height="514"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DiE-GB-wQo">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NotesCell" id="86H-ge-Bad" customClass="NotesContentCell" customModule="TutorDot_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ufJ-82-AxH">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sJd-n2-aDC"/>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="sJd-n2-aDC" firstAttribute="trailing" secondItem="iIr-aa-gO7" secondAttribute="trailing" id="4rz-3R-7bk"/>
+                            <constraint firstItem="iIr-aa-gO7" firstAttribute="leading" secondItem="sJd-n2-aDC" secondAttribute="leading" id="7mp-N1-i2p"/>
+                            <constraint firstItem="gVI-uo-qF9" firstAttribute="leading" secondItem="sJd-n2-aDC" secondAttribute="leading" id="AxX-Hg-ojX"/>
+                            <constraint firstItem="mNX-Yc-xvj" firstAttribute="top" secondItem="PTK-9m-sUl" secondAttribute="top" id="Jz5-xb-YsN"/>
+                            <constraint firstItem="sJd-n2-aDC" firstAttribute="trailing" secondItem="mNX-Yc-xvj" secondAttribute="trailing" id="LPo-Al-ztf"/>
+                            <constraint firstItem="mNX-Yc-xvj" firstAttribute="leading" secondItem="sJd-n2-aDC" secondAttribute="leading" id="Z8u-2d-r0x"/>
+                            <constraint firstItem="sJd-n2-aDC" firstAttribute="trailing" secondItem="gVI-uo-qF9" secondAttribute="trailing" id="ZsU-2h-vx6"/>
+                            <constraint firstItem="gVI-uo-qF9" firstAttribute="top" secondItem="mNX-Yc-xvj" secondAttribute="bottom" id="ioz-GC-fjr"/>
+                            <constraint firstItem="iIr-aa-gO7" firstAttribute="top" secondItem="gVI-uo-qF9" secondAttribute="bottom" id="qcm-yY-qWd"/>
+                            <constraint firstItem="sJd-n2-aDC" firstAttribute="bottom" secondItem="iIr-aa-gO7" secondAttribute="bottom" id="vnT-Pj-NYp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="def-Y5-uBo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="837.60000000000002" y="713.79310344827593"/>
+        </scene>
     </scenes>
     <resources>
         <image name="calenderBtnNextMonth" width="48" height="32"/>
@@ -524,6 +663,10 @@
         <image name="classLogModificationBtnCircleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnTriangleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnXUnpick" width="48" height="48"/>
+        <image name="classlogBtnFillter" width="43" height="48"/>
+        <image name="classlogBtnNextMonthPick" width="54" height="37"/>
+        <image name="classlogBtnNextMonthUnpick" width="54" height="37"/>
+        <image name="classlogBtnNotice" width="43" height="48"/>
         <image name="scheduleModificationBtnCancel" width="48" height="48"/>
         <image name="scheduleModificationBtnSave" width="48" height="48"/>
         <namedColor name="Color">

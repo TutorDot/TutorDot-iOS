@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "classlogBtnNextMonthUnpick.png",
+      "scale" : "1x",
+      "idiom" : "universal"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "classlogBtnNextMonthUnpick@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x",
+      "filename" : "classlogBtnNextMonthUnpick@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
