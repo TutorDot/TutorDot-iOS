@@ -524,8 +524,8 @@
         <image name="classLogModificationBtnCircleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnTriangleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnXUnpick" width="48" height="48"/>
-        <image name="scheduleModificationBtnCancel" width="53" height="50"/>
-        <image name="scheduleModificationBtnSave" width="55" height="50"/>
+        <image name="scheduleModificationBtnCancel" width="48" height="48"/>
+        <image name="scheduleModificationBtnSave" width="48" height="48"/>
         <namedColor name="Color">
             <color red="0.40784313725490196" green="0.45882352941176469" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

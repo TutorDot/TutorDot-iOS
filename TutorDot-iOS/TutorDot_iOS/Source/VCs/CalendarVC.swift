@@ -47,7 +47,11 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
-
+    
+    
+    
+    @IBOutlet weak var headerUserNameLabel: UILabel!
+    @IBOutlet weak var headerClassNameLabel: UILabel!
     
     
     @IBOutlet weak var dateCollectionView: UICollectionView!
@@ -68,6 +72,9 @@ class CalendarVC: UIViewController {
     
     @IBOutlet weak var tutorViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var totalView: UIView!
+    
+    @IBOutlet weak var anchorView: UIView!
+    
     @IBOutlet weak var calendarView: UIView! {
         didSet {
             calendarView.layer.cornerRadius = 20
@@ -89,6 +96,34 @@ class CalendarVC: UIViewController {
         }
     }
     
+    @IBAction func filterButton(_ sender: Any) {
+//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//
+//        let classList22 = ["수업", "수업2", "수업3"]
+//
+//        //actionSheet.view.backgroundColor = UIColor.white
+//        actionSheet.addAction(UIAlertAction(title: classList22[0], style: .default, handler: nil))
+//        actionSheet.addAction(UIAlertAction(title: classList22[1], style: .default, handler: nil))
+//            //actionSheet.addAction(UIAlertAction(title: "수업3", style: .default, handler: nil))
+//
+//        actionSheet.addAction(UIAlertAction(title: classList22[2], style: .default, handler: nil))
+//        present(actionSheet, animated: true, completion: nil)
+//
+        
+        let item1 = MenuItem(title: "Int", value: 1)
+        let item2 = MenuItem(title: "Car", value: 2)
+        let button = OkButton(title: "OK")
+        let items = [item1, item2, button]
+        let menu = Menu(title: "Select a type", items: items)
+        
+        let sheet = ActionSheet(menu: menu) { sheet, item in
+            if let value = item.value as? Int { print("You selected an int: \(value)") }
+            if item is OkButton { print("You tapped the OK button") }
+        }
+        let calendarVC = CalendarVC()
+        sheet.present(in: calendarVC, from: totalView)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,11 +150,16 @@ class CalendarVC: UIViewController {
     func setListDropDown(){
         var dropList : [String] = ["전체"]
         dropDown = DropDown()
-        self.dropDown?.width = 270
+        self.dropDown?.width = self.view.frame.width
         self.dropDown?.backgroundColor = UIColor.white
         self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
-        self.dropDown?.cellHeight = 41
-        DropDown.appearance().setupCornerRadius(7)
+        self.dropDown?.cellHeight = 60
+        DropDown.appearance().setupCornerRadius(13)
+        self.dropDown?.anchorView = anchorView
+        self.dropDown?.dimmedBackgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.dropDown?.setupMaskedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner])
+        //self.dropDown?.topOffset = CGPoint(x: 0, y:-(dropDown?.anchorView?.plainView.bounds.height)!)
+
         // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
             switch networkResult {
@@ -129,6 +169,7 @@ class CalendarVC: UIViewController {
                     let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
                     dropList.append(item.lectureName)
                     self.dropDown?.dataSource = dropList
+                    print(item)
                 }
                 
             case .pathErr : print("Patherr")
@@ -145,28 +186,31 @@ class CalendarVC: UIViewController {
         
         // 드롭박스 수업 제목 선택할 때 캘린더 컬렉션뷰, 튜터 컬렉션뷰 데이터 바꿔주기
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.dropDownLabelButton.setTitle(item, for: .normal)
+            //self.dropDownLabelButton.setTitle(item, for: .normal)
             self.classListToggle.removeAll()
             self.tutorCollectionView.reloadData()
+            
             // 전체 선택시
-            if self.dropDownLabelButton.title(for: .normal) == "전체" {
+            if self.dropDown?.selectedItem == "전체" {
                 self.classList2 = self.classList2Copy
-                print(self.classList2)
                 self.dateCollectionView.reloadData()
                 self.tutorCollectionView.reloadData()
+                self.headerClassNameLabel.text = "전체"
             } else {
-                // 수업 리스트 선택시
                 self.classList2 = self.classList2Copy
                 for i in 0..<self.classList2.count {
-                    if self.dropDownLabelButton.title(for: .normal) == self.classList2[i].lectureName {
+                    if self.dropDown?.selectedItem == self.classList2[i].lectureName {
                         self.classListToggle.append(self.classList2[i])
+                        self.headerClassNameLabel.text = self.classList2[i].lectureName
                     }
                 }
                 self.classList2.removeAll()
                 self.classList2 = self.classListToggle
                 self.dateCollectionView.reloadData()
                 self.tutorCollectionView.reloadData()
+                
             }
+        
         }
         // 드롭박스 내 text 가운데 정렬
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -182,7 +226,8 @@ class CalendarVC: UIViewController {
     
     @objc func dropDownToggleButton(){
         self.dropDown?.reloadAllComponents()
-        //dropDown?.show()
+        dropDown?.direction = .top
+        dropDown?.show()
     }
     
     // MARK: - 서버통신: 캘린더 전체 데이터 가져요기
@@ -263,12 +308,18 @@ class CalendarVC: UIViewController {
         receiveViewController.modalPresentationStyle = .fullScreen
         self.present(receiveViewController, animated: true, completion: nil)
         
-        
     }
     
-    
-    
-    
+    @IBAction func alertTabButton(_ sender: Any) {
+        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
+        guard let thirdTab = alertStoryboard.instantiateViewController(identifier: "AlertVC")
+            as? AlertVC  else {
+            return
+        }
+        //tabBarController?.selectedIndex = 2
+
+        self.present(thirdTab, animated: true, completion: nil)
+    }
 }
 
 extension CalendarVC {
@@ -375,7 +426,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if indexPath.item <= firstWeekDayOfMonth - 2 {
                 calendarCell.isHidden = false
                 calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                let prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex - 1] + 2)
+                let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex - 1] + 2)
                 calendarCell.dateLabel.text="\(prevDate)"
                 calendarCell.isUserInteractionEnabled = false
                 
@@ -405,7 +456,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.isHidden = false
                 calendarCell.dateLabel.textColor = UIColor.black
                 calendarCell.dateLabel.text="\(calcDate)"
-                print(indexPath.row, calcDate, "print")
                 calendarCell.dateLabel.textColor = UIColor.black
                 calendarCell.isUserInteractionEnabled = true
                 calendarCell.backgroundColor = UIColor.white
@@ -495,6 +545,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if indexPath == index {
                 cell?.dateLabel.textColor = UIColor.softBlue
                 cell?.dateView.backgroundColor = UIColor.white
+                //cell?.dateLabel.font = UIFont.boldSystemFont(ofSize: 13)
             }
             
             if let date = cell?.dateLabel.text! {
