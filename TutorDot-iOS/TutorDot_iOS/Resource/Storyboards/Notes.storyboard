@@ -127,7 +127,7 @@
                                                         </constraints>
                                                         <state key="normal" image="calenderBtnPreviousMonth"/>
                                                         <connections>
-                                                            <action selector="previousButton:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="sPP-0Y-LTy"/>
+                                                            <action selector="previousButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="cDA-DX-aVC"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="7월 수업일지" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0x-f2-rzd">
@@ -140,7 +140,7 @@
                                                         <rect key="frame" x="148.33333333333331" y="0.0" width="48" height="32"/>
                                                         <state key="normal" image="calenderBtnNextMonth"/>
                                                         <connections>
-                                                            <action selector="nextButton:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="Tej-hU-yVW"/>
+                                                            <action selector="nextButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="p6c-ID-Pok"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

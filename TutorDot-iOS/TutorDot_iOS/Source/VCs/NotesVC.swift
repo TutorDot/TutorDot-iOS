@@ -5,35 +5,48 @@
 //  Created by Sehwa Ryu on 29/06/2020.
 //  Copyright © 2020 Sehwa Ryu. All rights reserved.
 //
+import os
 import UIKit
+
+
 import DropDown
 
 class NotesVC: UIViewController {
     
     
 
-    @IBOutlet weak var viewHeaderHeight: NSLayoutConstraint!
+    
 
+    // MARK: - Views
     
     @IBOutlet weak var ClassHeaderView: UIView! //class progress bar
     @IBOutlet weak var monthJournalView: UIView!
-    
     @IBOutlet weak var progressViewWrap: UIStackView!
-    @IBOutlet weak var tableViewTopMargin: NSLayoutConstraint!
-    
-    @IBOutlet weak var listToggleButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dropboxbound: UIView!
-    @IBOutlet weak var notesTitle: UIButton!
-    
-    
     @IBOutlet weak var progressView: UIProgressView!
+    
+    
+    // MARK: - Layout Constraint
+    
+    @IBOutlet weak var tableViewTopMargin: NSLayoutConstraint!
+    @IBOutlet weak var monthJournalViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewHeaderHeight: NSLayoutConstraint!
+    
+    
+    // MARK: - UIButton and UILabel
+    
+    @IBOutlet weak var listToggleButton: UIButton!
+    @IBOutlet weak var notesTitle: UIButton!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
     @IBOutlet weak var totalClassLabel: UILabel!
-  
-    @IBOutlet weak var monthJournalViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var monthLable: UILabel!
     
+    var month: Int = 0
+    var dropDown:DropDown?
+    private var NotesInfos: [NotesInfo] = []
+
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
         if ishide { //true(안보일때)
@@ -43,23 +56,8 @@ class NotesVC: UIViewController {
         }
     }
     
-    func monthHeaderHidden(_ ishide: Bool){
-        if ishide { //true(안보일때)
-//            monthJournalViewHeight.constant = 50
-////            UIView.monthJournalView.animate(withDuration: 0.5) {
-////                self.view.layoutIfNeeded()
-////            }
-//            tableViewTopMargin.constant = 191-117-24
-//            print("50")
-        } else { //false (보일때)
-//            monthJournalViewHeight.constant = 74
-//            if notesTitle.currentTitle == "전체"{
-//                tableViewTopMargin.constant = 191-117
-//            } else {
-//                tableViewTopMargin.constant = 191
-//            }
-        }
-    }
+    
+    // MARK: - init
     
     func setProgress(){
         progressView.layer.cornerRadius = 9
@@ -72,22 +70,26 @@ class NotesVC: UIViewController {
         UIView.animate(withDuration: 4.0) {
             self.progressView.setProgress(12/16, animated: true)
         }
-        //progressView.progress = 12/16 //0.2로 두고 테스트
-        //progressLabel.text = String(12/16*100) + "%"
         progressLabel.text = "75%"
     }
    
-   func setProgressInfo(progressRate: String, currentClass: String, totalClass:String){
-       progressLabel.text = progressRate
-       currentClassLabel.text = currentClass
-       totalClassLabel.text = totalClass
-   }
+    func setProgressInfo(progressRate: String, currentClass: String, totalClass:String){
+        progressLabel.text = progressRate
+        currentClassLabel.text = currentClass
+        totalClassLabel.text = totalClass
+    }
     
-    var month: Int = 0
-    @IBOutlet weak var monthLable: UILabel!
+    func setMonthLabel(_ monthInput: Int){
+        var monthStr: String
+        monthStr = String(monthInput)
+        month = monthInput
+        monthLable.text = monthStr + "월 수업 일지"
+    }
+    
 
-   
-    @IBAction func previousButton(_ sender: Any) {
+   // MARK: - Button Action
+
+    @IBAction func previousButtonDidTap(_ sender: Any) {
         //추후 분기문으로 바운더리 지정
         if month > 1 {
             month -= 1
@@ -96,27 +98,20 @@ class NotesVC: UIViewController {
         }
         setMonthLabel(month)
     }
-   
-    @IBAction func nextButton(_ sender: Any) {
+    
+    @IBAction func nextButtonDidTap(_ sender: Any) {
         //추후 분기문으로 바운더리 지정
         if month < 12 {
             month += 1
         } else {
             month = 1
         }
-        
         setMonthLabel(month)
     }
    
-    func setMonthLabel(_ monthInput: Int){
-        var monthStr: String
-        monthStr = String(monthInput)
-        month = monthInput
-        monthLable.text = monthStr + "월 수업 일지"
-    }
+   
     
-    var dropDown:DropDown?
-    private var NotesInfos: [NotesInfo] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +136,7 @@ class NotesVC: UIViewController {
     }
     
 
+    // MARK: - Server
     
     func listDropDown(){
         var dropList : [String] = ["전체"]
@@ -149,8 +145,6 @@ class NotesVC: UIViewController {
         self.dropDown?.width = 275
         DropDown.appearance().setupCornerRadius(7)
        
-        // Top of drop down will be below the anchorView.
-        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!)
         
         var idList : [Int] = []
         
@@ -169,20 +163,22 @@ class NotesVC: UIViewController {
                 
             }
             
-            case .pathErr : print("Patherr")
-            case .serverErr : print("ServerErr")
-            case .requestErr(let message) : print(message)
-            case .networkFail:
-                print("networkFail")
+        case .pathErr: os_log("Patherr", log: .network)
+        case .serverErr: os_log("ServerErr", log: .network)
+        case .requestErr(let message): os_log(message as! StaticString, log: .network)
+        case .networkFail: os_log("networkFail", log: .network)
+                
             }
         }
         
         // 드롭박스 목록 내역
-        //dropDown?.dataSource = ["전체", "신연상학생 수학 수업", "신연하학생 영어 수업"]
-        listToggleButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
-        notesTitle.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
+        listToggleButton.addTarget(self,
+                                   action: #selector(dropDownToggleButton),
+                                   for: .touchUpInside)
+        notesTitle.addTarget(self,
+                             action: #selector(dropDownToggleButton),
+                             for: .touchUpInside)
         
-        // Action triggered on selection
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
             self.notesTitle.setTitle(item, for: .normal)
             if item != "전체" {
@@ -193,8 +189,9 @@ class NotesVC: UIViewController {
         }
 
         // 드롭박스 내 text 가운데 정렬
-        dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
-            // Setup your custom UI components
+        dropDown?.customCellConfiguration = { (index: Index,
+                                               item: String,
+                                               cell: DropDownCell) -> Void in
             cell.optionLabel.textAlignment = .center
         }
     }
@@ -219,81 +216,62 @@ class NotesVC: UIViewController {
         NotesInfos = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10]
     }
     
-    // 아래로 스크롤(스와이프)시 0월 수업일지 뷰 숨기기 / 나타내기
-//    func swipeAction(){
-//        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
-//        swipeUp.direction = UISwipeGestureRecognizer.Direction.left
-//        self.view.addGestureRecognizer(swipeUp)
-//
-//        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
-//        swipeDown.direction = UISwipeGestureRecognizer.Direction.right
-//        self.view.addGestureRecognizer(swipeDown)
-//    }
-//
-//    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
-//        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-//            if swipeGesture.direction == UISwipeGestureRecognizer.Direction.up{
-//                print("위로 스크롤 내리고 있음요")
-//                monthHeaderHidden(true)
-//            } else if swipeGesture.direction == UISwipeGestureRecognizer.Direction.down{
-//                print("아래로 스크롤 해또요")
-//                monthHeaderHidden(false)
-//            }
-//        }
-//    }
 }
 
-extension NotesVC: UITableViewDataSource, UITableViewDelegate{
-    
- 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        print(NotesInfos.count) //Log
+extension NotesVC: UITableViewDataSource, UITableViewDelegate{
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return NotesInfos.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
-        notesCell.setClassJournalInfo(classLog: NotesInfos[indexPath.row].classLog.getImageName(), currentClass: NotesInfos[indexPath.row].currentClass, lesson: NotesInfos[indexPath.row].lesson, homework: NotesInfos[indexPath.row].homework)
+        notesCell.setClassJournalInfo(
+            classLog: NotesInfos[indexPath.row].classLog.getImageName(),
+            currentClass: NotesInfos[indexPath.row].currentClass,
+            lesson: NotesInfos[indexPath.row].lesson,
+            homework: NotesInfos[indexPath.row].homework)
         
         return notesCell
-            
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
 
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = JournalDateHeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 16))
-        headerView.backgroundColor =  UIColor(red: 245 / 255, green: 246 / 255, blue: 250 / 255, alpha: 1.0)
+    func tableView(_ tableView: UITableView,
+                   viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = JournalDateHeaderView(
+            frame: CGRect(x: 0, y: 0, width: 375, height: 16))
+        headerView.backgroundColor =  UIColor(red: 245 / 255,
+                                              green: 246 / 255,
+                                              blue: 250 / 255,
+                                              alpha: 1.0)
         return headerView
 
     }
    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForHeaderInSection section: Int) -> CGFloat {
         return 16
     }
     
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        monthHeaderHidden(true)
-        //위로 스크롤하면!! (노션에 적기!!!!!)
-        if scrollView.contentOffset.y == 0 {
-            monthHeaderHidden(false)
-        }
-    }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let nextVC = self.storyboard?.instantiateViewController(identifier: NotesModifyVC.identifier) as? NotesModifyVC else {return}
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        guard let nextVC = self.storyboard?.instantiateViewController(
+                identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
         
         nextVC.modalPresentationStyle = .currentContext
-        
         nextVC.modalTransitionStyle = .crossDissolve
         self.present(nextVC, animated: true, completion: nil)
     }
    
 }
+
