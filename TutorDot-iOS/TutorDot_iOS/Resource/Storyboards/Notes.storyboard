@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Er3-Nc-HXA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Er3-Nc-HXA">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +24,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ku2-SE-olH">
                                         <rect key="frame" x="50" y="41" width="275" height="48"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UnZ-rT-QWX">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UnZ-rT-QWX">
                                                 <rect key="frame" x="121.66666666666666" y="14" width="32" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                 <state key="normal" title="전체">
@@ -84,19 +86,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ur9-lg-OcA">
-                                                <rect key="frame" x="323.66666666666669" y="89" width="34.333333333333314" height="14.333333333333329"/>
+                                                <rect key="frame" x="324" y="89" width="34" height="14.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UN-hv-E3Y">
-                                                <rect key="frame" x="320.33333333333331" y="66.333333333333343" width="26.666666666666686" height="14.333333333333329"/>
+                                                <rect key="frame" x="319" y="66.333333333333343" width="28" height="14.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                 <color key="textColor" red="0.40784313729999999" green="0.45882352939999999" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="q1i-Kb-Jod" firstAttribute="leading" secondItem="Wqa-MG-Nu8" secondAttribute="leading" constant="225" id="6qj-50-3bc"/>
                                             <constraint firstAttribute="bottom" secondItem="q1i-Kb-Jod" secondAttribute="bottom" constant="13" id="72I-pb-vgP"/>
@@ -216,13 +218,13 @@
                                                         </stackView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="huN-LO-05N">
                                                             <rect key="frame" x="5" y="5" width="194" height="40"/>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="qOj-c3-U10"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4회차 12시간/16시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgU-Jc-Qp7">
-                                                            <rect key="frame" x="16" y="14.999999999999998" width="138.66666666666666" height="19.333333333333329"/>
+                                                            <rect key="frame" x="16" y="14.999999999999998" width="137.66666666666666" height="19.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -246,7 +248,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="WJt-5X-Hgo" secondAttribute="bottom" constant="16" id="15E-KB-RaK"/>
                                                         <constraint firstAttribute="trailing" secondItem="huN-LO-05N" secondAttribute="trailing" constant="100" id="Cer-hS-4WP"/>
@@ -298,6 +300,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MCp-pP-N3j"/>
                         <color key="backgroundColor" name="journalColor"/>
                         <constraints>
                             <constraint firstItem="M9O-bg-GAs" firstAttribute="leading" secondItem="MCp-pP-N3j" secondAttribute="leading" id="3aL-lQ-jN5"/>
@@ -312,7 +315,6 @@
                             <constraint firstItem="zeE-ma-jPS" firstAttribute="trailing" secondItem="MCp-pP-N3j" secondAttribute="trailing" id="qy0-Hd-WSr"/>
                             <constraint firstItem="MCp-pP-N3j" firstAttribute="trailing" secondItem="M9O-bg-GAs" secondAttribute="trailing" id="vqH-G3-7oQ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MCp-pP-N3j"/>
                     </view>
                     <connections>
                         <outlet property="ClassHeaderView" destination="Wqa-MG-Nu8" id="Nrd-RT-45M"/>
@@ -388,7 +390,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4회차  12시간 / 16시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCX-RH-I1r">
-                                <rect key="frame" x="54.000000000000014" y="124.00000000000001" width="168.33333333333337" height="21.666666666666671"/>
+                                <rect key="frame" x="54" y="124.00000000000001" width="167" height="21.666666666666671"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -471,6 +473,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="YdC-6S-Des"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GUk-GR-POH" firstAttribute="top" secondItem="71s-lu-caA" secondAttribute="bottom" constant="329" id="143-ss-LfH"/>
@@ -495,7 +498,6 @@
                             <constraint firstItem="uCX-RH-I1r" firstAttribute="top" secondItem="71s-lu-caA" secondAttribute="bottom" constant="30" id="pgs-yG-sUi"/>
                             <constraint firstItem="jKP-KQ-42c" firstAttribute="leading" secondItem="YdC-6S-Des" secondAttribute="leading" constant="20" id="wm8-j2-JhD"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="YdC-6S-Des"/>
                     </view>
                     <connections>
                         <outlet property="classColor" destination="cGG-K4-CKw" id="eOf-wO-nuu"/>
@@ -522,8 +524,8 @@
         <image name="classLogModificationBtnCircleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnTriangleUnpick" width="48" height="48"/>
         <image name="classLogModificationBtnXUnpick" width="48" height="48"/>
-        <image name="scheduleModificationBtnCancel" width="53" height="50"/>
-        <image name="scheduleModificationBtnSave" width="55" height="50"/>
+        <image name="scheduleModificationBtnCancel" width="48" height="48"/>
+        <image name="scheduleModificationBtnSave" width="48" height="48"/>
         <namedColor name="Color">
             <color red="0.40784313725490196" green="0.45882352941176469" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -533,5 +535,8 @@
         <namedColor name="journalColor">
             <color red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

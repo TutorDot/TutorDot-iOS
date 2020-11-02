@@ -152,19 +152,21 @@ class NotesVC: UIViewController {
         // Top of drop down will be below the anchorView.
         dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!)
         
-    
+        var idList : [Int] = []
         
         // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
         switch networkResult {
             case .success(let resultData):
-            print("successssss")
             guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-            print("try")
+            print("success")
             for index in 0..<data.count {
                 let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
                 dropList.append(item.lectureName)
+                idList.append(item.lectureId)
                 self.dropDown?.dataSource = dropList
+                print("여기", idList)
+                
             }
             
             case .pathErr : print("Patherr")
