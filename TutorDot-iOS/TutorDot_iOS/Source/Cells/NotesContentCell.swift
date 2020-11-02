@@ -22,12 +22,13 @@ class NotesContentCell: UICollectionViewCell {
     @IBOutlet weak var classHW3: UILabel!
     @IBOutlet weak var tutorProfile: UIImageView!
     @IBOutlet weak var backView: UIView!
-    
+    @IBOutlet weak var noteCellWidth: NSLayoutConstraint!
+    @IBOutlet weak var noteCellHeight: NSLayoutConstraint!
     
     // MARK: variables and constant
     var lesson: [String] = []
     var homeworks: [String] = []
-    
+    let cellInset: CGFloat = 16
     let viewRadius: CGFloat = 13.0
 //    let lesson1: UIView = noteContentStackView.arrangedSubviews[2]
     
@@ -35,6 +36,9 @@ class NotesContentCell: UICollectionViewCell {
     // MARK: awake From Nib
     override func awakeFromNib() {
         super.awakeFromNib()
+        let screenWidth = UIScreen.main.bounds.size.width
+        self.backView.translatesAutoresizingMaskIntoConstraints = false
+        noteCellWidth.constant = screenWidth - (cellInset * 2)
         backView.layer.cornerRadius = viewRadius
     }
     
