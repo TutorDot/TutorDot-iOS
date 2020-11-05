@@ -47,7 +47,7 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
-    
+    let swipeRec = UISwipeGestureRecognizer()
     
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
@@ -75,6 +75,7 @@ class CalendarVC: UIViewController {
     
     @IBOutlet weak var anchorView: UIView!
     
+    
     @IBOutlet weak var calendarView: UIView! {
         didSet {
             calendarView.layer.cornerRadius = 20
@@ -96,23 +97,6 @@ class CalendarVC: UIViewController {
         }
     }
     
-    @IBAction func filterButton(_ sender: Any) {
-        
-        let item1 = MenuItem(title: "Int", value: 1)
-        let item2 = MenuItem(title: "Car", value: 2)
-        let button = OkButton(title: "OK")
-        let items = [item1, item2, button]
-        let menu = Menu(title: "Select a type", items: items)
-        
-        let sheet = ActionSheet(menu: menu) { sheet, item in
-            if let value = item.value as? Int { print("You selected an int: \(value)") }
-            if item is OkButton { print("You tapped the OK button") }
-        }
-        let calendarVC = CalendarVC()
-        sheet.present(in: calendarVC, from: totalView)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllerUI()
@@ -121,17 +105,15 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.sendSubviewToBack(calendarView)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
         self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-        
-        if firstTimeRunning {
-            dateCollectionView.scrollToItem(at: IndexPath(item: 6, section: 3), at: .centeredVertically, animated: false)
-            firstTimeRunning = false
-        }
+        //        if firstTimeRunning {
+        //            dateCollectionView.scrollToItem(at: IndexPath(item: 6, section: 3), at: .centeredVertically, animated: false)
+        //            firstTimeRunning = false
+        //        }
     }
     
     // MARK: - 서버통신: 수업 리스트 가져오기
@@ -174,7 +156,6 @@ class CalendarVC: UIViewController {
         
         // 드롭박스 수업 제목 선택할 때 캘린더 컬렉션뷰, 튜터 컬렉션뷰 데이터 바꿔주기
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
-            //self.dropDownLabelButton.setTitle(item, for: .normal)
             self.classListToggle.removeAll()
             self.tutorCollectionView.reloadData()
             
@@ -196,9 +177,7 @@ class CalendarVC: UIViewController {
                 self.classList2 = self.classListToggle
                 self.dateCollectionView.reloadData()
                 self.tutorCollectionView.reloadData()
-                
             }
-            
         }
         // 드롭박스 내 text 가운데 정렬
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -294,7 +273,6 @@ class CalendarVC: UIViewController {
         guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassAddVC.identifier) as? ClassAddVC else {return}
         receiveViewController.modalPresentationStyle = .fullScreen
         self.present(receiveViewController, animated: true, completion: nil)
-        
     }
     
     @IBAction func alertTabButton(_ sender: Any) {
@@ -302,13 +280,12 @@ class CalendarVC: UIViewController {
         let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")
         uvc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(uvc, animated: true)
-        
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.hidesBottomBarWhenPushed = true
     }
     
-
 }
 
 extension CalendarVC {
@@ -409,20 +386,28 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             //                calendarCell.dateLabel.text = String(prevDate)
             //            }
             
-            
-            
             // 이전 달 cell 표시
             if indexPath.item <= firstWeekDayOfMonth - 2 {
                 calendarCell.isHidden = false
                 calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex - 1] + 2)
-                calendarCell.dateLabel.text="\(prevDate)"
-                calendarCell.isUserInteractionEnabled = false
+                // 년도 전환 시
+                if currentMonthIndex == 0 {
+                    let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[11] + 2)
+                    calendarCell.dateLabel.text="\(prevDate)"
+                    calendarCell.isUserInteractionEnabled = false
+                    calendarCell.image1.image = nil
+                    calendarCell.image2.image = nil
+                    calendarCell.image3.image = nil
+                } else {
+                    let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex - 1] + 2)
+                    calendarCell.dateLabel.text="\(prevDate)"
+                    calendarCell.isUserInteractionEnabled = false
+                    calendarCell.image1.image = nil
+                    calendarCell.image2.image = nil
+                    calendarCell.image3.image = nil
+                }
                 
-                calendarCell.image1.image = nil
-                calendarCell.image2.image = nil
-                calendarCell.image3.image = nil
-                
+            
                 return calendarCell
             } // 이후 달 cell 표시
             else if indexPath.item >= firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex]-1) {
@@ -456,6 +441,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateLabel.textColor = UIColor.softBlue
                     calendarCell.dateView.backgroundColor = UIColor.white
+                    calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
                     
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
@@ -480,13 +466,14 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 }
                 
                 // 점들 가운데 정렬을 위한 분기처리
-                //                if calendarCell.image2.image == nil && calendarCell.image3.image == nil {
-                //                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-                //                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
-                //                }
-                //                else if calendarCell.image3.image == nil {
-                //                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-                //                }
+//                if calendarCell.image2.image == nil && calendarCell.image3.image == nil {
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
+//                }
+//                else if calendarCell.image3.image == nil {
+//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//                }
+                
                 
                 // 캘린더를 다음달로 전환 했을 때 1일 셀렉해놓기
                 if currentMonthIndex != presentMonthIndex {
@@ -556,6 +543,8 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 tutorCollectionView.reloadData()
                 
             }
+            print("selected", indexPath)
+            
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
             let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell

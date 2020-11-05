@@ -118,6 +118,7 @@ class AlertVC: UIViewController {
         let notice8 = AlertInfo(icon: AlertInfo.IconLog.classInfo, noticeInfo: "수업 정보가 변경되었습니다", detail: "신연상 선생님의 영어 수업 정보가 변경되었습니다.", newNotice: false)
         
         noticeList = [notice1, notice2, notice3, notice4, notice5, notice6, notice7, notice8]
+        //noticeList = []
         
     }
     
@@ -137,7 +138,7 @@ extension AlertVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let numOfSections: Int = 2
+        let numOfSections: Int = 1
         if noticeTableView.numberOfSections > 0
         {
             noticeTableView.backgroundView = nil
@@ -146,10 +147,9 @@ extension AlertVC: UITableViewDelegate, UITableViewDataSource {
         { // 알림이 없는 경우
             let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             let subLagel: UILabel  = UILabel(frame: CGRect(x: 50, y: 50, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text          = "알림이 없습니다"
-            //noDataLabel.
+            noDataLabel.text = "알림이 없습니다"
             noDataLabel.font.withSize(16)
-            noDataLabel.textColor     = UIColor.brownishGrey
+            noDataLabel.textColor = UIColor.brownishGrey
             noDataLabel.textAlignment = .center
             subLagel.text = "새로운 소식을 기다려주세요"
             tableView.backgroundView  = noDataLabel
