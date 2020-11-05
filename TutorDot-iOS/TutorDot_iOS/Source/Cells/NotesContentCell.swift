@@ -28,18 +28,16 @@ class NotesContentCell: UICollectionViewCell {
     // MARK: variables and constant
     var lesson: [String] = []
     var homeworks: [String] = []
-    let cellInset: CGFloat = 16
-    let viewRadius: CGFloat = 13.0
+    let radius: CGFloat = 13.0
+    
 //    let lesson1: UIView = noteContentStackView.arrangedSubviews[2]
     
     
     // MARK: awake From Nib
     override func awakeFromNib() {
         super.awakeFromNib()
-        let screenWidth = UIScreen.main.bounds.size.width
         self.backView.translatesAutoresizingMaskIntoConstraints = false
-        noteCellWidth.constant = screenWidth - (cellInset * 2)
-        backView.layer.cornerRadius = viewRadius
+        self.backView.layer.cornerRadius = radius
     }
     
     func setNotesContent(){
