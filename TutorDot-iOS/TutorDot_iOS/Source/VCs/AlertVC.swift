@@ -12,6 +12,8 @@ import DropDown
 
 class AlertVC: UIViewController {
     
+    static let identifier: String = "AlertVC"
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var noticeTableView: UITableView!
     @IBOutlet weak var anchorView: UIView!
@@ -29,6 +31,8 @@ class AlertVC: UIViewController {
         setListDropDown()
         setUpHeaderView()
         setList()
+        self.tabBarController?.tabBar.isHidden = true
+
         
         
     }
@@ -115,6 +119,11 @@ class AlertVC: UIViewController {
         
         noticeList = [notice1, notice2, notice3, notice4, notice5, notice6, notice7, notice8]
         
+    }
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     

@@ -97,18 +97,6 @@ class CalendarVC: UIViewController {
     }
     
     @IBAction func filterButton(_ sender: Any) {
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        let classList22 = ["수업", "수업2", "수업3"]
-//
-//        //actionSheet.view.backgroundColor = UIColor.white
-//        actionSheet.addAction(UIAlertAction(title: classList22[0], style: .default, handler: nil))
-//        actionSheet.addAction(UIAlertAction(title: classList22[1], style: .default, handler: nil))
-//            //actionSheet.addAction(UIAlertAction(title: "수업3", style: .default, handler: nil))
-//
-//        actionSheet.addAction(UIAlertAction(title: classList22[2], style: .default, handler: nil))
-//        present(actionSheet, animated: true, completion: nil)
-//
         
         let item1 = MenuItem(title: "Int", value: 1)
         let item2 = MenuItem(title: "Car", value: 2)
@@ -133,7 +121,7 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.sendSubviewToBack(calendarView)
-   
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -159,7 +147,7 @@ class CalendarVC: UIViewController {
         self.dropDown?.dimmedBackgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.dropDown?.setupMaskedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner])
         //self.dropDown?.topOffset = CGPoint(x: 0, y:-(dropDown?.anchorView?.plainView.bounds.height)!)
-
+        
         // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
             switch networkResult {
@@ -210,7 +198,7 @@ class CalendarVC: UIViewController {
                 self.tutorCollectionView.reloadData()
                 
             }
-        
+            
         }
         // 드롭박스 내 text 가운데 정렬
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
@@ -304,22 +292,23 @@ class CalendarVC: UIViewController {
     // MARK: -- 서버통신: 일정추가 버튼
     @IBAction func plusButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassAddVC.identifier) as? ClassAddVC else {return}
-        
         receiveViewController.modalPresentationStyle = .fullScreen
         self.present(receiveViewController, animated: true, completion: nil)
         
     }
     
     @IBAction func alertTabButton(_ sender: Any) {
-        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
-        guard let thirdTab = alertStoryboard.instantiateViewController(identifier: "AlertVC")
-            as? AlertVC  else {
-            return
-        }
-        //tabBarController?.selectedIndex = 2
-
-        self.present(thirdTab, animated: true, completion: nil)
+        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
+        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")
+        uvc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(uvc, animated: true)
+        
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.hidesBottomBarWhenPushed = true
+    }
+    
+
 }
 
 extension CalendarVC {
