@@ -16,6 +16,7 @@ class NotesMainVC: UIViewController {
     let infoViewHeight: CGFloat = 170
     let dateFomatter = DateFormatter()
     var month: String?
+    let cellInset: CGFloat = 16
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var classProgressBar: UIProgressView!
@@ -33,9 +34,7 @@ class NotesMainVC: UIViewController {
         noteCollectionView.delegate = self
         noteCollectionView.dataSource = self
         noteCollectionView.register(UINib.init(nibName: "NotesContentCell", bundle: nil), forCellWithReuseIdentifier: "noteContent")
-//        if let flowLayout = noteCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.estimatedItemSize = CGSize(width: 1,height: 1)
-//        }
+        setupFlowLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,21 +61,34 @@ class NotesMainVC: UIViewController {
         }
     }
     
+    private func setupFlowLayout() {
+        let flowLayout = UICollectionViewFlowLayout()
+        
+        let totalWidth = noteCollectionView.frame.width - (cellInset * 2)
+        let sideInset = (noteCollectionView.frame.width - totalWidth) / 2
+        
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: sideInset, bottom: 10, right: sideInset)
+        
+        flowLayout.itemSize = CGSize(width: totalWidth, height: totalWidth * 0.62)
+        
+        self.noteCollectionView.collectionViewLayout = flowLayout
+    }
+    
 }
 
 extension NotesMainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noteContent", for: indexPath)
+        cell.contentView.layer.cornerRadius = 13.0
         return cell
         
     }
     
-    
-    
-
+   
+   
     
 }
