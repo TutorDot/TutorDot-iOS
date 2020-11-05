@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hwN-nk-fcn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hwN-nk-fcn">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -82,7 +84,7 @@
                                     <action selector="checkBoxSelected:" destination="hwN-nk-fcn" eventType="touchUpInside" id="Y4U-Wf-zAY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbp-t1-LDM">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbp-t1-LDM">
                                 <rect key="frame" x="36" y="694" width="303" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="303" id="QvT-YH-ARn"/>
@@ -111,7 +113,8 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="TwO-ZF-qs2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FC6-H1-abi" firstAttribute="leading" secondItem="TwO-ZF-qs2" secondAttribute="leading" constant="41" id="4nF-1K-rFT"/>
                             <constraint firstItem="BDK-bu-JZ1" firstAttribute="leading" secondItem="TwO-ZF-qs2" secondAttribute="leading" constant="41" id="5aK-N5-eHw"/>
@@ -143,7 +146,6 @@
                             <constraint firstItem="rNI-gH-Q1z" firstAttribute="centerX" secondItem="TwO-ZF-qs2" secondAttribute="centerX" id="tOy-hv-FXF"/>
                             <constraint firstItem="TwO-ZF-qs2" firstAttribute="trailing" secondItem="cGI-HZ-OHE" secondAttribute="trailing" id="tWj-gD-Xny"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="TwO-ZF-qs2"/>
                     </view>
                     <connections>
                         <outlet property="bottomViewConstraint" destination="amo-hr-wr1" id="reK-fA-nqA"/>
@@ -185,13 +187,13 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImgOnboardMockup" translatesAutoresizingMaskIntoConstraints="NO" id="iIW-xs-9xo">
-                                <rect key="frame" x="16" y="185" width="343" height="175"/>
+                                <rect key="frame" x="16" y="185" width="343" height="288"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="221" id="hJj-Fz-ReC"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LaN-1H-Tw9">
-                                <rect key="frame" x="41" y="403" width="293" height="38"/>
+                                <rect key="frame" x="41" y="516" width="293" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="3Hf-hU-CcG"/>
                                 </constraints>
@@ -199,15 +201,15 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1HB-bJ-MHY">
-                                <rect key="frame" x="41" y="451" width="293" height="38"/>
+                                <rect key="frame" x="41" y="564" width="293" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="kxZ-MA-hVv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1c-vH-2g0">
-                                <rect key="frame" x="36" y="561" width="303" height="48"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1c-vH-2g0">
+                                <rect key="frame" x="36" y="674" width="303" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="IHD-tT-PqB"/>
                                     <constraint firstAttribute="width" constant="303" id="kcd-7I-VvF"/>
@@ -222,7 +224,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 상태를 유지하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmM-23-1tU">
-                                <rect key="frame" x="108.66666666666667" y="517" width="184.33333333333331" height="17"/>
+                                <rect key="frame" x="108.66666666666667" y="630" width="184.33333333333331" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="N5o-vi-inj"/>
                                 </constraints>
@@ -231,15 +233,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibU-0v-bX8" customClass="BEMCheckBox">
-                                <rect key="frame" x="78.666666666666671" y="518" width="15" height="15"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="78.666666666666671" y="631" width="15" height="15"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="2mI-Hu-Ytv"/>
                                     <constraint firstAttribute="width" constant="15" id="X7B-cu-feW"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="16T-jz-0qE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="PmM-23-1tU" firstAttribute="leading" secondItem="ibU-0v-bX8" secondAttribute="trailing" constant="15" id="0K2-c5-542"/>
                             <constraint firstItem="16T-jz-0qE" firstAttribute="trailing" secondItem="PmM-23-1tU" secondAttribute="trailing" constant="82" id="0wM-Ag-ebz"/>
@@ -261,7 +264,6 @@
                             <constraint firstItem="eSQ-cf-8xx" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="vfF-gq-8kJ"/>
                             <constraint firstItem="Y1c-vH-2g0" firstAttribute="top" secondItem="PmM-23-1tU" secondAttribute="bottom" constant="27" id="ze4-jF-NMP"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="16T-jz-0qE"/>
                     </view>
                     <connections>
                         <outlet property="autoLoginLabel" destination="PmM-23-1tU" id="0uh-jT-uIM"/>
@@ -280,6 +282,11 @@
             <point key="canvasLocation" x="1026.4000000000001" y="94.581280788177338"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="ibU-0v-bX8">
+            <size key="intrinsicContentSize" width="15" height="15"/>
+        </designable>
+    </designables>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
@@ -288,5 +295,8 @@
         <image name="signupBtnAgreeUnpick" width="14" height="14"/>
         <image name="signupBtnTuteeUnpick" width="136" height="175"/>
         <image name="signupBtnTutorUnpick" width="136" height="175"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

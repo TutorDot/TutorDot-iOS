@@ -39,6 +39,7 @@
 		012E888724B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012E888524B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib */; };
 		0131044B24BC6FA5000550AE /* ClassInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131044A24BC6FA5000550AE /* ClassInfoService.swift */; };
 		0131044D24BC721D000550AE /* ClassData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131044C24BC721D000550AE /* ClassData.swift */; };
+		013246282553C5B0003A7F75 /* CalendarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013246272553C5B0003A7F75 /* CalendarNavigationController.swift */; };
 		013B73BE24C09D0A002E60C4 /* AlertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B73BD24C09D0A002E60C4 /* AlertInfo.swift */; };
 		013B73C024C0BF83002E60C4 /* LidData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B73BF24C0BF83002E60C4 /* LidData.swift */; };
 		013B73C224C0FE6A002E60C4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 013B73C124C0FE6A002E60C4 /* Login.storyboard */; };
@@ -143,6 +144,7 @@
 		012E888524B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorBlankCollectionViewCell.xib; sourceTree = "<group>"; };
 		0131044A24BC6FA5000550AE /* ClassInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassInfoService.swift; sourceTree = "<group>"; };
 		0131044C24BC721D000550AE /* ClassData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassData.swift; sourceTree = "<group>"; };
+		013246272553C5B0003A7F75 /* CalendarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationController.swift; sourceTree = "<group>"; };
 		013B73BD24C09D0A002E60C4 /* AlertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInfo.swift; sourceTree = "<group>"; };
 		013B73BF24C0BF83002E60C4 /* LidData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidData.swift; sourceTree = "<group>"; };
 		013B73C124C0FE6A002E60C4 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */,
 				F4B565582536FA7D00A77C01 /* NotesMainVC.swift */,
 				01E4A83F252619DC00B5B485 /* testVC.swift */,
+				013246272553C5B0003A7F75 /* CalendarNavigationController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				F4D1A0C824B7C5BE00B13D65 /* DeveloperInfoVC.swift in Sources */,
 				01CAC65F24BB508400400654 /* SignUpService.swift in Sources */,
 				0126398924AA0437009EA0BA /* CalendarVC.swift in Sources */,
+				013246282553C5B0003A7F75 /* CalendarNavigationController.swift in Sources */,
 				012E887C24B5ABCF00EF81FB /* NotesModifyVC.swift in Sources */,
 				014703C424B316960074D4E2 /* AlertTableHeaderViewCell.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
