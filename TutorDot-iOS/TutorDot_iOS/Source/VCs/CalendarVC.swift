@@ -556,6 +556,8 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 tutorCollectionView.reloadData()
                 
             }
+            print("selected", indexPath)
+            
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
             let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
