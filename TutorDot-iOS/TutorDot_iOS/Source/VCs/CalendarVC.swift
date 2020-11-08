@@ -7,7 +7,7 @@
 import UIKit
 import DropDown
 import Foundation
-import Sheeeeeeeeet
+import FSCalendar
 
 protocol CalendarViewControllerDeleagte {
     func didSelectDate(dateString: String)
@@ -49,7 +49,8 @@ class CalendarVC: UIViewController {
     var firstTimeRunning = true
     
     
-    
+    fileprivate weak var calendar: FSCalendar!
+
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
     
@@ -96,22 +97,6 @@ class CalendarVC: UIViewController {
         }
     }
     
-    @IBAction func filterButton(_ sender: Any) {
-        
-        let item1 = MenuItem(title: "Int", value: 1)
-        let item2 = MenuItem(title: "Car", value: 2)
-        let button = OkButton(title: "OK")
-        let items = [item1, item2, button]
-        let menu = Menu(title: "Select a type", items: items)
-        
-        let sheet = ActionSheet(menu: menu) { sheet, item in
-            if let value = item.value as? Int { print("You selected an int: \(value)") }
-            if item is OkButton { print("You tapped the OK button") }
-        }
-        let calendarVC = CalendarVC()
-        sheet.present(in: calendarVC, from: totalView)
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
