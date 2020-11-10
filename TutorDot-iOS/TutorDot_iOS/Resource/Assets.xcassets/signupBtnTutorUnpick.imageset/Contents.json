@@ -1,13 +1,13 @@
 {
   "images" : [
     {
+      "filename" : "signupBtnTutorUnpick.png",
       "scale" : "1x",
-      "idiom" : "universal",
-      "filename" : "signupBtnTutorUnpick.png"
+      "idiom" : "universal"
     },
     {
-      "filename" : "signupBtnTutorUnpick@2x.png",
       "idiom" : "universal",
+      "filename" : "signupBtnTutorUnpick@2x.png",
       "scale" : "2x"
     },
     {
