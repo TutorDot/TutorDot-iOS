@@ -10,7 +10,7 @@ import UIKit
 
 class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier: String = "SignUp2VC"
-    
+    var role : String = ""
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var serviceLabel: UILabel!
@@ -20,15 +20,18 @@ class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
+        print("printed", self.role)
     }
     
     override func viewWillAppear(_ animated: Bool) { //
         registerForKeyboardNotifications()
     }
     
+
     @IBAction func nextButtonSelected(_ sender: Any) {
-        guard let uvc = storyboard?.instantiateViewController(withIdentifier: "SignUp3VC") else { return }
-        self.navigationController?.pushViewController(uvc, animated: true)
+        guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp3VC.identifier) as? SignUp3VC else {return}
+        receiveViewController.name = nameTextField.text ?? ""
+        self.navigationController?.pushViewController(receiveViewController, animated: true)
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {

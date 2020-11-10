@@ -14,6 +14,7 @@ class SignUpDoneVC: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
 
     }
     
@@ -25,9 +26,9 @@ class SignUpDoneVC: UIViewController {
     
 
     @IBAction func startButtonSelected(_ sender: Any) {
-        let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
-            TabbarVC else { return }
+        //let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
+        guard let mainView = self.storyboard?.instantiateViewController(identifier:"LoginVC") as?
+                LoginVC else { return }
         mainView.modalPresentationStyle = .fullScreen
         self.present(mainView, animated: true, completion: nil)
     }

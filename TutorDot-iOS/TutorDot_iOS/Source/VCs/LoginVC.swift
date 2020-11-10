@@ -61,9 +61,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         emailTextField.text = emailText
         passWordTextField.text = passwordText
         
-        // 812
-        // 667
-        
         if self.view.frame.size.height > 800 {
             self.bottomViewConstraint.constant = 123
             self.imageHeightConstraint.constant = 221
@@ -190,14 +187,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         case .networkFail: print("networkFail") }
         }
         
-        //        // 디폴트
-        //        let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        //        guard let tabView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as? TabbarVC else {
-        //            return
-        //        }
-        //        tabView.modalPresentationStyle = .fullScreen
-        //
-        //        self.present(tabView, animated: true, completion: nil)
     }
     
     

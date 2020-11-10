@@ -10,15 +10,16 @@ import UIKit
 
 class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     
+    static let identifier: String = "SignUp3VC"
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var idTextField: UITextField!
+    var name : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
         initGestureRecognizer()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) { //
@@ -26,9 +27,13 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func nextButtonSelected(_ sender: Any) {
-        guard let uvc = storyboard?.instantiateViewController(withIdentifier: "SignUp4VC") else { return }
-        self.navigationController?.pushViewController(uvc, animated: true)
+        guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp4VC.identifier) as? SignUp4VC else {return}
+        receiveViewController.name = name
+        receiveViewController.id = idTextField.text
+        
+        self.navigationController?.pushViewController(receiveViewController, animated: true)
     }
+    
     @IBAction func backButtonSelected(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

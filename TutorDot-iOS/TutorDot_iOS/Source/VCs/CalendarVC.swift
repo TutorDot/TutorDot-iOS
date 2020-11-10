@@ -110,10 +110,7 @@ class CalendarVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
         self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-        //        if firstTimeRunning {
-        //            dateCollectionView.scrollToItem(at: IndexPath(item: 6, section: 3), at: .centeredVertically, animated: false)
-        //            firstTimeRunning = false
-        //        }
+ 
     }
     
     // MARK: - 서버통신: 수업 리스트 가져오기
@@ -124,7 +121,7 @@ class CalendarVC: UIViewController {
         self.dropDown?.backgroundColor = UIColor.white
         self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
         self.dropDown?.cellHeight = 60
-        DropDown.appearance().setupCornerRadius(13)
+        DropDown.appearance().setupCornerRadius(17)
         self.dropDown?.anchorView = anchorView
         self.dropDown?.dimmedBackgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.dropDown?.setupMaskedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner])
