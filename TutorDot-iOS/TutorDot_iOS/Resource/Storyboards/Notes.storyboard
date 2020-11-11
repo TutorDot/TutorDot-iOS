@@ -336,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61L-Eb-pnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="714"/>
+            <point key="canvasLocation" x="2695" y="705"/>
         </scene>
         <!--Notes ModifyVC-->
         <scene sceneID="0Ue-48-3PF">
@@ -513,7 +513,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDg-gb-JIT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2567" y="714"/>
+            <point key="canvasLocation" x="3298" y="705"/>
         </scene>
         <!--Notes MainVC-->
         <scene sceneID="AjC-SD-Lac">
@@ -533,6 +533,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVa-1w-Fgt">
                                         <rect key="frame" x="284" y="46" width="43" height="48"/>
                                         <state key="normal" image="classlogBtnFillter"/>
+                                        <connections>
+                                            <action selector="selectClassButtonDidtap:" destination="6sZ-g7-ay9" eventType="touchUpInside" id="Tlz-HP-ksD"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csw-7S-B5x">
                                         <rect key="frame" x="77.666666666666686" y="62" width="220" height="18"/>
@@ -705,6 +708,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="def-Y5-uBo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="927" y="714"/>
+        </scene>
+        <!--Bottom SheetVC-->
+        <scene sceneID="c5S-Qh-yzd">
+            <objects>
+                <viewController storyboardIdentifier="BottomSheetVC" id="GAH-gq-V42" customClass="BottomSheetVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CCa-Tw-pvb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qev-I3-sme">
+                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PopUpClassListTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PopUpClassListTableViewCell" rowHeight="78.666664123535156" id="z2Y-J9-Hbc" customClass="PopUpClassListTableViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="78.666664123535156"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z2Y-J9-Hbc" id="QIM-Pb-kHp">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78.666664123535156"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-th-S2g">
+                                                    <rect key="frame" x="47.666666666666657" y="29" width="280" height="20.666666666666671"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="280" id="RWt-Mg-SwK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fIF-th-S2g" secondAttribute="bottom" constant="18" id="K4S-Zs-O8I"/>
+                                                <constraint firstItem="fIF-th-S2g" firstAttribute="top" secondItem="QIM-Pb-kHp" secondAttribute="topMargin" constant="18" id="dSl-I6-O1T"/>
+                                                <constraint firstItem="fIF-th-S2g" firstAttribute="centerX" secondItem="QIM-Pb-kHp" secondAttribute="centerX" id="o8N-Ag-gNq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="classNameLabel" destination="fIF-th-S2g" id="e12-XC-gRa"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Qcy-IF-DAb"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="BottomSheetTableView" destination="Qev-I3-sme" id="PlM-7Z-M30"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HGs-5g-cnA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1608.8" y="676.84729064039414"/>
         </scene>
     </scenes>
     <resources>

@@ -72,6 +72,8 @@
 		F4200E0524BE09D700EA1D6F /* AddRegularClassTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4200E0424BE09D700EA1D6F /* AddRegularClassTimeCell.swift */; };
 		F4200E0724BE4FFA00EA1D6F /* ClassConnectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4200E0624BE4FFA00EA1D6F /* ClassConnectCell.swift */; };
 		F4200E0924BF1A7F00EA1D6F /* MyClassInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */; };
+		F437B8B1255B9D200016A575 /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F437B8B0255B9D200016A575 /* BottomSheetVC.swift */; };
+		F437B8B4255BB2CB0016A575 /* PopUpClassListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F437B8B3255BB2CB0016A575 /* PopUpClassListTableViewCell.swift */; };
 		F471772A24B203510098C827 /* ClassProgressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471772924B203510098C827 /* ClassProgressCell.swift */; };
 		F471772C24B2036B0098C827 /* MonthJournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471772B24B2036B0098C827 /* MonthJournalCell.swift */; };
 		F471772E24B203810098C827 /* JournalDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F471772D24B203810098C827 /* JournalDataCell.swift */; };
@@ -178,6 +180,8 @@
 		F4200E0424BE09D700EA1D6F /* AddRegularClassTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRegularClassTimeCell.swift; sourceTree = "<group>"; };
 		F4200E0624BE4FFA00EA1D6F /* ClassConnectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassConnectCell.swift; sourceTree = "<group>"; };
 		F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClassInfoVC.swift; sourceTree = "<group>"; };
+		F437B8B0255B9D200016A575 /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		F437B8B3255BB2CB0016A575 /* PopUpClassListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpClassListTableViewCell.swift; sourceTree = "<group>"; };
 		F471772924B203510098C827 /* ClassProgressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassProgressCell.swift; sourceTree = "<group>"; };
 		F471772B24B2036B0098C827 /* MonthJournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthJournalCell.swift; sourceTree = "<group>"; };
 		F471772D24B203810098C827 /* JournalDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalDataCell.swift; sourceTree = "<group>"; };
@@ -287,6 +291,7 @@
 				F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */,
 				F4B565582536FA7D00A77C01 /* NotesMainVC.swift */,
 				01E4A83F252619DC00B5B485 /* testVC.swift */,
+				F437B8B0255B9D200016A575 /* BottomSheetVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				F4200E0624BE4FFA00EA1D6F /* ClassConnectCell.swift */,
 				F4B565522536D75200A77C01 /* NotesContentCell.swift */,
 				01D895BE2536F3E900570115 /* PopUpTableViewCell.swift */,
+				F437B8B3255BB2CB0016A575 /* PopUpClassListTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -623,6 +629,7 @@
 				01CAC66124BB525300400654 /* SignUpData.swift in Sources */,
 				01EFFF2224B9E73D00518DE6 /* NetworkResult.swift in Sources */,
 				01EFFF1924B9D78100518DE6 /* OnBoardingImageInfo.swift in Sources */,
+				F437B8B4255BB2CB0016A575 /* PopUpClassListTableViewCell.swift in Sources */,
 				F4D1A0CA24B7C69700B13D65 /* VersionInfoVC.swift in Sources */,
 				01CAC65724BB4D7700400654 /* SignInData.swift in Sources */,
 				F4D1A0BC24B7664200B13D65 /* ClassEditVC.swift in Sources */,
@@ -645,6 +652,7 @@
 				F4D1A0CC24B7CA3000B13D65 /* MyClassAddVC.swift in Sources */,
 				012639AF24ADD0F2009EA0BA /* UIColor+Additions.swift in Sources */,
 				F4B517DA24C05FD8007438DE /* AddLectureService.swift in Sources */,
+				F437B8B1255B9D200016A575 /* BottomSheetVC.swift in Sources */,
 				F4D1A0CE24B7D52B00B13D65 /* OnboardingVC.swift in Sources */,
 				F4D1A0D524BA9CDE00B13D65 /* BlankMyClassCell.swift in Sources */,
 				F471772E24B203810098C827 /* JournalDataCell.swift in Sources */,
