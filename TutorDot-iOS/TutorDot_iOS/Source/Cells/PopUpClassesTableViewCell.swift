@@ -1,5 +1,5 @@
 //
-//  PopUpClassListTableViewCell.swift
+//  PopUpClassesTableViewCell.swift
 //  TutorDot_iOS
 //
 //  Created by 최인정 on 2020/11/11.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-class PopUpClassListTableViewCell: UITableViewCell {
+class PopUpClassesTableViewCell: UITableViewCell {
 
-    static let identifier: String = "PopUpClassListTableViewCell"
-    @IBOutlet weak var classNameLabel: UILabel!
+    static let identifier: String = "popUpClassesTableViewCell"
+    
+    @IBOutlet weak var popUpLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,8 +24,6 @@ class PopUpClassListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
-    func setClassLabel(className: String){
-        classNameLabel.text = className
-    }
+    
+    
 }
