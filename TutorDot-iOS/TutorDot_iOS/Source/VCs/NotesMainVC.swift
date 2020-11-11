@@ -17,6 +17,7 @@ class NotesMainVC: UIViewController {
     let dateFomatter = DateFormatter()
     var month: String?
     let cellInset: CGFloat = 16
+    //let subjectSheetVc = sheetViewController()
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var classProgressBar: UIProgressView!
@@ -49,7 +50,8 @@ class NotesMainVC: UIViewController {
         
     }
     
-    func setProgressView(){
+    // 프로그래스 바 전체일 때만 보이도록 셋팅
+    private func setProgressView(){
         if noteTitle == "전체" {
             progressView.isHidden = true
             progressHeight.constant = 0
@@ -61,6 +63,7 @@ class NotesMainVC: UIViewController {
         }
     }
     
+    // collection view layout
     private func setupFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         
@@ -73,6 +76,15 @@ class NotesMainVC: UIViewController {
         
         self.noteCollectionView.collectionViewLayout = flowLayout
     }
+    
+    @IBAction func selectClassButtonDidtap(_ sender: Any) {
+        let storyBoard = UIStoryboard.init(name: "Notes", bundle: nil)
+        let popupVC = storyBoard.instantiateViewController(withIdentifier: "BottomSheetVC")
+        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalTransitionStyle = .crossDissolve
+        present(popupVC, animated: true, completion: nil)
+    }
+    
     
 }
 
@@ -87,8 +99,6 @@ extension NotesMainVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         return cell
         
     }
-    
-   
    
     
 }

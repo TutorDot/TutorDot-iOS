@@ -110,10 +110,7 @@ class CalendarVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
         self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-        //        if firstTimeRunning {
-        //            dateCollectionView.scrollToItem(at: IndexPath(item: 6, section: 3), at: .centeredVertically, animated: false)
-        //            firstTimeRunning = false
-        //        }
+
     }
     
     // MARK: - 서버통신: 수업 리스트 가져오기
@@ -124,11 +121,11 @@ class CalendarVC: UIViewController {
         self.dropDown?.backgroundColor = UIColor.white
         self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
         self.dropDown?.cellHeight = 60
-        DropDown.appearance().setupCornerRadius(13)
+        DropDown.appearance().setupCornerRadius(15)
         self.dropDown?.anchorView = anchorView
         self.dropDown?.dimmedBackgroundColor = UIColor.black.withAlphaComponent(0.3)
         self.dropDown?.setupMaskedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner])
-        //self.dropDown?.topOffset = CGPoint(x: 0, y:-(dropDown?.anchorView?.plainView.bounds.height)!)
+        self.dropDown?.animationduration = 0.25
         
         // 서버통신: 토글에서 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
@@ -375,16 +372,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         if collectionView == self.dateCollectionView {
             // 다음 달로 넘어가면 선택한 날짜 색 초기화
             calendarCell.dateView.backgroundColor = UIColor.white
-            
-            
-            //            var prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex - 1] + 2)
-            //            if indexPath.item != firstWeekDayOfMonth - 2 && indexPath.item < 32 {
-            //                calendarCell.dateLabel.text = String(prevDate)
-            //            }
-            //            else if indexPath.row != 6 {
-            //                prevDate = prevDate + 7 - 30
-            //                calendarCell.dateLabel.text = String(prevDate)
-            //            }
             
             // 이전 달 cell 표시
             if indexPath.item <= firstWeekDayOfMonth - 2 {
