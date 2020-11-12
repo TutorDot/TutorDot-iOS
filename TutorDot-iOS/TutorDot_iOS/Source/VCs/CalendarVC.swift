@@ -47,8 +47,9 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
-    let swipeRec = UISwipeGestureRecognizer()
+    let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     
+
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
@@ -105,6 +106,13 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.sendSubviewToBack(calendarView)
+        swipeGestureRecognizer.direction = .right
+        rightButton.addGestureRecognizer(swipeGestureRecognizer)
+
+
+    }
+    func swipe(gestureRecognizer: UISwipeGestureRecognizer) {
+        NSLog("right")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -337,7 +345,7 @@ extension CalendarVC {
 extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // 12 past months + 12 future months + current month
-        return 5
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
