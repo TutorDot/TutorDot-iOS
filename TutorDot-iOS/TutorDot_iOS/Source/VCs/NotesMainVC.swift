@@ -9,9 +9,8 @@
 import UIKit
 import os
 
-class NotesMainVC: UIViewController {
+class NotesMainVC: UIViewController, selectClassProtocol {
 
-    var noteTitle: String?
     let progressViewHeight: CGFloat = 115
     let infoViewHeight: CGFloat = 170
     let dateFomatter = DateFormatter()
@@ -30,8 +29,7 @@ class NotesMainVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        noteTitle = titleLabel.text
-        setasDefault()
+//        setasDefault()
         noteCollectionView.delegate = self
         noteCollectionView.dataSource = self
         noteCollectionView.register(UINib.init(nibName: "NotesContentCell", bundle: nil), forCellWithReuseIdentifier: "noteContent")
@@ -40,19 +38,20 @@ class NotesMainVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setProgressView()
+        setasDefault()
     }
     
-    func setasDefault(){
+
+    private func setasDefault(){
         classProgressBar.layer.cornerRadius = 8
         dateFomatter.dateFormat = "MM"
         month = dateFomatter.string(from: Date())
         monthLabel.text = month! + "월 수업일지"
-        
     }
     
     // 프로그래스 바 전체일 때만 보이도록 셋팅
     private func setProgressView(){
-        if noteTitle == "전체" {
+        if titleLabel.text == "전체" {
             progressView.isHidden = true
             progressHeight.constant = 0
             infoStackViewHeight.constant = infoViewHeight - progressViewHeight
@@ -78,11 +77,17 @@ class NotesMainVC: UIViewController {
     }
     
     @IBAction func selectClassButtonDidtap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "Notes", bundle: nil)
-        let popupVC = storyBoard.instantiateViewController(withIdentifier: "BottomSheetVC")
+        
+        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else { return }
         popupVC.modalPresentationStyle = .overCurrentContext
         popupVC.modalTransitionStyle = .crossDissolve
+        popupVC.delegate = self
         present(popupVC, animated: true, completion: nil)
+    }
+    
+    func sendClassTitle(_ title: String) {
+        titleLabel.text = title
+        setProgressView()
     }
     
     
