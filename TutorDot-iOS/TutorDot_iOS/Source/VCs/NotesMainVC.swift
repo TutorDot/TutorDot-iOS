@@ -43,7 +43,8 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     
 
     private func setasDefault(){
-        classProgressBar.layer.cornerRadius = 8
+        classProgressBar.layer.cornerRadius = 7.0
+        
         dateFomatter.dateFormat = "MM"
         month = dateFomatter.string(from: Date())
         monthLabel.text = month! + "월 수업일지"
