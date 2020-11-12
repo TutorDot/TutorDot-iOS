@@ -71,18 +71,30 @@ class TabbarVC: UITabBarController {
             secondTab.tabBarItem.image = UIImage(named: "calenderBalnkIcnClasslog")?.withRenderingMode(.alwaysOriginal)
             secondTab.tabBarItem.selectedImage = UIImage(named: "classLogMathIcClassLogPick")?.withRenderingMode(.alwaysOriginal)
         }
-        // Alert Tab
-        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
-        guard let thirdTab = alertStoryboard.instantiateViewController(identifier: "AlertVC")
-            as? AlertVC  else {
+        // Question Tab
+//        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle: nil)
+//        guard let thirdTab = alertStoryboard.instantiateViewController(identifier: "AlertVC")
+//            as? AlertVC  else {
+//            return
+//        }
+//        if self.view.frame.size.height > 800 {
+//        thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
+//        thirdTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcNoticePick")?.withRenderingMode(.alwaysOriginal)
+//        } else {
+//            thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
+//            thirdTab.tabBarItem.selectedImage = UIImage(named: "noticeBlankIcNoticePick")?.withRenderingMode(.alwaysOriginal)
+//        }
+        let questionStoryboard = UIStoryboard.init(name: "Question", bundle: nil)
+        guard let thirdTab = questionStoryboard.instantiateViewController(identifier: "QuestionVC")
+            as? QuestionVC  else {
             return
         }
         if self.view.frame.size.height > 800 {
-        thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
-        thirdTab.tabBarItem.selectedImage = UIImage(named: "tabbarIcNoticePick")?.withRenderingMode(.alwaysOriginal)
+        thirdTab.tabBarItem.image = UIImage(named: "questionIcnMemopick")?.withRenderingMode(.alwaysOriginal)
+        thirdTab.tabBarItem.selectedImage = UIImage(named: "questionIcnMemopick")?.withRenderingMode(.alwaysOriginal)
         } else {
-            thirdTab.tabBarItem.image = UIImage(named: "calenderIcnMemo")?.withRenderingMode(.alwaysOriginal)
-            thirdTab.tabBarItem.selectedImage = UIImage(named: "noticeBlankIcNoticePick")?.withRenderingMode(.alwaysOriginal)
+            thirdTab.tabBarItem.image = UIImage(named: "questionIcnMemopick")?.withRenderingMode(.alwaysOriginal)
+            thirdTab.tabBarItem.selectedImage = UIImage(named: "questionIcnMemopick")?.withRenderingMode(.alwaysOriginal)
         }
         
         // MyPage Tab
