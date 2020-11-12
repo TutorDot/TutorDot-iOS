@@ -337,7 +337,7 @@ extension CalendarVC {
 extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // 12 past months + 12 future months + current month
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

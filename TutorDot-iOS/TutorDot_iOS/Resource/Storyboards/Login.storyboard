@@ -601,6 +601,11 @@
             <point key="canvasLocation" x="3823" y="94"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="ibU-0v-bX8">
+            <size key="intrinsicContentSize" width="15" height="15"/>
+        </designable>
+    </designables>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>

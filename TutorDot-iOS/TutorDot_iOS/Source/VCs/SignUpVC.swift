@@ -11,7 +11,6 @@ import UIKit
 class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier: String = "SignUpVC"
     
-    
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var noticeLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!

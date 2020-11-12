@@ -18,7 +18,7 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var numberlabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
-    public var role : String = ""
+    var role : String = ""
     var name: String?
     var id: String?
     
@@ -64,7 +64,7 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
         let inputPw = passwordTextfield.text
         let inputRole = role
         
-        print(inputName, inputEmail, inputPw, inputRole)
+        print(inputName, inputEmail, inputPw, "tutor")
         
         SignUpService.shared.signup(userName: inputName ?? "", email: inputEmail ?? "", password: inputPw ?? "", role: inputRole ) { networkResult in
             switch networkResult {
