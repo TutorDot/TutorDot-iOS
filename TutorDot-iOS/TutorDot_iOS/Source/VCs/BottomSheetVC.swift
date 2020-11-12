@@ -9,17 +9,21 @@
 import UIKit
 import os
 
+protocol selectClassProtocol: class {
+    func sendClassTitle(_ title: String)
+}
+
 class BottomSheetVC: UIViewController {
 
     @IBOutlet weak var BottomSheetTableView: UITableView!
-    
+    weak var delegate: selectClassProtocol?
     
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     private var classlist: [String] = []
     let customHeight: CGFloat = 55
     let bottomSafeArea: CGFloat = 34
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBottomView()
@@ -34,7 +38,7 @@ class BottomSheetVC: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        var heightCalc = (self.customHeight * (CGFloat(classlist.count)+1)) + bottomSafeArea
+        let heightCalc = (self.customHeight * (CGFloat(classlist.count)+1)) + bottomSafeArea
         
         UIView.animate(withDuration: 0.5,
                        delay: 0,
@@ -59,7 +63,7 @@ class BottomSheetVC: UIViewController {
    
     func start(){
         BottomSheetTableView.separatorStyle = .none
-        var heightCalc = self.customHeight * (CGFloat(classlist.count)+1) + bottomSafeArea
+        let heightCalc = self.customHeight * (CGFloat(classlist.count)+1) + bottomSafeArea
         
         //init position
         BottomSheetTableView.frame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: heightCalc)
@@ -75,7 +79,6 @@ class BottomSheetVC: UIViewController {
         }, completion: nil)
         
     }
-    
 
 }
 
@@ -100,4 +103,10 @@ extension BottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         return 55
     }
    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var classTitle: String = classlist[indexPath.row]
+        delegate?.sendClassTitle(classTitle)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
