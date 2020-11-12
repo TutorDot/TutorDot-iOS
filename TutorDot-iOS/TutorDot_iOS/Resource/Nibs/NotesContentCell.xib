@@ -281,7 +281,7 @@
                 <outlet property="noteContentStackView" destination="mV4-oJ-2tA" id="Ef8-ay-QiA"/>
                 <outlet property="tutorProfile" destination="13A-ha-Dr4" id="6jL-Sf-yIn"/>
             </connections>
-            <point key="canvasLocation" x="195" y="42"/>
+            <point key="canvasLocation" x="-118" y="58"/>
         </collectionViewCell>
     </objects>
     <resources>
