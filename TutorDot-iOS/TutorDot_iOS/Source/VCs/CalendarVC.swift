@@ -47,8 +47,9 @@ class CalendarVC: UIViewController {
     var delegate: CalendarViewControllerDeleagte?
     
     var firstTimeRunning = true
-    let swipeRec = UISwipeGestureRecognizer()
+    let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     
+
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
@@ -105,12 +106,18 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.sendSubviewToBack(calendarView)
+        swipeGestureRecognizer.direction = .right
+        rightButton.addGestureRecognizer(swipeGestureRecognizer)
+
+
+    }
+    func swipe(gestureRecognizer: UISwipeGestureRecognizer) {
+        NSLog("right")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
         self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-
     }
     
     // MARK: - 서버통신: 수업 리스트 가져오기

@@ -12,5 +12,5 @@ pod 'Kingfisher', '~> 5.0'
 pod 'BEMCheckBox'
 pod 'lottie-ios'
 pod 'Sheeeeeeeeet'
-
+pod 'Firebase/Analytics'
 end

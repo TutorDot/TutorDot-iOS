@@ -7,17 +7,20 @@
 //
 
 import UIKit
+import Firebase
 //import DropDown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        //DropDown.startListeningToKeyboard()
+    var window: UIWindow?
+    func application(_ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions:
+            [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         return true
-    }
+      }
 
     // MARK: UISceneSession Lifecycle
 

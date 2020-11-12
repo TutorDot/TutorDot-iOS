@@ -214,17 +214,14 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         ProfileService.shared.getClassLid() { networkResult in
             switch networkResult {
             case .success(let resultData):
-                print("successssss")
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-                print("try")
                 for index in 0..<data.count {
                     let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
                     dropList.append(item.lectureName)
                     classLid.append(item.lectureId)
                     self.dic.updateValue(classLid[index], forKey: dropList[index])
                     self.dropDown?.dataSource = dropList
-                    //self.dictLid = self.dic
-                    print("딕셔러니", self.dic)
+                    print("ClassId", classLid)
                 }
                 
             case .pathErr : print("Patherr")
@@ -242,6 +239,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         // Action triggered on selection
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
             self.classInfoButton.setTitle(item, for: .normal)
+            self.classInfoButton.image(for: .normal)
         }
         
         // 드롭박스 내 text 가운데 정렬
@@ -352,7 +350,6 @@ extension ClassAddVC: UIPickerViewDelegate, UIPickerViewDataSource {
         //toolbar에 버튼 넣기
         buttons = [cancelButton, space1, titleBar, space2, doneButton]
         toolbar.setItems(buttons, animated: true)
-        
         
         pickLabel.inputAccessoryView = toolbar
         pickLabel.inputView = pickerViewStart
