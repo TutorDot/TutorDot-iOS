@@ -40,6 +40,7 @@
 		0131044B24BC6FA5000550AE /* ClassInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131044A24BC6FA5000550AE /* ClassInfoService.swift */; };
 		0131044D24BC721D000550AE /* ClassData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0131044C24BC721D000550AE /* ClassData.swift */; };
 		013246282553C5B0003A7F75 /* CalendarNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013246272553C5B0003A7F75 /* CalendarNavigationController.swift */; };
+		01364495255D0A07008C53A3 /* test2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01364494255D0A07008C53A3 /* test2VC.swift */; };
 		013B73BE24C09D0A002E60C4 /* AlertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B73BD24C09D0A002E60C4 /* AlertInfo.swift */; };
 		013B73C024C0BF83002E60C4 /* LidData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B73BF24C0BF83002E60C4 /* LidData.swift */; };
 		013B73C224C0FE6A002E60C4 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 013B73C124C0FE6A002E60C4 /* Login.storyboard */; };
@@ -150,6 +151,7 @@
 		0131044A24BC6FA5000550AE /* ClassInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassInfoService.swift; sourceTree = "<group>"; };
 		0131044C24BC721D000550AE /* ClassData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassData.swift; sourceTree = "<group>"; };
 		013246272553C5B0003A7F75 /* CalendarNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNavigationController.swift; sourceTree = "<group>"; };
+		01364494255D0A07008C53A3 /* test2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test2VC.swift; sourceTree = "<group>"; };
 		013B73BD24C09D0A002E60C4 /* AlertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInfo.swift; sourceTree = "<group>"; };
 		013B73BF24C0BF83002E60C4 /* LidData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidData.swift; sourceTree = "<group>"; };
 		013B73C124C0FE6A002E60C4 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */,
 				0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */,
 				0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */,
+				01364494255D0A07008C53A3 /* test2VC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -690,6 +693,7 @@
 				0126398D24AA092F009EA0BA /* NotesVC.swift in Sources */,
 				F4D1A0BA24B761A900B13D65 /* LeaveServiceVC.swift in Sources */,
 				F4D1A0D924BA9D5000B13D65 /* BlankClassJournalCell.swift in Sources */,
+				01364495255D0A07008C53A3 /* test2VC.swift in Sources */,
 				F4D1A0A024B515D600B13D65 /* MyClassCell.swift in Sources */,
 				0126399524AA0A16009EA0BA /* MyPageVC.swift in Sources */,
 				F4D1A09824B4FCEA00B13D65 /* MypageNoticeSettingCell.swift in Sources */,

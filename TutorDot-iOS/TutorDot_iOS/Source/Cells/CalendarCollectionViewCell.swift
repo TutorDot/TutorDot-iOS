@@ -16,7 +16,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var imageContainer: UIStackView!
-    
+    var date: Date?
     override func awakeFromNib() {
         super.awakeFromNib()
         dateView.layer.cornerRadius = dateView.frame.width/2.1

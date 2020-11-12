@@ -46,7 +46,15 @@ class CalendarVC: UIViewController {
     var currentMonthIndexConstant = 0
     var delegate: CalendarViewControllerDeleagte?
     
+    
+    let numberOfPastMonths: Int = 12
+    let numberOfFutureMonths: Int = 12
+    let calendar = Calendar.init(identifier: .gregorian)
     var firstTimeRunning = true
+    var selectedDate: Date?
+    var startingScrollingOffset = CGPoint.zero
+
+
     let swipeRec = UISwipeGestureRecognizer()
     
     
@@ -105,11 +113,19 @@ class CalendarVC: UIViewController {
         getClassList()
         setListDropDown()
         self.view.sendSubviewToBack(calendarView)
+        self.dateCollectionView.allowsMultipleSelection = true
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
-        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+//        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
+//        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+                if firstTimeRunning {
+                
+                    dateCollectionView.scrollToItem(at: IndexPath(item: 0, section: numberOfPastMonths), at: .centeredVertically, animated: false)
+                    firstTimeRunning = false
+                }
+        self.dateCollectionView.allowsMultipleSelection = true
  
     }
     
@@ -330,31 +346,70 @@ extension CalendarVC {
         return lastDay
     }
     
+    private func year(at indexPath: IndexPath) -> Int {
+        let shiftedDate = calendar.date(byAdding: .month, value: indexPath.section - numberOfPastMonths, to: Date())!
+        let year = calendar.component(.year, from: shiftedDate)
+        return year
+    }
+    
+    /// Returns month that should be displayed at the specified index path
+    private func month(at indexPath: IndexPath) -> Int {
+        let shiftedDate = calendar.date(byAdding: .month, value: indexPath.section - numberOfPastMonths, to: Date())!
+        let month = calendar.component(.month, from: shiftedDate)
+        return month
+    }
+    
+    /// Returns the day of month that should be displayed at the specified index path
+    private func day(at indexPath: IndexPath) -> Int? {
+        let year = self.year(at: indexPath)
+        let month = self.month(at: indexPath)
+        
+        // Account for the empty filler cells at the start of the month when
+        // determining the day for the index path
+        let day = indexPath.row - dayOffset(year: year, month: month) + 1
+        
+        guard day >= 1 else {
+            return nil
+        }
+        
+        return day
+    }
+    
+    /// Returns the day offset for the specified year and month. The day
+    /// offset is used to shift the days in the calendar view so the weekday
+    /// ordinal is aligned with the correct weekday.
+    private func dayOffset(year: Int, month: Int) -> Int {
+        // Get the weekday ordinal for the first day of the month
+        let firstOfMonthDateComponents = DateComponents(calendar: calendar, year: year, month: month, day:  1)
+        let startOfMonth = calendar.date(from: firstOfMonthDateComponents)!
+        let dayOffset = calendar.component(.weekday, from: startOfMonth) - 1
+        return dayOffset
+    }
+    
     
 }
 
 
-extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // 12 past months + 12 future months + current month
-        return 5
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 날짜 뷰
-        if collectionView == self.dateCollectionView {
-            // 위 아래 빈 셀들을 위해서
-            //let count = numOfDaysInMonth[currentMonthIndex] + firstWeekDayOfMonth + 8
-            return 42
-        } else {
-            // 해당 날짜에 수업이 없을 시 수업 추가 셀 리턴
-            if classDateList.count == 0 {
-                return 1
-            } else {
-                return classDateList.count
-            }
-            
-        }
+        
+        let indexPath = IndexPath(item: 0, section: section)
+        
+        let year = self.year(at: indexPath)
+        let month = self.month(at: indexPath)
+        let dateComponents = DateComponents(year: year, month: month)
+        let date = calendar.date(from: dateComponents)!
+   
+        let daysInMonth = calendar.range(of: .day, in: .month, for: date)!.count
+        let dayOffset = self.dayOffset(year: year, month: month)
+        
+        return daysInMonth + dayOffset
         
     }
     
@@ -364,124 +419,32 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         let tutorInfoCell = TutorCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorBlankCell = TutorBlankCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         
-        let currentMonthCalendarIndex = currentMonthIndex + 1
-        let currentDateCalendarIndex = todaysDate
-        
+//        let currentMonthCalendarIndex = currentMonthIndex + 1
+//        let currentDateCalendarIndex = todaysDate
         
         // CalendarCollectionView
+        // Display the weekday ordinal in the calendar cell
+        let year = self.year(at: indexPath)
+        let month = self.month(at: indexPath)
         if collectionView == self.dateCollectionView {
-            // 다음 달로 넘어가면 선택한 날짜 색 초기화
-            calendarCell.dateView.backgroundColor = UIColor.white
-            
-            
-            //            var prevDate = indexPath.row-firstWeekDayOfMonth+(numOfDaysInMonth[currentMonthIndex - 1] + 2)
-            //            if indexPath.item != firstWeekDayOfMonth - 2 && indexPath.item < 32 {
-            //                calendarCell.dateLabel.text = String(prevDate)
-            //            }
-            //            else if indexPath.row != 6 {
-            //                prevDate = prevDate + 7 - 30
-            //                calendarCell.dateLabel.text = String(prevDate)
-            //            }
-            
-            // 이전 달 cell 표시
-            if indexPath.item <= firstWeekDayOfMonth - 2 {
-                calendarCell.isHidden = false
-                calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                // 년도 전환 시
-                if currentMonthIndex == 0 {
-                    let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[11] + 2)
-                    calendarCell.dateLabel.text="\(prevDate)"
-                    calendarCell.isUserInteractionEnabled = false
-                    calendarCell.image1.image = nil
-                    calendarCell.image2.image = nil
-                    calendarCell.image3.image = nil
+            if let day = day(at: indexPath) {
+                let date = calendar.date(from: DateComponents(calendar: calendar, year: year, month: month, day: day))!
+                calendarCell.date = date
+                calendarCell.dateLabel?.text = "\(day)"
+                // If the day matches today, highlight the number with a different color
+                if calendar.compare(date, to: Date(), toGranularity: .day) == .orderedSame {
+                    calendarCell.dateLabel?.textColor = .systemOrange
                 } else {
-                    let prevDate = indexPath.row - firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex - 1] + 2)
-                    calendarCell.dateLabel.text="\(prevDate)"
-                    calendarCell.isUserInteractionEnabled = false
-                    calendarCell.image1.image = nil
-                    calendarCell.image2.image = nil
-                    calendarCell.image3.image = nil
+                    calendarCell.dateLabel?.textColor = .label
                 }
-                
-            
-                return calendarCell
-            } // 이후 달 cell 표시
-            else if indexPath.item >= firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex]-1) {
-                
-                calendarCell.dateLabel.textColor = UIColor.veryLightPinkThree
-                calendarCell.image1.image = nil
-                calendarCell.image2.image = nil
-                calendarCell.image3.image = nil
-                
-                // 셀이 그 배열의 달 날짜 일수와 레이블이 일치하면 그 자리의 인덱스 리턴
-                // 그 인덱스 + 1 인 자리부터 1++ 해주기
-                // 캘린더가 옆으로 넘어갈때, 서버에서 한번 reloadData 될때 0으로 리셋해주기
-                nextDate += 1
-                calendarCell.dateLabel.text = "\(nextDate)"
-                calendarCell.isUserInteractionEnabled = false
-                return calendarCell
-            } // 이번달 표시
-            else {
-                let calcDate = indexPath.row - firstWeekDayOfMonth+2
-                calendarCell.isHidden = false
-                calendarCell.dateLabel.textColor = UIColor.black
-                calendarCell.dateLabel.text="\(calcDate)"
-                calendarCell.dateLabel.textColor = UIColor.black
-                calendarCell.isUserInteractionEnabled = true
-                calendarCell.backgroundColor = UIColor.white
-                calendarCell.image1.image = nil
-                calendarCell.image2.image = nil
-                calendarCell.image3.image = nil
-                
-                // 오늘 날짜인 셀 찾아서 셀렉해놓기
-                if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
-                    calendarCell.dateLabel.textColor = UIColor.softBlue
-                    calendarCell.dateView.backgroundColor = UIColor.white
-                    calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
-                    
-                    // 오늘 날짜 인덱스 저장
-                    self.index = indexPath
-                }
-                // 달력에 날짜 별 일정 점 찍기
-                for i in 0..<self.classList2.count {
-                    let dayMove = String(format: "%02d", arguments: [currentMonthCalendarIndex]) // with zero month
-                    let todaysDate = String(format: "%02d", Int(calendarCell.dateLabel.text!)!)
-                    let classDateMonthZeros = self.classList2[i].classDate.components(separatedBy: "-")[1] // with zero month
-                    let classDateDay = self.classList2[i].classDate.components(separatedBy: "-")[2] // with zero day
-                    // 셀의 월, 일과 일치할때 점 찍기
-                    if classDateMonthZeros == dayMove && classDateDay == todaysDate {
-                        let imageName = classList2[i].color
-                        if calendarCell.image1.image == nil {
-                            calendarCell.image1.image = UIImage(named: imageName)
-                        } else if calendarCell.image2.image == nil {
-                            calendarCell.image2.image = UIImage(named: imageName)
-                        } else {
-                            calendarCell.image3.image = UIImage(named: imageName)
-                        }
-                    }
-                }
-                
-                // 점들 가운데 정렬을 위한 분기처리
-//                if calendarCell.image2.image == nil && calendarCell.image3.image == nil {
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
-//                }
-//                else if calendarCell.image3.image == nil {
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//                }
-                
-                
-                // 캘린더를 다음달로 전환 했을 때 1일 셀렉해놓기
-                if currentMonthIndex != presentMonthIndex {
-                    let firstWeekDayIndex  = getFirstWeekDay() - 1
-                    self.dateCollectionView.selectItem(at: [0, firstWeekDayIndex], animated: true, scrollPosition: [])
-                    self.collectionView(self.dateCollectionView, didSelectItemAt: [0,firstWeekDayIndex])
-                } else {
-                    self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
-                    self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-                }
+            } else {
+                //calendarCell.date = nil
+                calendarCell.dateLabel?.text = ""
+                calendarCell.dateLabel?.textColor = .label
             }
+            
+            print(year, month, day)
+            topDateButton.setTitle("\(year)년 \(month)", for: .normal)
             return calendarCell
         }
         // TutorCollectionView
@@ -507,84 +470,18 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // 캘린더 컬렉션 뷰
+
         if collectionView == self.dateCollectionView {
-            let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
-            // 날짜 선택시 셀 색깔 바뀌기
-            cell?.dateView.backgroundColor = UIColor.veryLightPinkTwo
-            cell?.dateLabel.textColor = UIColor.black
-            classDateList.removeAll()            
-            // 오늘 날짜 선택 해놓기
-            if indexPath == index {
-                cell?.dateLabel.textColor = UIColor.softBlue
-                cell?.dateView.backgroundColor = UIColor.white
-                //cell?.dateLabel.font = UIFont.boldSystemFont(ofSize: 13)
-            }
-            
-            if let date = cell?.dateLabel.text! {
-                // 날짜 선택시 헤더 날짜 레이블 바뀌기
-                dateHeaderLabel.text = date
-                monthHeaderLabel.text = "\(currentMonthIndex+1)월"
-                
-                // 날짜별로 해당하는 수업 리턴: 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
-                for index in 0..<classList2.count {
-                    let dateMonthInt = currentMonthIndex + 1
-                    let date2 = Int(date)
-                    let dayMove = String(format: "%02d", arguments: [dateMonthInt])
-                    let dayMove2 = String(format: "%02d", date2!)
-                    if classList2[index].classDate == "\(currentYear)-\(dayMove)-\(dayMove2)" {
-                        classDateList.append(classList2[index])
-                        tutorCollectionView.reloadData()
-                    }
-                }
-                tutorCollectionView.reloadData()
-                
-            }
-            print("selected", indexPath)
-            
-        } else {
-            let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
-            let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
-            guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassEditVC.identifier) as? ClassEditVC else {return}
-            // 과외 리스트가 있을 때에만
-            if classList2.count > 0 {
-                
-                // 뷰컨 ClassEditVC로 넘어가기
-                receiveViewController.modalPresentationStyle = .fullScreen
-                self.present(receiveViewController, animated: true, completion: nil)
-                
-                // 과외 선택시 상세 페이지 레이블 바뀌기
-                if let className = cell?.classNameLabel.text! {
-                    receiveViewController.classLabel.text = className
-                    receiveViewController.classHeaderLabel.text = className
-                }
-                // CalendarView 선택된 날짜 가쟈오기
-                if let date = calendarCell?.dateLabel.text! {
-                    // 날짜 선택시 헤더 날짜 레이블 바뀌기
-                    dateHeaderLabel.text = date
-                    monthHeaderLabel.text = "\(currentMonthIndex+1)월"
-                }
-                
-                // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
-                if let startHour = cell?.startTimeLabel.text! {
-                    //let date = calendarCell?.dateLabel.text!
-                    receiveViewController.startTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(startHour)"
-                }
-                
-                if let endHour = cell?.endTimeLabel.text! {
-                    receiveViewController.endTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(endHour)"
-                }
-                
-                if let location = cell?.locationLabel.text! {
-                    receiveViewController.locationTextField.text = location
-                }
-                
-                if let imageIcon = cell?.colorImage.image {
-                    receiveViewController.classImage.image = imageIcon
-                }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CalendarCollectionViewCell", for: indexPath) as! CalendarCollectionViewCell
+            cell.isUserInteractionEnabled = true
+            // If cell has no date, it's just a filler cell
+            if let date = cell.date {
+                self.selectedDate = date
+                //self.performSegue(withIdentifier: "daySegue", sender: self)
+                cell.dateLabel.textColor = UIColor.red
             }
         }
-        
+
     }
     
     
@@ -617,5 +514,32 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }
-}
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+       startingScrollingOffset = scrollView.contentOffset
+    }
+    
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+       // [...]
+       // First, we use the current contentOffset
+       // instead of the target one
+       let proposedPage = scrollView.contentOffset.x / 20
+      
+       // If we scroll forward, we need to pass 10% of a page:
+       // floor(3.1 + 0.9) != floor(3)
+       
+       // If we scroll backwards, we need to reach below 90%
+       // of the previous one: floor(2.89 + 0.1) == floor(2)
+       
+       let delta: CGFloat = scrollView.contentOffset.x
+          > startingScrollingOffset.x ? 0.9 : 0.1
+       // Then, instead of using a flat value, we use the delta value,
+       // and we also remove the targetContentOffset logic
+       if floor(proposedPage + delta) == floor(proposedPage) {
+       // [...]
+    }
+    
+    
 
+}
+}
