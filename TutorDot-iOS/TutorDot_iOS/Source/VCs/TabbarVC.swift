@@ -41,8 +41,8 @@ class TabbarVC: UITabBarController {
         // Calendar Tab
         let calendarStoryboard = UIStoryboard.init(name: "Calendar", bundle: nil)
 
-        guard let firstTab = calendarStoryboard.instantiateViewController(identifier: "CalendarVC")
-            as? CalendarVC  else {
+        guard let firstTab = calendarStoryboard.instantiateViewController(identifier: "CalendarNavigationController")
+            as? CalendarNavigationController  else {
             return
         }
         

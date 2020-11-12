@@ -1,19 +1,19 @@
 {
   "images" : [
     {
+      "scale" : "1x",
       "idiom" : "universal",
-      "filename" : "yellow.png",
-      "scale" : "1x"
+      "filename" : "alarmBtnBack.png"
     },
     {
-      "scale" : "2x",
+      "filename" : "alarmBtnBack@2x.png",
       "idiom" : "universal",
-      "filename" : "yellow@2x.png"
+      "scale" : "2x"
     },
     {
       "scale" : "3x",
-      "idiom" : "universal",
-      "filename" : "yellow@3x.png"
+      "filename" : "alarmBtnBack@3x.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
