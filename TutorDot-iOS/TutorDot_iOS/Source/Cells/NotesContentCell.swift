@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import os
 
 class NotesContentCell: UICollectionViewCell {
 
+    
     // MARK: Cell Objects Outlet
     @IBOutlet weak var noteContentStackView: UIStackView!
     @IBOutlet weak var classColor: UIImageView!
@@ -25,10 +27,16 @@ class NotesContentCell: UICollectionViewCell {
     @IBOutlet weak var noteCellWidth: NSLayoutConstraint!
     @IBOutlet weak var noteCellHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var hwCheckButton1: UIButton!
+    @IBOutlet weak var hwCheckButton2: UIButton!
+    @IBOutlet weak var hwCheckButton3: UIButton!
+    
     // MARK: variables and constant
     var lesson: [String] = []
     var homeworks: [String] = []
     let radius: CGFloat = 13.0
+    let pick: String = "classlogImgPick"
+    let unpick: String = "classlogImgUnpick"
     
 //    let lesson1: UIView = noteContentStackView.arrangedSubviews[2]
     
@@ -46,6 +54,16 @@ class NotesContentCell: UICollectionViewCell {
         //stack view hide 할 부분 hide시키기
         //stack view 개수 :
     }
+    
+    @IBAction func homeworkCheckButtonDidTap(_ sender: Any) {
+        os_log("select button", log: .note)
+        if hwCheckButton1.currentImage == UIImage(named: pick) {
+            hwCheckButton1.setImage(UIImage(named: unpick), for: .normal)
+        } else {
+            hwCheckButton1.setImage(UIImage(named: pick), for: .normal)
+        }
+    }
+    
     
     
 }

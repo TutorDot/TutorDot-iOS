@@ -149,6 +149,9 @@
                                                     <constraint firstAttribute="width" constant="13" id="K88-L5-zop"/>
                                                 </constraints>
                                                 <state key="normal" image="classlogImgPick"/>
+                                                <connections>
+                                                    <action selector="homeworkCheckButtonDidTap:" destination="gTV-IL-0wX" eventType="touchUpInside" id="iKK-jw-ohQ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -202,7 +205,7 @@
                                                     <constraint firstAttribute="width" constant="13" id="GBQ-KF-s5B"/>
                                                     <constraint firstAttribute="width" secondItem="7wg-hu-AP5" secondAttribute="height" multiplier="1:1" id="zez-ZI-R62"/>
                                                 </constraints>
-                                                <state key="normal" image="classlogImgPick"/>
+                                                <state key="normal" image="classlogImgUnpick"/>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fq-7R-YVw">
                                                 <rect key="frame" x="50" y="0.5" width="31" height="14.5"/>
@@ -270,16 +273,20 @@
                 <outlet property="classLesson2" destination="D4z-2J-uIC" id="RmI-hL-fhN"/>
                 <outlet property="classTimes" destination="vm1-dT-bm2" id="6gU-Ue-FVN"/>
                 <outlet property="classTitle" destination="8T4-PF-pwV" id="4fX-vr-mWZ"/>
+                <outlet property="hwCheckButton1" destination="QMp-i0-v8g" id="TyI-bD-6h1"/>
+                <outlet property="hwCheckButton2" destination="86g-uG-vcs" id="ywb-GJ-UdU"/>
+                <outlet property="hwCheckButton3" destination="7wg-hu-AP5" id="aC7-oZ-Jqr"/>
                 <outlet property="noteCellHeight" destination="1tr-18-8xg" id="MTq-3I-hLb"/>
                 <outlet property="noteCellWidth" destination="XP6-ds-0Gs" id="fDd-VS-Sgv"/>
                 <outlet property="noteContentStackView" destination="mV4-oJ-2tA" id="Ef8-ay-QiA"/>
                 <outlet property="tutorProfile" destination="13A-ha-Dr4" id="6jL-Sf-yIn"/>
             </connections>
-            <point key="canvasLocation" x="195" y="42"/>
+            <point key="canvasLocation" x="-118" y="58"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="classlogImgPick" width="13" height="13"/>
+        <image name="classlogImgUnpick" width="13" height="13"/>
         <image name="classlogImgcardblue" width="10" height="10"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
