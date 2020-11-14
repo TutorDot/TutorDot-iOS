@@ -51,12 +51,12 @@
 		015097C5255412BA00935DC6 /* FilterDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015097C3255412BA00935DC6 /* FilterDropDownCell.swift */; };
 		015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015097C4255412BA00935DC6 /* FilterDropDownCell.xib */; };
 		0153EA4224B782A600F8FBA1 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EA4124B782A600F8FBA1 /* TabbarView.swift */; };
+		0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */; };
 		0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D0255A46A200175BF7 /* SignUp2VC.swift */; };
 		0193A1D4255A4B1E00175BF7 /* SignUp3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */; };
 		0193A1D7255A4FCD00175BF7 /* SignUp4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */; };
 		0193A1DA255A646D00175BF7 /* SignUpDoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */; };
 		01944B8124C025A100E19467 /* CalendarClassAddData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01944B8024C025A100E19467 /* CalendarClassAddData.swift */; };
-		01AE73DA255CF9FD0027C850 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01AE73D9255CF9FC0027C850 /* GoogleService-Info.plist */; };
 		01B49D5F24C21F6F00B3A322 /* data3.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B49D5E24C21F6F00B3A322 /* data3.json */; };
 		01C4780524B4B6760005BC45 /* CalendarDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4780424B4B6760005BC45 /* CalendarDot.swift */; };
 		01C8B23524B42F5E00621BA3 /* Extensions+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8B23424B42F5E00621BA3 /* Extensions+Padding.swift */; };
@@ -165,12 +165,12 @@
 		015097C3255412BA00935DC6 /* FilterDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDropDownCell.swift; sourceTree = "<group>"; };
 		015097C4255412BA00935DC6 /* FilterDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDropDownCell.xib; sourceTree = "<group>"; };
 		0153EA4124B782A600F8FBA1 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0193A1D0255A46A200175BF7 /* SignUp2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2VC.swift; sourceTree = "<group>"; };
 		0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp3VC.swift; sourceTree = "<group>"; };
 		0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp4VC.swift; sourceTree = "<group>"; };
 		0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDoneVC.swift; sourceTree = "<group>"; };
 		01944B8024C025A100E19467 /* CalendarClassAddData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarClassAddData.swift; sourceTree = "<group>"; };
-		01AE73D9255CF9FC0027C850 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		01B49D5E24C21F6F00B3A322 /* data3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data3.json; sourceTree = "<group>"; };
 		01C4780424B4B6760005BC45 /* CalendarDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDot.swift; sourceTree = "<group>"; };
 		01C8B23424B42F5E00621BA3 /* Extensions+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Padding.swift"; sourceTree = "<group>"; };
@@ -307,9 +307,7 @@
 				F4200E0824BF1A7F00EA1D6F /* MyClassInfoVC.swift */,
 				F4B565582536FA7D00A77C01 /* NotesMainVC.swift */,
 				01E4A83F252619DC00B5B485 /* testVC.swift */,
-
 				F437B8B0255B9D200016A575 /* BottomSheetVC.swift */,
-
 				013246272553C5B0003A7F75 /* CalendarNavigationController.swift */,
 				0193A1D0255A46A200175BF7 /* SignUp2VC.swift */,
 				0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */,
@@ -364,11 +362,8 @@
 				F4200E0624BE4FFA00EA1D6F /* ClassConnectCell.swift */,
 				F4B565522536D75200A77C01 /* NotesContentCell.swift */,
 				01D895BE2536F3E900570115 /* PopUpTableViewCell.swift */,
-
 				F437B8B7255BD3160016A575 /* PopUpClassesTableViewCell.swift */,
-
 				015097C3255412BA00935DC6 /* FilterDropDownCell.swift */,
-
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -466,8 +461,8 @@
 				F4D1A0AC24B5C89C00B13D65 /* Models */,
 				0126399624AA0AF1009EA0BA /* VCs */,
 				0126397024AA00C8009EA0BA /* AppDelegate.swift */,
+				0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */,
 				0126397224AA00C8009EA0BA /* SceneDelegate.swift */,
-				01AE73D9255CF9FC0027C850 /* GoogleService-Info.plist */,
 				0126397E24AA00C9009EA0BA /* Info.plist */,
 				F4B517E024C0B009007438DE /* data2.json */,
 			);
@@ -572,13 +567,13 @@
 				014703C224B2CB4B0074D4E2 /* AlertTableViewCell.xib in Resources */,
 				012E887F24B5D30700EF81FB /* TutorCollectionViewCell.xib in Resources */,
 				012E888124B5D37E00EF81FB /* Notes.storyboard in Resources */,
-				01AE73DA255CF9FD0027C850 /* GoogleService-Info.plist in Resources */,
 				0126397A24AA00C9009EA0BA /* Assets.xcassets in Resources */,
 				0126399324AA0A0B009EA0BA /* MyPage.storyboard in Resources */,
 				01B49D5F24C21F6F00B3A322 /* data3.json in Resources */,
 				0126397824AA00C8009EA0BA /* MainTab.storyboard in Resources */,
 				0126399124AA09DD009EA0BA /* Alert.storyboard in Resources */,
 				015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */,
+				0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */,
 				012E888324B5D3FA00EF81FB /* Calendar.storyboard in Resources */,
 				F4B517E124C0B009007438DE /* data2.json in Resources */,
 			);
