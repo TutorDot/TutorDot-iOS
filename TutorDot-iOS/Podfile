@@ -13,4 +13,5 @@ pod 'BEMCheckBox'
 pod 'lottie-ios'
 pod 'Sheeeeeeeeet'
 pod 'Firebase/Analytics'
+pod 'Firebase/Messaging'
 end

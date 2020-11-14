@@ -39,7 +39,7 @@ struct ProfileService {
         // 토큰 가져오기
         //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjg4LCJuYW1lIjoic2Vod2EiLCJpYXQiOjE2MDQxMzM3NDcsImV4cCI6MTYwNTM0MzM0NywiaXNzIjoib3VyLXNvcHQifQ.1Eim6UVc96pE151ZuR419cQA_GEQLkjVFKrwOnYvJOs"]
+        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywibmFtZSI6IuulmOyEuO2ZlCIsImlhdCI6MTYwNTM1MDk2NywiZXhwIjoxNjA2NTYwNTY3LCJpc3MiOiJvdXItc29wdCJ9.8UDWwpaXIW07eUiDz6C24D5yHLNdw84NllwEcC4Zwe8"]
         
         let dataRequest = Alamofire.request(APIConstants.lectureURL, headers: header)
         
@@ -75,7 +75,6 @@ struct ProfileService {
         do {
             let decoder = JSONDecoder()
             let decodedData = try decoder.decode(ProfileData.self, from: data)
-            //print(decodedData)
             return .success(decodedData.data)
         }
         catch {
