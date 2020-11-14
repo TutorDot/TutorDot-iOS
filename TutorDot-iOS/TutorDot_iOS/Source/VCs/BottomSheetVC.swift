@@ -20,19 +20,20 @@ class BottomSheetVC: UIViewController {
     
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     let screenWidth: CGFloat = UIScreen.main.bounds.width
-    private var classlist: [String] = []
+    var classlist: [String] = []
     let customHeight: CGFloat = 55
     let bottomSafeArea: CGFloat = 34
    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBottomView()
-        setClassList()
+        //setClassList()
         
         BottomSheetTableView.dataSource = self
         BottomSheetTableView.delegate = self
         
         start()
+        setListDropDown()
         
         
     }
@@ -57,6 +58,29 @@ class BottomSheetVC: UIViewController {
         //Mark: - 서버통신
     }
     
+    
+    func setListDropDown(){
+        // 서버통신: 토글에서 수업리스트 가져오기
+        ProfileService.shared.getClassLid() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
+                for index in 0..<data.count {
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    self.classlist.append(item.lectureName)
+                    print(self.classlist)
+                }
+                
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+    }
+
+        
     func setupBottomView(){
         BottomSheetTableView.layer.cornerRadius = 13.0
     }
@@ -67,9 +91,7 @@ class BottomSheetVC: UIViewController {
         
         //init position
         BottomSheetTableView.frame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: heightCalc)
-        
-        
-        
+    
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,

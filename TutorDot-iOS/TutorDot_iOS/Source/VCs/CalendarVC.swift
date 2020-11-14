@@ -279,6 +279,16 @@ class CalendarVC: UIViewController {
         self.present(receiveViewController, animated: true, completion: nil)
     }
     
+    @IBAction func testButton(_ sender: Any) {
+        let noteStoryboard = UIStoryboard.init(name: "Notes", bundle : nil)
+        guard let popupVC = noteStoryboard.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else { return }
+        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalTransitionStyle = .crossDissolve
+        //popupVC.delegate = self
+        present(popupVC, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func alertTabButton(_ sender: Any) {
         let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
         let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")

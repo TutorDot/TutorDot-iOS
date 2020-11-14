@@ -232,13 +232,13 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginImgOnboardMockup" translatesAutoresizingMaskIntoConstraints="NO" id="iIW-xs-9xo">
-                                <rect key="frame" x="16" y="185" width="343" height="288"/>
+                                <rect key="frame" x="16" y="185" width="343" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="221" id="hJj-Fz-ReC"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="이메일" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LaN-1H-Tw9">
-                                <rect key="frame" x="41" y="516" width="293" height="38"/>
+                                <rect key="frame" x="41" y="403" width="293" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="3Hf-hU-CcG"/>
                                 </constraints>
@@ -246,7 +246,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1HB-bJ-MHY">
-                                <rect key="frame" x="41" y="564" width="293" height="38"/>
+                                <rect key="frame" x="41" y="451" width="293" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="kxZ-MA-hVv"/>
                                 </constraints>
@@ -254,7 +254,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1c-vH-2g0">
-                                <rect key="frame" x="36" y="674" width="303" height="48"/>
+                                <rect key="frame" x="36" y="561" width="303" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="IHD-tT-PqB"/>
                                     <constraint firstAttribute="width" constant="303" id="kcd-7I-VvF"/>
@@ -269,7 +269,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 상태를 유지하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PmM-23-1tU">
-                                <rect key="frame" x="108.66666666666667" y="630" width="184.33333333333331" height="17"/>
+                                <rect key="frame" x="108.66666666666667" y="517" width="184.33333333333331" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="N5o-vi-inj"/>
                                 </constraints>
@@ -278,7 +278,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ibU-0v-bX8" customClass="BEMCheckBox">
-                                <rect key="frame" x="78.666666666666671" y="631" width="15" height="15"/>
+                                <rect key="frame" x="78.666666666666671" y="518" width="15" height="15"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="2mI-Hu-Ytv"/>

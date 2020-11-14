@@ -9,9 +9,16 @@
 import UIKit
 
 class SignUpDoneVC: UIViewController {
+    static let identifier: String = "SignUpDoneVC"
 
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    
+    var name: String!
+    var userId: String!
+    var password: String!
+    var role: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -26,9 +33,16 @@ class SignUpDoneVC: UIViewController {
     
 
     @IBAction func startButtonSelected(_ sender: Any) {
-        //let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
         guard let mainView = self.storyboard?.instantiateViewController(identifier:"LoginVC") as?
                 LoginVC else { return }
+    
+        if let email = self.userId {
+            mainView.emailText = email
+        }
+        
+        if let password = password {
+            mainView.passwordText = password
+        }
         mainView.modalPresentationStyle = .fullScreen
         self.present(mainView, animated: true, completion: nil)
     }

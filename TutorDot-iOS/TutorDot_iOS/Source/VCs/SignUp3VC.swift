@@ -15,6 +15,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var idTextField: UITextField!
     var name : String?
+    var receiveRole: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp4VC.identifier) as? SignUp4VC else {return}
         receiveViewController.name = name
+        receiveViewController.role = receiveRole
         receiveViewController.id = idTextField.text
         
         self.navigationController?.pushViewController(receiveViewController, animated: true)

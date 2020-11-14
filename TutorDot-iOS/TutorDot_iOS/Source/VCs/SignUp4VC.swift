@@ -18,7 +18,8 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var numberlabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
-    var role : String = ""
+    var finalRole: String!
+    var role : String!
     var name: String?
     var id: String?
     
@@ -26,7 +27,8 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         setUpViews()
         initGestureRecognizer()
-        print(role)
+        self.finalRole = role
+        print(id, name, finalRole)
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {
@@ -58,33 +60,23 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
     // 회원가입 서버통신
     @IBAction func signUpSelected(_ sender: Any) {
         // 회원가입 통신
-        print("pressed")
         let inputName = name
         let inputEmail = id
         let inputPw = passwordTextfield.text
-        let inputRole = role
-        
-        print(inputName, inputEmail, inputPw, "tutor")
-        
-        SignUpService.shared.signup(userName: inputName ?? "", email: inputEmail ?? "", password: inputPw ?? "", role: inputRole ) { networkResult in
+        let inputRole = finalRole
+            
+        SignUpService.shared.signup(userName: inputName ?? "", email: inputEmail ?? "", password: inputPw ?? "", role: inputRole! ) { networkResult in
             switch networkResult {
             case .success:
                 // 회원가입에 성공했을때
                 print("success")
-                guard let loginView = self.storyboard?.instantiateViewController(identifier:LoginVC.identifier) as? LoginVC else {
-                    return
-                }
-                if let email = self.id {
-                    loginView.emailText = email
-                }
                 
-                if let password = self.passwordTextfield.text {
-                    loginView.passwordText = password
-                }
-                            
-                guard let uvc = self.storyboard?.instantiateViewController(withIdentifier: "SignUpDoneVC") else { return }
-                self.navigationController?.pushViewController(uvc, animated: true)
-                
+                guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUpDoneVC.identifier) as? SignUpDoneVC else {return}
+                receiveViewController.name = self.name
+                receiveViewController.userId = self.id
+                receiveViewController.password = self.passwordTextfield.text
+                receiveViewController.role = self.finalRole
+                self.navigationController?.pushViewController(receiveViewController, animated: true)
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "회원가입 실패", message: message, preferredStyle: .alert)
