@@ -49,12 +49,20 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp2VC.identifier) as? SignUp2VC else {return}
-        if isTutorButton.isSelected == true {
-            receiveViewController.role = "tutor"
+        if isTutorButton.isSelected == false && isTuteeButton.isSelected == false {
+            let alert = UIAlertController(title: nil, message: "역할을 선택해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
-            receiveViewController.role = "tutee"
+            if isTutorButton.isSelected == true {
+                receiveViewController.role = "tutor"
+            } else {
+                receiveViewController.role = "tutee"
+            }
+            self.navigationController?.pushViewController(receiveViewController, animated: true)
+            
         }
-        self.navigationController?.pushViewController(receiveViewController, animated: true)
+        
     }
     
     

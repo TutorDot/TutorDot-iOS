@@ -68,7 +68,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         headerViewHeightConstraints.constant = view.frame.height * (94/812)
-        setListDropDown()
+        
         setTimeZone()
         setUpView()
         initGestureRecognizer()
@@ -80,8 +80,15 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         createDatePicker2()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) { //
         registerForKeyboardNotifications()
+        setListDropDown()
+        print(classLid)
+        
     }
     
     func setUpView() {
@@ -113,10 +120,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.present(alert, animated: true, completion: nil)
         } else {
             addClassSchedule()
-            let alertViewController = UIAlertController(title: "일정추가 성공", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-            alertViewController.addAction(action)
-            self.present(alertViewController, animated: true, completion: nil)
             
         }
         
@@ -135,24 +138,17 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         guard let inputLocation = locationTexField.text else { return }
         guard let inputDate =  classStartDate else {return}
 
-        let title = classInfoButton.titleLabel
-        for (key, value) in self.dic {
-            if key == title?.text {
-                print(value)
-            }
-        }
-        
-        ClassInfoService.classInfoServiceShared.addClassSchedule(lectureId: 153, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
+        ClassInfoService.classInfoServiceShared.addClassSchedule(lectureId: 156, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
             networkResult in
             switch networkResult {
             case .success(let token):
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
                 // 일정 등록 후 캘린더 화면으로 돌아가기
-                let storyboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-                guard let receiveViewController = storyboard.instantiateViewController(identifier: TabbarVC.identifier) as? TabbarVC else {return}
-                receiveViewController.modalPresentationStyle = .fullScreen
-                self.present(receiveViewController, animated: false, completion: nil)
+                let alertViewController = UIAlertController(title: "일정추가 성공", message: nil, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
                 print("일정추가 서버 연결 성공")
             // 일정추가 실패시 AlertViewcon 열기
             case .requestErr(let message):
@@ -218,7 +214,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         DropDown.appearance().setupCornerRadius(7)
         dropDown?.backgroundColor = UIColor.white
         dropDown?.selectionBackgroundColor = UIColor.paleGrey
-        // dropdown 높이
         dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
         
         // 서버통신: 토글에 수업리스트 가져오기
@@ -231,9 +226,9 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
                     dropList.append(item.lectureName)
                     self.classLid.append(item.lectureId)
                     classColorLid.append(item.color)
-                    self.dic.updateValue(self.classLid[index], forKey: dropList[index])
+                    self.dic.updateValue(self.classLid[index] , forKey: dropList[index])
                     self.dropDown?.dataSource = dropList
-                    print("ClassId", self.classLid)
+                    //print("ClassId", self.classLid)
                     
 
                 }

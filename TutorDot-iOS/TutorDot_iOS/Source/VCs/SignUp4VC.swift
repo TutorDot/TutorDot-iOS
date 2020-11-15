@@ -28,7 +28,6 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
         setUpViews()
         initGestureRecognizer()
         self.finalRole = role
-        print(id, name, finalRole)
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {
@@ -64,29 +63,35 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
         let inputEmail = id
         let inputPw = passwordTextfield.text
         let inputRole = finalRole
+        if passwordTextfield.text!.isEmpty {
+            let alert = UIAlertController(title: nil, message: "비밀번호를 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            SignUpService.shared.signup(userName: inputName ?? "", email: inputEmail ?? "", password: inputPw ?? "", role: inputRole! ) { networkResult in
+                switch networkResult {
+                case .success:
+                    // 회원가입에 성공했을때
+                    print("success")
+                    
+                    guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUpDoneVC.identifier) as? SignUpDoneVC else {return}
+                    receiveViewController.name = self.name
+                    receiveViewController.userId = self.id
+                    receiveViewController.password = self.passwordTextfield.text
+                    receiveViewController.role = self.finalRole
+                    self.navigationController?.pushViewController(receiveViewController, animated: true)
+                case .requestErr(let message):
+                    guard let message = message as? String else { return }
+                    let alertViewController = UIAlertController(title: "회원가입 실패", message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                    alertViewController.addAction(action)
+                    self.present(alertViewController, animated: true, completion: nil)
+                    
+                case .pathErr: print("path")
+                case .serverErr: print("serverErr")
+                case .networkFail: print("networkFail") }
+            }
             
-        SignUpService.shared.signup(userName: inputName ?? "", email: inputEmail ?? "", password: inputPw ?? "", role: inputRole! ) { networkResult in
-            switch networkResult {
-            case .success:
-                // 회원가입에 성공했을때
-                print("success")
-                
-                guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUpDoneVC.identifier) as? SignUpDoneVC else {return}
-                receiveViewController.name = self.name
-                receiveViewController.userId = self.id
-                receiveViewController.password = self.passwordTextfield.text
-                receiveViewController.role = self.finalRole
-                self.navigationController?.pushViewController(receiveViewController, animated: true)
-            case .requestErr(let message):
-                guard let message = message as? String else { return }
-                let alertViewController = UIAlertController(title: "회원가입 실패", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                
-            case .pathErr: print("path")
-            case .serverErr: print("serverErr")
-            case .networkFail: print("networkFail") }
         }
         
     }

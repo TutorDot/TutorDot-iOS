@@ -81,14 +81,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ko-b9-Lbv">
-                                        <rect key="frame" x="255" y="58" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="testButton:" destination="Qqg-GD-pQr" eventType="touchUpInside" id="pBY-Ny-uLi"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -524,6 +516,7 @@
                                 <state key="normal" title="삭제"/>
                                 <connections>
                                     <action selector="deleteButtonSelected:" destination="Aaj-KY-eqb" eventType="touchUpInside" id="Yah-Ge-qAm"/>
+                                    <action selector="deleteClass:" destination="Aaj-KY-eqb" eventType="touchUpInside" id="3Fu-Yy-1dD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -836,28 +829,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2d2-1A-8XN">
-                                <rect key="frame" x="16" y="284" width="343" height="40"/>
+                                <rect key="frame" x="16" y="292" width="343" height="40"/>
                                 <connections>
                                     <action selector="pickerButton2:" destination="QxZ-ws-pXf" eventType="touchUpInside" id="uWP-Ck-D4V"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="위치" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mle-wm-MO5">
-                                <rect key="frame" x="16" y="334" width="26" height="18"/>
+                                <rect key="frame" x="16" y="342" width="26" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="터치하여 위치를 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QCl-aI-KgN">
-                                <rect key="frame" x="16" y="360" width="343" height="40"/>
+                                <rect key="frame" x="16" y="376" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Kx2-qc-qce"/>
                                 </constraints>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="location"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="터치하여 종료 시간을 입력하세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ovq-XL-keW">
-                                <rect key="frame" x="16" y="284" width="343" height="40"/>
+                                <rect key="frame" x="16" y="292" width="343" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Xob-Ut-Op3"/>
                                 </constraints>
@@ -866,7 +859,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ha-2F-BMN">
-                                <rect key="frame" x="67" y="465" width="240" height="283"/>
+                                <rect key="frame" x="67" y="481" width="240" height="267"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPP-mL-0Pb">
@@ -889,11 +882,11 @@
                             <constraint firstItem="MdS-PJ-sTl" firstAttribute="leading" secondItem="7KY-mc-pLO" secondAttribute="leading" constant="16" id="D4q-j3-pR3"/>
                             <constraint firstItem="2d2-1A-8XN" firstAttribute="width" secondItem="ovq-XL-keW" secondAttribute="width" id="G05-ev-jGV"/>
                             <constraint firstItem="7KY-mc-pLO" firstAttribute="trailing" secondItem="r4j-fm-Pm4" secondAttribute="trailing" id="LnJ-x1-eWU"/>
-                            <constraint firstItem="ovq-XL-keW" firstAttribute="top" secondItem="fh9-7l-k1l" secondAttribute="bottom" constant="8" id="NCd-At-17W"/>
+                            <constraint firstItem="ovq-XL-keW" firstAttribute="top" secondItem="fh9-7l-k1l" secondAttribute="bottom" constant="16" id="NCd-At-17W"/>
                             <constraint firstItem="r4j-fm-Pm4" firstAttribute="leading" secondItem="7KY-mc-pLO" secondAttribute="leading" id="NLp-Rs-2Yo"/>
                             <constraint firstItem="MdS-PJ-sTl" firstAttribute="top" secondItem="VxA-LU-qka" secondAttribute="bottom" constant="16" id="O8a-8P-2r2"/>
                             <constraint firstItem="VxA-LU-qka" firstAttribute="top" secondItem="BRq-Ar-O6o" secondAttribute="bottom" constant="20" id="RND-JN-XvY"/>
-                            <constraint firstItem="QCl-aI-KgN" firstAttribute="top" secondItem="Mle-wm-MO5" secondAttribute="bottom" constant="8" id="SED-dn-sre"/>
+                            <constraint firstItem="QCl-aI-KgN" firstAttribute="top" secondItem="Mle-wm-MO5" secondAttribute="bottom" constant="16" id="SED-dn-sre"/>
                             <constraint firstItem="7KY-mc-pLO" firstAttribute="bottom" secondItem="4ha-2F-BMN" secondAttribute="bottom" constant="30" id="YII-t5-s9L"/>
                             <constraint firstItem="iCt-cq-q08" firstAttribute="leading" secondItem="7KY-mc-pLO" secondAttribute="leading" constant="11" id="ZO6-B7-nZW"/>
                             <constraint firstItem="BRq-Ar-O6o" firstAttribute="centerY" secondItem="iCt-cq-q08" secondAttribute="centerY" id="a3a-aw-oNX"/>

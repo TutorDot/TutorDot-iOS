@@ -37,9 +37,9 @@ struct ProfileService {
     // GET: 수업 목록 조회
     func getClassLid(completion: @escaping (NetworkResult<Any>) -> Void) {
         // 토큰 가져오기
-        //let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywibmFtZSI6IuulmOyEuO2ZlCIsImlhdCI6MTYwNTM1MDk2NywiZXhwIjoxNjA2NTYwNTY3LCJpc3MiOiJvdXItc29wdCJ9.8UDWwpaXIW07eUiDz6C24D5yHLNdw84NllwEcC4Zwe8"]
+        //let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywibmFtZSI6IuulmOyEuO2ZlCIsImlhdCI6MTYwNTM1MDk2NywiZXhwIjoxNjA2NTYwNTY3LCJpc3MiOiJvdXItc29wdCJ9.8UDWwpaXIW07eUiDz6C24D5yHLNdw84NllwEcC4Zwe8"]
         
         let dataRequest = Alamofire.request(APIConstants.lectureURL, headers: header)
         
@@ -60,7 +60,6 @@ struct ProfileService {
     private func judge(by StatusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch StatusCode {
         case 200 :
-            //print("judge 200")
             return isLookup(by: data)
         case 400 :
             return .pathErr

@@ -210,7 +210,7 @@ class OnboardingVC: UIViewController {
     @IBAction func startButtonSelected(_ sender: Any) {
         
         let joinStoryboard = UIStoryboard.init(name: "Login", bundle: nil)
-        guard let joinView = joinStoryboard.instantiateViewController(identifier: SignUpVC.identifier) as? SignUpVC else {
+        guard let joinView = joinStoryboard.instantiateViewController(identifier: LoginNagivationVC.identifier) as? LoginNagivationVC else {
             return
         }
         joinView.modalPresentationStyle = .fullScreen

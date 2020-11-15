@@ -32,9 +32,16 @@ class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp3VC.identifier) as? SignUp3VC else {return}
-        receiveViewController.name = nameTextField.text ?? ""
-        receiveViewController.receiveRole = vcRole
-        self.navigationController?.pushViewController(receiveViewController, animated: true)
+        if nameTextField.text!.isEmpty {
+            let alert = UIAlertController(title: nil, message: "이름을 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            receiveViewController.name = nameTextField.text ?? ""
+            receiveViewController.receiveRole = vcRole
+            self.navigationController?.pushViewController(receiveViewController, animated: true)
+        }
+        
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {

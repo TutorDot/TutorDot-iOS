@@ -91,6 +91,7 @@ DEPENDENCIES:
   - BEMCheckBox
   - DropDown (~> 2.3.2)
   - Firebase/Analytics
+  - Firebase/Core
   - Firebase/Messaging
   - Kingfisher (~> 5.0)
   - lottie-ios
@@ -137,6 +138,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Sheeeeeeeeet: d4808c23c1d0aca2ccba13353ec7fa17ada2f129
 
-PODFILE CHECKSUM: 4ffd4c421344556284e0d861ff341fcf499f5a48
+PODFILE CHECKSUM: 12c85d49c6e54a869c3cdd5126cef9c306543c7d
 
 COCOAPODS: 1.9.3
