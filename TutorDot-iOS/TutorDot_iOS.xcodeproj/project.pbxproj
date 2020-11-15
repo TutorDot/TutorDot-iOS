@@ -57,6 +57,7 @@
 		0193A1D7255A4FCD00175BF7 /* SignUp4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */; };
 		0193A1DA255A646D00175BF7 /* SignUpDoneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */; };
 		01944B8124C025A100E19467 /* CalendarClassAddData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01944B8024C025A100E19467 /* CalendarClassAddData.swift */; };
+		019D11362560270900A88195 /* LoginNagivationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019D11352560270900A88195 /* LoginNagivationVC.swift */; };
 		01B49D5F24C21F6F00B3A322 /* data3.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B49D5E24C21F6F00B3A322 /* data3.json */; };
 		01C4780524B4B6760005BC45 /* CalendarDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4780424B4B6760005BC45 /* CalendarDot.swift */; };
 		01C8B23524B42F5E00621BA3 /* Extensions+Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C8B23424B42F5E00621BA3 /* Extensions+Padding.swift */; };
@@ -173,6 +174,7 @@
 		0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp4VC.swift; sourceTree = "<group>"; };
 		0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDoneVC.swift; sourceTree = "<group>"; };
 		01944B8024C025A100E19467 /* CalendarClassAddData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarClassAddData.swift; sourceTree = "<group>"; };
+		019D11352560270900A88195 /* LoginNagivationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNagivationVC.swift; sourceTree = "<group>"; };
 		01B49D5E24C21F6F00B3A322 /* data3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data3.json; sourceTree = "<group>"; };
 		01C4780424B4B6760005BC45 /* CalendarDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDot.swift; sourceTree = "<group>"; };
 		01C8B23424B42F5E00621BA3 /* Extensions+Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Padding.swift"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */,
 				0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */,
 				0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */,
+				019D11352560270900A88195 /* LoginNagivationVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				014703BE24B1F6350074D4E2 /* Extensions+String.swift in Sources */,
 				012639A524AB15D9009EA0BA /* LoginVC.swift in Sources */,
 				012639A524AB15D9009EA0BA /* LoginVC.swift in Sources */,
+				019D11362560270900A88195 /* LoginNagivationVC.swift in Sources */,
 				01CAC66124BB525300400654 /* SignUpData.swift in Sources */,
 				01EFFF2224B9E73D00518DE6 /* NetworkResult.swift in Sources */,
 				01EFFF1924B9D78100518DE6 /* OnBoardingImageInfo.swift in Sources */,

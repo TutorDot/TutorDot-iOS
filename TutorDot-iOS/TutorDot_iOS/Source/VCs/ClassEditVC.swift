@@ -108,6 +108,11 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    
+    @IBAction func deleteClass(_ sender: Any) {
+        deleteOneClass()
+    }
+    
     func deleteOneClass() {
         ClassInfoService.classInfoServiceShared.deleteOneClassInfo() { networkResult in
             switch networkResult {

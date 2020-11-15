@@ -10,7 +10,8 @@ import UIKit
 
 class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier: String = "SignUp2VC"
-    var role : String = ""
+    var vcRole: String!
+    var role : String!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var serviceLabel: UILabel!
@@ -20,7 +21,8 @@ class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
-        print("printed", self.role)
+        self.vcRole = role
+        
     }
     
     override func viewWillAppear(_ animated: Bool) { //
@@ -30,8 +32,16 @@ class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp3VC.identifier) as? SignUp3VC else {return}
-        receiveViewController.name = nameTextField.text ?? ""
-        self.navigationController?.pushViewController(receiveViewController, animated: true)
+        if nameTextField.text!.isEmpty {
+            let alert = UIAlertController(title: nil, message: "이름을 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            receiveViewController.name = nameTextField.text ?? ""
+            receiveViewController.receiveRole = vcRole
+            self.navigationController?.pushViewController(receiveViewController, animated: true)
+        }
+        
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {
@@ -60,7 +70,6 @@ class SignUp2VC: UIViewController, UIGestureRecognizerDelegate {
     //다른 위치 탭했을 때 키보드 없어지는 코드
     @objc func handleTapTextField(_ sender: UITapGestureRecognizer) { //
         self.nameTextField.resignFirstResponder()
-        
     }
     
     func registerForKeyboardNotifications() {
