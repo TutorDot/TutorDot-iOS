@@ -101,24 +101,56 @@ class CalendarVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewControllerUI()
-        setupCalendar()
         setUpView()
-        getClassList()
         setListDropDown()
-        self.view.sendSubviewToBack(calendarView)
-        swipeGestureRecognizer.direction = .right
-        rightButton.addGestureRecognizer(swipeGestureRecognizer)
+        gestureRecognizer()
+        setupCalendar()
+        getClassList()
 
+        
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if firstTimeRunning {
+            self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
+            self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+            firstTimeRunning = false
+        }
+        
 
     }
-    func swipe(gestureRecognizer: UISwipeGestureRecognizer) {
-        NSLog("right")
+    func gestureRecognizer() {
+        swipeGestureRecognizer.direction = .right
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(CalendarVC.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.calendarView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(CalendarVC.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.calendarView.addGestureRecognizer(swipeRight)
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
-        self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            // 발생한 이벤트의 방향이 왼쪽 스와이프라며 onBoarding 이미지 변경
+            if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
+                rightButtonSelected(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+            
+            } else if swipeGesture.direction == UISwipeGestureRecognizer.Direction.right{
+                leftButtonSelected(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+            }
+        }
     }
+    
+    
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
@@ -279,6 +311,16 @@ class CalendarVC: UIViewController {
         self.present(receiveViewController, animated: true, completion: nil)
     }
     
+    @IBAction func testButton(_ sender: Any) {
+        let noteStoryboard = UIStoryboard.init(name: "Notes", bundle : nil)
+        guard let popupVC = noteStoryboard.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else { return }
+        popupVC.modalPresentationStyle = .overCurrentContext
+        popupVC.modalTransitionStyle = .crossDissolve
+        //popupVC.delegate = self
+        present(popupVC, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func alertTabButton(_ sender: Any) {
         let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
         let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")
@@ -325,6 +367,7 @@ extension CalendarVC {
         // 처음 열었을 때 오늘 날짜로 보이기
         dateHeaderLabel.text = String(todaysDate)
         monthHeaderLabel.text = String("\(presentMonthIndex+1)월")
+        self.view.sendSubviewToBack(calendarView)
     }
     
     func getFirstWeekDay() -> Int {
@@ -537,7 +580,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 tutorCollectionView.reloadData()
                 
             }
-            print("selected", indexPath)
             
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
