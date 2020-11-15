@@ -13,13 +13,28 @@ class QuestionVC: UIViewController {
     @IBOutlet weak var questionTableView: UITableView!
     @IBOutlet weak var questionHeaderView: UIView!
     @IBOutlet weak var questionBox: UITextView!
+  
+    @IBOutlet weak var barview: UIView!
+    @IBOutlet weak var questionTabView: UIView!
+  
+    @IBOutlet weak var answerCount: UILabel!
+    @IBOutlet weak var questionCount: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextBox()
-        questionTableView.backgroundColor = UIColor.newGrey
+        setDefault()
+        
+        // Mark: - shadow setting
         self.view.bringSubviewToFront(questionBoxView)
         self.view.bringSubviewToFront(questionHeaderView)
+       
         
+    }
+    
+    func setDefault(){
+        questionTabView.layer.backgroundColor = UIColor.whiteTwo.cgColor
+        questionTableView.backgroundColor = UIColor.whiteTwo
+        questionCount.textColor = UIColor.fontSoftBlue
     }
     
     @IBOutlet weak var questionBoxView: UIView! {
