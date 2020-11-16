@@ -775,7 +775,7 @@
                                     <constraint firstItem="RfJ-gR-IwI" firstAttribute="centerX" secondItem="r4j-fm-Pm4" secondAttribute="centerX" id="zSD-SN-6Ek"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calenderImgYellow" translatesAutoresizingMaskIntoConstraints="NO" id="iCt-cq-q08">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scheduleClassMathImgNot" translatesAutoresizingMaskIntoConstraints="NO" id="iCt-cq-q08">
                                 <rect key="frame" x="16" y="124" width="10" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="10" id="rYj-2I-q7a"/>
@@ -932,6 +932,7 @@
         <image name="calenderImgYellow" width="15" height="15"/>
         <image name="calenderMathSectionBtnFluttering" width="53" height="53"/>
         <image name="scheduleClassMathBtnEdit" width="48" height="48"/>
+        <image name="scheduleClassMathImgNot" width="10" height="10"/>
         <image name="scheduleModificationBtnCancel" width="48" height="48"/>
         <image name="scheduleModificationBtnSave" width="48" height="48"/>
         <image name="scheduleModificationImgLine" width="335" height="1"/>

@@ -12,7 +12,17 @@ class TutorCollectionViewCell: UICollectionViewCell {
 
     static let identifier: String = "TutorCollectionViewCell"
     
-    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var infoView: UIView! {
+        didSet {
+            infoView.layer.cornerRadius = 20
+            infoView.layer.shadowRadius = 5
+            infoView.layer.shadowColor = UIColor.gray.cgColor
+            infoView.layer.shadowOffset = CGSize(width: 0.3, height: 0.3)
+            infoView.layer.shadowOpacity = 0.1
+            //infoView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+            
+        }
+    }
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var classNameLabel: UILabel!
@@ -31,8 +41,10 @@ class TutorCollectionViewCell: UICollectionViewCell {
         startTimeLabel.textColor = UIColor.brownishGrey
         endTimeLabel.textColor = UIColor.brownishGrey
         
+        
+        
     }
-
+    
     
     func set(_ classInformation: CalendarData) {
         startTimeLabel.text = classInformation.startTime

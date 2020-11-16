@@ -49,7 +49,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         delete = UIAlertAction(title: "삭제하기", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction) in
             self.deleteOneClass()
             self.dismiss(animated: true, completion: nil)
-        
+            CalendarVC.calendarShared.viewWillAppear(true)
             
             //CalendarVC.calendarShared.viewDidLoad()
             //CalendarVC.calendarShared.dateCollectionView.reloadData()
@@ -123,7 +123,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
-                print("delete success")
+                print("delete success", classId)
                 
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")

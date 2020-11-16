@@ -471,6 +471,10 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.image2.image = nil
                 calendarCell.image3.image = nil
                 
+                if indexPath == [0,7] || indexPath == [0,14] || indexPath == [0,28] || indexPath == [0,0] || indexPath == [0,21] {
+                    calendarCell.dateLabel.textColor = UIColor.red
+                }
+                
                 // 오늘 날짜인 셀 찾아서 셀렉해놓기
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateLabel.textColor = UIColor.softBlue
@@ -555,6 +559,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             cell?.dateLabel.textColor = UIColor.black
             classDateList.removeAll()            
             // 오늘 날짜 선택 해놓기
+            print(indexPath)
             if indexPath == index {
                 cell?.dateLabel.textColor = UIColor.softBlue
                 cell?.dateView.backgroundColor = UIColor.white
@@ -653,10 +658,14 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         if collectionView == self.dateCollectionView {
             return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/8.5 )
         } else {
-            return CGSize(width: collectionView.frame.width , height: collectionView.frame.height/1.5 )
+            if classList2.count > 0 {
+                return CGSize(width: collectionView.frame.width , height: 115 )
+            } else {
+                return CGSize(width: collectionView.frame.width , height: collectionView.frame.height*3 )
+            }
         }
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }

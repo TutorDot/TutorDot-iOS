@@ -142,7 +142,7 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
             case .success(let token):
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
-                print("일정추가 수정 연결 성공")
+                print("일정 수정 성공", classIdNew)
             // 일정추가 실패시 AlertViewcon 열기
             case .requestErr(let message):
                 guard let message = message as? String else { return }
