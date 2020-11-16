@@ -119,6 +119,7 @@
 		F4D1A0D924BA9D5000B13D65 /* BlankClassJournalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D1A0D724BA9D5000B13D65 /* BlankClassJournalCell.swift */; };
 		F4D1A0DA24BA9D5000B13D65 /* BlankClassJournalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4D1A0D824BA9D5000B13D65 /* BlankClassJournalCell.xib */; };
 		F4E51D212526182700626670 /* Extensions+OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51D202526182600626670 /* Extensions+OSLog.swift */; };
+		F4F13DF525610D5A00115FD4 /* QuestionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F13DF425610D5A00115FD4 /* QuestionListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +240,7 @@
 		F4D1A0D724BA9D5000B13D65 /* BlankClassJournalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankClassJournalCell.swift; sourceTree = "<group>"; };
 		F4D1A0D824BA9D5000B13D65 /* BlankClassJournalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankClassJournalCell.xib; sourceTree = "<group>"; };
 		F4E51D202526182600626670 /* Extensions+OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+OSLog.swift"; sourceTree = "<group>"; };
+		F4F13DF425610D5A00115FD4 /* QuestionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 				01D895BE2536F3E900570115 /* PopUpTableViewCell.swift */,
 				F437B8B7255BD3160016A575 /* PopUpClassesTableViewCell.swift */,
 				015097C3255412BA00935DC6 /* FilterDropDownCell.swift */,
+				F4F13DF425610D5A00115FD4 /* QuestionListCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				012E887C24B5ABCF00EF81FB /* NotesModifyVC.swift in Sources */,
 				014703C424B316960074D4E2 /* AlertTableHeaderViewCell.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
+				F4F13DF525610D5A00115FD4 /* QuestionListCell.swift in Sources */,
 				01E4A840252619DC00B5B485 /* testVC.swift in Sources */,
 				F471772C24B2036B0098C827 /* MonthJournalCell.swift in Sources */,
 				F4200E0724BE4FFA00EA1D6F /* ClassConnectCell.swift in Sources */,

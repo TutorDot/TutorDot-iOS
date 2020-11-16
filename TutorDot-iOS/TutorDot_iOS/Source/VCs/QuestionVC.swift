@@ -13,12 +13,31 @@ class QuestionVC: UIViewController {
     @IBOutlet weak var questionTableView: UITableView!
     @IBOutlet weak var questionHeaderView: UIView!
     @IBOutlet weak var questionBox: UITextView!
+  
+    @IBOutlet weak var barview: UIView!
+    @IBOutlet weak var questionTabView: UIView!
+  
+    
+    @IBOutlet weak var answerCount: UILabel!
+    @IBOutlet weak var questionCount: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextBox()
-        questionTableView.backgroundColor = UIColor.newGrey
+        setDefault()
+        
+        // Mark: - shadow setting
         self.view.bringSubviewToFront(questionBoxView)
         self.view.bringSubviewToFront(questionHeaderView)
+       
+        questionTableView.delegate = self
+        questionTableView.dataSource = self
+    }
+    
+    func setDefault(){
+        questionTabView.layer.backgroundColor = UIColor.whiteTwo.cgColor
+        questionTableView.backgroundColor = UIColor.whiteTwo
+        questionCount.textColor = UIColor.fontSoftBlue
+        
         
     }
     
@@ -43,4 +62,22 @@ class QuestionVC: UIViewController {
     }
     
 
+}
+
+extension QuestionVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        
+        guard let Cell = tableView.dequeueReusableCell(withIdentifier: QuestionListCell.identifier, for: indexPath) as? QuestionListCell
+        else { return UITableViewCell() }
+        
+        return Cell
+    }
+    
+    
 }
