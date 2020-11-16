@@ -18,7 +18,7 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var editButton: UIButton!
     
     @IBOutlet weak var addCancelButton: UIButton!
-    var classId : Int?
+    var classId : Int!
     
     @IBOutlet weak var startTextField: UITextField!
     @IBOutlet weak var endTextField: UITextField!
@@ -94,7 +94,6 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
         locationTextField.textColor = UIColor.brownishGrey
     }
     
-    
     // 확인 버튼 클릭시 전 뷰컨으로 돌아가기
     // 데이터 받아오기
     @IBAction func editButtonSelected(_ sender: UIButton) {
@@ -124,7 +123,6 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
         if let image = self.imageLabel.image {
             controller.classImage.image = image
         }
-    
         
     }
     
@@ -134,7 +132,9 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
         guard let inputEndTime = classEndTime else { return }
         guard let inputLocation = locationTextField.text else { return }
         guard let inputDate =  classStartDate else {return}
-        let classId = self.classId!
+        let classIdNew = classId
+        //print("확인해보기", inputStartTime, inputEndTime, inputLocation, inputDate, classIdNew)
+        print("classs", classIdNew)
         
         ClassInfoService.classInfoServiceShared.editClassSchedule(classId: classId, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
             networkResult in
@@ -156,12 +156,9 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-
-    
     // 취소 버튼 클릭 시 ClassEditVC로 그냥 돌아오기
     @IBAction func editCancelButton(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
-        
     }
     
     // 탭했을 때 키보드 action
@@ -172,7 +169,7 @@ class ClassInfoVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     // 다른 위치 탭했을 때 키보드 없어지는 코드
-    @objc func handleTapTextField(_ sender: UITapGestureRecognizer) { //
+    @objc func handleTapTextField(_ sender: UITapGestureRecognizer) { 
         self.locationTextField.resignFirstResponder()
         
     }

@@ -15,6 +15,7 @@ protocol CalendarViewControllerDeleagte {
 class CalendarVC: UIViewController {
     
     static let identifier: String = "CalendarVC"
+    static let calendarShared = CalendarVC()
     
     var dropDown: DropDown?
     var classList: [CalendarData] = [] // 수업 더미 데이터
@@ -105,12 +106,17 @@ class CalendarVC: UIViewController {
         gestureRecognizer()
         setupCalendar()
         getClassList()
+        dateCollectionView.delegate = self
+        dateCollectionView.dataSource = self
+        tutorCollectionView.delegate = self
+        tutorCollectionView.dataSource = self
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+
         if firstTimeRunning {
             self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
             self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
@@ -330,10 +336,7 @@ class CalendarVC: UIViewController {
 
 extension CalendarVC {
     func setupViewControllerUI() {
-        dateCollectionView.delegate = self
-        dateCollectionView.dataSource = self
-        tutorCollectionView.delegate = self
-        tutorCollectionView.dataSource = self
+        
     }
     
     // MARK: - Calendar Initial setup

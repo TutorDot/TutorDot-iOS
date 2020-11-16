@@ -27,16 +27,12 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         headerViewHeightConstraints.constant = view.frame.height * (94/812)
         
     }
-
-    
     func setUpView() {
         startTextField.textColor = UIColor.black
         endTextField.textColor = UIColor.black
         locationTextField.textColor = UIColor.black
-
     }
-    
-    
+
     @IBAction func editButton(_ sender: Any) {
         // 편집 확인하는 actionsheet 열기
         let alert: UIAlertController
@@ -52,10 +48,18 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         
         delete = UIAlertAction(title: "삭제하기", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction) in
             self.deleteOneClass()
+            self.dismiss(animated: true, completion: nil)
+        
+            
+            //CalendarVC.calendarShared.viewDidLoad()
+            //CalendarVC.calendarShared.dateCollectionView.reloadData()
+            //CalendarVC.calendarShared.self.dateCollectionView.reloadData()
+            //CalendarVC.calendarShared.tutorCollectionView.reloadData()
         })
         
         editAll = UIAlertAction(title: "편집하기", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
             self.editAllClick()
+            
         })
         
         alert.addAction(cancelAction)
@@ -82,10 +86,12 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
             if let startHour = self.startTextField.text {
                 receiveViewController.startTextField.text = startHour
+                receiveViewController.classStartDate = startHour
             }
             
             if let endHour = self.endTextField.text {
                 receiveViewController.endTextField.text = endHour
+                receiveViewController.classEndDate = endHour
             }
             
             if let location = self.locationTextField.text {
@@ -95,8 +101,10 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             if let image = self.classImage.image {
                 receiveViewController.imageLabel.image = image
             }
+            
             if let classId = self.classId {
                 receiveViewController.classId = classId
+                print(classId, "classss")
             }
             
         }
@@ -110,11 +118,13 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     
 
     func deleteOneClass() {
-        ClassInfoService.classInfoServiceShared.deleteOneClassInfo() { networkResult in
-            let classId = self.classId
+        let classId = self.classId
+        ClassInfoService.classInfoServiceShared.deleteOneClassInfo(classId: classId ?? 0) { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
+                print("delete success")
+                
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)

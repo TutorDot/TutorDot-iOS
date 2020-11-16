@@ -60,8 +60,6 @@ struct ClassInfoService {
     }
     
     // PUT : 수업일정 상세뷰에서 일정 하나 수정하기
-    
-    // POST: 캘린더 플러스 버튼 눌렀을 때 일정 추가하기
     private func makeParameter2(_ classId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
         return ["classId": classId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
     }
@@ -99,10 +97,15 @@ struct ClassInfoService {
         }
     }
     
+    
+    
     // DELETE: 특정 수업 일정 하나 삭제 by CID
-    func deleteOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+    private func makeParameter3(_ classId: Int) -> Parameters{
+        return ["classId": classId]
+    }
+    func deleteOneClassInfo(classId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
-        let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .delete, headers: header)
+        let dataRequest = Alamofire.request(APIConstants.calendarClassURL + "/" + "\(classId)", method: .delete,parameters: makeParameter3(classId), headers: header)
 
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
