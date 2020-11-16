@@ -40,27 +40,27 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Nzs-7f-D9U">
-                        <rect key="frame" x="17" y="37" width="16" height="4"/>
+                        <rect key="frame" x="15.5" y="37" width="19" height="5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MX9-Zz-Se9">
-                                <rect key="frame" x="0.0" y="0.0" width="4" height="4"/>
+                                <rect key="frame" x="0.0" y="0.0" width="5" height="5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="4" id="RPu-Wi-jco"/>
-                                    <constraint firstAttribute="height" constant="4" id="vee-Y0-deK"/>
+                                    <constraint firstAttribute="width" constant="5" id="RPu-Wi-jco"/>
+                                    <constraint firstAttribute="height" constant="5" id="vee-Y0-deK"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uNz-oe-DIa">
-                                <rect key="frame" x="6" y="0.0" width="4" height="4"/>
+                                <rect key="frame" x="7" y="0.0" width="5" height="5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="4" id="Q2G-iP-5aM"/>
-                                    <constraint firstAttribute="height" constant="4" id="r4A-6e-dbe"/>
+                                    <constraint firstAttribute="width" constant="5" id="Q2G-iP-5aM"/>
+                                    <constraint firstAttribute="height" constant="5" id="r4A-6e-dbe"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-z6-5hd">
-                                <rect key="frame" x="12" y="0.0" width="4" height="4"/>
+                                <rect key="frame" x="14" y="0.0" width="5" height="5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="4" id="0nk-LE-Xn7"/>
-                                    <constraint firstAttribute="width" constant="4" id="E1f-8b-q0i"/>
+                                    <constraint firstAttribute="height" constant="5" id="0nk-LE-Xn7"/>
+                                    <constraint firstAttribute="width" constant="5" id="E1f-8b-q0i"/>
                                 </constraints>
                             </imageView>
                         </subviews>

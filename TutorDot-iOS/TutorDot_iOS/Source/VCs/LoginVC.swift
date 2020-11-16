@@ -34,8 +34,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
-        //self.view.addSubview(checkBoxButton)
-        
         
     }
     
