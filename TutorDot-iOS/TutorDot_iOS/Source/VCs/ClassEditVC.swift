@@ -18,6 +18,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var classImage: UIImageView!
+    var classId : Int!
 
     
     override func viewDidLoad() {
@@ -48,9 +49,9 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         
         cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: { (action: UIAlertAction) in
         })
+        
         delete = UIAlertAction(title: "삭제하기", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction) in
-            //self.deleteClass()
-            
+            self.deleteOneClass()
         })
         
         editAll = UIAlertAction(title: "편집하기", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
@@ -75,7 +76,6 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         self.present(receiveViewController, animated: false, completion: nil)
         
         if let className = self.classLabel.text {
-            print(className)
             receiveViewController.classLabel.text = className
             
             // ClassInfoVC에 해당 내용들 넘겨주기
@@ -94,7 +94,9 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             
             if let image = self.classImage.image {
                 receiveViewController.imageLabel.image = image
-                
+            }
+            if let classId = self.classId {
+                receiveViewController.classId = classId
             }
             
         }
@@ -104,17 +106,12 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
-        
     }
     
-    
-    @IBAction func deleteClass(_ sender: Any) {
-        deleteOneClass()
-    }
-    
+
     func deleteOneClass() {
         ClassInfoService.classInfoServiceShared.deleteOneClassInfo() { networkResult in
+            let classId = self.classId
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
@@ -126,12 +123,5 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    
-    @IBAction func deleteButtonSelected(_ sender: Any) {
-        deleteOneClass()
-    }
-    
-    
-
 
 }

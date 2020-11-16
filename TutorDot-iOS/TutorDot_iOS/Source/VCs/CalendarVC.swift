@@ -7,7 +7,6 @@
 import UIKit
 import DropDown
 import Foundation
-import Sheeeeeeeeet
 
 protocol CalendarViewControllerDeleagte {
     func didSelectDate(dateString: String)
@@ -106,13 +105,11 @@ class CalendarVC: UIViewController {
         gestureRecognizer()
         setupCalendar()
         getClassList()
-
-        
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         if firstTimeRunning {
             self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
@@ -120,7 +117,6 @@ class CalendarVC: UIViewController {
             firstTimeRunning = false
         }
         
-
     }
     func gestureRecognizer() {
         swipeGestureRecognizer.direction = .right
@@ -136,7 +132,6 @@ class CalendarVC: UIViewController {
     
     @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-            // 발생한 이벤트의 방향이 왼쪽 스와이프라며 onBoarding 이미지 변경
             if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
                 rightButtonSelected(self)
                 UIView.animate(withDuration: 0.7) {
@@ -149,8 +144,7 @@ class CalendarVC: UIViewController {
             }
         }
     }
-    
-    
+
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
@@ -489,11 +483,12 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     let todaysDate = String(format: "%02d", Int(calendarCell.dateLabel.text!)!)
                     let classDateMonthZeros = self.classList2[i].classDate.components(separatedBy: "-")[1] // with zero month
                     let classDateDay = self.classList2[i].classDate.components(separatedBy: "-")[2] // with zero day
-                    // 셀의 월, 일과 일치할때 점 찍기
+                    // 셀의 월, 일과 일치할때 점 찍기, 아이디 넘겨주기
                     if classDateMonthZeros == dayMove && classDateDay == todaysDate {
                         let imageName = classList2[i].color
                         if calendarCell.image1.image == nil {
                             calendarCell.image1.image = UIImage(named: imageName)
+                            calendarCell.classId = classList2[i].classId
                         } else if calendarCell.image2.image == nil {
                             calendarCell.image2.image = UIImage(named: imageName)
                         } else {
@@ -536,9 +531,11 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             } else {
                 tutorInfoCell.infoView.frame.size.width = tutorInfoCell.frame.size.width/2
                 tutorInfoCell.set(classDateList[indexPath.row])
+                
                 for i in 0..<self.classDateList.count {
                     let hourTimes =  "\(self.classDateList[i].times)회차/ \(self.classDateList[i].hour)시간"
                     tutorInfoCell.classHourLabel.text = hourTimes
+                    //tutorInfoCell.classId = classDateList[i].classId
                 }
                 return tutorInfoCell
             }
@@ -588,10 +585,12 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             // 과외 리스트가 있을 때에만
             if classList2.count > 0 {
                 
+                print("클래스 아이디", cell?.classId)
+                
                 // 뷰컨 ClassEditVC로 넘어가기
                 receiveViewController.modalPresentationStyle = .fullScreen
                 self.present(receiveViewController, animated: true, completion: nil)
-                
+
                 // 과외 선택시 상세 페이지 레이블 바뀌기
                 if let className = cell?.classNameLabel.text! {
                     receiveViewController.classLabel.text = className
@@ -621,6 +620,11 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if let imageIcon = cell?.colorImage.image {
                     receiveViewController.classImage.image = imageIcon
                 }
+                
+                if let classId = cell?.classId {
+                    receiveViewController.classId = classId
+                }
+                
             }
         }
         

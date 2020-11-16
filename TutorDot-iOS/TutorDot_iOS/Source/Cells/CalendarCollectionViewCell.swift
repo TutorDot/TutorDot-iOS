@@ -16,6 +16,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
     @IBOutlet weak var imageContainer: UIStackView!
+    var classId: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -45,8 +45,6 @@ struct ClassInfoService {
         // 토큰 가져오기
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
-//        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywibmFtZSI6IuulmOyEuO2ZlCIsImlhdCI6MTYwNTM1MDk2NywiZXhwIjoxNjA2NTYwNTY3LCJpc3MiOiJvdXItc29wdCJ9.8UDWwpaXIW07eUiDz6C24D5yHLNdw84NllwEcC4Zwe8"]
-        
         let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .post, parameters: makeParameter(lectureId, date, startTime, endTime, location), headers: header)
         
         dataRequest.responseData { dataResponse in
@@ -61,11 +59,34 @@ struct ClassInfoService {
         }
     }
     
+    // PUT : 수업일정 상세뷰에서 일정 하나 수정하기
+    
+    // POST: 캘린더 플러스 버튼 눌렀을 때 일정 추가하기
+    private func makeParameter2(_ classId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
+        return ["classId": classId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
+    }
+    
+    func editClassSchedule(classId:Int, date: String, startTime: String, endTime: String, location: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        // 토큰 가져오기
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+        
+        let dataRequest = Alamofire.request(APIConstants.calendarClassURL + "/" + "\(classId)", method: .put, parameters: makeParameter2(classId, date, startTime, endTime, location), headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judge(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
     
     // GET: 특정 수업 일정 조회
     func getOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         let dataRequest = Alamofire.request(APIConstants.calendarLidURL)
-        
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success :
@@ -81,7 +102,6 @@ struct ClassInfoService {
     // DELETE: 특정 수업 일정 하나 삭제 by CID
     func deleteOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
-//        let header: HTTPHeaders = ["jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywibmFtZSI6IuulmOyEuO2ZlCIsImlhdCI6MTYwNTM1MDk2NywiZXhwIjoxNjA2NTYwNTY3LCJpc3MiOiJvdXItc29wdCJ9.8UDWwpaXIW07eUiDz6C24D5yHLNdw84NllwEcC4Zwe8"]
         let dataRequest = Alamofire.request(APIConstants.calendarClassURL, method: .delete, headers: header)
 
         dataRequest.responseData { dataResponse in
