@@ -1,14 +1,14 @@
 {
   "images" : [
     {
+      "filename" : "scheduleClassMathBtnEdit.png",
       "scale" : "1x",
-      "idiom" : "universal",
-      "filename" : "scheduleClassMathBtnEdit.png"
+      "idiom" : "universal"
     },
     {
       "idiom" : "universal",
-      "filename" : "scheduleClassMathBtnEdit@2x.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "scheduleClassMathBtnEdit@2x.png"
     },
     {
       "idiom" : "universal",

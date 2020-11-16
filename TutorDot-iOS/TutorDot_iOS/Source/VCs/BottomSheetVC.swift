@@ -28,8 +28,7 @@ class BottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBottomView()
-        //setClassList()
-        
+        setClassList()
         BottomSheetTableView.dataSource = self
         BottomSheetTableView.delegate = self
         start()
@@ -38,7 +37,7 @@ class BottomSheetVC: UIViewController {
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        setListDropDown()
+        //setListDropDown()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,7 +102,7 @@ class BottomSheetVC: UIViewController {
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,
-                       initialSpringVelocity: 1.0,
+                       initialSpringVelocity: 0.5,
                        options: .curveEaseInOut, animations: { [self] in
                         self.BottomSheetTableView.frame = CGRect(x: 0, y: self.screenHeight - heightCalc, width: self.screenWidth, height: heightCalc)
                        }, completion: nil)

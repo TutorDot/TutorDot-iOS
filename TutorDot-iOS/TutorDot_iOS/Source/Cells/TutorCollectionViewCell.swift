@@ -19,12 +19,13 @@ class TutorCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var classHourLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var colorImage: UIImageView!
+    var classId : Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
         infoView.layer.cornerRadius = infoView.frame.width/20
         backgroundColor = UIColor.newGrey
-        classNameLabel.text = "류세화 튜티 수학 수업"
+        //classNameLabel.text = "류세화 튜티 수학 수업"
         classHourLabel.textColor = UIColor.brownishGrey
         locationLabel.textColor = UIColor.brownishGrey
         startTimeLabel.textColor = UIColor.brownishGrey
@@ -40,6 +41,7 @@ class TutorCollectionViewCell: UICollectionViewCell {
         classHourLabel.text = String(classInformation.hour)
         locationLabel.text = classInformation.location
         colorImage.image = UIImage(named:classInformation.color)
+        classId = classInformation.classId
     }
     
     
