@@ -25,13 +25,20 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var nextButton: UIButton!
     
-    var roleStatus: String = "tutor"
+    var roleStatus = "tutor"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         noticeLabel.textColor = UIColor.brownishGrey
         numberLabel.textColor = UIColor.brownishGrey
         print(roleStatus)
+        
+    }
+    
+    @objc func printSomeThing(_ notification: Notification) {
+        if isTutorButton.isSelected == true {
+            roleStatus = "tutor"
+        }
     }
     
     
@@ -42,8 +49,20 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp2VC.identifier) as? SignUp2VC else {return}
+        if isTutorButton.isSelected == false && isTuteeButton.isSelected == false {
+            let alert = UIAlertController(title: nil, message: "역할을 선택해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            if isTutorButton.isSelected == true {
+                receiveViewController.role = "tutor"
+            } else {
+                receiveViewController.role = "tutee"
+            }
+            self.navigationController?.pushViewController(receiveViewController, animated: true)
+            
+        }
         
-        self.navigationController?.pushViewController(receiveViewController, animated: true)
     }
     
     
@@ -53,10 +72,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         isTutorButton.setImage(UIImage(named: "signupBtnTutorPick"), for: .normal)
         isTuteeButton.setImage(UIImage(named: "signupBtnTuteeUnpick"), for: .normal)
         roleStatus = "tutor"
-        
-        guard let lastVC = self.storyboard?.instantiateViewController(withIdentifier: SignUp2VC.identifier) as? SignUp2VC else {return}
-        lastVC.role = roleStatus
-        print(roleStatus)
+    
     }
 
 
@@ -67,10 +83,6 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
         isTutorButton.setImage(UIImage(named: "signupBtnTutorUnpick"), for: .normal)
         isTuteeButton.setImage(UIImage(named: "signupBtnTuteePick"), for: .normal)
         roleStatus = "tutee"
-        
-        guard let lastVC = self.storyboard?.instantiateViewController(withIdentifier: SignUp2VC.identifier) as? SignUp2VC else {return}
-        lastVC.role = roleStatus
-        print(roleStatus)
     }
     
     
