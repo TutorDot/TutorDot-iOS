@@ -555,7 +555,9 @@
                         <outlet property="endTextField" destination="jA4-Vv-NnY" id="qn3-Mv-0xy"/>
                         <outlet property="headerViewHeightConstraints" destination="zr3-av-Nub" id="UTk-rN-fIE"/>
                         <outlet property="locationTextField" destination="YLL-5h-h4E" id="3aE-Jh-78D"/>
+                        <outlet property="menuButton" destination="lLx-5e-LYo" id="wza-xH-2H9"/>
                         <outlet property="startTextField" destination="8Al-HU-ckF" id="YZY-Km-olV"/>
+                        <outlet property="startTimeToClassLabelConstraint" destination="5BL-VU-Vve" id="6aN-rt-n7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPN-I3-a9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

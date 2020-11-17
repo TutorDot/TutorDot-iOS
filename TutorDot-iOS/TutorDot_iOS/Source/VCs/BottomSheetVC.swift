@@ -32,6 +32,7 @@ class BottomSheetVC: UIViewController {
         BottomSheetTableView.dataSource = self
         BottomSheetTableView.delegate = self
         start()
+        setListDropDown()
         
         
         
@@ -60,8 +61,11 @@ class BottomSheetVC: UIViewController {
     }
     
     func setClassList(){
-        classlist = ["전체", "수업이름1", "수업이름2"]
+        //classlist = ["전체", "수업이름1", "수업이름2"]
         //Mark: - 서버통신
+        
+        self.classFinalList = self.classlist
+        print(classFinalList)
     }
     
     
@@ -75,6 +79,7 @@ class BottomSheetVC: UIViewController {
                 for index in 0..<data.count {
                     let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
                     self.classlist.append(item.lectureName)
+                    
                     //print(self.classlist)
                 }
                 

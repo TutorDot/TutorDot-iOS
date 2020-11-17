@@ -23,9 +23,6 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         dateView.layer.cornerRadius = dateView.frame.width/2.1
         dateView.clipsToBounds = true
         dateView.backgroundColor = UIColor.white
-//        image1.image = UIImage(named: "")
-//        image2.image = UIImage(named: "")
-//        image3.image = UIImage(named: "")
         
     }
 
