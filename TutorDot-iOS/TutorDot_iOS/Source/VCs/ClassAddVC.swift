@@ -43,6 +43,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     var classLidColor : [String] = []
     public var startTime: String = ""
     public var endTime: String = ""
+    var lectureId: Int!
     
     // DropDown Setup
     @IBOutlet weak var classInfoButton: UIButton!
@@ -56,8 +57,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     // PickerView Setup
     @IBOutlet weak var pickLabel: UITextField!
     @IBOutlet weak var pickLabel2: UITextField!
-    //@IBOutlet weak var pickerButton1: UIButton!
-    //@IBOutlet weak var pickerButton2: UIButton!
     @IBOutlet weak var locationTexField: UITextField!
     @IBOutlet weak var startTimeToClassLabelConstraint: NSLayoutConstraint!
     
@@ -128,8 +127,9 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         guard let inputEndTime = classEndTime else { return }
         guard let inputLocation = locationTexField.text else { return }
         guard let inputDate =  classStartDate else {return}
-        
-        ClassInfoService.classInfoServiceShared.addClassSchedule(lectureId: 157, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
+        guard let inputLectureId = lectureId else { return }
+        print("yess",lectureId)
+        ClassInfoService.classInfoServiceShared.addClassSchedule(lectureId: inputLectureId, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
             networkResult in
             switch networkResult {
             case .success(let token):
@@ -189,9 +189,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
                     classColorLid.append(item.color)
                     self.dic.updateValue(self.classLid[index] , forKey: dropList[index])
                     self.dropDown?.dataSource = dropList
-                    //print("ClassId", self.classLid)
-                    
-                    
+                
                 }
                 
             case .pathErr : print("Patherr")
@@ -212,6 +210,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.classInfoButton.image(for: .normal)
             selectionIndex = index
             self.classInfoImage.image = UIImage(named:classColorLid[selectionIndex ?? 0])
+            self.lectureId = classLid[selectionIndex ?? 0]
+            print("printt", lectureId)
             
         }
         
