@@ -45,6 +45,7 @@ class BottomSheetVC: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //Mark: device 분기처리 필요 bottomSafeArea 더할지 말지
         let heightCalc = (self.customHeight * (CGFloat(classlist.count)+1)) + bottomSafeArea
         
         UIView.animate(withDuration: 0.5,
