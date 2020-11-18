@@ -110,6 +110,7 @@ class CalendarVC: UIViewController {
         dateCollectionView.dataSource = self
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshView), name: NSNotification.Name(rawValue: "load"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,6 +123,38 @@ class CalendarVC: UIViewController {
             self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
             firstTimeRunning = false
         }
+        
+    }
+    
+    @objc func refreshView(notification: NSNotification) {
+        self.classList2Copy.removeAll()
+        self.classList2.removeAll()
+        self.classList.removeAll()
+    
+        setListDropDown()
+        //self.dateCollectionView.reloadData()
+//        ClassInfoService.classInfoServiceShared.getAllClassInfo() { networkResult in
+//            switch networkResult {
+//            case .success(let resultData):
+//                guard let data = resultData as? [CalendarData] else { return print(Error.self) }
+//                for index in 0..<data.count {
+//                    let item = CalendarData(classId: data[index].classId, lectureName: data[index].lectureName, color: data[index].color, times: data[index].times, hour: data[index].hour, location: data[index].location, classDate: data[index].classDate, startTime: data[index].startTime, endTime: data[index].endTime)
+//                    self.classList2.append(item)
+//                    self.classList2Copy = self.classList2
+//                }
+//                self.dateCollectionView.reloadData()
+//                self.tutorCollectionView.reloadData()
+//                self.nextDate = 0
+//            case .pathErr : print("Patherr")
+//            case .serverErr : print("ServerErr")
+//            case .requestErr(let message) : print(message)
+//            case .networkFail:
+//                print("networkFail")
+//            }
+//        }
+        getClassList()
+        print("classList2",classList2)
+        
         
     }
     func gestureRecognizer() {
@@ -383,7 +416,6 @@ extension CalendarVC {
 
 extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // 12 past months + 12 future months + current month
         return 1
     }
     
@@ -404,13 +436,10 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         }
         
     }
-    
-    // MARK: 문제의 그 부분!!!!!!!!!
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let calendarCell = CalendarCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorInfoCell = TutorCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
         let tutorBlankCell = TutorBlankCollectionViewCell.cellForCollectionView(collectionView: collectionView, indexPath: indexPath)
-        
         let currentMonthCalendarIndex = currentMonthIndex + 1
         let currentDateCalendarIndex = todaysDate
         
@@ -471,11 +500,16 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 calendarCell.image2.image = nil
                 calendarCell.image3.image = nil
                 
+                // sunday red tint
+                if indexPath == [0,7] || indexPath == [0,14] || indexPath == [0,28] || indexPath == [0,0] || indexPath == [0,35] || indexPath == [0,21] {
+                    calendarCell.dateLabel.textColor = UIColor.grapefruit
+                }
+                
                 // 오늘 날짜인 셀 찾아서 셀렉해놓기
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateLabel.textColor = UIColor.softBlue
                     calendarCell.dateView.backgroundColor = UIColor.white
-                    calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
+                    //calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 13.0)
                     
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
@@ -555,7 +589,8 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             cell?.dateLabel.textColor = UIColor.black
             classDateList.removeAll()            
             // 오늘 날짜 선택 해놓기
-            if indexPath == index {
+            
+            if indexPath == index && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                 cell?.dateLabel.textColor = UIColor.softBlue
                 cell?.dateView.backgroundColor = UIColor.white
                 //cell?.dateLabel.font = UIFont.boldSystemFont(ofSize: 13)
@@ -638,7 +673,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
         
         // 다른 날짜 선택 시 다시 색 원래대로 바뀌기: 오늘 날짜일때는 다시 보라색으로 돌아오기
-        if indexPath == index {
+        if indexPath == index && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
             cell?.dateView.backgroundColor = UIColor.white
             cell?.dateLabel.textColor = UIColor.softBlue
             classDateList.removeAll()
@@ -653,10 +688,14 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         if collectionView == self.dateCollectionView {
             return CGSize(width: collectionView.frame.width/7.5 , height: collectionView.frame.width/8.5 )
         } else {
-            return CGSize(width: collectionView.frame.width , height: collectionView.frame.height/1.5 )
+            if classList2.count > 0 {
+                return CGSize(width: collectionView.frame.width , height: 115 )
+            } else {
+                return CGSize(width: collectionView.frame.width , height: 300 )
+            }
         }
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
     }

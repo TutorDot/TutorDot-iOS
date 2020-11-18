@@ -12,25 +12,14 @@ class TutorBlankCollectionViewCell: UICollectionViewCell {
 
     static let identifier: String = "TutorBlankCollectionViewCell"
     
-    @IBOutlet weak var emptyView: UIView!
-    @IBOutlet weak var newClassAddLabel: UILabel!
-    
+    @IBOutlet weak var firstLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setView()
-        // Initialization code
+        firstLabel.textColor = UIColor.brownishGrey
+        secondLabel.textColor = UIColor.brownishGrey
     }
     
-    func setView() {
-        emptyView.backgroundColor = UIColor.clear
-        emptyView.layer.borderWidth = 1
-        emptyView.layer.borderColor = UIColor.brownishGrey.cgColor
-        emptyView.layer.cornerRadius = emptyView.frame.width/20
-        newClassAddLabel.textColor = UIColor.brownishGrey
-        emptyView.layer.borderColor = UIColor.brownishGreyTransparent.cgColor
-
-        
-    }
     
     class func cellForCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> TutorBlankCollectionViewCell {
         let TutorBlankCollectionViewCellIdentifier = "TutorBlankCollectionViewCell"
