@@ -65,7 +65,9 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var topDateButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var dateHeaderLabel: UILabel!
-    @IBOutlet weak var monthHeaderLabel: UILabel!
+    @IBOutlet weak var dayHeaderLabel: UILabel!
+    @IBOutlet weak var weekDayHeaderLabel: UILabel!
+    
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var calendarCollectionViewHeightConstraint: NSLayoutConstraint!
@@ -258,6 +260,9 @@ class CalendarVC: UIViewController {
         headerViewHeightConstraint.constant = view.frame.height * 130/812
         self.calendarCollectionViewHeightConstraint.constant = 290
         self.calendarViewHeightConstraint.constant = 330
+        dateHeaderLabel.textColor = UIColor.brownishGrey
+        dayHeaderLabel.textColor = UIColor.brownishGrey
+        weekDayHeaderLabel.textColor = UIColor.brownishGrey
     }
     
     @objc func dropDownToggleButton(){
@@ -396,7 +401,7 @@ extension CalendarVC {
         
         // 처음 열었을 때 오늘 날짜로 보이기
         dateHeaderLabel.text = String(todaysDate)
-        monthHeaderLabel.text = String("\(presentMonthIndex+1)월")
+        //monthHeaderLabel.text = String("\(presentMonthIndex+1)월")
         self.view.sendSubviewToBack(calendarView)
     }
     
@@ -586,8 +591,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
             // 날짜 선택시 셀 색깔 바뀌기
             cell?.dateView.backgroundColor = UIColor.veryLightPinkTwo
-            cell?.dateLabel.textColor = UIColor.black
-            classDateList.removeAll()            
+            classDateList.removeAll()
             // 오늘 날짜 선택 해놓기
             
             if indexPath == index && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
@@ -599,7 +603,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if let date = cell?.dateLabel.text! {
                 // 날짜 선택시 헤더 날짜 레이블 바뀌기
                 dateHeaderLabel.text = date
-                monthHeaderLabel.text = "\(currentMonthIndex+1)월"
+                //monthHeaderLabel.text = "\(currentMonthIndex+1)월"
                 
                 // 날짜별로 해당하는 수업 리턴: 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
                 for index in 0..<classList2.count {
@@ -638,7 +642,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if let date = calendarCell?.dateLabel.text! {
                     // 날짜 선택시 헤더 날짜 레이블 바뀌기
                     dateHeaderLabel.text = date
-                    monthHeaderLabel.text = "\(currentMonthIndex+1)월"
+                    //monthHeaderLabel.text = "\(currentMonthIndex+1)월"
                 }
                 
                 // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
@@ -679,7 +683,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             classDateList.removeAll()
         } else {
             cell?.dateView.backgroundColor = UIColor.white
-            cell?.dateLabel.textColor = UIColor.black
             classDateList.removeAll()
         }
     }

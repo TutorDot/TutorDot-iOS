@@ -18,7 +18,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     let pickerViewEnd = UIPickerView()
     let toolbar = UIToolbar()
     let toolbar2 = UIToolbar()
-    let weekdays: [String] = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    let weekdays: [String] = ["20년 12월", "21년 1월", "21년 2월", "21년 3월", "21년 4월", "21년 5월", "21년 6월", "21년 7월", "21년 8월", "21년 9월", "21년 10월", "21년 11월", "21년 12월", "22년 1월", "22년 2월", "22년 3월", "22년 4월", "22년 5월", "22년 6월", "22년 7월", "22년 8월", "22년 9월", "22년 10월", "22년 11월", "22년 12월"]
     let startHours: [String] = ["01일", "02일", "03일", "04일", "05일", "06일","07일", "08일", "09일", "10일", "11일", "12일", "13일", "14일", "15일", "16일", "17일", "18일", "19일", "20일", "21일", "22일", "23일", "24일", "25일", "26일", "27일", "28일", "29일","30일","31일"]
     let startMins: [String] = ["00", "01", "02", "03", "04", "05", "06","07", "08", "09", "10", "11", "12"]
     let endHours: [String] =  ["00","30"]
@@ -66,7 +66,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        headerViewHeightConstraints.constant = view.frame.height * (94/812)
         setTimeZone()
         setUpView()
         initGestureRecognizer()
@@ -84,11 +83,11 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillAppear(_ animated: Bool) { //
         registerForKeyboardNotifications()
         setListDropDown()
-        print(classLid)
         
     }
     
     func setUpView() {
+        headerViewHeightConstraints.constant = view.frame.height * (94/812)
         pickLabel.backgroundColor = UIColor.paleGrey
         pickLabel2.backgroundColor = UIColor.paleGrey
         locationTexField.backgroundColor = UIColor.paleGrey
@@ -113,6 +112,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.present(alert, animated: true, completion: nil)
         } else {
             addClassSchedule()
+            self.dismiss(animated: true, completion: nil)
+            // **서버 리로드 필요
         }
     }
     
@@ -128,7 +129,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         guard let inputLocation = locationTexField.text else { return }
         guard let inputDate =  classStartDate else {return}
         guard let inputLectureId = lectureId else { return }
-        print("yess",lectureId)
         ClassInfoService.classInfoServiceShared.addClassSchedule(lectureId: inputLectureId, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
             networkResult in
             switch networkResult {
@@ -349,40 +349,47 @@ extension ClassAddVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     //toolbar actions
-    @objc func donePressed(){
-        let dateRaw = pickLabel.text?.components(separatedBy: "일")[0]
-        let dateRawTime = pickLabel.text?.components(separatedBy: "일")[1] // 시작 시간
-        let dateRawTimeStart = dateRawTime?.components(separatedBy: " ")[1] // 시작 시간 스페이스바 제외
-        let inputMonth = dateRaw?.components(separatedBy: "월")[0]
-        //print("확인", dateRaw, dateRawTime, dateRawTimeStart, inputMonth)
+    @objc func donePressed() {
+        let dateRaw = pickLabel.text?.components(separatedBy: "일")[0] // 시작 날짜
+        let dateRawTime = pickLabel.text?.components(separatedBy: "일")[1] ?? "00:00"  // 시작 시간
+        let dateRawTimeStart = dateRawTime.components(separatedBy: " ")[1] // 시작 시간 스페이스바 제외
         classStartTime = dateRawTimeStart
-        let dateSpace = dateRaw?.components(separatedBy:"월")[1]
-        let inputDate:String? = dateSpace?.components(separatedBy:" ")[1]
-        if inputMonth!.count == 1 {
-            let classStartD: String? = "2020-0" + inputMonth! + "-" + inputDate!
-            classStartDate = classStartD
+        let inputYear = dateRaw?.components(separatedBy: "년")[0] ?? "21"
+        let inputMonth = dateRaw?.components(separatedBy: "월")[0]
+        let dateSpaceEnd = dateRaw?.components(separatedBy:"월")[1]
+        let inputMonthSplitEnd = inputMonth?.components(separatedBy: "년")[1]
+        let inputDateEnd : String? = dateSpaceEnd?.components(separatedBy:" ")[1]
+        let inputMonthEnd = inputMonthSplitEnd?.components(separatedBy: " ")[1]
+        //print(inputMonthSplitEnd, inputMonth, inputMonthSplitEnd)
+        if inputMonthEnd!.count == 1 {
+            let classEndD: String? = "20" + inputYear + "-0" + inputMonthEnd! + "-" + inputDateEnd!
+            classStartDate = classEndD
         } else {
-            let classStartD: String? = "2020-" + inputMonth! + "-" + inputDate!
-            classStartDate = classStartD
+            let classEndD: String? = "20" + inputYear + "-" + inputMonthEnd! + "-" + inputDateEnd!
+            classStartDate = classEndD
         }
         print(classStartDate, classStartTime)
         self.view.endEditing(true)
     }
     
     @objc func donePressed2() {
-        let dateRaw2 = pickLabel2.text?.components(separatedBy: "일")[0]
-        let dateRawTime2 = pickLabel2.text?.components(separatedBy: "일")[1] // 시작 시간
-        let dateRawTimeStart2 = dateRawTime2?.components(separatedBy: " ")[1] // 시작 시간 스페이스바 제외
+        let dateRaw2 = pickLabel2.text?.components(separatedBy: "일")[0] // 시작 날짜
+        let dateRawTime2 = pickLabel2.text?.components(separatedBy: "일")[1] ?? "00:00"  // 시작 시간
+        let dateRawTimeStart2 = dateRawTime2.components(separatedBy: " ")[1] // 시작 시간 스페이스바 제외
         classEndTime = dateRawTimeStart2
+        //print(classEndTime)
+        let inputYear2 = dateRaw2?.components(separatedBy: "년")[0] ?? "21"
         let inputMonth2 = dateRaw2?.components(separatedBy: "월")[0]
         let dateSpaceEnd2 = dateRaw2?.components(separatedBy:"월")[1]
+        let inputMonthSplitEnd2 = inputMonth2?.components(separatedBy: "년")[1]
         let inputDateEnd2 : String? = dateSpaceEnd2?.components(separatedBy:" ")[1]
-        let inputMonthEnd2 = dateRaw2?.components(separatedBy: "월")[0]
-        if inputMonth2!.count == 1 {
-            let classEndD: String? = "2020-0" + inputMonthEnd2! + "-" + inputDateEnd2!
+        let inputMonthEnd2 = inputMonthSplitEnd2?.components(separatedBy: " ")[1]
+        //print(inputMonthSplitEnd2, inputMonth2, inputMonthSplitEnd2)
+        if inputMonthEnd2!.count == 1 {
+            let classEndD: String? = "20" + inputYear2 + "-0" + inputMonthEnd2! + "-" + inputDateEnd2!
             classEndDate = classEndD
         } else {
-            let classEndD: String? = "2020-" + inputMonthEnd2! + "-" + inputDateEnd2!
+            let classEndD: String? = "20" + inputYear2 + "-" + inputMonthEnd2! + "-" + inputDateEnd2!
             classEndDate = classEndD
         }
         print(classEndDate, classEndTime)
@@ -391,7 +398,6 @@ extension ClassAddVC: UIPickerViewDelegate, UIPickerViewDataSource {
     
     @objc func cancelPressed(){
         self.view.endEditing(true)
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -542,13 +548,13 @@ extension ClassAddVC: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         switch component {
         case 0:
-            return 55
+            return 110
         case 1:
             return 60
         case 2:
-            return 50
+            return 40
         case 3:
-            return 50
+            return 40
         case 4:
             return 50
         default:
