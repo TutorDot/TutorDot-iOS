@@ -361,7 +361,7 @@ class CalendarVC: UIViewController {
     
     @IBAction func alertTabButton(_ sender: Any) {
         let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
-        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")
+        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertServiceVC")
         uvc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(uvc, animated: true)
     }
@@ -514,7 +514,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateLabel.textColor = UIColor.softBlue
                     calendarCell.dateView.backgroundColor = UIColor.white
-                    //calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 13.0)
+                    calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
                     
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath

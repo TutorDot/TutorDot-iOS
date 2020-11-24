@@ -8,6 +8,7 @@
 
 import UIKit
 import BEMCheckBox
+import SafariServices
 
 class SignUpAgreeVC: UIViewController {
     
@@ -50,4 +51,25 @@ class SignUpAgreeVC: UIViewController {
         dismiss(animated: true, completion: nil)
     
     }
+    
+    @IBAction func service1Button(_ sender: Any) {
+        guard let url = URL(string: "https://sites.google.com/view/tutordot/%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80") else { return }
+
+            let safariViewController = SFSafariViewController(url: url)
+
+            present(safariViewController, animated: true, completion: nil)
+
+
+    }
+    
+    @IBAction func service2Button(_ sender: Any) {
+        guard let url = URL(string: "https://sites.google.com/view/tutordot/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8") else { return }
+
+            let safariViewController = SFSafariViewController(url: url)
+
+            present(safariViewController, animated: true, completion: nil)
+
+
+    }
+    
 }

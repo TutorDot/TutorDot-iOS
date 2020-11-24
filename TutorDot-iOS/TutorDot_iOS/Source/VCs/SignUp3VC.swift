@@ -34,6 +34,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
             alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
+            
             receiveViewController.name = name
             receiveViewController.role = receiveRole
             receiveViewController.id = idTextField.text
@@ -52,7 +53,6 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
         bottomBorder.frame = CGRect(x: 0.0, y: idTextField.frame.size.height - 1, width: idTextField.frame.size.width, height: 0.8);
         bottomBorder.backgroundColor = UIColor.veryLightPink.cgColor
         idTextField.layer.addSublayer(bottomBorder)
-        
         serviceLabel.textColor = UIColor.brownishGrey
         numberLabel.textColor = UIColor.brownishGrey
         

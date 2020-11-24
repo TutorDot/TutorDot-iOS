@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lrw-pG-tB9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WaC-xl-qdQ">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -37,14 +37,6 @@
                                         <connections>
                                             <action selector="backButton:" destination="lrw-pG-tB9" eventType="touchUpInside" id="iRs-po-taQ"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVQ-4O-agl">
-                                        <rect key="frame" x="302" y="56" width="32" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <state key="normal" title="전체">
-                                            <color key="titleColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -97,7 +89,6 @@
                     <connections>
                         <outlet property="anchorView" destination="0lr-yI-GGb" id="Fya-Mi-4di"/>
                         <outlet property="dropDownButton" destination="XMg-lz-p60" id="OPQ-Bo-u7I"/>
-                        <outlet property="dropDownLabelButton" destination="VVQ-4O-agl" id="A8e-pw-Lqk"/>
                         <outlet property="headerView" destination="qbX-1D-70z" id="wNs-5D-Ne1"/>
                         <outlet property="headerViewHeightConstraint" destination="PGV-WM-mi4" id="OJm-rA-G0l"/>
                         <outlet property="noticeTableView" destination="Ucf-jW-pTy" id="qx9-2p-BuV"/>
@@ -107,8 +98,94 @@
             </objects>
             <point key="canvasLocation" x="152.80000000000001" y="87.931034482758619"/>
         </scene>
+        <!--AlertServiceVC-->
+        <scene sceneID="F3A-3Y-yKg">
+            <objects>
+                <viewController restorationIdentifier="AlertServiceVC" storyboardIdentifier="AlertServiceVC" title="AlertServiceVC" id="WaC-xl-qdQ" customClass="AlertServiceVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="19u-S6-eQl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4It-hS-FKH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-6c-z2M">
+                                        <rect key="frame" x="324" y="48.666666666666657" width="43" height="48"/>
+                                        <color key="tintColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" image="calenderBtnFillter"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세화 튜터의 전체 알람" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki7-0V-YrT">
+                                        <rect key="frame" x="114.66666666666669" y="62" width="146" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVU-rY-a8n">
+                                        <rect key="frame" x="8" y="48.666666666666657" width="102" height="48"/>
+                                        <state key="normal" title="Button" image="alarmBtnBack"/>
+                                        <connections>
+                                            <action selector="backButtonSelected:" destination="WaC-xl-qdQ" eventType="touchUpInside" id="P9q-cR-0S7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="CVU-rY-a8n" firstAttribute="leading" secondItem="4It-hS-FKH" secondAttribute="leading" constant="8" id="0X0-50-lB0"/>
+                                    <constraint firstItem="kIM-6c-z2M" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="7aY-fx-J55"/>
+                                    <constraint firstAttribute="height" constant="94" id="8Ai-k1-gZp"/>
+                                    <constraint firstItem="CVU-rY-a8n" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="JPd-fE-GWJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="kIM-6c-z2M" secondAttribute="trailing" constant="8" id="LGO-2E-7Ro"/>
+                                    <constraint firstItem="Ki7-0V-YrT" firstAttribute="centerX" secondItem="4It-hS-FKH" secondAttribute="centerX" id="mrs-lf-sSl"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ki7-0V-YrT" secondAttribute="bottom" constant="11" id="xLi-qG-Lfj"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alarmBlankImgService" translatesAutoresizingMaskIntoConstraints="NO" id="kvX-lm-dcc">
+                                <rect key="frame" x="67" y="315" width="241" height="120"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 준비중입니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cn2-1b-poz">
+                                <rect key="frame" x="127" y="441" width="121" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더 나은 서비스로 찾아올게요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6l-tq-Ccg">
+                                <rect key="frame" x="109" y="469" width="157" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조금만 기다려주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duD-UK-tub">
+                                <rect key="frame" x="129" y="491" width="117" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qfK-SU-b1h"/>
+                        <color key="backgroundColor" name="journalColor"/>
+                        <constraints>
+                            <constraint firstItem="4It-hS-FKH" firstAttribute="leading" secondItem="qfK-SU-b1h" secondAttribute="leading" id="19d-sA-46v"/>
+                            <constraint firstAttribute="trailing" secondItem="4It-hS-FKH" secondAttribute="trailing" id="BQi-VA-eAZ"/>
+                            <constraint firstItem="cn2-1b-poz" firstAttribute="centerX" secondItem="kvX-lm-dcc" secondAttribute="centerX" id="Cwy-On-Cbq"/>
+                            <constraint firstItem="kvX-lm-dcc" firstAttribute="top" secondItem="4It-hS-FKH" secondAttribute="bottom" constant="221" id="G91-vW-Uag"/>
+                            <constraint firstItem="duD-UK-tub" firstAttribute="top" secondItem="m6l-tq-Ccg" secondAttribute="bottom" constant="5" id="Ttv-KX-jxc"/>
+                            <constraint firstItem="m6l-tq-Ccg" firstAttribute="centerX" secondItem="cn2-1b-poz" secondAttribute="centerX" id="Z66-GV-uXx"/>
+                            <constraint firstItem="kvX-lm-dcc" firstAttribute="leading" secondItem="qfK-SU-b1h" secondAttribute="leading" constant="67" id="dbx-OC-loR"/>
+                            <constraint firstItem="4It-hS-FKH" firstAttribute="top" secondItem="19u-S6-eQl" secondAttribute="top" id="gmP-OP-xAz"/>
+                            <constraint firstItem="qfK-SU-b1h" firstAttribute="trailing" secondItem="kvX-lm-dcc" secondAttribute="trailing" constant="67" id="iZt-Ue-AFI"/>
+                            <constraint firstItem="cn2-1b-poz" firstAttribute="top" secondItem="kvX-lm-dcc" secondAttribute="bottom" constant="6" id="jxQ-1b-nzX"/>
+                            <constraint firstItem="m6l-tq-Ccg" firstAttribute="top" secondItem="cn2-1b-poz" secondAttribute="bottom" constant="10" id="kM8-aH-enn"/>
+                            <constraint firstItem="duD-UK-tub" firstAttribute="centerX" secondItem="m6l-tq-Ccg" secondAttribute="centerX" id="vas-9O-zof"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8i-Ew-WgE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="860" y="88"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="alarmBlankImgService" width="120" height="120"/>
         <image name="alarmBtnBack" width="48" height="48"/>
         <image name="calenderBtnFillter" width="43" height="48"/>
         <namedColor name="journalColor">

@@ -51,6 +51,8 @@
 		015097C5255412BA00935DC6 /* FilterDropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015097C3255412BA00935DC6 /* FilterDropDownCell.swift */; };
 		015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015097C4255412BA00935DC6 /* FilterDropDownCell.xib */; };
 		0153EA4224B782A600F8FBA1 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EA4124B782A600F8FBA1 /* TabbarView.swift */; };
+		0154D9E9256BB910000953E4 /* AlertBlankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0154D9E7256BB90F000953E4 /* AlertBlankTableViewCell.swift */; };
+		0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0154D9E8256BB910000953E4 /* AlertBlankTableViewCell.xib */; };
 		0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */; };
 		0166C6BB2566CDA70061E984 /* SignUpAgreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */; };
 		0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D0255A46A200175BF7 /* SignUp2VC.swift */; };
@@ -73,6 +75,7 @@
 		01EFFF1924B9D78100518DE6 /* OnBoardingImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF1824B9D78100518DE6 /* OnBoardingImageInfo.swift */; };
 		01EFFF2024B9E72C00518DE6 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF1F24B9E72C00518DE6 /* APIConstants.swift */; };
 		01EFFF2224B9E73D00518DE6 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFFF2124B9E73D00518DE6 /* NetworkResult.swift */; };
+		01F1215A256C065F00910CEB /* AlertServiceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F12159256C065F00910CEB /* AlertServiceVC.swift */; };
 		3B04AD4210452352D721178E /* Pods_TutorDot_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B27A91A8FA9C5F4035959065 /* Pods_TutorDot_iOS.framework */; };
 		F4200DFB24BB83EA00EA1D6F /* RegularClassHoursCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4200DFA24BB83EA00EA1D6F /* RegularClassHoursCell.swift */; };
 		F4200DFD24BCB01200EA1D6F /* Extension+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4200DFC24BCB01200EA1D6F /* Extension+ViewController.swift */; };
@@ -170,6 +173,8 @@
 		015097C3255412BA00935DC6 /* FilterDropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterDropDownCell.swift; sourceTree = "<group>"; };
 		015097C4255412BA00935DC6 /* FilterDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDropDownCell.xib; sourceTree = "<group>"; };
 		0153EA4124B782A600F8FBA1 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
+		0154D9E7256BB90F000953E4 /* AlertBlankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBlankTableViewCell.swift; sourceTree = "<group>"; };
+		0154D9E8256BB910000953E4 /* AlertBlankTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertBlankTableViewCell.xib; sourceTree = "<group>"; };
 		0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreeVC.swift; sourceTree = "<group>"; };
 		0193A1D0255A46A200175BF7 /* SignUp2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2VC.swift; sourceTree = "<group>"; };
@@ -192,6 +197,7 @@
 		01EFFF1824B9D78100518DE6 /* OnBoardingImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingImageInfo.swift; sourceTree = "<group>"; };
 		01EFFF1F24B9E72C00518DE6 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		01EFFF2124B9E73D00518DE6 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		01F12159256C065F00910CEB /* AlertServiceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertServiceVC.swift; sourceTree = "<group>"; };
 		2316F30522401B1086C23B6D /* Pods-TutorDot_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TutorDot_iOS.release.xcconfig"; path = "Target Support Files/Pods-TutorDot_iOS/Pods-TutorDot_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		56D21582807602A44764B046 /* Pods-TutorDot_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TutorDot_iOS.debug.xcconfig"; path = "Target Support Files/Pods-TutorDot_iOS/Pods-TutorDot_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B27A91A8FA9C5F4035959065 /* Pods_TutorDot_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TutorDot_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -326,6 +332,7 @@
 				0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */,
 				019D11352560270900A88195 /* LoginNagivationVC.swift */,
 				0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */,
+				01F12159256C065F00910CEB /* AlertServiceVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -379,6 +386,7 @@
 				F437B8B7255BD3160016A575 /* PopUpClassesTableViewCell.swift */,
 				015097C3255412BA00935DC6 /* FilterDropDownCell.swift */,
 				F4F13DF425610D5A00115FD4 /* QuestionListCell.swift */,
+				0154D9E7256BB90F000953E4 /* AlertBlankTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -506,6 +514,7 @@
 				012E888524B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib */,
 				F4D1A0D824BA9D5000B13D65 /* BlankClassJournalCell.xib */,
 				F4B565532536D75200A77C01 /* NotesContentCell.xib */,
+				0154D9E8256BB910000953E4 /* AlertBlankTableViewCell.xib */,
 				015097C4255412BA00935DC6 /* FilterDropDownCell.xib */,
 			);
 			path = Nibs;
@@ -588,6 +597,7 @@
 				01B49D5F24C21F6F00B3A322 /* data3.json in Resources */,
 				0126397824AA00C8009EA0BA /* MainTab.storyboard in Resources */,
 				0126399124AA09DD009EA0BA /* Alert.storyboard in Resources */,
+				0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */,
 				015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */,
 				0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */,
 				012E888324B5D3FA00EF81FB /* Calendar.storyboard in Resources */,
@@ -651,6 +661,7 @@
 				0126398924AA0437009EA0BA /* CalendarVC.swift in Sources */,
 				013246282553C5B0003A7F75 /* CalendarNavigationController.swift in Sources */,
 				012E887C24B5ABCF00EF81FB /* NotesModifyVC.swift in Sources */,
+				0154D9E9256BB910000953E4 /* AlertBlankTableViewCell.swift in Sources */,
 				014703C424B316960074D4E2 /* AlertTableHeaderViewCell.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
 				F4F13DF525610D5A00115FD4 /* QuestionListCell.swift in Sources */,
@@ -660,6 +671,7 @@
 				F4200E0524BE09D700EA1D6F /* AddRegularClassTimeCell.swift in Sources */,
 				F4D1A0C224B7B26100B13D65 /* ClassInviteVC.swift in Sources */,
 				F471773024B218790098C827 /* NotesInfo.swift in Sources */,
+				01F1215A256C065F00910CEB /* AlertServiceVC.swift in Sources */,
 				F4D1A09C24B4FD2B00B13D65 /* MypageServiceCell.swift in Sources */,
 				F49825F8255D2C5C00E2FA5A /* QuestionVC.swift in Sources */,
 				F4B565542536D75200A77C01 /* NotesContentCell.swift in Sources */,
