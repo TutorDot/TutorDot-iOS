@@ -17,10 +17,10 @@ class MypageInfoCell: UITableViewCell {
     
     var versionLabel : UILabel!
     func setVersionLabel(){
-        versionLabel = UILabel(frame : CGRect(x: 302, y: 18, width: 60, height: 19))
+        versionLabel = UILabel(frame : CGRect(x: 315, y: 19, width: 60, height: 17))
         versionLabel.text = "1 . 0 . 0"
         versionLabel.textColor = UIColor.brownishGrey2
-        
+        versionLabel.font = UIFont(name: versionLabel.font.fontName, size: 14)
         self.addSubview(versionLabel)
     }
     
