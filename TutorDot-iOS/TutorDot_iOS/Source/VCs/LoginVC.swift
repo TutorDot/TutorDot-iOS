@@ -115,7 +115,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         
         LoginService.shared.login(email: inputID, password: inputPWD) { networkResult in switch networkResult {
         case .success(let token):
-            
             // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
             let dataSave = UserDefaults.standard // UserDefaults.standard 정의
             dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장

@@ -42,13 +42,16 @@ struct LoginService {
         guard let decodedData = try? decoder.decode(SignInData.self, from: data)
         else {
             return .pathErr }
-        
+
         guard let tokenData = decodedData.data
         else {
             return .requestErr(decodedData.message)
             
         }
+        //let list: [String] = [tokenData.accessToken, tokenData.role, tokenData.userName]
+        //print(list[0], "inputlist")
         return .success(tokenData.accessToken)
+        //return .success(list)
         
     }
     
