@@ -64,7 +64,7 @@ class MyPageVC: UIViewController {
     }
     
     func setSettingView(){
-        let alert1 = MypageInfo(title: "수업료 알림")
+        let alert1 = MypageInfo(title: "수업료 알림 (서비스 준비 중)")
         let alert2 = MypageInfo(title: "수업 시작 전 알림")
         let info1 = MypageInfo(title: "버전정보")
         let info2 = MypageInfo(title: "개발자정보")
@@ -119,7 +119,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 55
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,10 +141,22 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+                
+                cell.setTitleInfo(Alert[indexPath.row].title)
+                cell.hiddenSwitch()
+                
+                return cell
+                
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+                
+                cell.setTitleInfo(Alert[indexPath.row].title)
+                
+                return cell
+            }
             
-            cell.setTitleInfo(Alert[indexPath.row].title)
-            return cell
         case 1 :
             if indexPath.row == 0 {
                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageInfoCell.identifier, for: indexPath) as? MypageInfoCell else { return UITableViewCell()}
@@ -173,12 +185,52 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 2
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55
+    }
+
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 55)
+        view.backgroundColor = UIColor.white
+        
+        switch section {
+        case 0 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "알림설정"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+        case 1 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "어플정보"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+            
+        case 2 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "계정설정"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+        default:
+            print("default")
+        }
+        
+        return view
+        
+        
+    }
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 375, height: 10)
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 8)
         view.backgroundColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1.0)
         return view
     }
