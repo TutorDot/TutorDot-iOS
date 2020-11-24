@@ -202,17 +202,23 @@
                                                         <cells/>
                                                     </collectionView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="57W-ab-Yom">
-                                                        <rect key="frame" x="15" y="0.0" width="63" height="57"/>
+                                                        <rect key="frame" x="15" y="0.0" width="63" height="30"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7O-58-mAU">
-                                                                <rect key="frame" x="8" y="7.9999999999999982" width="28" height="26.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                                <rect key="frame" x="5" y="7.9999999999999982" width="20.666666666666668" height="19.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fU6-Kr-p5i">
-                                                                <rect key="frame" x="8.0000000000000018" y="37.333333333333371" width="20.666666666666671" height="17"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQ8-PP-0rO">
+                                                                <rect key="frame" x="25.666666666666664" y="9.3333333333333144" width="12.333333333333336" height="17"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3z-qc-vNm">
+                                                                <rect key="frame" x="43" y="9.3333333333333144" width="12.333333333333336" height="17"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -220,12 +226,13 @@
                                                         <color key="backgroundColor" name="journalColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="63" id="2EC-BF-Uvl"/>
-                                                            <constraint firstItem="x7O-58-mAU" firstAttribute="leading" secondItem="57W-ab-Yom" secondAttribute="leading" constant="8" id="911-rK-zl4"/>
-                                                            <constraint firstItem="fU6-Kr-p5i" firstAttribute="leading" secondItem="x7O-58-mAU" secondAttribute="leading" id="e3T-dZ-Lfv"/>
+                                                            <constraint firstItem="OQ8-PP-0rO" firstAttribute="centerY" secondItem="x7O-58-mAU" secondAttribute="centerY" id="5IZ-qi-OBN"/>
+                                                            <constraint firstItem="H3z-qc-vNm" firstAttribute="centerY" secondItem="OQ8-PP-0rO" secondAttribute="centerY" id="8NA-vm-NKU"/>
+                                                            <constraint firstItem="x7O-58-mAU" firstAttribute="leading" secondItem="57W-ab-Yom" secondAttribute="leading" constant="5" id="911-rK-zl4"/>
+                                                            <constraint firstItem="OQ8-PP-0rO" firstAttribute="leading" secondItem="x7O-58-mAU" secondAttribute="trailing" id="BHw-2e-qxp"/>
                                                             <constraint firstItem="x7O-58-mAU" firstAttribute="top" secondItem="57W-ab-Yom" secondAttribute="top" constant="8" id="edJ-X9-P9P"/>
-                                                            <constraint firstItem="fU6-Kr-p5i" firstAttribute="top" secondItem="x7O-58-mAU" secondAttribute="bottom" constant="3" id="iOS-Hd-7fd"/>
-                                                            <constraint firstItem="fU6-Kr-p5i" firstAttribute="leading" secondItem="57W-ab-Yom" secondAttribute="leading" constant="8" id="rWa-qn-gSC"/>
-                                                            <constraint firstAttribute="height" constant="57" id="wPM-gs-q52"/>
+                                                            <constraint firstItem="H3z-qc-vNm" firstAttribute="leading" secondItem="OQ8-PP-0rO" secondAttribute="trailing" constant="5" id="oQG-Pa-hf4"/>
+                                                            <constraint firstAttribute="height" constant="30" id="wPM-gs-q52"/>
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeA-09-Kft">
@@ -311,13 +318,13 @@
                         <outlet property="calendarViewHeightConstraint" destination="4Oo-es-iib" id="yeP-29-OJZ"/>
                         <outlet property="dateCollectionView" destination="N3n-rm-NLU" id="nLN-cS-jUY"/>
                         <outlet property="dateHeaderLabel" destination="x7O-58-mAU" id="sd7-qx-Eqe"/>
+                        <outlet property="dayHeaderLabel" destination="OQ8-PP-0rO" id="1hq-S0-GPL"/>
                         <outlet property="dropDownLabelButton" destination="BX6-GH-RmG" id="iyM-IF-HGo"/>
                         <outlet property="headerClassNameLabel" destination="GKF-Pf-9Ea" id="Jvf-ib-Dl5"/>
                         <outlet property="headerUserNameLabel" destination="MmY-l1-8zM" id="WoE-sm-sb5"/>
                         <outlet property="headerView" destination="bAc-Oh-INb" id="0Tl-xa-Acb"/>
                         <outlet property="headerViewHeightConstraint" destination="qaW-1K-SR8" id="DCe-pf-baz"/>
                         <outlet property="leftButton" destination="OME-fv-ddV" id="iOa-EL-oE7"/>
-                        <outlet property="monthHeaderLabel" destination="fU6-Kr-p5i" id="49h-sZ-R3d"/>
                         <outlet property="plusButton" destination="OeA-09-Kft" id="5dg-KS-u3h"/>
                         <outlet property="rightButton" destination="Wrn-6R-Jo3" id="giU-5q-tk6"/>
                         <outlet property="topDateButton" destination="sx2-t5-cf7" id="wDH-FX-VVE"/>
@@ -325,6 +332,7 @@
                         <outlet property="tutorCollectionView" destination="hDe-Zy-BfX" id="9dR-VD-uIv"/>
                         <outlet property="tutorView" destination="sYc-1k-x0p" id="ggt-a4-yhw"/>
                         <outlet property="tutorViewHeightConstraint" destination="Ulr-jl-mz2" id="cuA-HX-M1e"/>
+                        <outlet property="weekDayHeaderLabel" destination="H3z-qc-vNm" id="AM8-C0-DjR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjm-xV-vyE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
