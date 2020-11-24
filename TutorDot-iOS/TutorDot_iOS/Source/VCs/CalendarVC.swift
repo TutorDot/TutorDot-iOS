@@ -54,7 +54,6 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
     
-    
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var tutorView: UIView!
     @IBOutlet weak var tutorCollectionView: UICollectionView!
@@ -112,14 +111,23 @@ class CalendarVC: UIViewController {
         dateCollectionView.dataSource = self
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshView), name: NSNotification.Name(rawValue: "load"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
+        print("viewdisappeared")
+        self.classList2Copy.removeAll()
+        self.classList2.removeAll()
+        self.classList.removeAll()
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
-
+        if firstTimeRunning == false {
+            print("viewloaded")
+            setListDropDown()
+            getClassList()
+        }
+        
         if firstTimeRunning {
             self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
             self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
@@ -127,38 +135,7 @@ class CalendarVC: UIViewController {
         }
         
     }
-    
-    @objc func refreshView(notification: NSNotification) {
-        self.classList2Copy.removeAll()
-        self.classList2.removeAll()
-        self.classList.removeAll()
-    
-        setListDropDown()
-        //self.dateCollectionView.reloadData()
-//        ClassInfoService.classInfoServiceShared.getAllClassInfo() { networkResult in
-//            switch networkResult {
-//            case .success(let resultData):
-//                guard let data = resultData as? [CalendarData] else { return print(Error.self) }
-//                for index in 0..<data.count {
-//                    let item = CalendarData(classId: data[index].classId, lectureName: data[index].lectureName, color: data[index].color, times: data[index].times, hour: data[index].hour, location: data[index].location, classDate: data[index].classDate, startTime: data[index].startTime, endTime: data[index].endTime)
-//                    self.classList2.append(item)
-//                    self.classList2Copy = self.classList2
-//                }
-//                self.dateCollectionView.reloadData()
-//                self.tutorCollectionView.reloadData()
-//                self.nextDate = 0
-//            case .pathErr : print("Patherr")
-//            case .serverErr : print("ServerErr")
-//            case .requestErr(let message) : print(message)
-//            case .networkFail:
-//                print("networkFail")
-//            }
-//        }
-        getClassList()
-        print("classList2",classList2)
-        
-        
-    }
+
     func gestureRecognizer() {
         swipeGestureRecognizer.direction = .right
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(CalendarVC.respondToSwipeGesture(_:)))
@@ -263,6 +240,7 @@ class CalendarVC: UIViewController {
         dateHeaderLabel.textColor = UIColor.brownishGrey
         dayHeaderLabel.textColor = UIColor.brownishGrey
         weekDayHeaderLabel.textColor = UIColor.brownishGrey
+        headerUserNameLabel.text = ""
     }
     
     @objc func dropDownToggleButton(){
@@ -361,7 +339,7 @@ class CalendarVC: UIViewController {
     
     @IBAction func alertTabButton(_ sender: Any) {
         let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
-        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertVC")
+        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertServiceVC")
         uvc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(uvc, animated: true)
     }
@@ -514,7 +492,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                 if String(currentDateCalendarIndex) == calendarCell.dateLabel.text && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                     calendarCell.dateLabel.textColor = UIColor.softBlue
                     calendarCell.dateView.backgroundColor = UIColor.white
-                    //calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 13.0)
+                    calendarCell.dateLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
                     
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
