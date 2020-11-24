@@ -52,6 +52,7 @@
 		015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015097C4255412BA00935DC6 /* FilterDropDownCell.xib */; };
 		0153EA4224B782A600F8FBA1 /* TabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0153EA4124B782A600F8FBA1 /* TabbarView.swift */; };
 		0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */; };
+		0166C6BB2566CDA70061E984 /* SignUpAgreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */; };
 		0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D0255A46A200175BF7 /* SignUp2VC.swift */; };
 		0193A1D4255A4B1E00175BF7 /* SignUp3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */; };
 		0193A1D7255A4FCD00175BF7 /* SignUp4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */; };
@@ -170,6 +171,7 @@
 		015097C4255412BA00935DC6 /* FilterDropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterDropDownCell.xib; sourceTree = "<group>"; };
 		0153EA4124B782A600F8FBA1 /* TabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarView.swift; sourceTree = "<group>"; };
 		0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreeVC.swift; sourceTree = "<group>"; };
 		0193A1D0255A46A200175BF7 /* SignUp2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2VC.swift; sourceTree = "<group>"; };
 		0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp3VC.swift; sourceTree = "<group>"; };
 		0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp4VC.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */,
 				0193A1D9255A646D00175BF7 /* SignUpDoneVC.swift */,
 				019D11352560270900A88195 /* LoginNagivationVC.swift */,
+				0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
 				012639A724AB15E7009EA0BA /* SplashVC.swift in Sources */,
+				0166C6BB2566CDA70061E984 /* SignUpAgreeVC.swift in Sources */,
 				011D6C9024AF8D53004056C4 /* ClassAddVC.swift in Sources */,
 				014703BE24B1F6350074D4E2 /* Extensions+String.swift in Sources */,
 				012639A524AB15D9009EA0BA /* LoginVC.swift in Sources */,

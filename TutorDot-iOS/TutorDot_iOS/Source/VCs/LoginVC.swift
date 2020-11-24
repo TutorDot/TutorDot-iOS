@@ -12,23 +12,13 @@ import BEMCheckBox
 class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier : String = "LoginVC"
     
-    @IBOutlet weak var imageView: UIImageView!
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var autoLoginLabel: UILabel!
     
     var emailText = ""
     var passwordText = ""
-    //var webView: WKWebView!
-    
-    @IBOutlet weak var checkBoxButton: BEMCheckBox!
-    
-    
-    @IBOutlet weak var imageToTextHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,18 +48,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         // 이메일, 비번 받아오기
         emailTextField.text = emailText
         passWordTextField.text = passwordText
-        
-        if self.view.frame.size.height > 800 {
-            self.bottomViewConstraint.constant = 123
-            self.imageHeightConstraint.constant = 221
-        } else {
-            self.bottomViewConstraint.constant = 56
-            imageHeightConstraint.constant = 180
-        }
-        
-        autoLoginLabel.textColor = UIColor.brownGrey
-        
-        
+    
         
     }
     
@@ -112,13 +91,11 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         // 최종 결과물 보여줄 상태만 선언해주면 애니메이션은 알아서
         // duration은 간격
         UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
-            
-            self.imageView.alpha = 0
-            
+                    
             // +로 갈수록 y값이 내려가고 -로 갈수록 y값이 올라간다.
-            self.imageToTextHeightConstraint.constant = 0
-            
-            self.bottomViewConstraint.constant = +keyboardHeight/2 + 100
+//            self.imageToTextHeightConstraint.constant = 0
+//
+//            self.bottomViewConstraint.constant = +keyboardHeight/2 + 100
         })
         
         self.view.layoutIfNeeded()
@@ -132,18 +109,17 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
             
             // 원래대로 돌아가도록
-            self.imageView.alpha = 1.0
-            self.imageToTextHeightConstraint.constant = 43
-            
-            if self.view.frame.size.height > 800 {
-                self.bottomViewConstraint.constant = 123
-                self.imageHeightConstraint.constant = 221
-                
-            } else {
-                self.bottomViewConstraint.constant = 56
-                self.imageHeightConstraint.constant = 180
-                
-            }
+//            self.imageToTextHeightConstraint.constant = 43
+//
+//            if self.view.frame.size.height > 800 {
+//                self.bottomViewConstraint.constant = 123
+//                self.imageHeightConstraint.constant = 221
+//
+//            } else {
+//                self.bottomViewConstraint.constant = 56
+//                self.imageHeightConstraint.constant = 180
+//
+//            }
         })
         
         self.view.layoutIfNeeded()
@@ -158,32 +134,25 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         
         LoginService.shared.login(email: inputID, password: inputPWD) { networkResult in switch networkResult {
         case .success(let token):
-            if self.checkBoxButton.on == true {
-                // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
-                let dataSave = UserDefaults.standard // UserDefaults.standard 정의
-                dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
-                dataSave.setValue(inputPWD, forKey: "save_pw") // save_pw 키값에 pw값 저장
-                
-                UserDefaults.standard.synchronize() // setValue 실행
-            } else {
-                let dataSave = UserDefaults.standard
-                dataSave.setValue("nil", forKey: "save_userNm")
-                dataSave.setValue("nil", forKey: "save_pw")
-                UserDefaults.standard.synchronize()
-                
-            }
+            
+            // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
+            let dataSave = UserDefaults.standard // UserDefaults.standard 정의
+            dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
+            dataSave.setValue(inputPWD, forKey: "save_pw") // save_pw 키값에 pw값 저장
+            UserDefaults.standard.synchronize() // setValue 실행
+            
             guard let token = token as? String else { return }
             UserDefaults.standard.set(token, forKey: "token")
             print("myToken:",token)
             print("\(UserDefaults.standard.value(forKey: "save_userNm")!)")
             print("\(UserDefaults.standard.value(forKey: "save_pw")!)")
             
-//            let url = URL(string: APIConstants.baseURL)
-//            let request = NSMutableURLRequest(url : url! as URL)
-//            request.httpMethod = "POST"
-//            let bodyData: String = "user_login=" + inputID + "&user_pw=" + inputPWD
-//            request.httpBody = bodyData.data(using: String.Encoding.utf8)
-//            self.view.loadRequest(request as URLRequest)
+            //            let url = URL(string: APIConstants.baseURL)
+            //            let request = NSMutableURLRequest(url : url! as URL)
+            //            request.httpMethod = "POST"
+            //            let bodyData: String = "user_login=" + inputID + "&user_pw=" + inputPWD
+            //            request.httpBody = bodyData.data(using: String.Encoding.utf8)
+            //            self.view.loadRequest(request as URLRequest)
             
             // 로그인 성공시 뷰 전환
             let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
@@ -210,6 +179,27 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         }
         
     }
+    
+    @IBAction func signUpButtonSelected(_ sender: Any) {
+        guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: LoginNagivationVC.identifier) as? LoginNagivationVC else {return}
+        receiveViewController.modalPresentationStyle = .fullScreen
+        self.present(receiveViewController, animated: true, completion: nil)
+        
+    }
+    
+    
+    @IBAction func previewButtonSelected(_ sender: Any) {
+        let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
+        guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
+                TabbarVC else { return }
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
     
     
     

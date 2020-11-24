@@ -43,7 +43,7 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
