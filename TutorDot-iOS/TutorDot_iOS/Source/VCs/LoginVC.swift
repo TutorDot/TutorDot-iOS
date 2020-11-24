@@ -88,14 +88,8 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         }
         
         // animation 함수
-        // 최종 결과물 보여줄 상태만 선언해주면 애니메이션은 알아서
-        // duration은 간격
         UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
                     
-            // +로 갈수록 y값이 내려가고 -로 갈수록 y값이 올라간다.
-//            self.imageToTextHeightConstraint.constant = 0
-//
-//            self.bottomViewConstraint.constant = +keyboardHeight/2 + 100
         })
         
         self.view.layoutIfNeeded()
@@ -107,19 +101,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {return}
         
         UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
-            
-            // 원래대로 돌아가도록
-//            self.imageToTextHeightConstraint.constant = 43
-//
-//            if self.view.frame.size.height > 800 {
-//                self.bottomViewConstraint.constant = 123
-//                self.imageHeightConstraint.constant = 221
-//
-//            } else {
-//                self.bottomViewConstraint.constant = 56
-//                self.imageHeightConstraint.constant = 180
-//
-//            }
         })
         
         self.view.layoutIfNeeded()
@@ -146,14 +127,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
             print("myToken:",token)
             print("\(UserDefaults.standard.value(forKey: "save_userNm")!)")
             print("\(UserDefaults.standard.value(forKey: "save_pw")!)")
-            
-            //            let url = URL(string: APIConstants.baseURL)
-            //            let request = NSMutableURLRequest(url : url! as URL)
-            //            request.httpMethod = "POST"
-            //            let bodyData: String = "user_login=" + inputID + "&user_pw=" + inputPWD
-            //            request.httpBody = bodyData.data(using: String.Encoding.utf8)
-            //            self.view.loadRequest(request as URLRequest)
-            
             // 로그인 성공시 뷰 전환
             let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
             guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
