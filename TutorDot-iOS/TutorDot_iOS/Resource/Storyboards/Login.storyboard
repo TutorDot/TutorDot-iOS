@@ -248,6 +248,9 @@
                                 <state key="normal" title="보기">
                                     <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="service1Button:" destination="x00-gL-enr" eventType="touchUpInside" id="bkg-ns-CLn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nw-w9-Yro">
                                 <rect key="frame" x="309" y="395.66666666666669" width="30" height="28"/>
@@ -255,6 +258,9 @@
                                 <state key="normal" title="보기">
                                     <color key="titleColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="service2Button:" destination="x00-gL-enr" eventType="touchUpInside" id="tsk-ea-37k"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이용약관 안내" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4XQ-5i-zUY">
                                 <rect key="frame" x="109" y="361.66666666666669" width="88" height="20"/>
