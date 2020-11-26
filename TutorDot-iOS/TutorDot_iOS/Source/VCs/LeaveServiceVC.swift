@@ -10,21 +10,31 @@ import UIKit
 
 class LeaveServiceVC: UIViewController {
 
-    @IBOutlet weak var popupView: UIView!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var leaveServiceButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
+    let images: [String] = ["servivcebye1ImgIllust", "22", "33"]
+ 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var pageController: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        popupView.layer.cornerRadius = 10
-        cancelButton.layer.cornerRadius = 5
-        leaveServiceButton.layer.cornerRadius = 5
-        // Do any additional setup after loading the view.
+        
+       
+    }
+    
+    @IBAction func pageChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func backButtonDidTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     
     @IBAction func leaveServiceButtonDidTap(_ sender: Any) {
         let storyBoard = UIStoryboard.init(name: "Login", bundle: nil)
@@ -33,14 +43,5 @@ class LeaveServiceVC: UIViewController {
         popupVC.modalTransitionStyle = .crossDissolve
         present(popupVC, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
