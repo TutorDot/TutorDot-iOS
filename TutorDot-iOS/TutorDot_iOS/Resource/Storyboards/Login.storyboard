@@ -587,13 +587,24 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="아이디를 입력해주세요." textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="QYB-yx-tgk">
-                                <rect key="frame" x="36" y="264" width="303" height="35"/>
+                                <rect key="frame" x="36" y="264" width="250" height="35"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="I2o-3D-7RW"/>
                                     <constraint firstAttribute="height" constant="35" id="K1h-kU-6rN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="username"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ems-M2-NTY">
+                                <rect key="frame" x="299" y="267" width="49" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="중복확인">
+                                    <color key="titleColor" red="0.40784313729999999" green="0.45882352939999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="idCheckButton:" destination="UhS-jD-1oc" eventType="touchUpInside" id="Fu7-BP-gcb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jsu-bw-Ipe"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -602,16 +613,17 @@
                             <constraint firstItem="9hv-Q1-Q37" firstAttribute="leading" secondItem="Jsu-bw-Ipe" secondAttribute="leading" constant="36" id="6kq-zi-F7K"/>
                             <constraint firstItem="13x-x5-mFH" firstAttribute="top" secondItem="Jsu-bw-Ipe" secondAttribute="top" constant="17" id="7KV-w6-XiE"/>
                             <constraint firstItem="Jsu-bw-Ipe" firstAttribute="trailing" secondItem="wZD-54-J5k" secondAttribute="trailing" constant="33" id="7Yu-Yg-IsJ"/>
+                            <constraint firstItem="Jsu-bw-Ipe" firstAttribute="trailing" secondItem="ems-M2-NTY" secondAttribute="trailing" constant="27" id="7bM-45-EUF"/>
                             <constraint firstItem="9hv-Q1-Q37" firstAttribute="top" secondItem="MRE-8J-rfE" secondAttribute="bottom" constant="15" id="8Po-Mf-5Gh"/>
                             <constraint firstItem="avg-TQ-b8o" firstAttribute="top" secondItem="9hv-Q1-Q37" secondAttribute="bottom" constant="60" id="Rp0-G6-2tX"/>
                             <constraint firstItem="MRE-8J-rfE" firstAttribute="leading" secondItem="Jsu-bw-Ipe" secondAttribute="leading" constant="36" id="UID-1z-5sN"/>
                             <constraint firstItem="avg-TQ-b8o" firstAttribute="leading" secondItem="Jsu-bw-Ipe" secondAttribute="leading" constant="36" id="Xeb-AB-sN7"/>
+                            <constraint firstItem="ems-M2-NTY" firstAttribute="centerY" secondItem="QYB-yx-tgk" secondAttribute="centerY" id="Xwt-1G-6rg"/>
                             <constraint firstItem="QYB-yx-tgk" firstAttribute="top" secondItem="avg-TQ-b8o" secondAttribute="bottom" constant="10" id="Ybn-Tp-QpC"/>
                             <constraint firstItem="Jsu-bw-Ipe" firstAttribute="trailing" secondItem="13x-x5-mFH" secondAttribute="trailing" constant="20" id="c99-g8-Amc"/>
                             <constraint firstItem="kPS-jK-FlS" firstAttribute="centerY" secondItem="13x-x5-mFH" secondAttribute="centerY" id="clr-hO-dCJ"/>
                             <constraint firstItem="kPS-jK-FlS" firstAttribute="leading" secondItem="Jsu-bw-Ipe" secondAttribute="leading" id="dR5-xz-aRj"/>
                             <constraint firstItem="MRE-8J-rfE" firstAttribute="top" secondItem="Jsu-bw-Ipe" secondAttribute="top" constant="76" id="p9M-6g-Zh5"/>
-                            <constraint firstItem="Jsu-bw-Ipe" firstAttribute="trailing" secondItem="QYB-yx-tgk" secondAttribute="trailing" constant="36" id="vdS-Dp-XXo"/>
                             <constraint firstItem="QYB-yx-tgk" firstAttribute="leading" secondItem="Jsu-bw-Ipe" secondAttribute="leading" constant="36" id="vgP-vj-Wma"/>
                         </constraints>
                     </view>
@@ -685,6 +697,10 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="textFieldInput:" destination="dt2-gf-kcG" eventType="editingChanged" id="6Xf-1Z-j46"/>
+                                    <action selector="textFieldTapped:" destination="dt2-gf-kcG" eventType="editingDidBegin" id="vsK-JX-q8G"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-bu-51d">
                                 <rect key="frame" x="36" y="660" width="303" height="48"/>
@@ -698,6 +714,12 @@
                                     <action selector="signUpSelected:" destination="dt2-gf-kcG" eventType="touchUpInside" id="r5F-Tc-aXk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호가 일치하지 않습니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGf-PG-VOp">
+                                <rect key="frame" x="36" y="415" width="153.66666666666666" height="15.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Uva-dl-FGg"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -705,6 +727,7 @@
                             <constraint firstItem="5Dc-bu-51d" firstAttribute="leading" secondItem="Uva-dl-FGg" secondAttribute="leading" constant="36" id="1pl-T3-un5"/>
                             <constraint firstItem="Uva-dl-FGg" firstAttribute="trailing" secondItem="Ufr-bq-HAx" secondAttribute="trailing" constant="36" id="5kg-sf-Y1b"/>
                             <constraint firstItem="Uva-dl-FGg" firstAttribute="trailing" secondItem="GMc-ur-Wg2" secondAttribute="trailing" constant="33" id="8GS-8j-CJd"/>
+                            <constraint firstItem="AGf-PG-VOp" firstAttribute="top" secondItem="Ufr-bq-HAx" secondAttribute="bottom" constant="10" id="BEz-DI-npK"/>
                             <constraint firstItem="aNf-8v-scX" firstAttribute="top" secondItem="Uva-dl-FGg" secondAttribute="top" constant="76" id="CY6-Bx-m38"/>
                             <constraint firstItem="Uva-dl-FGg" firstAttribute="bottom" secondItem="5Dc-bu-51d" secondAttribute="bottom" constant="70" id="I3q-Mv-tZd"/>
                             <constraint firstItem="Uva-dl-FGg" firstAttribute="trailing" secondItem="5Dc-bu-51d" secondAttribute="trailing" constant="36" id="MgC-7X-nFm"/>
@@ -716,6 +739,7 @@
                             <constraint firstItem="Ufr-bq-HAx" firstAttribute="top" secondItem="rv1-tf-WYq" secondAttribute="bottom" constant="10" id="YXh-oc-Lev"/>
                             <constraint firstItem="rv1-tf-WYq" firstAttribute="leading" secondItem="Uva-dl-FGg" secondAttribute="leading" constant="36" id="bWr-aE-NfE"/>
                             <constraint firstItem="Uwv-Ca-8TT" firstAttribute="top" secondItem="1qW-0Q-PqB" secondAttribute="bottom" constant="60" id="m03-HR-622"/>
+                            <constraint firstItem="AGf-PG-VOp" firstAttribute="leading" secondItem="Uva-dl-FGg" secondAttribute="leading" constant="36" id="mPS-Yd-trp"/>
                             <constraint firstItem="GMc-ur-Wg2" firstAttribute="centerY" secondItem="1qW-0Q-PqB" secondAttribute="centerY" id="ohK-MD-04I"/>
                             <constraint firstItem="1qW-0Q-PqB" firstAttribute="leading" secondItem="Uva-dl-FGg" secondAttribute="leading" constant="36" id="rpl-dm-p5q"/>
                             <constraint firstItem="1qW-0Q-PqB" firstAttribute="top" secondItem="aNf-8v-scX" secondAttribute="bottom" constant="15" id="skI-nW-nJb"/>
@@ -727,6 +751,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="l9x-wh-khG" id="9qn-0c-ze9"/>
+                        <outlet property="correctLabel" destination="AGf-PG-VOp" id="XZF-u8-2Xs"/>
                         <outlet property="numberlabel" destination="GMc-ur-Wg2" id="oNj-ES-Pov"/>
                         <outlet property="passwordReTextfield" destination="Ufr-bq-HAx" id="ziK-xT-Cdj"/>
                         <outlet property="passwordTextfield" destination="war-Xn-yx3" id="qcJ-7u-cRb"/>

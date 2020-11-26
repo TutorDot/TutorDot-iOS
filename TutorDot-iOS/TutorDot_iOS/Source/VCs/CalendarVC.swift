@@ -122,6 +122,7 @@ class CalendarVC: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
+        print("viewappeared")
         if firstTimeRunning == false {
             setListDropDown()
             getClassList()
