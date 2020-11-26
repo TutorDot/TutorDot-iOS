@@ -1471,6 +1471,9 @@ jjungminyy@gmail.com</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyb-Ab-te0">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                         <state key="normal" image="scheduleClassMathBtnBack"/>
+                                        <connections>
+                                            <action selector="backButtonDidTap:" destination="7U7-3x-oEm" eventType="touchUpInside" id="RIY-dA-0Kb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1519,6 +1522,9 @@ jjungminyy@gmail.com</string>
                                 <state key="normal" title="아니요, 취소합니다">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelButtonDidTap:" destination="7U7-3x-oEm" eventType="touchUpInside" id="GG6-uH-ut0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMv-bu-vGl">
                                 <rect key="frame" x="36" y="778" width="342" height="48"/>
@@ -1529,6 +1535,9 @@ jjungminyy@gmail.com</string>
                                 <state key="normal" title="네, 해제합니다">
                                     <color key="titleColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="logoutButtonDidTap:" destination="7U7-3x-oEm" eventType="touchUpInside" id="84V-qS-dJF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4Fq-lF-TBN"/>
@@ -3184,7 +3193,7 @@ TutorDot 서비스를 이용하세요!</string>
                                     <constraint firstItem="1kH-lF-y2j" firstAttribute="leading" secondItem="ZSb-NH-Hc9" secondAttribute="leading" constant="13" id="jeC-8g-wr7"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="servivcebye1ImgIllust" translatesAutoresizingMaskIntoConstraints="NO" id="HLc-fp-T3J">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tuteeInviteImage" translatesAutoresizingMaskIntoConstraints="NO" id="HLc-fp-T3J">
                                 <rect key="frame" x="136" y="218" width="142" height="142"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="HLc-fp-T3J" secondAttribute="height" multiplier="1:1" id="DcF-Px-JTG"/>
@@ -3223,6 +3232,7 @@ TutorDot 서비스를 이용하세요!</string>
                         <outlet property="headerHeightConstraints" destination="8qQ-31-eYH" id="mEj-Xo-HoM"/>
                         <outlet property="inviteCode" destination="1kH-lF-y2j" id="VxW-sV-3X9"/>
                         <outlet property="inviteCodeView" destination="ZSb-NH-Hc9" id="khx-J3-Isl"/>
+                        <outlet property="labelTopMarginConstraints" destination="I4P-Lu-CxZ" id="IXQ-q9-f3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSt-RK-Oc2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3573,7 +3583,7 @@ TutorDot 서비스를 이용하세요!</string>
         <image name="scheduleModificationBtnCancel_op" width="48" height="48"/>
         <image name="scheduleModificationBtnPlus" width="68" height="68"/>
         <image name="scheduleModificationBtnSave" width="48" height="48"/>
-        <image name="servivcebye1ImgIllust" width="142" height="142"/>
+        <image name="tuteeInviteImage" width="142" height="142"/>
         <image name="yellow" width="14" height="14"/>
         <namedColor name="Color">
             <color red="0.40784313725490196" green="0.45882352941176469" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
