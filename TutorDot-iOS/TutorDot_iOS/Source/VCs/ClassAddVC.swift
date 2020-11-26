@@ -170,12 +170,18 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         
         classInfoButton.setTitle("수업을 선택하세요", for: .normal)
         dropDown = DropDown()
-        dropDown?.anchorView = anchorView
-        self.dropDown?.width = anchorView.frame.size.width
-        DropDown.appearance().setupCornerRadius(7)
-        dropDown?.backgroundColor = UIColor.white
-        dropDown?.selectionBackgroundColor = UIColor.paleGrey
-        dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
+        // 드랍다운 디자인
+        self.dropDown?.anchorView = anchorView
+        self.dropDown?.width = self.view.frame.width
+        self.dropDown?.backgroundColor = UIColor.white
+        self.dropDown?.selectionBackgroundColor = UIColor.paleGrey
+        self.dropDown?.cellHeight = 60
+        DropDown.appearance().setupCornerRadius(15)
+        self.dropDown?.anchorView = anchorView
+        self.dropDown?.dimmedBackgroundColor = UIColor.black.withAlphaComponent(0.3)
+        self.dropDown?.setupMaskedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner])
+        self.dropDown?.animationduration = 0.25
+        
         
         // 서버통신: 토글에 수업리스트 가져오기
         ProfileService.shared.getClassLid() { networkResult in
@@ -211,14 +217,14 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             selectionIndex = index
             self.classInfoImage.image = UIImage(named:classColorLid[selectionIndex ?? 0])
             self.lectureId = classLid[selectionIndex ?? 0]
-            print("printt", lectureId)
             
         }
+        
         
         // 드롭박스 내 text 가운데 정렬
         dropDown?.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
             // Setup your custom UI components
-            cell.optionLabel.textAlignment = .left
+            cell.optionLabel.textAlignment = .center
         }
     }
     
