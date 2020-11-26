@@ -1592,6 +1592,9 @@ jjungminyy@gmail.com</string>
                                         <state key="normal" title="다음">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextButtonDidTap:" destination="YJl-yz-pze" eventType="touchUpInside" id="VBi-IA-TWF"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1606,7 +1609,7 @@ jjungminyy@gmail.com</string>
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-iT-MHS">
-                                <rect key="frame" x="145.5" y="458.5" width="123" height="28"/>
+                                <rect key="frame" x="145.5" y="487" width="123" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="fFq-xV-UIM"/>
                                 </constraints>
@@ -1621,11 +1624,14 @@ jjungminyy@gmail.com</string>
                                     <constraint firstAttribute="width" secondItem="NNw-m1-9z3" secondAttribute="height" multiplier="1:1" id="gwK-Ib-RdM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TU-HR-Kiv">
-                                <rect key="frame" x="72" y="414" width="270" height="14.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TU-HR-Kiv">
+                                <rect key="frame" x="72" y="414" width="270" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="Man-fl-Pef"/>
                                 </constraints>
+                                <string key="text">서비스 탈퇴시 생성했던 모든 수업방이 사라지며, 
+참여했던 모든 수업방의 연결이 해제됩니다. 
+(이 행위는 되돌릴 수 없습니다.)</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="0.38" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1685,14 +1691,17 @@ jjungminyy@gmail.com</string>
                             <constraint firstItem="KFk-ku-aws" firstAttribute="bottom" secondItem="zQH-0I-3lo" secondAttribute="bottom" constant="36" id="nqx-1s-XT4"/>
                             <constraint firstItem="r0P-Fb-OYz" firstAttribute="top" secondItem="KFk-ku-aws" secondAttribute="top" id="o2Q-Co-4yw"/>
                             <constraint firstItem="NNw-m1-9z3" firstAttribute="centerX" secondItem="KFk-ku-aws" secondAttribute="centerX" id="sed-Au-X9V"/>
-                            <constraint firstItem="zQH-0I-3lo" firstAttribute="top" secondItem="6RU-Xo-kQy" secondAttribute="bottom" constant="10" id="xMU-Ik-omn"/>
+                            <constraint firstItem="KFk-ku-aws" firstAttribute="bottom" secondItem="6RU-Xo-kQy" secondAttribute="bottom" constant="94" id="xMU-Ik-omn"/>
                             <constraint firstItem="r0P-Fb-OYz" firstAttribute="leading" secondItem="KFk-ku-aws" secondAttribute="leading" id="xeH-Vp-0dU"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="6RU-Xo-kQy" id="pJg-0e-WfA"/>
+                        <outlet property="cancelButtonBottom" destination="xMU-Ik-omn" id="62P-Aq-oW0"/>
                         <outlet property="imageView" destination="NNw-m1-9z3" id="sfy-v5-GMw"/>
+                        <outlet property="nextButton" destination="Irc-ba-9KU" id="zof-V2-lgM"/>
                         <outlet property="pageController" destination="2Oq-iT-MHS" id="5b5-Bp-FNX"/>
-                        <outlet property="subTitleLabel" destination="2TU-HR-Kiv" id="cTH-sR-d2q"/>
+                        <outlet property="serviceLeaveButton" destination="zQH-0I-3lo" id="IKd-t3-vqV"/>
                         <outlet property="titleLabel" destination="26o-jh-C3b" id="7ZN-ID-qg4"/>
                     </connections>
                 </viewController>
