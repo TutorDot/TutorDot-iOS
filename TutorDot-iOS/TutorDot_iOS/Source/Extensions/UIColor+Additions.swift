@@ -86,4 +86,8 @@ extension UIColor {
     @nonobjc class var fontSoftBlue: UIColor {
         return UIColor(red: 90.0 / 255.0, green: 96.0 / 255.0, blue: 227.0 / 255.0, alpha: 1.0)
     }
+    
+    @nonobjc class var indicateGray: UIColor {
+        return UIColor(red: 229.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
+    }
 }
