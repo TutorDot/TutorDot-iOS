@@ -10,21 +10,28 @@ import UIKit
 
 class MypageNewClassTimeVC: UIViewController {
 
+    @IBOutlet weak var completeButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDefault()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setDefault(){
+        completeButton.layer.cornerRadius = 8
     }
-    */
-
+    
+    @IBAction func backButtonDidTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func completeButtonDidTap(_ sender: Any) {
+        //AddClassCompleteVC
+        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddClassCompleteVC")
+        nextVC.modalPresentationStyle = .currentContext
+        nextVC.modalTransitionStyle = .crossDissolve
+        present(nextVC, animated: true, completion: nil)
+    }
 }

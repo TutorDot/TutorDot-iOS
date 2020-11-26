@@ -13,7 +13,7 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
-    @IBOutlet weak var myClassAdd: UIView!
+    @IBOutlet weak var myClassAddButton: UIButton!
     @IBOutlet weak var tutorImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
     
@@ -44,7 +44,7 @@ class MyPageVC: UIViewController {
     }
     
     func setMyclassViews(){
-        myClassAdd.layer.cornerRadius = 7
+        myClassAddButton.layer.cornerRadius = 7
     }
     
     //상단 콜렉션 뷰에서 쓸 리스트

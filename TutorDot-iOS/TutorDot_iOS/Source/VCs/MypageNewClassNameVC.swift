@@ -13,18 +13,19 @@ class MypageNewClassNameVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func closeButtonDidTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
+    
+    @IBAction func nextButtonDidTap(_ sender: Any) {
+        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "MyClassAddDetailVC")
+        nextVC.modalPresentationStyle = .currentContext
+        nextVC.modalTransitionStyle = .crossDissolve
+        present(nextVC, animated: true, completion: nil)
+    }
+    
 }
