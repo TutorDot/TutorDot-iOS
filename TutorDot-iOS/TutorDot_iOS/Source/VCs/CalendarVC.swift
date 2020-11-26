@@ -36,6 +36,7 @@ class CalendarVC: UIViewController {
     var returnvalue: Int = 0
     var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     var numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
+    var weekDays = ["일", "월", "화", "수", "목", "금", "토"]
     var currentMonthIndex: Int = 0
     var currentYear: Int = 0
     var presentMonthIndex = 0
@@ -61,7 +62,9 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var dropDownLabelButton: UIButton!
-    @IBOutlet weak var topDateButton: UIButton!
+    //@IBOutlet weak var topDateButton: UIButton!
+    
+    @IBOutlet weak var topDateButton: UILabel!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var dateHeaderLabel: UILabel!
     @IBOutlet weak var dayHeaderLabel: UILabel!
@@ -134,6 +137,7 @@ class CalendarVC: UIViewController {
             firstTimeRunning = false
         }
         
+    
     }
 
     func gestureRecognizer() {
@@ -187,7 +191,7 @@ class CalendarVC: UIViewController {
                     let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
                     dropList.append(item.lectureName)
                     self.dropDown?.dataSource = dropList
-                    print(item)
+                    //print(item)
                 }
                 
             case .pathErr : print("Patherr")
@@ -280,7 +284,8 @@ class CalendarVC: UIViewController {
             currentMonthIndex = 11
             currentYear -= 1
         }
-        topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
+        //topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
+        topDateButton.text = "\(currentYear)년 \(months[currentMonthIndex])"
         
         // 2월 일 수 처리
         if currentMonthIndex == 1 {
@@ -305,7 +310,9 @@ class CalendarVC: UIViewController {
             currentMonthIndex = 0
             currentYear += 1
         }
-        topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
+        //topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
+        
+        topDateButton.text = "\(currentYear)년 \(months[currentMonthIndex])"
         // 2월 일 수 처리
         if currentMonthIndex == 1 {
             if currentYear % 4 == 0 {
@@ -375,8 +382,8 @@ extension CalendarVC {
         presentYear = currentYear
         
         // 현재 년, 월 타이틀에 보이기
-        topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
-        
+        //topDateButton.setTitle("\(currentYear)년 \(months[currentMonthIndex])", for: .normal)
+        topDateButton.text = "\(currentYear)년 \(months[currentMonthIndex])"
         // 처음 열었을 때 오늘 날짜로 보이기
         dateHeaderLabel.text = String(todaysDate)
         //monthHeaderLabel.text = String("\(presentMonthIndex+1)월")
@@ -431,6 +438,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         if collectionView == self.dateCollectionView {
             // 다음 달로 넘어가면 선택한 날짜 색 초기화
             calendarCell.dateView.backgroundColor = UIColor.white
+        
             
             // 이전 달 cell 표시
             if indexPath.item <= firstWeekDayOfMonth - 2 {
@@ -452,8 +460,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     calendarCell.image2.image = nil
                     calendarCell.image3.image = nil
                 }
-                
-            
                 return calendarCell
             } // 이후 달 cell 표시
             else if indexPath.item >= firstWeekDayOfMonth + (numOfDaysInMonth[currentMonthIndex]-1) {
@@ -497,6 +503,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     // 오늘 날짜 인덱스 저장
                     self.index = indexPath
                 }
+                
                 // 달력에 날짜 별 일정 점 찍기
                 for i in 0..<self.classList2.count {
                     let dayMove = String(format: "%02d", arguments: [currentMonthCalendarIndex]) // with zero month
@@ -517,16 +524,6 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     }
                 }
                 
-                // 점들 가운데 정렬을 위한 분기처리
-//                if calendarCell.image2.image == nil && calendarCell.image3.image == nil {
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
-//                }
-//                else if calendarCell.image3.image == nil {
-//                    calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//                }
-                
-                
                 // 캘린더를 다음달로 전환 했을 때 1일 셀렉해놓기
                 if currentMonthIndex != presentMonthIndex {
                     let firstWeekDayIndex  = getFirstWeekDay() - 1
@@ -537,6 +534,16 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
                     self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
                 }
             }
+            
+            // 점들 가운데 정렬을 위한 분기처리
+//            if calendarCell.image2.image == nil {
+//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
+//            }
+//            else if calendarCell.image3.image == nil {
+//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+//            }
+            
             return calendarCell
         }
         // TutorCollectionView
@@ -570,18 +577,39 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             // 날짜 선택시 셀 색깔 바뀌기
             cell?.dateView.backgroundColor = UIColor.veryLightPinkTwo
             classDateList.removeAll()
-            // 오늘 날짜 선택 해놓기
             
+            // 오늘 날짜 선택 해놓기
             if indexPath == index && String(currentMonthIndexConstant) == String(currentMonthIndex+1) {
                 cell?.dateLabel.textColor = UIColor.softBlue
                 cell?.dateView.backgroundColor = UIColor.white
                 //cell?.dateLabel.font = UIFont.boldSystemFont(ofSize: 13)
             }
             
+            // 날짜별 요일 처리
+            if indexPath.item == 0 || indexPath.item % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[0]
+            }
+            if indexPath.item == 1 || (indexPath.item-1) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[1]
+            }
+            if indexPath.item == 2 || (indexPath.item-2) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[2]
+            }
+            if indexPath.item == 3 || (indexPath.item-3) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[3]
+            }
+            if indexPath.item == 4 || (indexPath.item-4) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[4]
+            }
+            if indexPath.item == 5 || (indexPath.item-5) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[5]
+            }
+            if indexPath.item == 6 || (indexPath.item-6) % 7 == 0 {
+                weekDayHeaderLabel.text = weekDays[6]
+            }
+        
             if let date = cell?.dateLabel.text! {
-                // 날짜 선택시 헤더 날짜 레이블 바뀌기
                 dateHeaderLabel.text = date
-                //monthHeaderLabel.text = "\(currentMonthIndex+1)월"
                 
                 // 날짜별로 해당하는 수업 리턴: 선택한 날짜에 일치하는 데이터를 새로운 리스트에 append 해주기
                 for index in 0..<classList2.count {

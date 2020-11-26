@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BX6-GH-RmG">
-                                        <rect key="frame" x="286" y="44" width="43" height="48"/>
+                                        <rect key="frame" x="286" y="50" width="43" height="48"/>
                                         <state key="normal" image="calenderBtnFillter">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-fv-ddV">
-                                        <rect key="frame" x="0.0" y="86" width="48" height="32"/>
+                                        <rect key="frame" x="0.0" y="97" width="48" height="32"/>
                                         <state key="normal" image="calenderBtnPreviousMonth">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -37,7 +37,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wrn-6R-Jo3">
-                                        <rect key="frame" x="201" y="86" width="48" height="32"/>
+                                        <rect key="frame" x="206.66666666666666" y="97" width="48" height="32"/>
                                         <state key="normal" image="calenderBtnNextMonth">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -46,13 +46,13 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세화님의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmY-l1-8zM">
-                                        <rect key="frame" x="29" y="59" width="52" height="18"/>
+                                        <rect key="frame" x="29" y="65" width="52" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40f-vH-b7O">
-                                        <rect key="frame" x="332" y="44" width="43" height="48"/>
+                                        <rect key="frame" x="332" y="50" width="43" height="48"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="calenderBtnNotice">
@@ -63,43 +63,42 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKF-Pf-9Ea">
-                                        <rect key="frame" x="84" y="59" width="26" height="18"/>
+                                        <rect key="frame" x="84" y="65" width="26" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="캘린더" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hX-GT-WOX">
-                                        <rect key="frame" x="113" y="59" width="39" height="18"/>
+                                        <rect key="frame" x="113" y="65" width="39" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx2-t5-cf7" userLabel="topDateButton">
-                                        <rect key="frame" x="63" y="82" width="120" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                                        <state key="normal" title="2020년  7월">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020년 11월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqY-oM-TFv">
+                                        <rect key="frame" x="60" y="98" width="134.66666666666666" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="GKF-Pf-9Ea" firstAttribute="leading" secondItem="MmY-l1-8zM" secondAttribute="trailing" constant="3" id="00q-tW-m2g"/>
                                     <constraint firstAttribute="trailing" secondItem="40f-vH-b7O" secondAttribute="trailing" id="6UQ-Fv-00a"/>
-                                    <constraint firstItem="OME-fv-ddV" firstAttribute="centerY" secondItem="sx2-t5-cf7" secondAttribute="centerY" id="9tr-UT-Yvt"/>
-                                    <constraint firstAttribute="bottom" secondItem="sx2-t5-cf7" secondAttribute="bottom" constant="8" id="AzR-Cc-L1g"/>
-                                    <constraint firstItem="sx2-t5-cf7" firstAttribute="leading" secondItem="OME-fv-ddV" secondAttribute="trailing" constant="15" id="NKj-9E-acp"/>
-                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="sx2-t5-cf7" secondAttribute="trailing" constant="18" id="WPG-s9-rIy"/>
+                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="UqY-oM-TFv" secondAttribute="centerY" id="8of-p9-nSg"/>
+                                    <constraint firstItem="OME-fv-ddV" firstAttribute="centerY" secondItem="UqY-oM-TFv" secondAttribute="centerY" id="S9l-5O-F6x"/>
+                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="UqY-oM-TFv" secondAttribute="trailing" constant="12" id="Vcc-nG-xeN"/>
                                     <constraint firstItem="4hX-GT-WOX" firstAttribute="leading" secondItem="GKF-Pf-9Ea" secondAttribute="trailing" constant="3" id="WXG-rg-JWW"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="centerY" secondItem="BX6-GH-RmG" secondAttribute="centerY" id="ZP1-87-hsn"/>
-                                    <constraint firstItem="sx2-t5-cf7" firstAttribute="top" secondItem="MmY-l1-8zM" secondAttribute="bottom" constant="5" id="abR-cJ-CuQ"/>
-                                    <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="sx2-t5-cf7" secondAttribute="centerY" id="eIR-Ym-ncb"/>
+                                    <constraint firstItem="UqY-oM-TFv" firstAttribute="leading" secondItem="OME-fv-ddV" secondAttribute="trailing" constant="12" id="ckp-yn-7Gd"/>
                                     <constraint firstItem="GKF-Pf-9Ea" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="fhB-lD-W1f"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="leading" secondItem="BX6-GH-RmG" secondAttribute="trailing" constant="3" id="fxk-ZP-dme"/>
                                     <constraint firstItem="OME-fv-ddV" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" id="jDR-b4-wSp"/>
+                                    <constraint firstItem="UqY-oM-TFv" firstAttribute="top" secondItem="MmY-l1-8zM" secondAttribute="bottom" constant="15" id="l2r-LL-Ewh"/>
                                     <constraint firstItem="MmY-l1-8zM" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" constant="29" id="n7e-s1-Vm7"/>
                                     <constraint firstAttribute="height" constant="130" id="qaW-1K-SR8"/>
                                     <constraint firstItem="4hX-GT-WOX" firstAttribute="centerY" secondItem="GKF-Pf-9Ea" secondAttribute="centerY" id="twm-Ag-6TT"/>
+                                    <constraint firstItem="MmY-l1-8zM" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="top" constant="65" id="vbv-XP-bL9"/>
                                     <constraint firstItem="BX6-GH-RmG" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="wuo-BW-Pud"/>
                                 </constraints>
                             </view>
@@ -327,7 +326,7 @@
                         <outlet property="leftButton" destination="OME-fv-ddV" id="iOa-EL-oE7"/>
                         <outlet property="plusButton" destination="OeA-09-Kft" id="5dg-KS-u3h"/>
                         <outlet property="rightButton" destination="Wrn-6R-Jo3" id="giU-5q-tk6"/>
-                        <outlet property="topDateButton" destination="sx2-t5-cf7" id="wDH-FX-VVE"/>
+                        <outlet property="topDateButton" destination="UqY-oM-TFv" id="tRJ-Cp-Cyy"/>
                         <outlet property="totalView" destination="Zt4-lF-jPS" id="LRZ-fv-J4F"/>
                         <outlet property="tutorCollectionView" destination="hDe-Zy-BfX" id="9dR-VD-uIv"/>
                         <outlet property="tutorView" destination="sYc-1k-x0p" id="ggt-a4-yhw"/>
