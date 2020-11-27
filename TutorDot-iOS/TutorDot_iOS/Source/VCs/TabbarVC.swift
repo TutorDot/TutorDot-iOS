@@ -75,7 +75,7 @@ class TabbarVC: UITabBarController {
         
         // MyPage Tab
         let personalInfoStoryboard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        guard let fourthTab = personalInfoStoryboard.instantiateViewController(identifier: "MyPageVC")
+        guard let fourthTab = personalInfoStoryboard.instantiateViewController(identifier: "MypageNavigationController")
                 as? MyPageVC  else {
             return
         }

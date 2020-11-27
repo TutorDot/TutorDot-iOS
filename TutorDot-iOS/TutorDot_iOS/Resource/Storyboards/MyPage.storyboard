@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QLk-Sh-m2p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ROl-ja-p8H">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ld-gX-pa1">
-                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내정보" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApE-oR-vMY">
                                         <rect key="frame" x="182" y="17" width="50" height="18"/>
@@ -52,7 +52,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cwz-IV-G7Y">
-                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <color key="backgroundColor" name="journalColor"/>
                                 <color key="sectionIndexBackgroundColor" name="journalColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Wz3-2N-p0a">
@@ -352,6 +352,7 @@
                             <constraint firstItem="cwz-IV-G7Y" firstAttribute="leading" secondItem="Z8Q-t2-KWk" secondAttribute="leading" id="tuv-Up-Bfg"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="QEm-H2-EuP"/>
                     <connections>
                         <outlet property="classCollectionView" destination="7Et-cq-paM" id="Hzo-Bl-bfx"/>
                         <outlet property="myClassAddButton" destination="iSN-Dp-X3J" id="CaY-j7-YxU"/>
@@ -362,12 +363,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4A-Bp-Mnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2304.3478260869565" y="225"/>
+            <point key="canvasLocation" x="-1394.2028985507247" y="225"/>
         </scene>
         <!--Mypage New Class NameVC-->
         <scene sceneID="0bW-aW-w9s">
             <objects>
-                <viewController storyboardIdentifier="MyClassAddVC" id="UKM-1x-E0c" customClass="MypageNewClassNameVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageNewClassNameVC" id="UKM-1x-E0c" customClass="MypageNewClassNameVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6P3-66-AYv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -422,8 +423,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="수업 이름을 입력해 주세요." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0T-sv-SXe">
-                                <rect key="frame" x="36" y="267" width="159" height="19"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="수업 이름을 입력해 주세요." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0T-sv-SXe">
+                                <rect key="frame" x="36" y="267" width="304" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="xdC-yu-lDf"/>
                                 </constraints>
@@ -433,6 +434,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quR-Aq-fZW">
                                 <rect key="frame" x="348" y="248" width="48" height="48"/>
                                 <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                <connections>
+                                    <action selector="deleteButtonDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="VSA-fE-Nnf"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="색상 선택" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLu-DE-Oga">
                                 <rect key="frame" x="36" y="337.5" width="52.5" height="17"/>
@@ -441,45 +445,60 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="VHF-qZ-aem">
-                                <rect key="frame" x="36" y="368.5" width="170" height="14"/>
+                                <rect key="frame" x="36" y="368.5" width="200" height="20"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPE-Kt-gWb">
-                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="UPE-Kt-gWb" secondAttribute="height" multiplier="1:1" id="6fa-7C-uo7"/>
-                                            <constraint firstAttribute="height" constant="14" id="Vjp-Tm-0dR"/>
-                                            <constraint firstAttribute="width" constant="14" id="ZPk-1b-to0"/>
+                                            <constraint firstAttribute="height" constant="20" id="Vjp-Tm-0dR"/>
+                                            <constraint firstAttribute="width" constant="20" id="ZPk-1b-to0"/>
                                         </constraints>
                                         <state key="normal" image="red"/>
+                                        <connections>
+                                            <action selector="redColorDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="yrx-76-4mg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3J-6R-aS3">
-                                        <rect key="frame" x="39" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="45" y="0.0" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="jwd-d2-Ahh"/>
-                                            <constraint firstAttribute="width" constant="14" id="rQJ-oX-kwv"/>
+                                            <constraint firstAttribute="height" constant="20" id="jwd-d2-Ahh"/>
+                                            <constraint firstAttribute="width" constant="20" id="rQJ-oX-kwv"/>
                                         </constraints>
                                         <state key="normal" image="calenderImgYellow"/>
+                                        <connections>
+                                            <action selector="yellowColorDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="hNY-bW-XiP"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eey-gC-H0M">
-                                        <rect key="frame" x="78" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="90" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eey-gC-H0M" secondAttribute="height" multiplier="1:1" id="lnO-VW-SWX"/>
                                         </constraints>
                                         <state key="normal" image="green"/>
+                                        <connections>
+                                            <action selector="greenColorDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="J0c-HM-M44"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pB-eC-6mp">
-                                        <rect key="frame" x="117" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="135" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="8pB-eC-6mp" secondAttribute="height" multiplier="1:1" id="wZb-bN-fct"/>
                                         </constraints>
                                         <state key="normal" image="blue"/>
+                                        <connections>
+                                            <action selector="blueColorDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="g1r-lt-JjK"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ql-zx-nmV">
-                                        <rect key="frame" x="156" y="0.0" width="14" height="14"/>
+                                        <rect key="frame" x="180" y="0.0" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="5ql-zx-nmV" secondAttribute="height" multiplier="1:1" id="iUb-jR-2ca"/>
                                         </constraints>
                                         <state key="normal" image="purple"/>
+                                        <connections>
+                                            <action selector="purpleColorDidTap:" destination="UKM-1x-E0c" eventType="touchUpInside" id="X5t-UM-5qY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -525,15 +544,25 @@
                             <constraint firstItem="n8e-ix-i0N" firstAttribute="leading" secondItem="6P3-66-AYv" secondAttribute="leading" constant="36" id="yQT-pI-R4b"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aF2-el-Yfn"/>
+                    <connections>
+                        <outlet property="blueColor" destination="8pB-eC-6mp" id="xyp-sP-q5M"/>
+                        <outlet property="greenColor" destination="eey-gC-H0M" id="3sv-rw-0Fe"/>
+                        <outlet property="lectureName" destination="h0T-sv-SXe" id="SLg-Nf-yRN"/>
+                        <outlet property="nextButton" destination="tMK-Gt-L9F" id="1yh-03-Yue"/>
+                        <outlet property="purpleColor" destination="5ql-zx-nmV" id="tBZ-HM-yGr"/>
+                        <outlet property="redColor" destination="UPE-Kt-gWb" id="9vR-2u-rO2"/>
+                        <outlet property="yellowColor" destination="g3J-6R-aS3" id="CLO-S7-oxD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcX-5N-7sV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2304" y="905"/>
+            <point key="canvasLocation" x="-1394.2028985507247" y="904.6875"/>
         </scene>
         <!--Mypage New Class DetailVC-->
         <scene sceneID="aZx-l4-R3w">
             <objects>
-                <viewController storyboardIdentifier="MyClassAddDetailVC" id="T6m-WI-w6W" customClass="MypageNewClassDetailVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageNewClassDetailVC" id="T6m-WI-w6W" customClass="MypageNewClassDetailVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YeQ-hH-jIu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -589,16 +618,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00  시간" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S1p-bL-btn">
-                                <rect key="frame" x="36" y="267" width="52.5" height="19"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00  시간" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S1p-bL-btn">
+                                <rect key="frame" x="36" y="267" width="255" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="KHH-jf-P2K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="timeEndEditing:" destination="T6m-WI-w6W" eventType="editingDidEnd" id="Imm-vJ-lmi"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00  만원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oHH-uL-6nH">
-                                <rect key="frame" x="36" y="369.5" width="52.5" height="19"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00  만원" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oHH-uL-6nH">
+                                <rect key="frame" x="36" y="370" width="304" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="kIV-kJ-JSE"/>
                                 </constraints>
@@ -635,8 +667,8 @@
                                     <constraint firstAttribute="width" constant="85" id="ldo-Gh-b9h"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioP-aj-cRf">
-                                <rect key="frame" x="140" y="472" width="52" height="19"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="계좌번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ioP-aj-cRf">
+                                <rect key="frame" x="140" y="472" width="211" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="Nkw-K5-4F5"/>
                                 </constraints>
@@ -657,14 +689,23 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Be-we-DzD">
                                 <rect key="frame" x="348" y="248" width="48" height="48"/>
                                 <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                <connections>
+                                    <action selector="timeDelButtonDidTap:" destination="T6m-WI-w6W" eventType="touchUpInside" id="d5N-NU-to2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbL-hL-35a">
                                 <rect key="frame" x="348" y="345" width="48" height="48"/>
                                 <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                <connections>
+                                    <action selector="priceDelButtonDidTap:" destination="T6m-WI-w6W" eventType="touchUpInside" id="On6-po-2Sz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AA6-ti-Yae">
                                 <rect key="frame" x="348" y="453" width="48" height="48"/>
                                 <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                <connections>
+                                    <action selector="bankDelButtonDidTap:" destination="T6m-WI-w6W" eventType="touchUpInside" id="2Oe-Qv-mKN"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkc-5f-1ew" userLabel="View-bankaccount">
                                 <rect key="frame" x="131" y="497.5" width="247" height="1"/>
@@ -720,15 +761,21 @@
                             <constraint firstItem="ecs-DY-lhO" firstAttribute="leading" secondItem="bGW-4x-mdX" secondAttribute="leading" constant="36" id="ylR-Gg-5Ra"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bank" destination="SCt-Uw-2Xd" id="Ooz-pd-AVs"/>
+                        <outlet property="bankAccount" destination="ioP-aj-cRf" id="yfE-Eg-NjK"/>
+                        <outlet property="price" destination="oHH-uL-6nH" id="Er2-mY-tYg"/>
+                        <outlet property="time" destination="S1p-bL-btn" id="HcC-qT-sSm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz8-M8-MHJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1659.4202898550725" y="904.6875"/>
+            <point key="canvasLocation" x="-749.27536231884062" y="904.6875"/>
         </scene>
         <!--Mypage New Class TimeVC-->
         <scene sceneID="Is3-Rg-knV">
             <objects>
-                <viewController storyboardIdentifier="MyClassAddTimeVC" id="l3e-cu-Mta" customClass="MypageNewClassTimeVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageNewClassTimeVC" id="l3e-cu-Mta" customClass="MypageNewClassTimeVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QsX-6a-reG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -877,7 +924,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clg-to-sNL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1013.0434782608696" y="904.6875"/>
+            <point key="canvasLocation" x="-102.89855072463769" y="904.6875"/>
         </scene>
         <!--Add Class CompleteVC-->
         <scene sceneID="E4w-k2-fHm">
@@ -960,7 +1007,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRd-Gu-woA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-365.21739130434787" y="904.6875"/>
+            <point key="canvasLocation" x="544.92753623188412" y="904.6875"/>
         </scene>
         <!--Tutor Profile EditVC-->
         <scene sceneID="259-tO-yLN">
@@ -1115,7 +1162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfY-jo-G51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1620" y="225"/>
+            <point key="canvasLocation" x="-710.14492753623199" y="225"/>
         </scene>
         <!--Developer InfoVC-->
         <scene sceneID="slZ-v6-cbf">
@@ -1442,7 +1489,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Se-Zj-xuj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1021" y="1039"/>
+            <point key="canvasLocation" x="1929.7101449275365" y="1038.6160714285713"/>
         </scene>
         <!--Logout Pop UpVC-->
         <scene sceneID="cab-3O-Trz">
@@ -2393,7 +2440,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4z-Zw-MXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3192" y="658"/>
+            <point key="canvasLocation" x="5010.8695652173919" y="657.58928571428567"/>
         </scene>
         <!--My Class AddVC-->
         <scene sceneID="NFi-eo-X8E">
@@ -2882,7 +2929,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGr-mh-L6c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3882" y="658"/>
+            <point key="canvasLocation" x="5702.1739130434789" y="657.58928571428567"/>
         </scene>
         <!--My Class InfoVC-->
         <scene sceneID="LiX-4f-3Qj">
@@ -3341,7 +3388,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAI-qZ-5k7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="441" y="912"/>
+            <point key="canvasLocation" x="1350" y="911.71875"/>
         </scene>
         <!--Class InviteVC-->
         <scene sceneID="Qq7-c7-46I">
@@ -3467,7 +3514,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSt-RK-Oc2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-742" y="226"/>
+            <point key="canvasLocation" x="168.11594202898553" y="225.66964285714283"/>
         </scene>
         <!--Invite CodeVC-->
         <scene sceneID="elC-RR-UdE">
@@ -3607,7 +3654,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxX-cd-2fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100.00000000000001" y="225"/>
+            <point key="canvasLocation" x="810.14492753623199" y="225"/>
         </scene>
         <!--Class DisconnectionVC-->
         <scene sceneID="6aN-da-eyJ">
@@ -3821,7 +3868,25 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDZ-TM-RGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="226"/>
+            <point key="canvasLocation" x="1442.0289855072465" y="225.66964285714283"/>
+        </scene>
+        <!--Mypage Navigation Controller-->
+        <scene sceneID="W9f-lJ-yaz">
+            <objects>
+                <navigationController storyboardIdentifier="MypageNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ROl-ja-p8H" customClass="MypageNavigationController" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qL2-gh-Lck">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QLk-Sh-m2p" kind="relationship" relationship="rootViewController" id="vjF-6B-N7R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C4Q-UP-DzI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2304.3478260869565" y="225"/>
         </scene>
     </scenes>
     <resources>

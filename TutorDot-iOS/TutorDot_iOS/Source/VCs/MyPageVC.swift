@@ -116,9 +116,8 @@ class MyPageVC: UIViewController {
     @IBAction func addClassButtonDidTap(_ sender: Any) {
         let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
         if myRole.text == "튜터"{
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "MyClassAddVC")
-            nextVC.modalPresentationStyle = .currentContext
-            nextVC.modalTransitionStyle = .crossDissolve
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "MypageNewClassNameVC")
+            nextVC.modalPresentationStyle = .fullScreen
             present(nextVC, animated: true, completion: nil)
         } else if myRole.text == "튜티" {
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")

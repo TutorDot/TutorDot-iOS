@@ -8,9 +8,25 @@
 
 import UIKit
 
+
+
+
+
 class MypageNewClassTimeVC: UIViewController {
 
     @IBOutlet weak var completeButton: UIButton!
+    
+    static let identifier: String = "MypageNewClassTimeVC"
+    
+    
+    var className: String = ""
+    var classColor: String = ""
+    var classTime: Int = 0
+    var classPrice: Int = 0
+    var tutorBank: String = ""
+    var tutorBanckAccout: String = ""
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
