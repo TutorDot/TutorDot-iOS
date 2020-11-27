@@ -85,21 +85,19 @@ class MyClassInfoVC: UIViewController {
     }
     
     @IBAction func inviteButtonDidTap(_ sender: Any) {
-        //TuteeInviteCodeVC
+        //튜터가 튜티를 초대 TuteeInviteCodeVC
         let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "TutorClassInviteVC")
         nextVC.modalPresentationStyle = .currentContext
         nextVC.modalTransitionStyle = .crossDissolve
         present(nextVC, animated: true, completion: nil)
         
-        
-        //TutorInviteCodeVC
-        
+  
     }
     
     @IBAction func unconnectButtonDidTap(_ sender: Any) {
         let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let popupVC = storyBoard.instantiateViewController(withIdentifier: "LeaveClassVC")
+        let popupVC = storyBoard.instantiateViewController(withIdentifier: "ClassDisconnectionVC")
         popupVC.modalPresentationStyle = .overCurrentContext
         popupVC.modalTransitionStyle = .crossDissolve
         present(popupVC, animated: true, completion: nil)

@@ -20,7 +20,8 @@ class MypageInfoCell: UITableViewCell {
         versionLabel = UILabel(frame : CGRect(x: 315, y: 19, width: 60, height: 17))
         versionLabel.text = "1 . 0 . 0"
         versionLabel.textColor = UIColor.brownishGrey2
-        versionLabel.font = UIFont(name: versionLabel.font.fontName, size: 14)
+        versionLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+
         self.addSubview(versionLabel)
     }
     

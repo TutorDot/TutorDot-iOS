@@ -44,6 +44,4 @@ struct LidToggleData: Codable {
         self.profileUrls = profileUrls
         
     }
-
-    
 }

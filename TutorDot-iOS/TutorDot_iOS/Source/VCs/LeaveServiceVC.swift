@@ -11,7 +11,7 @@ import UIKit
 class LeaveServiceVC: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
-    let images: [String] = ["servivcebye1ImgIllust", "22", "33"]
+    let images: [String] = ["servivcebye1ImgIllust", "servivcebye2ImgIllust", "servivcebye3ImgIllust"]
     let titles: [String] = ["저희의 서비스가 부족했나 봐요", "그동안 튜터닷을 이용해주셔서 감사합니다", "언제든 튜터닷을 다시 찾아주세요"]
    
     
