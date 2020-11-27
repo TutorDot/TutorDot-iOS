@@ -114,12 +114,13 @@ class MyPageVC: UIViewController {
     }
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+        
         if myRole.text == "튜터"{
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "MypageNewClassNameVC")
-            nextVC.modalPresentationStyle = .fullScreen
-            present(nextVC, animated: true, completion: nil)
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
         } else if myRole.text == "튜티" {
+            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
             nextVC.modalPresentationStyle = .currentContext
             nextVC.modalTransitionStyle = .crossDissolve

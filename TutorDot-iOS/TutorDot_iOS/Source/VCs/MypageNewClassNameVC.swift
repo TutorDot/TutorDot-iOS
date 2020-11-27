@@ -90,12 +90,12 @@ class MypageNewClassNameVC: UIViewController {
     }
     
     @IBAction func closeButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
         
-        guard let receiveVC = self.storyboard?.instantiateViewController(withIdentifier: MypageNewClassDetailVC.identifier) as? MypageNewClassDetailVC else {return}
+        
         
         if lectureName.text == "" || newColor == "" {
             var inputMessage: String = ""
@@ -108,12 +108,16 @@ class MypageNewClassNameVC: UIViewController {
             let alert = UIAlertController(title: "필요한 값이 없습니다", message: inputMessage, preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        
         } else {
+            guard let receiveVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassDetailVC") as? MypageNewClassDetailVC else {return}
+            
             receiveVC.classColor = newColor
             receiveVC.className = lectureName.text ?? ""
+            
             self.navigationController?.pushViewController(receiveVC, animated: true)
         }
+        
+        
         
     }
     
