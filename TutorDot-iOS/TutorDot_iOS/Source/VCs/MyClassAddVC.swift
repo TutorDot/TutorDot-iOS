@@ -494,7 +494,7 @@ extension MyClassAddVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddRegularClassTimeCell.identifier, for: indexPath) as? AddRegularClassTimeCell else { return UITableViewCell()}
-        cell.delegate = self
+
         
         return cell
 
@@ -513,10 +513,4 @@ extension MyClassAddVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-extension MyClassAddVC: AddRegularClassTimeCellDelegate {
-    func setScheduler(_ date: String, _ start: String, _ end: String) {
-        let newSchedule = Schedules(day: date, orgStartTime: start, orgEndTime: end)
-        schedule.append(newSchedule)
-        print(schedule.count, "append success", schedule)
-    }
-}
+

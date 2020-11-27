@@ -22,11 +22,8 @@ class AddClassCompleteVC: UIViewController {
     }
     
     @IBAction func closeButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "MyPageVC")
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
+        // root View 로 이동
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func checkClassListButtonDidTap(_ sender: Any) {

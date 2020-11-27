@@ -30,7 +30,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp4VC.identifier) as? SignUp4VC else {return}
         if idTextField.text!.isEmpty {
-            let alert = UIAlertController(title: nil, message: "아이디를 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "필요한 값이 없습니다", message: "아이디를 입력해주세요", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -47,6 +47,11 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func backButtonSelected(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func idCheckButton(_ sender: Any) {
+        
+    }
+    
     
     func setUpViews() {
         let bottomBorder = CALayer()
