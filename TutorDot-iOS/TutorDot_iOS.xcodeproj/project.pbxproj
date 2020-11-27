@@ -55,6 +55,9 @@
 		0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0154D9E8256BB910000953E4 /* AlertBlankTableViewCell.xib */; };
 		0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */; };
 		0166C6BB2566CDA70061E984 /* SignUpAgreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */; };
+		01871802257156CD0021EDD4 /* OnboardingNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01871801257156CD0021EDD4 /* OnboardingNewVC.swift */; };
+		01871806257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01871805257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift */; };
+		0187180925715C560021EDD4 /* OnboardingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187180825715C560021EDD4 /* OnboardingImage.swift */; };
 		0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D0255A46A200175BF7 /* SignUp2VC.swift */; };
 		0193A1D4255A4B1E00175BF7 /* SignUp3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */; };
 		0193A1D7255A4FCD00175BF7 /* SignUp4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */; };
@@ -183,6 +186,9 @@
 		0154D9E8256BB910000953E4 /* AlertBlankTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertBlankTableViewCell.xib; sourceTree = "<group>"; };
 		0157927E255FE97C00DE55F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0166C6BA2566CDA70061E984 /* SignUpAgreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAgreeVC.swift; sourceTree = "<group>"; };
+		01871801257156CD0021EDD4 /* OnboardingNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNewVC.swift; sourceTree = "<group>"; };
+		01871805257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingNewCollectionViewCell.swift; sourceTree = "<group>"; };
+		0187180825715C560021EDD4 /* OnboardingImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingImage.swift; sourceTree = "<group>"; };
 		0193A1D0255A46A200175BF7 /* SignUp2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp2VC.swift; sourceTree = "<group>"; };
 		0193A1D3255A4B1E00175BF7 /* SignUp3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp3VC.swift; sourceTree = "<group>"; };
 		0193A1D6255A4FCD00175BF7 /* SignUp4VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp4VC.swift; sourceTree = "<group>"; };
@@ -349,6 +355,7 @@
 				F46808F6256FD91100D925F3 /* MypageNewClassDetailVC.swift */,
 				F46808F9256FD95100D925F3 /* MypageNewClassTimeVC.swift */,
 				F46808FC256FDBF100D925F3 /* AddClassCompleteVC.swift */,
+				01871801257156CD0021EDD4 /* OnboardingNewVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -404,6 +411,7 @@
 				F4F13DF425610D5A00115FD4 /* QuestionListCell.swift */,
 				0154D9E7256BB90F000953E4 /* AlertBlankTableViewCell.swift */,
 				F46808FF256FE27000D925F3 /* MypageNoClassCell.swift */,
+				01871805257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -487,6 +495,7 @@
 				01C4780424B4B6760005BC45 /* CalendarDot.swift */,
 				01EFFF1824B9D78100518DE6 /* OnBoardingImageInfo.swift */,
 				013B73BD24C09D0A002E60C4 /* AlertInfo.swift */,
+				0187180825715C560021EDD4 /* OnboardingImage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -693,6 +702,7 @@
 				F471773024B218790098C827 /* NotesInfo.swift in Sources */,
 				F4680901256FE27000D925F3 /* MypageNoClassCell.swift in Sources */,
 				01F1215A256C065F00910CEB /* AlertServiceVC.swift in Sources */,
+				01871802257156CD0021EDD4 /* OnboardingNewVC.swift in Sources */,
 				F4D1A09C24B4FD2B00B13D65 /* MypageServiceCell.swift in Sources */,
 				F49825F8255D2C5C00E2FA5A /* QuestionVC.swift in Sources */,
 				F4B565542536D75200A77C01 /* NotesContentCell.swift in Sources */,
@@ -738,9 +748,11 @@
 				F4D1A0D524BA9CDE00B13D65 /* BlankMyClassCell.swift in Sources */,
 				F471772E24B203810098C827 /* JournalDataCell.swift in Sources */,
 				012639B224ADF64B009EA0BA /* TutorCollectionViewCell.swift in Sources */,
+				01871806257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift in Sources */,
 				F4D1A0B824B75D3100B13D65 /* LeaveClassVC.swift in Sources */,
 				F46808F4256FD8E800D925F3 /* MypageNewClassNameVC.swift in Sources */,
 				013B73C024C0BF83002E60C4 /* LidData.swift in Sources */,
+				0187180925715C560021EDD4 /* OnboardingImage.swift in Sources */,
 				F4200E0124BDA57A00EA1D6F /* ProfileData.swift in Sources */,
 				0126398524AA034F009EA0BA /* TabbarVC.swift in Sources */,
 				015097C5255412BA00935DC6 /* FilterDropDownCell.swift in Sources */,
