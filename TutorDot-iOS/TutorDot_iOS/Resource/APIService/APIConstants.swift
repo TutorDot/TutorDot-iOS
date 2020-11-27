@@ -21,7 +21,7 @@ struct APIConstants {
     // 수업관리
     static let lectureURL = APIConstants.baseURL + "/lecture"  //수업 추가
     static let lidURL = APIConstants.baseURL + "/lecture/:lid"
-    static let invitationLidURL = APIConstants.baseURL + "/lecture/invitation/:lid"
+    static let invitationLidURL = APIConstants.baseURL + "/lecture/invitation/:lid" //수업 초대
     static let invitationURL = APIConstants.baseURL + "/lecture/invitation"
     static let toggleURL = APIConstants.baseURL + "/lecture/toggle"
     
