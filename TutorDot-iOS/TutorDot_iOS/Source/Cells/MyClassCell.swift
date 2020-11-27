@@ -30,10 +30,10 @@ class MyClassCell: UICollectionViewCell {
         myClassView.layer.cornerRadius = 7
     }
     
-    func setMyClassInfo(classColor : String, classTitle: String, Tutee1:String, Tutee2:String, role: String){
+    func setMyClassInfo(classColor : String, classTitle: String, Tutee:String){
         self.classColor.image = UIImage(named: classColor)
         self.classTitle.text = classTitle
-        myRoleSet = role
+        self.TuteeImage.image = UIImage(named: Tutee)
     }
     
 }

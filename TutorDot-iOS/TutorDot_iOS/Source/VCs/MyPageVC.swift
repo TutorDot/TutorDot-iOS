@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os
 
 class MyPageVC: UIViewController {
 
@@ -17,7 +18,7 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var tutorImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
     
-    @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
+    
     
     
     override func viewDidLoad() {
@@ -27,7 +28,7 @@ class MyPageVC: UIViewController {
         setMyclassViews()
         
         gotoProfileEdit()
-        autoLayoutView()
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,31 +37,51 @@ class MyPageVC: UIViewController {
         classCollectionView.dataSource = self
         
         classCollectionView.isScrollEnabled = true
-        classCollectionView.contentSize = CGSize(width: 112, height: self.classCollectionView.frame.height)
+        classCollectionView.contentSize = CGSize(width: 206, height: 81)
     }
     
-    func autoLayoutView(){
-        headerHeightContraints.constant = self.view.frame.height * 94/812
-    }
+  
     
     func setMyclassViews(){
         myClassAddButton.layer.cornerRadius = 7
     }
     
     //상단 콜렉션 뷰에서 쓸 리스트
-    private var MyClassInfos: [MyClassInfo] = []
+    private var MyClassInfos: [LidToggleData] = []
     //하단 테이블 뷰에서 쓸 리스트
     private var Alert: [MypageInfo] = []
     private var Info: [MypageInfo] = []
     private var Service: [MypageInfo] = []
     
     func setMyClassInfos(){
-        let myClass1 = MyClassInfo(classColor: .blue, classTitle: "권세희 학생 영어 회화수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass2 = MyClassInfo(classColor: .red, classTitle: "최인정 학생 일러스트 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass3 = MyClassInfo(classColor: .green, classTitle: "변정인 학생 정리전돈 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass4 = MyClassInfo(classColor: .yellow, classTitle: "류세화 학생 카트 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
         
-        MyClassInfos = [myClass1, myClass2, myClass3, myClass4]
+        // MARK - 수업 리스트 서버통신
+        ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
+            switch networkResult {
+                case .success(let resultData):
+                    guard let data = resultData as? [LidToggleData] else { return print(Error.self)
+                        
+                    }
+                    for index in 0..<data.count {
+                        
+                        let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                        
+                        self.MyClassInfos.append(item)
+                    }
+
+                    self.classCollectionView.reloadData()
+                case .pathErr :
+                    os_log("PathErr", log: .mypage)
+                case .serverErr :
+                    os_log("ServerErr", log: .mypage)
+                case .requestErr(let message) :
+                    os_log(message as! StaticString , log: .mypage)
+                case .networkFail:
+                    os_log("networkFail", log: .mypage)
+            }
+            
+            
+        }
     }
     
     func setSettingView(){
@@ -93,13 +114,13 @@ class MyPageVC: UIViewController {
     }
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+        
         if myRole.text == "튜터"{
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "MyClassAddVC")
-            nextVC.modalPresentationStyle = .currentContext
-            nextVC.modalTransitionStyle = .crossDissolve
-            present(nextVC, animated: true, completion: nil)
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
         } else if myRole.text == "튜티" {
+            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
             nextVC.modalPresentationStyle = .currentContext
             nextVC.modalTransitionStyle = .crossDissolve
@@ -250,7 +271,13 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
                 present(nextVC, animated: true, completion: nil)
             }
         case 2:
-            if indexPath.row == 1 { //로그아웃 클릭 시
+            if indexPath.row == 0 { //비밀번호 변경 클릭 시
+                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+                let popupVC = storyBoard.instantiateViewController(withIdentifier: "passwordModifyVC")
+                popupVC.modalPresentationStyle = .fullScreen
+                present(popupVC, animated: true, completion: nil)
+                
+            } else if indexPath.row == 1 { //로그아웃 클릭 시
                 let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
                 let popupVC = storyBoard.instantiateViewController(withIdentifier: "LogoutPopupVC")
                 popupVC.modalPresentationStyle = .overCurrentContext
@@ -281,7 +308,8 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
         
         cell.delegate = self;
         
-        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].classColor.getImageName(), classTitle: MyClassInfos[indexPath.row].classTitle, Tutee1: MyClassInfos[indexPath.row].tutee1, Tutee2: MyClassInfos[indexPath.row].tutee2, role: MyClassInfos[indexPath.row].role)
+        // Mark: - 프로필 url 꼭 수정!!!
+        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile")
         
         
         return cell

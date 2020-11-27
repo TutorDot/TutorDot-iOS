@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import Kingfisher
+import os
 
 // 수업 정보 가져오는 서비스 파일
 struct ClassInfoService {
@@ -169,5 +170,51 @@ struct ClassInfoService {
 //            }
 //        }
 //    }
-//    
+//
+    
+    // GET: 마이페이지 수업 목록 조회
+    func setMypageClassList(completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+    
+        let dataRequest = Alamofire.request(APIConstants.lectureURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)
+        
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judgeClassList(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    private func judgeClassList(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+            case 200:
+                os_log("judge classList success", log: .mypage)
+                return isClassListData(by: data)
+            case 400: return .pathErr
+            case 500: return .serverErr
+            default: return .networkFail
+        }
+    }
+    
+    private func isClassListData(by data:Data) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(LidData.self, from: data)
+            else {return .pathErr}
+        if decodedData.success {
+            return .success(decodedData.data)
+        }
+        else {
+            return .requestErr(decodedData.message)}
+    }
+    
+    
+   
 }
