@@ -867,6 +867,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="placeEndEditing:" destination="l3e-cu-Mta" eventType="editingDidEnd" id="5Vg-Rc-hV7"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytm-Aa-CYn">
                                 <rect key="frame" x="36" y="498.5" width="342" height="1"/>
@@ -896,6 +899,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="timeFieldEndEditing:" destination="lXv-Z3-gt9" eventType="editingDidEnd" id="WAR-Fb-TYv"/>
+                                                    </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJe-uR-oTG">
                                                     <rect key="frame" x="36" y="25.5" width="342" height="1"/>
@@ -1028,7 +1034,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="checkClassListButtonDidTap:" destination="hKQ-IF-jKA" eventType="touchUpInside" id="6tV-Z3-JCk"/>
+                                    <action selector="checkScheduleDidTap:" destination="hKQ-IF-jKA" eventType="touchUpInside" id="y5H-JE-Rep"/>
                                 </connections>
                             </button>
                         </subviews>

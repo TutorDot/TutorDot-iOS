@@ -35,6 +35,8 @@ class MypageNewClassTimeVC: UIViewController {
     // 현재 뷰에서 받는 내용
     var defaultClassTime: [String] = []
     @IBOutlet weak var place: UITextField!
+    var schedules: [Schedules] = []
+    var classPlace: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +63,33 @@ class MypageNewClassTimeVC: UIViewController {
     @IBAction func completeButtonDidTap(_ sender: Any) {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
+
+        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
+            networkResult in
+            switch networkResult {
+            case .success(let token) :
+                guard let token = token as? String else { return }
+                UserDefaults.standard.set(token, forKey: "token")
+                // 서버 통신 성공 후 성공 뷰로 이동
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AddClassCompleteVC") as? AddClassCompleteVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            case .requestErr(let message) :
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "수업추가 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            case .pathErr:
+                print("path")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
         
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddClassCompleteVC")
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
+        
+        
     }
     
     // 화면 터치 시, 키보드 내리기
@@ -83,6 +106,11 @@ class MypageNewClassTimeVC: UIViewController {
                 self.view.layoutIfNeeded()
         }
     }
+    
+    @IBAction func placeEndEditing(_ sender: Any) {
+        classPlace = place.text ?? ""
+    }
+    
     
 
 }
@@ -107,7 +135,17 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddRegularClassTimeCell.identifier, for: indexPath) as? AddRegularClassTimeCell else { return UITableViewCell()}
         
+        cell.delegate = self
+        
         return cell
 
+    }
+}
+
+
+extension MypageNewClassTimeVC: TimeSendDelegate {
+    func classTimesend(_ days: String, _ startTime: String, _ endTime: String) {
+        let schedule = Schedules(days, startTime, endTime)
+        schedules.append(schedule)
     }
 }

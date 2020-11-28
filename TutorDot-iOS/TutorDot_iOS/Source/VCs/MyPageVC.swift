@@ -38,9 +38,13 @@ class MyPageVC: UIViewController {
         
         classCollectionView.isScrollEnabled = true
         classCollectionView.contentSize = CGSize(width: 206, height: 81)
+        
+        NotificationCenter.default.addObserver(self, selector: Selector(("handleModelChange:")), name: NSNotification.Name(rawValue: "NewClassAddedNotification"), object: nil)
     }
     
-  
+    func handleModelChange (noti: Notification) {
+        classCollectionView.reloadData()
+    }
     
     func setMyclassViews(){
         myClassAddButton.layer.cornerRadius = 7
