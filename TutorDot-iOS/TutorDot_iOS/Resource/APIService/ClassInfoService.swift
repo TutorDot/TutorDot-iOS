@@ -126,6 +126,9 @@ struct ClassInfoService {
         case 200:
             print("judge success")
             return isClassData(by: data)
+        case 204:
+            print("judge success2")
+            return isClassData(by: data)
         case 400: return .pathErr
         case 500: return .serverErr
         default: return .networkFail

@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "onboardingImgClassLog.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "onboardingImgClassLog.png"
     },
     {
       "filename" : "onboardingImgClassLog@2x.png",
