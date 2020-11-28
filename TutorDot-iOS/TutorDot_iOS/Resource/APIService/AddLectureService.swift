@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 
+
 struct AddLectureService{
     
     // singleton
@@ -23,9 +24,10 @@ struct AddLectureService{
         var sendSchedule: NSMutableArray = ([])
         
         for i in 0...count-1 {
-            sendSchedule.insert(["day": schedules[i].day, "orgStartTime": schedules[i].orgStartTime, "orgEndTime": schedules[i].orgEndTime], at: i)
+            let ScheduleDict: NSDictionary = ["day": schedules[i].day, "orgStartTime": schedules[i].orgStartTime, "orgEndTime": schedules[i].orgEndTime]
+            sendSchedule.insert(ScheduleDict, at: i)
         }
-
+        
         return ["lectureName": lectureName, "color": color,
                 "schedules": sendSchedule,
                 "orgLocation": orgLocation, "bank": bank, "accountNumber": accountNumber, "totalHours": totalHours, "price": price]
@@ -73,6 +75,7 @@ struct AddLectureService{
     }
     
 }
+
 
 struct Schedules: Codable {
     var day: String

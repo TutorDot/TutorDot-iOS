@@ -151,7 +151,7 @@ class NotesVC: UIViewController {
             guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
             print("success")
             for index in 0..<data.count {
-                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                 dropList.append(item.lectureName)
                 idList.append(item.lectureId)
                 self.dropDown?.dataSource = dropList

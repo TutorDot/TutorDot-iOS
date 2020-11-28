@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class MypageNewClassTimeVC: UIViewController {
+class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
 
     static let identifier: String = "MypageNewClassTimeVC"
     
@@ -44,7 +44,22 @@ class MypageNewClassTimeVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        place.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        self.view.frame.origin.y = -80 // Move view 80 points upward
+    }
+
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0// Move view 80 points upward
+    }
+    
     
     func setDefault(){
         completeButton.layer.cornerRadius = 8
@@ -98,12 +113,20 @@ class MypageNewClassTimeVC: UIViewController {
     }
     
     @IBAction func classTimeAddedDidTap(_ sender: Any) {
-        defaultClassTime.append("append Cell")
-        tableView.reloadData()
-        tableViewHeight.constant = classAddedHeight * CGFloat(defaultClassTime.count)
-        
-        UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
+        if defaultClassTime.count < 5 {
+            defaultClassTime.append("append Cell")
+            tableView.reloadData()
+            tableViewHeight.constant = classAddedHeight * CGFloat(defaultClassTime.count)
+            
+            UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+            }
+        } else {
+            // 수업시간 5개 초과 시 경고창 띄우기
+            let alertViewController = UIAlertController(title: "등록횟수 초과", message: "수업시간은 5개까지 입력이 가능합니다.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
         }
     }
     

@@ -27,7 +27,6 @@ struct LidData: Codable {
         success = (try? values.decode(Bool.self, forKey: .success)) ?? false
         message = (try? values.decode(String.self, forKey: .message)) ?? ""
         data = (try? values.decode([LidToggleData].self, forKey: .data)) ?? []
-        //[CalendarData(classId: 0, lectureName: "", color: CalendarData.ClassLogColor.green, times: 0, hour: 0, location: "", classDate: "", startTime: "", endTime: "")]
     }
 }
 
@@ -36,12 +35,25 @@ struct LidToggleData: Codable {
     var lectureName: String
     var color: String
     var profileUrls: [String]
+    var schedules: [SchedulesData]
     
-    init (lectureId: Int, lectureName: String, color: String, profileUrls: [String]) {
+    init (lectureId: Int, lectureName: String, color: String, profileUrls: [String], schedules: [SchedulesData]) {
         self.lectureId = lectureId
         self.lectureName = lectureName
         self.color = color
         self.profileUrls = profileUrls
-        
+        self.schedules = schedules
+    }
+}
+
+struct SchedulesData: Codable {
+    var day: String
+    var orgStartTime: String
+    var orgEndTime: String
+
+    init(_ day: String, _ orgStartTime: String, _ orgEndTime: String){
+        self.day = day
+        self.orgStartTime = orgStartTime
+        self.orgEndTime = orgEndTime
     }
 }

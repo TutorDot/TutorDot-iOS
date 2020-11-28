@@ -38,11 +38,11 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
 
     }
     @objc func keyboardWillShow(_ sender: Notification) {
-        self.view.frame.origin.y = -150 // Move view 150 points upward
+        self.view.frame.origin.y = -80 // Move view 80 points upward
     }
 
     @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0// Move view 150 points upward
+        self.view.frame.origin.y = 0// Move view 80 points upward
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

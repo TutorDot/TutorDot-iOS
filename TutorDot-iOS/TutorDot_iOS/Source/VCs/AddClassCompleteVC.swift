@@ -23,7 +23,7 @@ class AddClassCompleteVC: UIViewController {
     
     @IBAction func closeButtonDidTap(_ sender: Any) {
         //모델이 변경되었다는 것을 뷰 컨드롤러에게 알림
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewClassAddedNotification"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewClassAddedNotification"), object: nil)
         
         
         // root View 로 이동
