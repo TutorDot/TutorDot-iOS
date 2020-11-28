@@ -36,11 +36,11 @@ class OnboardingNewVC: UIViewController {
     
     func setHeight() {
         if (self.view.frame.size.height) < 700 {
-            collectionViewToTopConstraint.constant = 35
-            signUpButtonHeight.constant = 20
+            collectionViewToTopConstraint.constant = 30
+            signUpButtonHeight.constant = 40
             
         } else {
-            signUpButtonHeight.constant = 40
+            //signUpButtonHeight.constant = 40
             collectionViewToTopConstraint.constant = 70
 
         }
@@ -60,6 +60,20 @@ class OnboardingNewVC: UIViewController {
         let image5 = OnboardingImage(imageName: "onboardingImgNotice")
         
         onboardingImageList = [image1, image2, image3, image4, image5]
+    }
+    
+    
+    @IBAction func signUpButton(_ sender: Any) {
+        let tabbarStoryboard = UIStoryboard.init(name: "Login", bundle: nil)
+        guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"LoginVC") as?
+                LoginVC else { return }
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func loginButton(_ sender: Any) {
+        
     }
     
 

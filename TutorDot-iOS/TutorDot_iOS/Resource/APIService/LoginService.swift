@@ -70,11 +70,38 @@ struct LoginService {
             return .requestErr(decodedData.message)
             
         }
-        //let list: [String] = [tokenData.accessToken, tokenData.role, tokenData.userName]
-        //print(list[0], "inputlist")
+//        let list : [String] = [tokenData.accessToken, tokenData.role, tokenData.userName]
+//        print(list[0], "inputlist")
+        //return .success(tokenData.accessToken)
         return .success(tokenData.accessToken)
-        //return .success(list)
         
+    }
+    
+    private func judge2(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+        case 200:
+            print("judge success")
+            return isClassData(by: data)
+        case 204:
+            print("judge success2")
+            return isClassData(by: data)
+        case 400: return .pathErr
+        case 500: return .serverErr
+        default: return .networkFail
+        }
+    }
+    
+    private func isClassData(by data:Data) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(SignInData.self, from: data)
+            else {return .pathErr}
+        print(decodedData.status, "\n", decodedData.success, "\n", decodedData.message, "\n")
+        
+        if decodedData.success {
+            return .success(decodedData.data)
+        }
+        else {
+            return .requestErr(decodedData.message)}
     }
     
 }
