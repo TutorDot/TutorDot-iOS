@@ -89,8 +89,8 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             
             delete = UIAlertAction(title: "삭제하기", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction) in
                 self.deleteOneClass()
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-                self.dismiss(animated: true, completion: nil)
+                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+                
                 // ** 서버 리로드 필요
                 
             })
@@ -98,7 +98,6 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             editAll = UIAlertAction(title: "편집하기", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
                 self.editClicked()
                
-                
             })
             
             alert.addAction(cancelAction)
@@ -109,8 +108,6 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             }
         } else {
             editClassSchedule()
-            self.dismiss(animated: true, completion: nil)
-            // ** 서버 리로드 필요
         }
         
     }
@@ -137,7 +134,8 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             case .success(let resultData):
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
                 print("delete success", classId)
-                
+                self.dismiss(animated: true, completion: nil)
+
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)
@@ -154,17 +152,16 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         guard let inputLocation = locationTextField.text else { return }
         guard let inputDate =  classStartDate else {return}
         let classIdNew = classId
-        //print("확인해보기", inputStartTime, inputEndTime, inputLocation, inputDate, classIdNew)
         print("classs", classIdNew)
         
         ClassInfoService.classInfoServiceShared.editClassSchedule(classId: classId, date: inputDate, startTime: inputStartTime, endTime: inputEndTime, location: inputLocation) {
             networkResult in
             switch networkResult {
             case .success(let token):
+                print("일정수정 서버 연결 성공")
+                self.dismiss(animated: true, completion: nil)
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
-                print("일정 수정 성공", classIdNew)
-            // 일정추가 실패시 AlertViewcon 열기
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "일정수정 실패", message: message, preferredStyle: .alert)

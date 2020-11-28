@@ -134,14 +134,13 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
             self.present(mainView, animated: true, completion: nil)
             
         case .requestErr(let message):
-            guard let message = message as? String else { return }
-            let alertViewController = UIAlertController(title: "로그인 실패", message: message, preferredStyle: .alert)
+            let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
             print("requestErr")
         case .pathErr:
-            let alertViewController = UIAlertController(title: "로그인 실패", message: nil, preferredStyle: .alert)
+            let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
