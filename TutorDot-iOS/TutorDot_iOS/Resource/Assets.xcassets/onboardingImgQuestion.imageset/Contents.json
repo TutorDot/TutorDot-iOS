@@ -1,19 +1,19 @@
 {
   "images" : [
     {
+      "filename" : "onboardingImgQuestion.png",
       "idiom" : "universal",
-      "filename" : "onboardingImgCalender.png",
       "scale" : "1x"
     },
     {
-      "filename" : "onboardingImgCalender@2x.png",
+      "filename" : "onboardingImgQuestion@2x.png",
       "scale" : "2x",
       "idiom" : "universal"
     },
     {
-      "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "onboardingImgCalender@3x.png"
+      "filename" : "onboardingImgQuestion@3x.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

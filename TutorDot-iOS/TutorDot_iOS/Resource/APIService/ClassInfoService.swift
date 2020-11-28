@@ -126,6 +126,9 @@ struct ClassInfoService {
         case 200:
             print("judge success")
             return isClassData(by: data)
+        case 204:
+            print("judge success2")
+            return isClassData(by: data)
         case 400: return .pathErr
         case 500: return .serverErr
         default: return .networkFail
@@ -175,7 +178,7 @@ struct ClassInfoService {
     // GET: 마이페이지 수업 목록 조회
     func setMypageClassList(completion: @escaping (NetworkResult<Any>) -> Void) {
         
-
+        
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
     
         let dataRequest = Alamofire.request(APIConstants.lectureURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)

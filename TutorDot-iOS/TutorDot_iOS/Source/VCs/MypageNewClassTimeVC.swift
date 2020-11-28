@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class MypageNewClassTimeVC: UIViewController {
+class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
 
     static let identifier: String = "MypageNewClassTimeVC"
     
@@ -35,6 +35,8 @@ class MypageNewClassTimeVC: UIViewController {
     // 현재 뷰에서 받는 내용
     var defaultClassTime: [String] = []
     @IBOutlet weak var place: UITextField!
+    var schedules: [Schedules] = []
+    var classPlace: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +44,22 @@ class MypageNewClassTimeVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        place.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        self.view.frame.origin.y = -80 // Move view 80 points upward
+    }
+
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0// Move view 80 points upward
+    }
+    
     
     func setDefault(){
         completeButton.layer.cornerRadius = 8
@@ -61,12 +78,33 @@ class MypageNewClassTimeVC: UIViewController {
     @IBAction func completeButtonDidTap(_ sender: Any) {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
+
+        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
+            networkResult in
+            switch networkResult {
+            case .success(let token) :
+                guard let token = token as? String else { return }
+                UserDefaults.standard.set(token, forKey: "token")
+                // 서버 통신 성공 후 성공 뷰로 이동
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AddClassCompleteVC") as? AddClassCompleteVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            case .requestErr(let message) :
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "수업추가 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            case .pathErr:
+                print("path")
+            case .serverErr:
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+        }
         
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "AddClassCompleteVC")
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
+        
+        
     }
     
     // 화면 터치 시, 키보드 내리기
@@ -75,14 +113,27 @@ class MypageNewClassTimeVC: UIViewController {
     }
     
     @IBAction func classTimeAddedDidTap(_ sender: Any) {
-        defaultClassTime.append("append Cell")
-        tableView.reloadData()
-        tableViewHeight.constant = classAddedHeight * CGFloat(defaultClassTime.count)
-        
-        UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
+        if defaultClassTime.count < 5 {
+            defaultClassTime.append("append Cell")
+            tableView.reloadData()
+            tableViewHeight.constant = classAddedHeight * CGFloat(defaultClassTime.count)
+            
+            UIView.animate(withDuration: 0.3) {
+                    self.view.layoutIfNeeded()
+            }
+        } else {
+            // 수업시간 5개 초과 시 경고창 띄우기
+            let alertViewController = UIAlertController(title: "등록횟수 초과", message: "수업시간은 5개까지 입력이 가능합니다.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func placeEndEditing(_ sender: Any) {
+        classPlace = place.text ?? ""
+    }
+    
     
 
 }
@@ -107,7 +158,17 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddRegularClassTimeCell.identifier, for: indexPath) as? AddRegularClassTimeCell else { return UITableViewCell()}
         
+        cell.delegate = self
+        
         return cell
 
+    }
+}
+
+
+extension MypageNewClassTimeVC: TimeSendDelegate {
+    func classTimesend(_ days: String, _ startTime: String, _ endTime: String) {
+        let schedule = Schedules(days, startTime, endTime)
+        schedules.append(schedule)
     }
 }

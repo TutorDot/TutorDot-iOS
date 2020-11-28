@@ -49,6 +49,31 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func idCheckButton(_ sender: Any) {
+        guard let inputID = idTextField.text else { return }
+        
+        LoginService.shared.idCheck(email: inputID) { networkResult in switch networkResult {
+        case .success(_):
+            // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
+            let alertViewController = UIAlertController(title: "사용가능한 아이디입니다", message: "사용가능한 아이디입니다", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+        case .requestErr(let message):
+            guard let message = message as? String else { return }
+            let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: "이미 존재하는 아이디입니다", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("requestErr")
+        case .pathErr:
+            let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: nil, preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("pathErr")
+        case .serverErr: print("serverErr")
+        case .networkFail: print("networkFail") }
+        }
         
     }
     

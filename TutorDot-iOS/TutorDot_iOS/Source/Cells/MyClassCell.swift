@@ -30,10 +30,23 @@ class MyClassCell: UICollectionViewCell {
         myClassView.layer.cornerRadius = 7
     }
     
-    func setMyClassInfo(classColor : String, classTitle: String, Tutee:String){
+    func setMyClassInfo(classColor : String, classTitle: String, Tutee: String, classTime: [SchedulesData]){
         self.classColor.image = UIImage(named: classColor)
         self.classTitle.text = classTitle
         self.TuteeImage.image = UIImage(named: Tutee)
+        
+        var timeInfo: String = ""
+        for i in 0...classTime.count-1 {
+            timeInfo += classTime[i].day + " "
+            if i != classTime.count-1 {
+                timeInfo += "/ "
+            }
+        }
+        timeInfo += classTime[0].orgStartTime
+        timeInfo += "~"
+        
+        self.classInfo.text = timeInfo
+        
     }
     
 }

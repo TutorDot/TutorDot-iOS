@@ -117,27 +117,25 @@ class CalendarVC: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("viewdisappeared")
+        print("viewDidDisappear")
         self.classList2Copy.removeAll()
         self.classList2.removeAll()
         self.classList.removeAll()
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        print("viewappeared")
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         if firstTimeRunning == false {
             setListDropDown()
             getClassList()
-        }
         
+        }
         if firstTimeRunning {
             self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
             self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
             firstTimeRunning = false
         }
-        
-    
     }
 
     func gestureRecognizer() {
@@ -188,7 +186,7 @@ class CalendarVC: UIViewController {
             case .success(let resultData):
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                 for index in 0..<data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                     dropList.append(item.lectureName)
                     self.dropDown?.dataSource = dropList
                     //print(item)

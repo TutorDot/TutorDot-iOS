@@ -59,8 +59,9 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var pickLabel2: UITextField!
     @IBOutlet weak var locationTexField: UITextField!
     @IBOutlet weak var startTimeToClassLabelConstraint: NSLayoutConstraint!
+    @IBOutlet weak var classNametoHeaderConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var alertView: UIView!
     
     func setTimeZone() {
     }
@@ -77,6 +78,14 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         createDatePicker2()
         pickerViewStart.tag = 0
         pickerViewEnd.tag = 1
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .transitionCrossDissolve, animations: {
+            
+            self.alertView.isHidden = false
+            
+           
+        })
+        
     }
 
     
@@ -98,6 +107,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         classEndLabel.textColor = UIColor.blackTwo
         locationLabel.textColor = UIColor.blackTwo
         anchorView.frame.size.width = self.view.frame.size.width / 1.2
+        //alertView.backgroundColor = UIColor.softBlue
+        //alertView.layer.cornerRadius = 20
         
     }
     
@@ -112,7 +123,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.present(alert, animated: true, completion: nil)
         } else {
             addClassSchedule()
-            self.dismiss(animated: true, completion: nil)
+            
             // **서버 리로드 필요
         }
     }
@@ -133,14 +144,11 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             networkResult in
             switch networkResult {
             case .success(let token):
+                print("일정추가 서버 연결 성공")
+                self.dismiss(animated: true, completion: nil)
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
-                // 일정 등록 후 캘린더 화면으로 돌아가기
-                let alertViewController = UIAlertController(title: "일정추가 성공", message: nil, preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("일정추가 서버 연결 성공")
+                
             // 일정추가 실패시 AlertViewcon 열기
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -189,7 +197,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             case .success(let resultData):
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                 for index in 0..<data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                     dropList.append(item.lectureName)
                     self.classLid.append(item.lectureId)
                     classColorLid.append(item.color)
@@ -266,10 +274,6 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         } else {
             keyboardHeight = keyboardFrame.cgRectValue.height
         }
-        
-        // animation 함수
-        // 최종 결과물 보여줄 상태만 선언해주면 애니메이션은 알아서
-        // duration은 간격
         UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
             
             self.classInfoButton.alpha = 0
@@ -277,8 +281,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.dropDownButton.alpha = 0
             
             // +로 갈수록 y값이 내려가고 -로 갈수록 y값이 올라간다.
+            self.classNametoHeaderConstraint.constant = 0
             self.startTimeToClassLabelConstraint.constant = 0
-            self.bottomConstraint.constant = +keyboardHeight/2 + 100
         })
         
         self.view.layoutIfNeeded()
@@ -295,9 +299,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
             self.classInfoButton.alpha = 1.0
             self.classInfoImage.alpha = 1.0
             self.dropDownButton.alpha = 1.0
-            
+            self.classNametoHeaderConstraint.constant = 30
             self.startTimeToClassLabelConstraint.constant = 25
-            self.bottomConstraint.constant = 30
         })
         
         self.view.layoutIfNeeded()
