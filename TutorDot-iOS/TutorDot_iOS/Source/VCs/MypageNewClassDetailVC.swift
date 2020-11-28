@@ -10,7 +10,7 @@ import UIKit
 import os
 
 
-class MypageNewClassDetailVC: UIViewController {
+class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
 
     static let identifier: String = "MypageNewClassDetailVC"
     
@@ -27,9 +27,33 @@ class MypageNewClassDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setKeyboardType()
+        
+        bankAccount.delegate = self
+        bank.delegate = self
+        price.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+    @objc func keyboardWillShow(_ sender: Notification) {
+        self.view.frame.origin.y = -80 // Move view 80 points upward
+    }
+
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0// Move view 80 points upward
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        bankAccount.resignFirstResponder()
+        bank.resignFirstResponder()
+        price.resignFirstResponder()
+        return true
+
+    }
+
     
     func setKeyboardType(){
         time.keyboardType = .numberPad

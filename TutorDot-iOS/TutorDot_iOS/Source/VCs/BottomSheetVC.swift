@@ -77,7 +77,7 @@ class BottomSheetVC: UIViewController {
             case .success(let resultData):
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                 for index in 0..<data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                     self.classlist.append(item.lectureName)
                     
                     //print(self.classlist)

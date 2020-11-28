@@ -18,7 +18,8 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var tutorImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
     
-    
+    private var refreshControl = UIRefreshControl()
+    var firstViewLoad: Bool = true
     
     
     override func viewDidLoad() {
@@ -38,6 +39,32 @@ class MyPageVC: UIViewController {
         
         classCollectionView.isScrollEnabled = true
         classCollectionView.contentSize = CGSize(width: 206, height: 81)
+        
+        // scroll refresh
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+    }
+    
+    @objc func refresh(){
+        // refresh Action
+        MyClassInfos.removeAll()
+        setMyClassInfos()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if firstViewLoad == false {
+            setMyClassInfos()
+        } else {
+            firstViewLoad = false
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        MyClassInfos.removeAll()
     }
     
   
@@ -59,12 +86,9 @@ class MyPageVC: UIViewController {
         ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
             switch networkResult {
                 case .success(let resultData):
-                    guard let data = resultData as? [LidToggleData] else { return print(Error.self)
-                        
-                    }
+                    guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                     for index in 0..<data.count {
-                        
-                        let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                        let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                         
                         self.MyClassInfos.append(item)
                     }
@@ -309,7 +333,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.delegate = self;
         
         // Mark: - 프로필 url 꼭 수정!!!
-        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile")
+        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile", classTime: MyClassInfos[indexPath.row].schedules)
         
         
         return cell
