@@ -6,9 +6,9 @@
       "filename" : "calenderBalnkImg.png"
     },
     {
-      "filename" : "calenderBalnkImg@2x.png",
       "scale" : "2x",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "calenderBalnkImg@2x.png"
     },
     {
       "scale" : "3x",
