@@ -122,7 +122,6 @@ struct ClassInfoService {
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
-        //case 200: return isClassData(by: data)
         case 200:
             print("judge success")
             return isClassData(by: data)

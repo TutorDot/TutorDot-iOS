@@ -24,9 +24,6 @@ class NotesContentCell: UICollectionViewCell {
     @IBOutlet weak var classHW3: UILabel!
     @IBOutlet weak var tutorProfile: UIImageView!
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var noteCellWidth: NSLayoutConstraint!
-    @IBOutlet weak var noteCellHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var hwCheckButton1: UIButton!
     @IBOutlet weak var hwCheckButton2: UIButton!
     @IBOutlet weak var hwCheckButton3: UIButton!
@@ -38,14 +35,14 @@ class NotesContentCell: UICollectionViewCell {
     let pick: String = "classlogImgPick"
     let unpick: String = "classlogImgUnpick"
     
-//    let lesson1: UIView = noteContentStackView.arrangedSubviews[2]
-    
-    
+
     // MARK: awake From Nib
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backView.translatesAutoresizingMaskIntoConstraints = false
         self.backView.layer.cornerRadius = radius
+        tutorProfile.layer.cornerRadius = 21
+        
     }
     
     func setNotesContent(){
