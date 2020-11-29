@@ -122,6 +122,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
             UserDefaults.standard.synchronize() // setValue 실행
             
             guard let token = token as? String else { return }
+            //let token = token[0]
             UserDefaults.standard.set(token, forKey: "token")
             print("myToken:",token)
             print("\(UserDefaults.standard.value(forKey: "save_userNm")!)")

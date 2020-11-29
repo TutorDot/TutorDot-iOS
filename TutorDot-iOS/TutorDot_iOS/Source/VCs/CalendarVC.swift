@@ -49,7 +49,7 @@ class CalendarVC: UIViewController {
     
     var firstTimeRunning = true
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
-    
+    //var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyNSwibmFtZSI6Iuy1nOyduOyglSIsImlhdCI6MTYwNjU3NzQwMiwiZXhwIjoxNjA3Nzg3MDAyLCJpc3MiOiJvdXItc29wdCJ9.jM3qzmOGxzwmm3Ut3473TQle5Ym6DofwguRgd8VWeKU"
 
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
@@ -114,6 +114,7 @@ class CalendarVC: UIViewController {
         dateCollectionView.dataSource = self
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
+        getProfileInfo()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -272,6 +273,23 @@ class CalendarVC: UIViewController {
                 print("networkFail")
             }
         }
+    }
+    // MARK: - 서버통신: 유저 인포 데이터 가져오기
+    func getProfileInfo() {
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [UserProfile] else { return print(Error.self) }
+                    print(data, "성공")
+                
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        
     }
     
     @IBAction func leftButtonSelected(_ sender: Any) {

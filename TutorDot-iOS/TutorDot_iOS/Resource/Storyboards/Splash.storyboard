@@ -258,7 +258,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="502" id="5sj-oe-5XV"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="20" id="pif-tG-yuS">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="30" id="pif-tG-yuS">
                                     <size key="itemSize" width="375" height="510"/>
                                     <size key="estimatedItemSize" width="375" height="510"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -276,7 +276,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingImgStart" translatesAutoresizingMaskIntoConstraints="NO" id="g7K-fl-gXX">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="490" id="Rgx-re-fng"/>
+                                                        <constraint firstAttribute="width" secondItem="g7K-fl-gXX" secondAttribute="height" multiplier="125:166" id="Tlr-22-lbO"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -295,47 +295,34 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="SrP-JF-KTl">
-                                <rect key="frame" x="126.66666666666666" y="626" width="121.66666666666666" height="28"/>
+                                <rect key="frame" x="127" y="626" width="121.33333333333331" height="28"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tU-EU-Fzp">
-                                <rect key="frame" x="45" y="664" width="285" height="40"/>
+                                <rect key="frame" x="45" y="669" width="285" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Z1T-mN-lmi"/>
                                 </constraints>
-                                <state key="normal" title="가입하기">
+                                <state key="normal" title="시작하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButton:" destination="kRg-Ji-IGR" eventType="touchUpInside" id="FDx-ii-w4q"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOd-PB-be2">
-                                <rect key="frame" x="236" y="707" width="39" height="30"/>
-                                <state key="normal" title="로그인">
-                                    <color key="titleColor" red="0.40784313729999999" green="0.45882352939999999" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미 회원이신가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u18-q0-NWU">
-                                <rect key="frame" x="100" y="714" width="100.33333333333331" height="15.666666666666629"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TCw-it-OPy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rta-27-Y8Q" firstAttribute="top" secondItem="TCw-it-OPy" secondAttribute="top" constant="70" id="3N8-8E-eDO"/>
                             <constraint firstItem="SrP-JF-KTl" firstAttribute="top" secondItem="Rta-27-Y8Q" secondAttribute="bottom" constant="10" id="4rl-Tc-AD0"/>
-                            <constraint firstItem="u18-q0-NWU" firstAttribute="leading" secondItem="TCw-it-OPy" secondAttribute="leading" constant="100" id="BKt-2d-OH9"/>
                             <constraint firstItem="0tU-EU-Fzp" firstAttribute="centerX" secondItem="SrP-JF-KTl" secondAttribute="centerX" id="DcC-1q-r3A"/>
                             <constraint firstItem="SrP-JF-KTl" firstAttribute="centerX" secondItem="TCw-it-OPy" secondAttribute="centerX" id="G2h-76-zl4"/>
                             <constraint firstItem="0tU-EU-Fzp" firstAttribute="leading" secondItem="TCw-it-OPy" secondAttribute="leading" constant="45" id="O39-9F-JYN"/>
                             <constraint firstItem="SrP-JF-KTl" firstAttribute="centerX" secondItem="TCw-it-OPy" secondAttribute="centerX" id="bjd-hE-0zw"/>
-                            <constraint firstItem="dOd-PB-be2" firstAttribute="centerY" secondItem="u18-q0-NWU" secondAttribute="centerY" id="cS4-s7-6oP"/>
-                            <constraint firstItem="TCw-it-OPy" firstAttribute="trailing" secondItem="dOd-PB-be2" secondAttribute="trailing" constant="100" id="cek-Dx-BcT"/>
                             <constraint firstItem="TCw-it-OPy" firstAttribute="trailing" secondItem="0tU-EU-Fzp" secondAttribute="trailing" constant="45" id="fSW-r3-enM"/>
-                            <constraint firstItem="u18-q0-NWU" firstAttribute="top" secondItem="0tU-EU-Fzp" secondAttribute="bottom" constant="10" id="mNx-zK-v0Z"/>
                             <constraint firstItem="Rta-27-Y8Q" firstAttribute="leading" secondItem="TCw-it-OPy" secondAttribute="leading" id="sev-6F-1Uv"/>
                             <constraint firstItem="TCw-it-OPy" firstAttribute="trailing" secondItem="Rta-27-Y8Q" secondAttribute="trailing" id="sn8-cg-jxX"/>
-                            <constraint firstItem="0tU-EU-Fzp" firstAttribute="top" secondItem="SrP-JF-KTl" secondAttribute="bottom" constant="10" id="tPc-1B-5bd"/>
+                            <constraint firstItem="0tU-EU-Fzp" firstAttribute="top" secondItem="SrP-JF-KTl" secondAttribute="bottom" constant="15" id="tPc-1B-5bd"/>
                         </constraints>
                     </view>
                     <connections>
