@@ -57,7 +57,7 @@ class NotesMainVC: UIViewController, selectClassProtocol {
         monthLabel.text = month! + "월 수업일지"
         
         //Dummy Data
-        //notelist = ["hihi","hoho"]
+        notelist = ["hihi","hoho"]
     }
     
     func setLayout(){
@@ -94,10 +94,9 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     private func setupFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         
-        let totalWidth = noteCollectionView.frame.width - (cellInset * 2)
-        let sideInset = (noteCollectionView.frame.width - totalWidth) / 2
-        
-        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: sideInset, bottom: 10, right: sideInset)
+        let totalWidth = noteCollectionView.frame.width
+       
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 10, right: 0)
         
         flowLayout.itemSize = CGSize(width: totalWidth, height: totalWidth * 0.62)
         
@@ -114,12 +113,10 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     
     
     @IBAction func selectClassButtonDidtap(_ sender: Any) {
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
+        self.navigationController?.pushViewController(nextVC, animated: true)
         
-        guard let popupVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else { return }
-        popupVC.modalPresentationStyle = .overCurrentContext
-        popupVC.modalTransitionStyle = .crossDissolve
-        popupVC.delegate = self
-        present(popupVC, animated: true, completion: nil)
+        nextVC.delegate = self
     }
     
     func sendClassTitle(_ title: String) {
@@ -146,7 +143,6 @@ extension NotesMainVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
         let blankCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlankNoteCell", for: indexPath)
         
         if notelist.count > 0 {
-            Cell.contentView.layer.cornerRadius = 13.0
             return Cell
         } else {
             return blankCell
