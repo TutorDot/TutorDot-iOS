@@ -32,6 +32,7 @@ class MyClassInfoVC: UIViewController {
         super.viewDidLoad()
         setTimesData()
         autoLayoutView()
+        self.tabBarController?.tabBar.isHidden = true
         
     }
     

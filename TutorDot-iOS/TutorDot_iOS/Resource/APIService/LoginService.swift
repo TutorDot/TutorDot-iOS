@@ -43,7 +43,7 @@ struct LoginService {
             switch dataResponse.result { case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return }
                 guard let value = dataResponse.result.value else { return }
-                let networkResult = self.judge(by: statusCode, value)
+                let networkResult = self.judge2(by: statusCode, value)
                 completion(networkResult)
             case .failure: completion(.networkFail)
             }

@@ -36,16 +36,13 @@ class AddClassCompleteVC: UIViewController {
     @IBAction func checkScheduleDidTap(_ sender: Any) {
 
         // Calendar Tab으로 이동
-        let calendarStoryboard = UIStoryboard.init(name: "Calendar", bundle: nil)
-        
-        guard let firstTab = calendarStoryboard.instantiateViewController(identifier: "CalendarNavigationController")
-                as? CalendarNavigationController  else {
-            return
-        }
-        
-        firstTab.tabBarItem.image = UIImage(named: "calenderIcnUnpick")?.withRenderingMode(.alwaysOriginal)
-        firstTab.tabBarItem.selectedImage = UIImage(named: "calenderIcnPick")?.withRenderingMode(.alwaysOriginal)
-        firstTab.tabBarItem.title = nil
+        UserDefaults.standard.value(forKey: "token")
+        let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
+        guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
+                TabbarVC else { return }
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true, completion: nil)
+    
     }
     
 }
