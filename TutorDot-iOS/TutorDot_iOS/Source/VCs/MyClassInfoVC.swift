@@ -11,20 +11,20 @@ import UIKit
 class MyClassInfoVC: UIViewController {
     
     static let idnetifier: String = "MyClassInfoVC"
-    var myRole: String?
+    var myRole: String = ""
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
-    
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
     @IBOutlet weak var classColorImage: UIImageView!
+    @IBOutlet weak var Role: UILabel!
     @IBOutlet weak var TutorProfileImage: UIImageView!
-    @IBOutlet weak var classTitle: UILabel!
-    @IBOutlet weak var tutorName: UILabel!
-    @IBOutlet weak var tutorIntro: UILabel!
     @IBOutlet weak var timeAndPrice: UILabel!
     @IBOutlet weak var bankAccountInfo: UILabel!
     @IBOutlet weak var regularClassTime: UILabel!
     @IBOutlet weak var classPlace: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var classTitle: UILabel!
+    @IBOutlet weak var tutorIntro: UILabel!
+    @IBOutlet weak var tutorName: UILabel!
     
     @IBOutlet weak var stackList: UIStackView!
     
@@ -96,17 +96,16 @@ class MyClassInfoVC: UIViewController {
     }
     
     @IBAction func unconnectButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let popupVC = storyBoard.instantiateViewController(withIdentifier: "ClassDisconnectionVC")
-        popupVC.modalPresentationStyle = .overCurrentContext
-        popupVC.modalTransitionStyle = .crossDissolve
-        present(popupVC, animated: true, completion: nil)
+        
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ClassDisconnectionVC") as? ClassDisconnectionVC else { return }
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
     }
     
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func accountCopyButtonDidTap(_ sender: Any) {

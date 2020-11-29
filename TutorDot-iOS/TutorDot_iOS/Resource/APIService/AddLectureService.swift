@@ -14,18 +14,18 @@ struct AddLectureService{
     
     // singleton
     static let AddLectureServiceshared = AddLectureService()
+    var sendSchedule: NSMutableArray = ([])
     
     // Mark - POST : 마이페이지 뷰 수업추가 버튼 클릭 시
     
     
     // request body에 들어갈 부분 : 서버로 보낼 데이터
     private func makeParameter(_ lectureName: String, _ color: String, _ schedules: [Schedules], _ orgLocation: String, _ bank : String, _ accountNumber : String, _ totalHours: Int, _ price: Int, _ count: Int) -> Parameters {
-        
-        var sendSchedule: NSMutableArray = ([])
+
         
         for i in 0...count-1 {
             let ScheduleDict: NSDictionary = ["day": schedules[i].day, "orgStartTime": schedules[i].orgStartTime, "orgEndTime": schedules[i].orgEndTime]
-            sendSchedule.insert(ScheduleDict, at: i)
+            self.sendSchedule.insert(ScheduleDict, at: i)
         }
         
         return ["lectureName": lectureName, "color": color,

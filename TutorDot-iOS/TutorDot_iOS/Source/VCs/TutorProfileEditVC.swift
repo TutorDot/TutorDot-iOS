@@ -38,25 +38,25 @@ class TutorProfileEditVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        lookupProfile()
+//        lookupProfile()
     }
     
-    private func lookupProfile(){
-        print("lookupProfile start")
-        guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
-        ProfileService.shared.setMyProfile(token) { networkResult in
-            switch networkResult {
-            case .success(let profileData):
-                guard let profileData = profileData as? UserProfile else { return }
-                self.profileImageView.setImage(from: profileData.profileURL)
-            case .requestErr(let message): print(message)
-            case .pathErr: print("pathErr")
-            case .serverErr: print("ServerErr")
-            case .networkFail: print("networkReult")
-                
-            }
-        }
-    }
+//    private func lookupProfile(){
+//        print("lookupProfile start")
+//        guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
+//        ProfileService.ProfileServiceShared.setMyProfile(token) { networkResult in
+//            switch networkResult {
+//            case .success(let profileData):
+//                guard let profileData = profileData as? UserProfile else { return }
+//                self.profileImageView.setImage(from: profileData.profileURL)
+//            case .requestErr(let message): print(message)
+//            case .pathErr: print("pathErr")
+//            case .serverErr: print("ServerErr")
+//            case .networkFail: print("networkReult")
+//
+//            }
+//        }
+//    }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
