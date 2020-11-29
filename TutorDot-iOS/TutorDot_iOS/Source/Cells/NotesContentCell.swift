@@ -11,6 +11,7 @@ import os
 
 class NotesContentCell: UICollectionViewCell {
 
+    static let identifier: String = "NotesContentCell"
     
     // MARK: Cell Objects Outlet
     @IBOutlet weak var noteContentStackView: UIStackView!
@@ -35,11 +36,19 @@ class NotesContentCell: UICollectionViewCell {
     let pick: String = "classlogImgPick"
     let unpick: String = "classlogImgUnpick"
     
+    class func cellForCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> NotesContentCell {
+        let noteContentCollectionViewCellIdentifier = "NotesContentCell"
+        
+        collectionView.register(UINib(nibName: "NotesContentCell", bundle: Bundle.main), forCellWithReuseIdentifier: noteContentCollectionViewCellIdentifier)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noteContentCollectionViewCellIdentifier, for: indexPath) as! NotesContentCell
+        return cell
+    }
 
     // MARK: awake From Nib
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backView.translatesAutoresizingMaskIntoConstraints = false
+
         self.backView.layer.cornerRadius = radius
         tutorProfile.layer.cornerRadius = 21
         

@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="noteContent" id="gTV-IL-0wX" customClass="NotesContentCell" customModule="TutorDot_iOS" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NotesContentCell" id="gTV-IL-0wX" customClass="NotesContentCell" customModule="TutorDot_iOS" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -259,7 +259,7 @@
                 <outlet property="noteContentStackView" destination="mV4-oJ-2tA" id="Ef8-ay-QiA"/>
                 <outlet property="tutorProfile" destination="OyG-TN-9cw" id="GG7-hu-xIp"/>
             </connections>
-            <point key="canvasLocation" x="-231" y="39"/>
+            <point key="canvasLocation" x="-231.15942028985509" y="38.839285714285715"/>
         </collectionViewCell>
     </objects>
     <resources>
