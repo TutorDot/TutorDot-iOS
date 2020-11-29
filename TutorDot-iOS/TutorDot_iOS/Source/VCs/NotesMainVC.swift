@@ -28,8 +28,8 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     @IBOutlet weak var infoStackViewHeight: NSLayoutConstraint!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var noteCollectionView: UICollectionView!
-    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var collectionTopHeight: NSLayoutConstraint!
+   
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,7 @@ class NotesMainVC: UIViewController, selectClassProtocol {
         monthLabel.text = month! + "월 수업일지"
         
         //Dummy Data
-        notelist = ["hihi","hoho"]
+        //notelist = ["hihi","hoho"]
     }
     
     func setLayout(){
@@ -68,12 +68,11 @@ class NotesMainVC: UIViewController, selectClassProtocol {
             setupFlowLayout()
             infoStackView.isHidden = false
             infoStackViewHeight.constant = 150 * deviceHeight
-            collectionTopHeight.constant = 150 * deviceHeight
+            
         } else {
             setupBlankFlowLayout()
             infoStackView.isHidden = true
             infoStackViewHeight.constant = 0
-            collectionTopHeight.constant = 0
         }
         
         

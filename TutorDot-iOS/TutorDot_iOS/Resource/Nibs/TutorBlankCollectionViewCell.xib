@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
-    <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
-=======
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
->>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,25 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="428" height="267"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-<<<<<<< HEAD
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXq-lE-xBe">
-                        <rect key="frame" x="89" y="18" width="314" height="89"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 일정을 추가해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTb-Ym-SPj">
-                                <rect key="frame" x="80.5" y="34" width="153" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="fN7-R1-viC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-=======
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calenderBalnkImg" translatesAutoresizingMaskIntoConstraints="NO" id="hwx-aB-Jvf">
                         <rect key="frame" x="165.5" y="0.0" width="97" height="97"/>
->>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
                         <constraints>
                             <constraint firstAttribute="width" constant="97" id="Q6W-Kc-1lD"/>
                             <constraint firstAttribute="height" constant="97" id="zco-dN-w4l"/>
@@ -74,11 +48,7 @@
                 <constraint firstItem="YYs-MD-Bwr" firstAttribute="top" secondItem="Wfc-eR-TZe" secondAttribute="bottom" constant="5" id="n74-s8-6hn"/>
                 <constraint firstItem="Wfc-eR-TZe" firstAttribute="centerX" secondItem="hwx-aB-Jvf" secondAttribute="centerX" id="wZM-L9-5kr"/>
             </constraints>
-<<<<<<< HEAD
-            <size key="customSize" width="423" height="125"/>
-=======
             <size key="customSize" width="428" height="267"/>
->>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
             <connections>
                 <outlet property="firstLabel" destination="Wfc-eR-TZe" id="wXL-Lk-1nx"/>
                 <outlet property="secondLabel" destination="YYs-MD-Bwr" id="VNJ-mg-nYf"/>
@@ -87,12 +57,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-<<<<<<< HEAD
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-=======
         <image name="calenderBalnkImg" width="97" height="97"/>
->>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
     </resources>
 </document>
