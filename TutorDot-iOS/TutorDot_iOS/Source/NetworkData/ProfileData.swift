@@ -26,7 +26,7 @@ struct ProfileData: Codable {
         status = (try? values.decode(Int.self, forKey: .status)) ?? -1
         success = (try? values.decode(Bool.self, forKey: .success)) ?? false
         message = (try? values.decode(String.self, forKey: .message)) ?? ""
-        data = (try? values.decode(UserProfile?.self, forKey: .data)) ?? nil
+        data = (try? values.decode(UserProfile?.self, forKey: .data)) ??  nil
     }
 }
 
@@ -34,19 +34,31 @@ struct ProfileData: Codable {
 struct UserProfile: Codable {
     var userName: String
     var role: String
-    var intro: String
-    var profileURL: String
+    var intro: String?
+    var profileUrl: String
     
-    init(userName: String, role: String, intro: String?, profileURL: String) {
+    private enum CodingKeys: String, CodingKey {
+        case userName = "userName"
+        case role = "role"
+        case intro = "intro"
+        case profileUrl = "profileUrl"
+    }
+    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        let userName: String = try container.decode(String.self, forKey: .userName)
+//        let role: String = try container.decode(String.self, forKey: .role)
+//        let intro: String = try container.decode(String.self, forKey: .intro)
+//        let profileURL: String = try container.decode(String.self, forKey: .profileURL)
+//
+//
+//        self.init(from: <#Decoder#>, userName: userName, role: role, intro: intro, profileURL: profileURL)
+//    }
+    
+    init(userName: String, role: String, intro: String?, profileUrl: String) {
         self.userName = userName
         self.role = role
-        
-        if intro == nil {
-            self.intro = ""
-        } else {
-            self.intro = intro!
-        }
-        
-        self.profileURL = profileURL
+        self.intro = intro
+        self.profileUrl = profileUrl
     }
 }

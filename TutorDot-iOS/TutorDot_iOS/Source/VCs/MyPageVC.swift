@@ -33,7 +33,7 @@ class MyPageVC: UIViewController {
         
         setSettingView()
         setMyclassViews()
-        //setProfile()
+        setProfile()
         gotoProfileEdit()
         
         tableView.delegate = self
@@ -133,17 +133,14 @@ class MyPageVC: UIViewController {
             switch networkResult {
                 case .success(let resultData):
                     os_log("profile success", log: .mypage)
-                    guard let data = resultData as? [UserProfile] else { return print(Error.self) }
-                    for index in 0..<data.count {
-                        self.usernameLabel.text =  data[index].userName
-                        self.myRole.text = data[index].role
-                        self.userIntro.text = data[index].intro
-                        self.profileURL = data[index].profileURL
+                    guard let data = resultData as? UserProfile else { return print(Error.self) }
+                        self.usernameLabel.text =  data.userName
+                        self.myRole.text = data.role
+                        self.userIntro.text = data.intro
+                        self.profileURL = data.profileUrl
                         
                         let url = URL(string: self.profileURL)
                         self.userProfileImage.kf.setImage(with: url)
-                        
-                    }
 
                 case .pathErr :
                     os_log("PathErr-Profile", log: .mypage)
