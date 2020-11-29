@@ -108,11 +108,13 @@
 		F49D9EFA257159BF003076EA /* MypageNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D9EF9257159BF003076EA /* MypageNavigationController.swift */; };
 		F49D9F4225736914003076EA /* MypageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D9F4125736914003076EA /* MypageService.swift */; };
 		F49D9F5F2573893C003076EA /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49D9F5E2573893C003076EA /* Notes.storyboard */; };
+		F4A032EA2573AB0100F46F24 /* noteHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A032E82573AB0100F46F24 /* noteHeaderViewCell.swift */; };
+		F4A032EB2573AB0100F46F24 /* noteHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A032E92573AB0100F46F24 /* noteHeaderViewCell.xib */; };
+		F4A032F52573AED300F46F24 /* NotesContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4B565532536D75200A77C01 /* NotesContentCell.xib */; };
 		F4B517DA24C05FD8007438DE /* AddLectureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B517D924C05FD8007438DE /* AddLectureService.swift */; };
 		F4B517DC24C06054007438DE /* AddLectureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B517DB24C06054007438DE /* AddLectureData.swift */; };
 		F4B517E124C0B009007438DE /* data2.json in Resources */ = {isa = PBXBuildFile; fileRef = F4B517E024C0B009007438DE /* data2.json */; };
 		F4B565542536D75200A77C01 /* NotesContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B565522536D75200A77C01 /* NotesContentCell.swift */; };
-		F4B565552536D75200A77C01 /* NotesContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4B565532536D75200A77C01 /* NotesContentCell.xib */; };
 		F4B565592536FA7D00A77C01 /* NotesMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B565582536FA7D00A77C01 /* NotesMainVC.swift */; };
 		F4D1A09624B4B7CE00B13D65 /* JournalDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D1A09524B4B7CE00B13D65 /* JournalDateHeaderView.swift */; };
 		F4D1A09824B4FCEA00B13D65 /* MypageNoticeSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D1A09724B4FCEA00B13D65 /* MypageNoticeSettingCell.swift */; };
@@ -245,6 +247,8 @@
 		F49D9EF9257159BF003076EA /* MypageNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageNavigationController.swift; sourceTree = "<group>"; };
 		F49D9F4125736914003076EA /* MypageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageService.swift; sourceTree = "<group>"; };
 		F49D9F5E2573893C003076EA /* Notes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notes.storyboard; sourceTree = "<group>"; };
+		F4A032E82573AB0100F46F24 /* noteHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteHeaderViewCell.swift; sourceTree = "<group>"; };
+		F4A032E92573AB0100F46F24 /* noteHeaderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = noteHeaderViewCell.xib; sourceTree = "<group>"; };
 		F4B517D924C05FD8007438DE /* AddLectureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLectureService.swift; sourceTree = "<group>"; };
 		F4B517DB24C06054007438DE /* AddLectureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLectureData.swift; sourceTree = "<group>"; };
 		F4B517E024C0B009007438DE /* data2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data2.json; sourceTree = "<group>"; };
@@ -423,6 +427,7 @@
 				0154D9E7256BB90F000953E4 /* AlertBlankTableViewCell.swift */,
 				F46808FF256FE27000D925F3 /* MypageNoClassCell.swift */,
 				01871805257158F40021EDD4 /* OnboardingNewCollectionViewCell.swift */,
+				F4A032E82573AB0100F46F24 /* noteHeaderViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -547,6 +552,7 @@
 			children = (
 				012639AA24ADADE8009EA0BA /* CalendarCollectionViewCell.xib */,
 				F4680900256FE27000D925F3 /* MypageNoClassCell.xib */,
+				F4A032E92573AB0100F46F24 /* noteHeaderViewCell.xib */,
 				012E887E24B5D30700EF81FB /* TutorCollectionViewCell.xib */,
 				014703C024B2CB4B0074D4E2 /* AlertTableViewCell.xib */,
 				012E888524B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib */,
@@ -623,12 +629,12 @@
 				F49D9F5F2573893C003076EA /* Notes.storyboard in Resources */,
 				012E888724B60C0E00EF81FB /* TutorBlankCollectionViewCell.xib in Resources */,
 				F4D1A0DA24BA9D5000B13D65 /* BlankClassJournalCell.xib in Resources */,
-				F4B565552536D75200A77C01 /* NotesContentCell.xib in Resources */,
 				F444D9FE2564E12A002839F4 /* BlankNoteCell.xib in Resources */,
 				0126397D24AA00C9009EA0BA /* LaunchScreen.storyboard in Resources */,
 				012639AC24ADADE8009EA0BA /* CalendarCollectionViewCell.xib in Resources */,
 				F49825F1255D2B4800E2FA5A /* Question.storyboard in Resources */,
 				0126399D24AB1558009EA0BA /* Splash.storyboard in Resources */,
+				F4A032F52573AED300F46F24 /* NotesContentCell.xib in Resources */,
 				014703C224B2CB4B0074D4E2 /* AlertTableViewCell.xib in Resources */,
 				012E887F24B5D30700EF81FB /* TutorCollectionViewCell.xib in Resources */,
 				0126397A24AA00C9009EA0BA /* Assets.xcassets in Resources */,
@@ -636,6 +642,7 @@
 				01B49D5F24C21F6F00B3A322 /* data3.json in Resources */,
 				F4680902256FE27000D925F3 /* MypageNoClassCell.xib in Resources */,
 				0126397824AA00C8009EA0BA /* MainTab.storyboard in Resources */,
+				F4A032EB2573AB0100F46F24 /* noteHeaderViewCell.xib in Resources */,
 				0126399124AA09DD009EA0BA /* Alert.storyboard in Resources */,
 				0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */,
 				015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */,
@@ -710,6 +717,7 @@
 				F4F13DF525610D5A00115FD4 /* QuestionListCell.swift in Sources */,
 				01E4A840252619DC00B5B485 /* testVC.swift in Sources */,
 				F471772C24B2036B0098C827 /* MonthJournalCell.swift in Sources */,
+				F4A032EA2573AB0100F46F24 /* noteHeaderViewCell.swift in Sources */,
 				F4200E0724BE4FFA00EA1D6F /* ClassConnectCell.swift in Sources */,
 				F4200E0524BE09D700EA1D6F /* AddRegularClassTimeCell.swift in Sources */,
 				F4D1A0C224B7B26100B13D65 /* ClassInviteVC.swift in Sources */,
