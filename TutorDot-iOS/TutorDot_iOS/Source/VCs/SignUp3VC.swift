@@ -65,6 +65,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
         case .requestErr(let message):
+            self.idChecked = false
             guard let message = message as? String else { return }
             let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: "이미 존재하는 아이디입니다", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
@@ -72,6 +73,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
             self.present(alertViewController, animated: true, completion: nil)
             print("requestErr")
         case .pathErr:
+            self.idChecked = false
             let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: "이미 존재하는 아이디입니다", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)

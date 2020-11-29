@@ -33,7 +33,7 @@ class MyPageVC: UIViewController {
         
         setSettingView()
         setMyclassViews()
-        setProfile()
+        //setProfile()
         gotoProfileEdit()
         
         tableView.delegate = self
@@ -51,6 +51,8 @@ class MyPageVC: UIViewController {
         
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
+        
+        //self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -186,6 +188,9 @@ class MyPageVC: UIViewController {
         
        
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        segue.destination.hidesBottomBarWhenPushed = true
+//    }
     
     
 }
@@ -323,25 +328,32 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
              if indexPath.row == 1 { //개발자정보 클릭 시
 
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             } else if indexPath.row == 1 { //로그아웃 클릭 시
-
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LogoutPopupVC") as? LogoutPopUpVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             
         default:
             print("default")
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.hidesBottomBarWhenPushed = true
     }
 }
 
@@ -389,6 +401,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
         if ClassListDidSelect == true {
             
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
+            nextVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         } 
@@ -408,6 +421,10 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
 //                present(popupVC, animated: true, completion: nil)
 //            }
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        segue.destination.hidesBottomBarWhenPushed = true
+//    }
 }
 
 
