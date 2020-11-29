@@ -29,16 +29,13 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var noteCollectionView: UICollectionView!
    
-  
+    @IBOutlet weak var collectionViewTop: NSLayoutConstraint!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         noteCollectionView.delegate = self
         noteCollectionView.dataSource = self
-        
-        noteCollectionView.register(UINib.init(nibName: "NotesContentCell", bundle: nil), forCellWithReuseIdentifier: "noteContent")
-        noteCollectionView.register(UINib.init(nibName: "BlankNoteCell", bundle: nil), forCellWithReuseIdentifier: "BlankNoteCell")
-        
         setLayout()
         
     }
@@ -57,7 +54,7 @@ class NotesMainVC: UIViewController, selectClassProtocol {
         monthLabel.text = month! + "월 수업일지"
         
         //Dummy Data
-        notelist = ["hihi","hoho"]
+        //notelist = ["hihi","hoho"]
     }
     
     func setLayout(){
@@ -83,6 +80,8 @@ class NotesMainVC: UIViewController, selectClassProtocol {
             progressView.isHidden = true
             progressHeight.constant = 0
             infoStackViewHeight.constant = infoViewHeight - progressViewHeight
+            collectionViewTop.constant = 0
+            
         } else {
             progressView.isHidden = false
             progressHeight.constant = progressViewHeight
@@ -93,12 +92,13 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     // collection view layout
     private func setupFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
-        
-        let totalWidth = noteCollectionView.frame.width
        
-        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 10, right: 0)
+        flowLayout.sectionInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         
-        flowLayout.itemSize = CGSize(width: totalWidth, height: totalWidth * 0.62)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.62)
+//        flowLayout.footerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 17)
+//        flowLayout.sectionFootersPinToVisibleBounds = true
+        
         
         self.noteCollectionView.collectionViewLayout = flowLayout
     }
@@ -139,17 +139,29 @@ extension NotesMainVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let Cell = collectionView.dequeueReusableCell(withReuseIdentifier: "noteContent", for: indexPath)
-        let blankCell = collectionView.dequeueReusableCell(withReuseIdentifier: "BlankNoteCell", for: indexPath)
+        
+        let noteBlankCell = BlankNoteCell.cellForCollectionView(collectionView: noteCollectionView, indexPath: indexPath)
+        let noteContentCell = NotesContentCell.cellForCollectionView(collectionView: noteCollectionView, indexPath: indexPath)
+//        let noteHeaderCell = noteHeaderViewCell.cellForCollectionView(collectionView: noteCollectionView, indexPath: indexPath)
+        
         
         if notelist.count > 0 {
-            return Cell
+            os_log("cell load", log: .note)
+            return noteContentCell
         } else {
-            return blankCell
+            return noteBlankCell
         }
     
-        
     }
+
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        let width: CGFloat = noteCollectionView.frame.width
+//        let height: CGFloat = 17
+//        return CGSize(width: width, height: height)
+//
+//    }
+
+   
    
     
 }
