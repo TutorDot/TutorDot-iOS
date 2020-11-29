@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -358,12 +358,14 @@
                         <outlet property="myClassAddButton" destination="iSN-Dp-X3J" id="CaY-j7-YxU"/>
                         <outlet property="myRole" destination="pjv-Ku-LLT" id="DCe-Cl-MR4"/>
                         <outlet property="tableView" destination="cwz-IV-G7Y" id="QcT-gM-5O3"/>
-                        <outlet property="tutorImage" destination="aZy-o2-Ck5" id="QhO-2e-1o5"/>
+                        <outlet property="userIntro" destination="5Yo-fd-z3t" id="yor-bk-B2j"/>
+                        <outlet property="userProfileImage" destination="aZy-o2-Ck5" id="lA5-9P-uG0"/>
+                        <outlet property="usernameLabel" destination="wj2-bG-du9" id="ayA-3c-JXx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4A-Bp-Mnm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1394.2028985507247" y="225"/>
+            <point key="canvasLocation" x="-1483" y="358"/>
         </scene>
         <!--Mypage New Class NameVC-->
         <scene sceneID="0bW-aW-w9s">
@@ -429,7 +431,7 @@
                                     <constraint firstAttribute="height" constant="19" id="xdC-yu-lDf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quR-Aq-fZW">
                                 <rect key="frame" x="348" y="248" width="48" height="48"/>
@@ -557,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcX-5N-7sV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1394.2028985507247" y="904.6875"/>
+            <point key="canvasLocation" x="-1557" y="1126"/>
         </scene>
         <!--Mypage New Class DetailVC-->
         <scene sceneID="aZx-l4-R3w">
@@ -624,7 +626,7 @@
                                     <constraint firstAttribute="height" constant="19" id="KHH-jf-P2K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="timeEndEditing:" destination="T6m-WI-w6W" eventType="editingDidEnd" id="Imm-vJ-lmi"/>
                                 </connections>
@@ -635,7 +637,7 @@
                                     <constraint firstAttribute="height" constant="19" id="kIV-kJ-JSE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="priceEndEditing:" destination="T6m-WI-w6W" eventType="editingDidEnd" id="dQO-eF-oXz"/>
                                 </connections>
@@ -646,7 +648,7 @@
                                     <constraint firstAttribute="height" constant="19" id="1aY-8t-CkV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hhy-md-GlD">
                                 <rect key="frame" x="36" y="292.5" width="342" height="1"/>
@@ -676,7 +678,7 @@
                                     <constraint firstAttribute="height" constant="19" id="Nkw-K5-4F5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bt9-xu-fg6">
                                 <rect key="frame" x="0.0" y="44" width="48" height="48"/>
@@ -773,7 +775,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bz8-M8-MHJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-749.27536231884062" y="904.6875"/>
+            <point key="canvasLocation" x="-891" y="1126"/>
         </scene>
         <!--Mypage New Class TimeVC-->
         <scene sceneID="Is3-Rg-knV">
@@ -866,7 +868,7 @@
                                     <constraint firstAttribute="height" constant="19" id="auN-Ju-4ir"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="placeEndEditing:" destination="l3e-cu-Mta" eventType="editingDidEnd" id="5Vg-Rc-hV7"/>
                                 </connections>
@@ -977,7 +979,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clg-to-sNL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-102.89855072463769" y="904.6875"/>
+            <point key="canvasLocation" x="-249" y="1126"/>
         </scene>
         <!--Add Class CompleteVC-->
         <scene sceneID="E4w-k2-fHm">
@@ -1060,7 +1062,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRd-Gu-woA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="544.92753623188412" y="904.6875"/>
+            <point key="canvasLocation" x="378" y="1126"/>
         </scene>
         <!--Tutor Profile EditVC-->
         <scene sceneID="259-tO-yLN">
@@ -1215,7 +1217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfY-jo-G51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-710.14492753623199" y="225"/>
+            <point key="canvasLocation" x="-99" y="358"/>
         </scene>
         <!--Developer InfoVC-->
         <scene sceneID="slZ-v6-cbf">
@@ -1542,7 +1544,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Se-Zj-xuj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1929.7101449275365" y="1038.6160714285713"/>
+            <point key="canvasLocation" x="1418" y="1245"/>
         </scene>
         <!--Logout Pop UpVC-->
         <scene sceneID="cab-3O-Trz">
@@ -1659,7 +1661,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-pd-Aed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1620" y="-506"/>
+            <point key="canvasLocation" x="-248" y="-350"/>
         </scene>
         <!--Leave ServiceVC-->
         <scene sceneID="CMh-VV-ttp">
@@ -1812,7 +1814,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6C8-8s-40a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-972" y="-506"/>
+            <point key="canvasLocation" x="470" y="-350"/>
         </scene>
         <!--Password ModifyVC-->
         <scene sceneID="Yw0-A7-vSP">
@@ -2048,7 +2050,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXb-GT-ZLn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2267" y="-506"/>
+            <point key="canvasLocation" x="-929" y="-350"/>
         </scene>
         <!--Mypage Class EditVC-->
         <scene sceneID="kZ9-Tu-z3U">
@@ -2493,7 +2495,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4z-Zw-MXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5010.8695652173919" y="657.58928571428567"/>
+            <point key="canvasLocation" x="3457.5" y="982"/>
         </scene>
         <!--My Class AddVC-->
         <scene sceneID="NFi-eo-X8E">
@@ -2982,7 +2984,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oGr-mh-L6c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5702.1739130434789" y="657.58928571428567"/>
+            <point key="canvasLocation" x="3934.5" y="982"/>
         </scene>
         <!--My Class InfoVC-->
         <scene sceneID="LiX-4f-3Qj">
@@ -3104,8 +3106,8 @@ TutorDot 서비스를 이용하세요!</string>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 줄 자기소개 입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDC-08-ZNj">
-                                                                <rect key="frame" x="120" y="90" width="116" height="16"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="튜터" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDC-08-ZNj">
+                                                                <rect key="frame" x="120" y="90" width="22.5" height="16"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -3424,6 +3426,7 @@ TutorDot 서비스를 이용하세요!</string>
                     </view>
                     <size key="freeformSize" width="375" height="875"/>
                     <connections>
+                        <outlet property="Role" destination="tDC-08-ZNj" id="D0i-kZ-zeL"/>
                         <outlet property="TutorProfileImage" destination="bGt-5m-fSn" id="IPd-9u-xA7"/>
                         <outlet property="bankAccountInfo" destination="pGU-M6-v1i" id="JqL-5e-O3y"/>
                         <outlet property="classColorImage" destination="wjI-Ij-J4u" id="aPY-Qx-QI3"/>
@@ -3435,13 +3438,13 @@ TutorDot 서비스를 이용하세요!</string>
                         <outlet property="regularClassTime" destination="2uz-x6-6tL" id="U30-6j-Afi"/>
                         <outlet property="stackList" destination="phE-eI-p14" id="E14-n0-Vor"/>
                         <outlet property="timeAndPrice" destination="Uzc-RG-9P7" id="hbb-bm-eEh"/>
-                        <outlet property="tutorIntro" destination="tDC-08-ZNj" id="tzA-Xc-RZd"/>
+                        <outlet property="tutorIntro" destination="ZZN-oI-TGF" id="9ri-2y-kmJ"/>
                         <outlet property="tutorName" destination="Cxa-sy-sOq" id="ePT-cX-onP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAI-qZ-5k7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1350" y="911.71875"/>
+            <point key="canvasLocation" x="-830" y="358"/>
         </scene>
         <!--Class InviteVC-->
         <scene sceneID="Qq7-c7-46I">
@@ -3567,7 +3570,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSt-RK-Oc2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="168.11594202898553" y="225.66964285714283"/>
+            <point key="canvasLocation" x="535" y="358"/>
         </scene>
         <!--Invite CodeVC-->
         <scene sceneID="elC-RR-UdE">
@@ -3707,7 +3710,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxX-cd-2fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810.14492753623199" y="225"/>
+            <point key="canvasLocation" x="1174" y="358"/>
         </scene>
         <!--Class DisconnectionVC-->
         <scene sceneID="6aN-da-eyJ">
@@ -3797,6 +3800,9 @@ TutorDot 서비스를 이용하세요!</string>
                                 <state key="normal" title="네, 해제합니다">
                                     <color key="titleColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="conformButtonDidTap:" destination="EgK-Aw-M6D" eventType="touchUpInside" id="Qs0-NW-e8P"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Uul-da-VTO"/>
@@ -3826,7 +3832,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sg8-oD-iYi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="151" y="-506"/>
+            <point key="canvasLocation" x="1175" y="-349"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="3gd-6P-acd">
@@ -3921,7 +3927,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDZ-TM-RGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442.0289855072465" y="225.66964285714283"/>
+            <point key="canvasLocation" x="1829" y="358"/>
         </scene>
         <!--Mypage Navigation Controller-->
         <scene sceneID="W9f-lJ-yaz">
@@ -3938,7 +3944,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C4Q-UP-DzI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2223" y="188"/>
+            <point key="canvasLocation" x="-2183" y="358"/>
         </scene>
     </scenes>
     <resources>

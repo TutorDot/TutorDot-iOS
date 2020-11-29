@@ -8,28 +8,33 @@
 
 import UIKit
 import os
+import Kingfisher
 
 class MyPageVC: UIViewController {
 
+    // 프로필 설정
+    var profileURL: String = ""
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
     @IBOutlet weak var myClassAddButton: UIButton!
-    @IBOutlet weak var tutorImage: UIImageView!
+    
+    @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userIntro: UILabel!
     
     private var refreshControl = UIRefreshControl()
-    var firstViewLoad: Bool = true
-    
+    var ClassListDidSelect: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setMyClassInfos()
+        
         setSettingView()
         setMyclassViews()
-        
+        setProfile()
         gotoProfileEdit()
-        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -44,6 +49,9 @@ class MyPageVC: UIViewController {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
+        
+        classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
+        
     }
     
     @objc func refresh(){
@@ -53,17 +61,12 @@ class MyPageVC: UIViewController {
     }
     
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if firstViewLoad == false {
-            setMyClassInfos()
-        } else {
-            firstViewLoad = false
-        }
+    override func viewWillAppear(_ animated: Bool) {
+
+        setMyClassInfos()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
         MyClassInfos.removeAll()
     }
     
@@ -99,7 +102,7 @@ class MyPageVC: UIViewController {
                 case .serverErr :
                     os_log("ServerErr", log: .mypage)
                 case .requestErr(let message) :
-                    os_log(message as! StaticString , log: .mypage)
+                    print(message)
                 case .networkFail:
                     os_log("networkFail", log: .mypage)
             }
@@ -122,11 +125,41 @@ class MyPageVC: UIViewController {
         Service = [service1, service2, service3]
     }
     
+    // Mark - 서버통신 : 간편 프로필 조회
+    func setProfile(){
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
+            switch networkResult {
+                case .success(let resultData):
+                    os_log("profile success", log: .mypage)
+                    guard let data = resultData as? [UserProfile] else { return print(Error.self) }
+                    for index in 0..<data.count {
+                        self.usernameLabel.text =  data[index].userName
+                        self.myRole.text = data[index].role
+                        self.userIntro.text = data[index].intro
+                        self.profileURL = data[index].profileURL
+                        
+                        let url = URL(string: self.profileURL)
+                        self.userProfileImage.kf.setImage(with: url)
+                        
+                    }
+
+                case .pathErr :
+                    os_log("PathErr-Profile", log: .mypage)
+                case .serverErr :
+                    os_log("ServerErr", log: .mypage)
+                case .requestErr(let message) :
+                    os_log(message as! StaticString, log: .mypage)
+                case .networkFail:
+                    os_log("networkFail", log: .mypage)
+            }
+        }
+    }
+    
     // 프로필 이미지 뷰 선택시 프로필 편집 화면으로 화면전환
     func gotoProfileEdit(){
-        tutorImage.isUserInteractionEnabled = true
+        userProfileImage.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.profileDidTap))
-        tutorImage.addGestureRecognizer(tapGestureRecognizer)
+        userProfileImage.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @objc func profileDidTap(){
@@ -288,31 +321,22 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
             print("case 0")
         case 1:
              if indexPath.row == 1 { //개발자정보 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeveloperInfoVC")
-                nextVC.modalPresentationStyle = .currentContext
-                nextVC.modalTransitionStyle = .crossDissolve
-                present(nextVC, animated: true, completion: nil)
+
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let popupVC = storyBoard.instantiateViewController(withIdentifier: "passwordModifyVC")
-                popupVC.modalPresentationStyle = .fullScreen
-                present(popupVC, animated: true, completion: nil)
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
                 
             } else if indexPath.row == 1 { //로그아웃 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let popupVC = storyBoard.instantiateViewController(withIdentifier: "LogoutPopupVC")
-                popupVC.modalPresentationStyle = .overCurrentContext
-                popupVC.modalTransitionStyle = .crossDissolve
-                present(popupVC, animated: true, completion: nil)
+
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LogoutPopupVC") as? LogoutPopUpVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let popupVC = storyBoard.instantiateViewController(withIdentifier: "LeaveServiceVC")
-                popupVC.modalPresentationStyle = .overCurrentContext
-                popupVC.modalTransitionStyle = .crossDissolve
-                present(popupVC, animated: true, completion: nil)
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
             
         default:
@@ -324,32 +348,53 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        MyClassInfos.count
+        if MyClassInfos.count == 0 {
+            return  1 // blank Cell
+        } else {
+            return MyClassInfos.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
         
-        cell.delegate = self;
+        if MyClassInfos.count == 0 {
+            
+            ClassListDidSelect = false
+            
+            guard let blankcell = collectionView.dequeueReusableCell(withReuseIdentifier: "MypageNoClassCell", for: indexPath) as? MypageNoClassCell else { return UICollectionViewCell() }
+            
+            
+            return blankcell
+            
+        } else {
+            
+            ClassListDidSelect = true
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
+            
+            cell.delegate = self;
+            
+            // Mark: - 프로필 url 꼭 수정!!!
+            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile", classTime: MyClassInfos[indexPath.row].schedules)
+            
+            
+            return cell
+        }
         
-        // Mark: - 프로필 url 꼭 수정!!!
-        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile", classTime: MyClassInfos[indexPath.row].schedules)
-        
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-//            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-//            let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
+
+        if ClassListDidSelect == true {
             
-             guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
-             receiveViewController.myRole = self.myRole.text
-            receiveViewController.modalPresentationStyle = .currentContext
-            receiveViewController.modalTransitionStyle = .crossDissolve
-            present(receiveViewController, animated: true, completion: nil)
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        } 
+            
+             
+            
 //            if myRole == "튜터" {
 //                let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
 //                popupVC.modalPresentationStyle = .currentContext
@@ -362,15 +407,6 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
 //                popupVC.modalTransitionStyle = .crossDissolve
 //                present(popupVC, animated: true, completion: nil)
 //            }
-            
-            
-        case 1:
-            print("2")
-        case 2 :
-            print("3")
-        default:
-            print("default")
-        }
     }
 }
 
@@ -385,7 +421,5 @@ extension MyPageVC: MyClassCellDelegate {
         return self.myRole.text ?? "튜터"
     }
     
-//    func setRole(_ role : String){
-//
-//    }
+
 }

@@ -24,7 +24,7 @@ class passwordModifyVC: UIViewController {
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func idDeleteButtonDidTap(_ sender: Any) {

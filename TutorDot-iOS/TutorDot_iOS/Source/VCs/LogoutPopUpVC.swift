@@ -27,12 +27,12 @@ class LogoutPopUpVC: UIViewController {
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
         
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
         
     }
     

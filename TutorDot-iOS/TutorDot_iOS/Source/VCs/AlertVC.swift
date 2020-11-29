@@ -61,7 +61,7 @@ class AlertVC: UIViewController {
         dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
 
         // 서버통신: 토글에서 수업리스트 가져오기
-               ProfileService.shared.getClassLid() { networkResult in
+               ProfileService.ProfileServiceShared.getClassLid() { networkResult in
                switch networkResult {
                    case .success(let resultData):
                    print("successssss")

@@ -174,7 +174,7 @@ struct ClassInfoService {
 //    }
 //
     
-    // GET: 마이페이지 수업 목록 조회
+    // Mark - GET: 마이페이지 수업 목록 조회
     func setMypageClassList(completion: @escaping (NetworkResult<Any>) -> Void) {
         
         
@@ -198,7 +198,6 @@ struct ClassInfoService {
     private func judgeClassList(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
             case 200:
-                os_log("judge classList success", log: .mypage)
                 return isClassListData(by: data)
             case 400: return .pathErr
             case 500: return .serverErr
@@ -210,13 +209,12 @@ struct ClassInfoService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(LidData.self, from: data)
             else {return .pathErr}
+        
         if decodedData.success {
             return .success(decodedData.data)
         }
         else {
             return .requestErr(decodedData.message)}
-    }
+        }
     
-    
-   
 }

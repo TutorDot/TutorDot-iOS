@@ -182,7 +182,7 @@ class CalendarVC: UIViewController {
         self.dropDown?.animationduration = 0.25
         
         // 서버통신: 토글에서 수업리스트 가져오기
-        ProfileService.shared.getClassLid() { networkResult in
+        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
@@ -276,7 +276,7 @@ class CalendarVC: UIViewController {
     }
     // MARK: - 서버통신: 유저 인포 데이터 가져오기
     func getProfileInfo() {
-        ProfileService.shared.setMyProfile("\(UserDefaults.standard.value(forKey: "token")!)") { networkResult in
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [UserProfile] else { return print(Error.self) }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os
 
 class LeaveServiceVC: UIViewController {
 
@@ -109,20 +110,46 @@ class LeaveServiceVC: UIViewController {
         })
     }
     @IBAction func backButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func cancelButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func leaveServiceButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "Login", bundle: nil)
-        let popupVC = storyBoard.instantiateViewController(withIdentifier: "SignUpVC")
-        popupVC.modalPresentationStyle = .overCurrentContext
-        popupVC.modalTransitionStyle = .crossDissolve
-        present(popupVC, animated: true, completion: nil)
+        
+        MypageService.MypageServiceShared.deleteUser() { networkResult in
+            switch networkResult {
+            case .success:
+                
+                //login VC로 이동 준비
+                let loginStoryboard = UIStoryboard.init(name: "Login", bundle: nil)
+                guard let loginVC = loginStoryboard.instantiateViewController(identifier: "LoginVC") as? LoginVC  else { return }
+                loginVC.modalPresentationStyle = .fullScreen
+                
+                
+                // 서비스 탈퇴 성공 alert
+                let alert = UIAlertController(title: "완료", message: "서비스 탈퇴가 완료되었습니다.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: {_ in self.present(loginVC, animated: true, completion: nil)}))
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                        
+            case .requestErr(let message):
+                os_log(message as! StaticString , log: .mypage)
+            case .pathErr:
+                os_log("PathErr", log: .mypage)
+            case .networkFail:
+                os_log("networkFail", log: .mypage)
+            case .serverErr:
+                os_log("ServerErr", log: .mypage)
+
+            }
+            
+        }
+
     }
     
 }
