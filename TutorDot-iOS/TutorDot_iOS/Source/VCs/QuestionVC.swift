@@ -18,6 +18,7 @@ class QuestionVC: UIViewController {
     @IBOutlet weak var questionTabView: UIView!
   
     
+    @IBOutlet weak var blindView: UIView!
     @IBOutlet weak var answerCount: UILabel!
     @IBOutlet weak var questionCount: UILabel!
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class QuestionVC: UIViewController {
         // Mark: - shadow setting
         self.view.bringSubviewToFront(questionBoxView)
         self.view.bringSubviewToFront(questionHeaderView)
-       
+        self.view.bringSubviewToFront(blindView)
         questionTableView.delegate = self
         questionTableView.dataSource = self
     }
