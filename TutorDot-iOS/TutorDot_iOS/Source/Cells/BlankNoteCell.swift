@@ -27,6 +27,15 @@ class BlankNoteCell: UICollectionViewCell {
         //topConstraints = blankImage.topAnchor.constraint(equalTo: topAnchor, constant: 137*mult)
         topConstraints.constant *= mult
     }
+    
+    class func cellForCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> BlankNoteCell {
+        let noteBlankCollectionViewCellIdentifier = "BlankNoteCell"
+        
+        collectionView.register(UINib(nibName: "BlankNoteCell", bundle: Bundle.main), forCellWithReuseIdentifier: noteBlankCollectionViewCellIdentifier)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noteBlankCollectionViewCellIdentifier, for: indexPath) as! BlankNoteCell
+        return cell
+    }
 
     
     

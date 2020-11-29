@@ -618,7 +618,7 @@
                                             <constraint firstAttribute="trailing" secondItem="c42-dz-FMT" secondAttribute="trailing" constant="16" id="v8h-a1-jQe"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYw-bl-f6D">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LYw-bl-f6D" userLabel="monthView">
                                         <rect key="frame" x="0.0" y="94" width="375" height="56"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="7.5" translatesAutoresizingMaskIntoConstraints="NO" id="OUS-n5-PBn">
@@ -661,29 +661,16 @@
                                     <constraint firstAttribute="trailing" secondItem="LYw-bl-f6D" secondAttribute="trailing" id="uVb-t3-P0c"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iIr-aa-gO7">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iIr-aa-gO7">
                                 <rect key="frame" x="0.0" y="244" width="375" height="534"/>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DiE-GB-wQo">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="50" height="16"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DiE-GB-wQo">
+                                    <size key="itemSize" width="128" height="534"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="NotesHeader" id="k7d-6a-BB6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00일 토" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDd-Bd-epR">
-                                            <rect key="frame" x="22" y="0.0" width="47" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                            <color key="textColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </collectionReusableView>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sJd-n2-aDC"/>
@@ -697,13 +684,14 @@
                             <constraint firstItem="mNX-Yc-xvj" firstAttribute="leading" secondItem="sJd-n2-aDC" secondAttribute="leading" id="Z8u-2d-r0x"/>
                             <constraint firstItem="sJd-n2-aDC" firstAttribute="trailing" secondItem="gVI-uo-qF9" secondAttribute="trailing" id="ZsU-2h-vx6"/>
                             <constraint firstItem="gVI-uo-qF9" firstAttribute="top" secondItem="mNX-Yc-xvj" secondAttribute="bottom" id="ioz-GC-fjr"/>
-                            <constraint firstItem="iIr-aa-gO7" firstAttribute="top" secondItem="gVI-uo-qF9" secondAttribute="bottom" id="qcm-yY-qWd"/>
+                            <constraint firstItem="iIr-aa-gO7" firstAttribute="top" secondItem="mNX-Yc-xvj" secondAttribute="bottom" constant="150" id="qcm-yY-qWd"/>
                             <constraint firstItem="sJd-n2-aDC" firstAttribute="bottom" secondItem="iIr-aa-gO7" secondAttribute="bottom" id="vnT-Pj-NYp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aBm-hu-Tkf"/>
                     <connections>
                         <outlet property="classProgressBar" destination="c42-dz-FMT" id="Wqc-uL-5st"/>
+                        <outlet property="collectionViewTop" destination="qcm-yY-qWd" id="pmL-pr-Rvd"/>
                         <outlet property="infoStackView" destination="gVI-uo-qF9" id="e3q-zJ-9RD"/>
                         <outlet property="infoStackViewHeight" destination="1PM-Ay-dYC" id="JPO-NQ-Uu6"/>
                         <outlet property="monthLabel" destination="z6g-7A-B6k" id="vES-Xg-ru4"/>
@@ -821,10 +809,9 @@
         <!--Navigation Controller-->
         <scene sceneID="DKy-6V-7Nj">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hPZ-0L-pam" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="hPZ-0L-pam" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wcI-zf-e5E">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
