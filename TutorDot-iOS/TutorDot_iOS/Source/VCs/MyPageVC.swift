@@ -52,7 +52,7 @@ class MyPageVC: UIViewController {
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
-        //self.tabBarController?.tabBar.isHidden = false
+        //self.hidesBottomBarWhenPushed = false;
         
     }
     

@@ -106,7 +106,14 @@ class MyClassInfoVC: UIViewController {
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
+        self.hidesBottomBarWhenPushed = false;
+        
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.hidesBottomBarWhenPushed = false
+        segue.destination.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func accountCopyButtonDidTap(_ sender: Any) {

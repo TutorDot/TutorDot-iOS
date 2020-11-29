@@ -115,6 +115,11 @@ class CalendarVC: UIViewController {
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
         getProfileInfo()
+        if "\(UserDefaults.standard.value(forKey: "token")!)" ==  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU" {
+            headerUserNameLabel.text = "둘러보기"
+        } else {
+            headerUserNameLabel.text = ""
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
