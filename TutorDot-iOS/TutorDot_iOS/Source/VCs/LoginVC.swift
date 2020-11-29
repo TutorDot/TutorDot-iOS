@@ -161,6 +161,18 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func previewButtonSelected(_ sender: Any) {
+        
+        let inputID = "dummy"
+        let inputPWD = "dummy"
+        
+        let dataSave = UserDefaults.standard //
+        dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
+        dataSave.setValue(inputPWD, forKey: "save_pw") // save_pw 키값에 pw값 저장
+        UserDefaults.standard.synchronize() // setValue 실행
+        
+        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU"
+        UserDefaults.standard.set(token, forKey: "token")
+        
         let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
         guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
                 TabbarVC else { return }

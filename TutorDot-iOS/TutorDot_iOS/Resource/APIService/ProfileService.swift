@@ -52,11 +52,11 @@ struct ProfileService {
     }
     
     private func isLookup(by data: Data) -> NetworkResult<Any> {
-        
+
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(ProfileData.self, from: data)
             else { return .pathErr }
-        
+
         if decodedData.success {
             os_log("profile decoding success", log: .mypage)
             return .success(decodedData.data as Any)

@@ -52,6 +52,8 @@ class MyPageVC: UIViewController {
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
+        //self.tabBarController?.tabBar.isHidden = false
+        
     }
     
     @objc func refresh(){
@@ -131,17 +133,14 @@ class MyPageVC: UIViewController {
             switch networkResult {
                 case .success(let resultData):
                     os_log("profile success", log: .mypage)
-                    guard let data = resultData as? [UserProfile] else { return print(Error.self) }
-                    for index in 0..<data.count {
-                        self.usernameLabel.text =  data[index].userName
-                        self.myRole.text = data[index].role
-                        self.userIntro.text = data[index].intro
-                        self.profileURL = data[index].profileURL
+                    guard let data = resultData as? UserProfile else { return print(Error.self) }
+                        self.usernameLabel.text =  data.userName
+                        self.myRole.text = data.role
+                        self.userIntro.text = data.intro
+                        self.profileURL = data.profileUrl
                         
                         let url = URL(string: self.profileURL)
                         self.userProfileImage.kf.setImage(with: url)
-                        
-                    }
 
                 case .pathErr :
                     os_log("PathErr-Profile", log: .mypage)
@@ -186,6 +185,9 @@ class MyPageVC: UIViewController {
         
        
     }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        segue.destination.hidesBottomBarWhenPushed = true
+//    }
     
     
 }
@@ -323,25 +325,32 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
              if indexPath.row == 1 { //개발자정보 클릭 시
 
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             } else if indexPath.row == 1 { //로그아웃 클릭 시
-
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LogoutPopupVC") as? LogoutPopUpVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
             
         default:
             print("default")
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.hidesBottomBarWhenPushed = true
     }
 }
 
@@ -389,6 +398,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
         if ClassListDidSelect == true {
             
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
+            nextVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(nextVC, animated: true)
             
         } 
@@ -408,6 +418,10 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
 //                present(popupVC, animated: true, completion: nil)
 //            }
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        segue.destination.hidesBottomBarWhenPushed = true
+//    }
 }
 
 
