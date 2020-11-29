@@ -32,6 +32,10 @@ class MypageNoticeSettingCell: UITableViewCell {
         switchStatus = status
     }
     
+    func hiddenSwitch(){
+        noticeSwitch.isHidden = true
+    }
+    
     func setSwitchUI(){
         noticeSwitch.onTintColor = UIColor(named: "SwitchColor")
         noticeSwitch.thumbTintColor = UIColor(named: "Color")

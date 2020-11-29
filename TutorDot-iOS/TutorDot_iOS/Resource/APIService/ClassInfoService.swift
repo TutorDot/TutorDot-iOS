@@ -9,13 +9,14 @@
 import Foundation
 import Alamofire
 import Kingfisher
+import os
 
 // 수업 정보 가져오는 서비스 파일
 struct ClassInfoService {
     // Singleton
     static let classInfoServiceShared = ClassInfoService()
     
-    // GET: 캘린더 탭 했을 때 전체 수업 정보 가져오기
+    // MARK - GET: 캘린더 탭 했을 때 전체 수업 정보 가져오기
     func getAllClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         // 토큰 가져오기
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
@@ -36,7 +37,7 @@ struct ClassInfoService {
         }
     }
     
-    // POST: 캘린더 플러스 버튼 눌렀을 때 일정 추가하기
+    // MARK - POST: 캘린더 플러스 버튼 눌렀을 때 일정 추가하기
     private func makeParameter(_ lectureId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
         return ["lectureId": lectureId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
     }
@@ -59,7 +60,7 @@ struct ClassInfoService {
         }
     }
     
-    // PUT : 수업일정 상세뷰에서 일정 하나 수정하기
+    // MARK - PUT : 수업일정 상세뷰에서 일정 하나 수정하기
     private func makeParameter2(_ classId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
         return ["classId": classId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
     }
@@ -82,7 +83,7 @@ struct ClassInfoService {
         }
     }
     
-    // GET: 특정 수업 일정 조회
+    // MARK - GET: 특정 수업 일정 조회
     func getOneClassInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         let dataRequest = Alamofire.request(APIConstants.calendarLidURL)
         dataRequest.responseData { dataResponse in
@@ -99,7 +100,7 @@ struct ClassInfoService {
     
     
     
-    // DELETE: 특정 수업 일정 하나 삭제 by CID
+    // MARK - DELETE: 특정 수업 일정 하나 삭제 by CID
     private func makeParameter3(_ classId: Int) -> Parameters{
         return ["classId": classId]
     }
@@ -121,9 +122,11 @@ struct ClassInfoService {
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
-        //case 200: return isClassData(by: data)
         case 200:
             print("judge success")
+            return isClassData(by: data)
+        case 204:
+            print("judge success2")
             return isClassData(by: data)
         case 400: return .pathErr
         case 500: return .serverErr
@@ -145,5 +148,73 @@ struct ClassInfoService {
             return .requestErr(decodedData.message)}
     }
     
+    // MARK - GET: 수업 초대코드 가져오기
+//    private func parameterForInvite(_ classId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
+//        return ["classId": classId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
+//    }
+//    
+//    func getClassInviteCoed(completion: @escaping (NetworkResult<Any>) -> Void) {
+//        // 토큰 가져오기
+//        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+//
+//        let dataRequest = Alamofire.request(APIConstants.invitationURL+ "/" + "\(classId)", method: .get, pa(classId), headers: header)
+//      
+//        
+//        
+//        dataRequest.responseData { dataResponse in
+//            switch dataResponse.result {
+//            case .success :
+//                guard let statusCode = dataResponse.response?.statusCode else {return}
+//                guard let value = dataResponse.result.value else {return}
+//                let networkResult = self.judge(by: statusCode,value)
+//                completion(networkResult)
+//            case .failure : completion(.networkFail)
+//            }
+//        }
+//    }
+//
+    
+    // Mark - GET: 마이페이지 수업 목록 조회
+    func setMypageClassList(completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+    
+        let dataRequest = Alamofire.request(APIConstants.lectureURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)
+        
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judgeClassList(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    private func judgeClassList(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+            case 200:
+                return isClassListData(by: data)
+            case 400: return .pathErr
+            case 500: return .serverErr
+            default: return .networkFail
+        }
+    }
+    
+    private func isClassListData(by data:Data) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(LidData.self, from: data)
+            else {return .pathErr}
+        
+        if decodedData.success {
+            return .success(decodedData.data)
+        }
+        else {
+            return .requestErr(decodedData.message)}
+        }
     
 }

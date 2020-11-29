@@ -1,18 +1,32 @@
 {
   "images" : [
     {
+<<<<<<< HEAD
       "idiom" : "universal",
       "scale" : "1x",
+=======
+      "scale" : "1x",
+      "idiom" : "universal",
+>>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
       "filename" : "calenderBalnkImg.png"
     },
     {
       "filename" : "calenderBalnkImg@2x.png",
+<<<<<<< HEAD
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
+=======
+      "scale" : "2x",
+      "idiom" : "universal"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "universal",
+>>>>>>> 34ff8ae5971aa72dbd238a28d6256a708e4f1bbd
       "filename" : "calenderBalnkImg@3x.png"
     }
   ],

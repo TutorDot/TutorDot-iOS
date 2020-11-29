@@ -17,6 +17,7 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var numberlabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var correctLabel: UILabel!
     
     var finalRole: String!
     var role : String!
@@ -28,6 +29,7 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
         setUpViews()
         initGestureRecognizer()
         self.finalRole = role
+        correctLabel.isHidden = true
     }
     
     @IBAction func backButtonSelected(_ sender: Any) {
@@ -36,6 +38,21 @@ class SignUp4VC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) { //
         registerForKeyboardNotifications()
+    }
+    
+    @IBAction func textFieldTapped(_ sender: Any) {
+        if passwordReTextfield.text != passwordTextfield.text {
+            correctLabel.isHidden = false
+        }
+    }
+
+    
+    @IBAction func textFieldInput(_ sender: Any) {
+        if passwordReTextfield.text == passwordTextfield.text && passwordReTextfield.text?.length == passwordTextfield.text?.length{
+            correctLabel.isHidden = true
+        } else {
+            correctLabel.isHidden = false
+        }
     }
     
     func setUpViews() {

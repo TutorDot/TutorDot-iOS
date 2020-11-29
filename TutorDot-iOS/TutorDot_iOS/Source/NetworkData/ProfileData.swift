@@ -11,11 +11,13 @@ import Foundation
 struct ProfileData: Codable {
     var status: Int
     var success: Bool
+    var message: String
     var data: UserProfile?
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
         case success = "success"
+        case message = "message"
         case data = "data"
     }
     
@@ -23,29 +25,28 @@ struct ProfileData: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         status = (try? values.decode(Int.self, forKey: .status)) ?? -1
         success = (try? values.decode(Bool.self, forKey: .success)) ?? false
-        data = (try? values.decode(UserProfile.self, forKey: .data)) ?? nil
+        message = (try? values.decode(String.self, forKey: .message)) ?? ""
+        data = (try? values.decode(UserProfile?.self, forKey: .data)) ?? nil
     }
 }
 
+// 계정 - 간편 프로필 조회
 struct UserProfile: Codable {
     var userName: String
     var role: String
     var intro: String
     var profileURL: String
     
-    enum CodingKeys: String, CodingKey {
-        case userName = "userName"
-        case role = "role"
-        case intro = "intro"
-        case profileURL = "profileUrl"
+    init(userName: String, role: String, intro: String?, profileURL: String) {
+        self.userName = userName
+        self.role = role
         
-    }
-    
-    init(form decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        userName = (try? values.decode(String.self, forKey: .userName)) ?? ""
-        role = (try? values.decode(String.self, forKey: .role)) ?? ""
-        intro = (try? values.decode(String.self, forKey: .intro)) ?? ""
-        profileURL = (try? values.decode(String.self, forKey: .profileURL)) ?? ""
+        if intro == nil {
+            self.intro = ""
+        } else {
+            self.intro = intro!
+        }
+        
+        self.profileURL = profileURL
     }
 }

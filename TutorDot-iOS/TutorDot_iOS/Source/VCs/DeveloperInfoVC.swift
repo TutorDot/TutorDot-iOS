@@ -18,7 +18,7 @@ class DeveloperInfoVC: UIViewController {
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBOutlet weak var scrollViewButtom: NSLayoutConstraint!

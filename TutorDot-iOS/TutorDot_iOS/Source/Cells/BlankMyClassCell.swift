@@ -10,6 +10,8 @@ import UIKit
 
 class BlankMyClassCell: UICollectionViewCell {
 
+    static let identifier: String = "MypageBlankClassCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

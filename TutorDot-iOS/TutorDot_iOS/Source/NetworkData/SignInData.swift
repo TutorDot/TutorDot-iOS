@@ -32,4 +32,6 @@ struct SignInData: Codable {
 
 struct TokenData: Codable {
     var accessToken: String
+    var role: String
+    var userName: String
 }

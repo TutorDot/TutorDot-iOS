@@ -16,7 +16,9 @@ class QuestionVC: UIViewController {
   
     @IBOutlet weak var barview: UIView!
     @IBOutlet weak var questionTabView: UIView!
-  
+    //var serviceView = UIView()
+    @IBOutlet weak var serviceView: UIView!
+    
     
     @IBOutlet weak var answerCount: UILabel!
     @IBOutlet weak var questionCount: UILabel!
@@ -28,6 +30,7 @@ class QuestionVC: UIViewController {
         // Mark: - shadow setting
         self.view.bringSubviewToFront(questionBoxView)
         self.view.bringSubviewToFront(questionHeaderView)
+        self.view.bringSubviewToFront(serviceView)
        
         questionTableView.delegate = self
         questionTableView.dataSource = self
@@ -40,6 +43,8 @@ class QuestionVC: UIViewController {
         
         
     }
+    
+
     
     @IBOutlet weak var questionBoxView: UIView! {
         didSet {

@@ -24,6 +24,11 @@ class AlertVC: UIViewController {
     var dropDown : DropDown?
     var noticeList: [AlertInfo] = []
     var dropDownList: [String] = [] // 서버에서 받아오는 수업정보 데이터: 드랍다운 리스트
+    var customView = UIView()
+    var label: UILabel = UILabel()
+    var label2: UILabel = UILabel()
+    var label3: UILabel = UILabel()
+    var imageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +61,14 @@ class AlertVC: UIViewController {
         dropDown?.bottomOffset = CGPoint(x: 0, y:(dropDown?.anchorView?.plainView.bounds.height)!+6)
 
         // 서버통신: 토글에서 수업리스트 가져오기
-               ProfileService.shared.getClassLid() { networkResult in
+               ProfileService.ProfileServiceShared.getClassLid() { networkResult in
                switch networkResult {
                    case .success(let resultData):
                    print("successssss")
                    guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                    print("try")
                    for index in 0..<data.count {
-                       let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                        dropList.append(item.lectureName)
                        self.dropDown?.dataSource = dropList
                    }
@@ -79,7 +84,7 @@ class AlertVC: UIViewController {
         
         // 드롭박스 목록 내역
         dropDownButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
-        dropDownLabelButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
+        //dropDownLabelButton.addTarget(self, action: #selector(dropDownToggleButton), for: .touchUpInside)
         
         // Action triggered on selection
         dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -145,15 +150,37 @@ extension AlertVC: UITableViewDelegate, UITableViewDataSource {
         }
         else
         { // 알림이 없는 경우
-            let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            let subLagel: UILabel  = UILabel(frame: CGRect(x: 50, y: 50, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            noDataLabel.text = "알림이 없습니다"
-            noDataLabel.font.withSize(16)
-            noDataLabel.textColor = UIColor.brownishGrey
-            noDataLabel.textAlignment = .center
-            subLagel.text = "새로운 소식을 기다려주세요"
-            tableView.backgroundView  = noDataLabel
-            tableView.separatorStyle  = .none
+            
+            customView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+                customView.center = self.view.center
+
+            self.view.addSubview(customView)
+            
+            imageView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+            imageView.setImage(from: "alarmBlankImgService")
+            self.customView.addSubview(imageView)
+            
+            label.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+            label.textAlignment = .center
+            label.text = "서비스 준비중입니다"
+            label.textColor = UIColor.brownishGrey
+            label.font = UIFont.boldSystemFont(ofSize: 16)
+            self.customView.addSubview(label)
+            
+            label2.frame = CGRect(x: 0, y: 30, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+            label2.textAlignment = .center
+            label2.text = "더 나은 서비스로 찾아올게요"
+            label2.textColor = UIColor.brownishGrey
+            label2.font = UIFont.boldSystemFont(ofSize: 14)
+            self.customView.addSubview(label2)
+            
+            label3.frame = CGRect(x: 0, y: 50, width: tableView.bounds.size.width, height: tableView.bounds.size.height)
+            label3.textAlignment = .center
+            label3.text = "조금만 기다려주세요!"
+            label3.textColor = UIColor.brownishGrey
+            label3.font = UIFont.boldSystemFont(ofSize: 14)
+            self.customView.addSubview(label3)
+            
         }
         return numOfSections
     }

@@ -7,27 +7,34 @@
 //
 
 import UIKit
+import os
+import Kingfisher
 
 class MyPageVC: UIViewController {
 
+    // 프로필 설정
+    var profileURL: String = ""
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
-    @IBOutlet weak var myClassAdd: UIView!
-    @IBOutlet weak var tutorImage: UIImageView!
+    @IBOutlet weak var myClassAddButton: UIButton!
+    
+    @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userIntro: UILabel!
     
-    @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
-    
+    private var refreshControl = UIRefreshControl()
+    var ClassListDidSelect: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setMyClassInfos()
+        
         setSettingView()
         setMyclassViews()
-        
+        setProfile()
         gotoProfileEdit()
-        autoLayoutView()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -36,35 +43,76 @@ class MyPageVC: UIViewController {
         classCollectionView.dataSource = self
         
         classCollectionView.isScrollEnabled = true
-        classCollectionView.contentSize = CGSize(width: 112, height: self.classCollectionView.frame.height)
+        classCollectionView.contentSize = CGSize(width: 206, height: 81)
+        
+        // scroll refresh
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        
+        classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
+        
     }
     
-    func autoLayoutView(){
-        headerHeightContraints.constant = self.view.frame.height * 94/812
+    @objc func refresh(){
+        // refresh Action
+        MyClassInfos.removeAll()
+        setMyClassInfos()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+
+        setMyClassInfos()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        MyClassInfos.removeAll()
+    }
+    
+  
     
     func setMyclassViews(){
-        myClassAdd.layer.cornerRadius = 7
+        myClassAddButton.layer.cornerRadius = 7
     }
     
     //상단 콜렉션 뷰에서 쓸 리스트
-    private var MyClassInfos: [MyClassInfo] = []
+    private var MyClassInfos: [LidToggleData] = []
     //하단 테이블 뷰에서 쓸 리스트
     private var Alert: [MypageInfo] = []
     private var Info: [MypageInfo] = []
     private var Service: [MypageInfo] = []
     
     func setMyClassInfos(){
-        let myClass1 = MyClassInfo(classColor: .blue, classTitle: "권세희 학생 영어 회화수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass2 = MyClassInfo(classColor: .red, classTitle: "최인정 학생 일러스트 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass3 = MyClassInfo(classColor: .green, classTitle: "변정인 학생 정리전돈 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
-        let myClass4 = MyClassInfo(classColor: .yellow, classTitle: "류세화 학생 카트 수업", tutee1: "myBlankImgProifleTutee2", tutee2: "myBlankImgProifleTutee2", role: myRole.text ?? "튜터")
         
-        MyClassInfos = [myClass1, myClass2, myClass3, myClass4]
+        // MARK - 수업 리스트 서버통신
+        ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
+            switch networkResult {
+                case .success(let resultData):
+                    guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
+                    for index in 0..<data.count {
+                        let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
+                        
+                        self.MyClassInfos.append(item)
+                    }
+
+                    self.classCollectionView.reloadData()
+                case .pathErr :
+                    os_log("PathErr", log: .mypage)
+                case .serverErr :
+                    os_log("ServerErr", log: .mypage)
+                case .requestErr(let message) :
+                    print(message)
+                case .networkFail:
+                    os_log("networkFail", log: .mypage)
+            }
+            
+            
+        }
     }
     
     func setSettingView(){
-        let alert1 = MypageInfo(title: "수업료 알림")
+        let alert1 = MypageInfo(title: "수업료 알림 (서비스 준비 중)")
         let alert2 = MypageInfo(title: "수업 시작 전 알림")
         let info1 = MypageInfo(title: "버전정보")
         let info2 = MypageInfo(title: "개발자정보")
@@ -77,11 +125,41 @@ class MyPageVC: UIViewController {
         Service = [service1, service2, service3]
     }
     
+    // Mark - 서버통신 : 간편 프로필 조회
+    func setProfile(){
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
+            switch networkResult {
+                case .success(let resultData):
+                    os_log("profile success", log: .mypage)
+                    guard let data = resultData as? [UserProfile] else { return print(Error.self) }
+                    for index in 0..<data.count {
+                        self.usernameLabel.text =  data[index].userName
+                        self.myRole.text = data[index].role
+                        self.userIntro.text = data[index].intro
+                        self.profileURL = data[index].profileURL
+                        
+                        let url = URL(string: self.profileURL)
+                        self.userProfileImage.kf.setImage(with: url)
+                        
+                    }
+
+                case .pathErr :
+                    os_log("PathErr-Profile", log: .mypage)
+                case .serverErr :
+                    os_log("ServerErr", log: .mypage)
+                case .requestErr(let message) :
+                    os_log(message as! StaticString, log: .mypage)
+                case .networkFail:
+                    os_log("networkFail", log: .mypage)
+            }
+        }
+    }
+    
     // 프로필 이미지 뷰 선택시 프로필 편집 화면으로 화면전환
     func gotoProfileEdit(){
-        tutorImage.isUserInteractionEnabled = true
+        userProfileImage.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.profileDidTap))
-        tutorImage.addGestureRecognizer(tapGestureRecognizer)
+        userProfileImage.addGestureRecognizer(tapGestureRecognizer)
     }
     
     @objc func profileDidTap(){
@@ -93,13 +171,13 @@ class MyPageVC: UIViewController {
     }
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+        
         if myRole.text == "튜터"{
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "MyClassAddVC")
-            nextVC.modalPresentationStyle = .currentContext
-            nextVC.modalTransitionStyle = .crossDissolve
-            present(nextVC, animated: true, completion: nil)
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
         } else if myRole.text == "튜티" {
+            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
             nextVC.modalPresentationStyle = .currentContext
             nextVC.modalTransitionStyle = .crossDissolve
@@ -119,7 +197,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return 55
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,10 +219,22 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0 :
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+            if indexPath.row == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+                
+                cell.setTitleInfo(Alert[indexPath.row].title)
+                cell.hiddenSwitch()
+                
+                return cell
+                
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
+                
+                cell.setTitleInfo(Alert[indexPath.row].title)
+                
+                return cell
+            }
             
-            cell.setTitleInfo(Alert[indexPath.row].title)
-            return cell
         case 1 :
             if indexPath.row == 0 {
                guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageInfoCell.identifier, for: indexPath) as? MypageInfoCell else { return UITableViewCell()}
@@ -173,12 +263,52 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 2
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55
+    }
+
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 55)
+        view.backgroundColor = UIColor.white
+        
+        switch section {
+        case 0 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "알림설정"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+        case 1 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "어플정보"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+            
+        case 2 :
+            let headerTitle = UILabel(frame : CGRect(x: 16, y: 19, width: 60, height: 17))
+            headerTitle.text = "계정설정"
+            headerTitle.textColor = UIColor.black
+            headerTitle.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+            view.addSubview(headerTitle)
+        default:
+            print("default")
+        }
+        
+        return view
+        
+        
+    }
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 375, height: 10)
+        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 8)
         view.backgroundColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1.0)
         return view
     }
@@ -191,25 +321,22 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
             print("case 0")
         case 1:
              if indexPath.row == 1 { //개발자정보 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "DeveloperInfoVC")
-                nextVC.modalPresentationStyle = .currentContext
-                nextVC.modalTransitionStyle = .crossDissolve
-                present(nextVC, animated: true, completion: nil)
+
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
         case 2:
-            if indexPath.row == 1 { //로그아웃 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let popupVC = storyBoard.instantiateViewController(withIdentifier: "LogoutPopupVC")
-                popupVC.modalPresentationStyle = .overCurrentContext
-                popupVC.modalTransitionStyle = .crossDissolve
-                present(popupVC, animated: true, completion: nil)
+            if indexPath.row == 0 { //비밀번호 변경 클릭 시
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+            } else if indexPath.row == 1 { //로그아웃 클릭 시
+
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LogoutPopupVC") as? LogoutPopUpVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let popupVC = storyBoard.instantiateViewController(withIdentifier: "LeaveServiceVC")
-                popupVC.modalPresentationStyle = .overCurrentContext
-                popupVC.modalTransitionStyle = .crossDissolve
-                present(popupVC, animated: true, completion: nil)
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
             
         default:
@@ -221,31 +348,53 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        MyClassInfos.count
+        if MyClassInfos.count == 0 {
+            return  1 // blank Cell
+        } else {
+            return MyClassInfos.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
         
-        cell.delegate = self;
+        if MyClassInfos.count == 0 {
+            
+            ClassListDidSelect = false
+            
+            guard let blankcell = collectionView.dequeueReusableCell(withReuseIdentifier: "MypageNoClassCell", for: indexPath) as? MypageNoClassCell else { return UICollectionViewCell() }
+            
+            
+            return blankcell
+            
+        } else {
+            
+            ClassListDidSelect = true
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
+            
+            cell.delegate = self;
+            
+            // Mark: - 프로필 url 꼭 수정!!!
+            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile", classTime: MyClassInfos[indexPath.row].schedules)
+            
+            
+            return cell
+        }
         
-        cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].classColor.getImageName(), classTitle: MyClassInfos[indexPath.row].classTitle, Tutee1: MyClassInfos[indexPath.row].tutee1, Tutee2: MyClassInfos[indexPath.row].tutee2, role: MyClassInfos[indexPath.row].role)
-        
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.item {
-        case 0:
-//            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-//            let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
+
+        if ClassListDidSelect == true {
             
-             guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
-             receiveViewController.myRole = self.myRole.text
-            receiveViewController.modalPresentationStyle = .currentContext
-            receiveViewController.modalTransitionStyle = .crossDissolve
-            present(receiveViewController, animated: true, completion: nil)
+            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+            
+        } 
+            
+             
+            
 //            if myRole == "튜터" {
 //                let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
 //                popupVC.modalPresentationStyle = .currentContext
@@ -258,15 +407,6 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
 //                popupVC.modalTransitionStyle = .crossDissolve
 //                present(popupVC, animated: true, completion: nil)
 //            }
-            
-            
-        case 1:
-            print("2")
-        case 2 :
-            print("3")
-        default:
-            print("default")
-        }
     }
 }
 
@@ -281,7 +421,5 @@ extension MyPageVC: MyClassCellDelegate {
         return self.myRole.text ?? "튜터"
     }
     
-//    func setRole(_ role : String){
-//
-//    }
+
 }

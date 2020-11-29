@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os
 
 protocol MyClassCellDelegate: class {
     func getRole() -> String
@@ -21,20 +22,33 @@ class MyClassCell: UICollectionViewCell {
     @IBOutlet weak var myClassView: UIView!
     @IBOutlet weak var classColor: UIImageView!
     @IBOutlet weak var classTitle: UILabel!
-    @IBOutlet weak var TuteeImage1: UIImageView!
-    @IBOutlet weak var TuteeImage2: UIImageView!
+    
+    @IBOutlet weak var classInfo: UILabel!
+    @IBOutlet weak var TuteeImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         myClassView.layer.cornerRadius = 7
+        os_log("class list view awake", log: .mypage)
     }
     
-    func setMyClassInfo(classColor : String, classTitle: String, Tutee1:String, Tutee2:String, role: String){
+    func setMyClassInfo(classColor : String, classTitle: String, Tutee: String, classTime: [SchedulesData]){
         self.classColor.image = UIImage(named: classColor)
         self.classTitle.text = classTitle
-        TuteeImage1.image = UIImage(named: Tutee1)
-        TuteeImage2.image = UIImage(named: Tutee2)
-        myRoleSet = role
+        self.TuteeImage.image = UIImage(named: Tutee)
+        
+        var timeInfo: String = ""
+        for i in 0...classTime.count-1 {
+            timeInfo += classTime[i].day + " "
+            if i != classTime.count-1 {
+                timeInfo += "/ "
+            }
+        }
+        timeInfo += classTime[0].orgStartTime
+        timeInfo += "~"
+        
+        self.classInfo.text = timeInfo
+        
     }
     
 }

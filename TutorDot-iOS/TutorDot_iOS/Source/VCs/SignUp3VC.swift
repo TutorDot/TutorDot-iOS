@@ -16,6 +16,7 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var idTextField: UITextField!
     var name : String?
     var receiveRole: String!
+    var idChecked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +31,21 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
     @IBAction func nextButtonSelected(_ sender: Any) {
         guard let receiveViewController = self.storyboard?.instantiateViewController(withIdentifier: SignUp4VC.identifier) as? SignUp4VC else {return}
         if idTextField.text!.isEmpty {
-            let alert = UIAlertController(title: nil, message: "아이디를 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "필요한 값이 없습니다", message: "아이디를 입력해주세요", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else if idChecked == false {
+            let alert = UIAlertController(title: "아이디 중복 확인", message: "아이디 중복확인을 해주세요.", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         } else {
-            receiveViewController.name = name
-            receiveViewController.role = receiveRole
-            receiveViewController.id = idTextField.text
+            receiveViewController.name = self.name
+            receiveViewController.role = self.receiveRole
+            receiveViewController.id = self.idTextField.text
             
             self.navigationController?.pushViewController(receiveViewController, animated: true)
         }
+        
        
     }
     
@@ -47,12 +53,42 @@ class SignUp3VC: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func idCheckButton(_ sender: Any) {
+        guard let inputID = idTextField.text else { return }
+        
+        LoginService.shared.idCheck(email: inputID) { networkResult in switch networkResult {
+        case .success(_):
+            // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
+            self.idChecked = true
+            let alertViewController = UIAlertController(title: "사용가능한 아이디입니다", message: "사용가능한 아이디입니다", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+        case .requestErr(let message):
+            guard let message = message as? String else { return }
+            let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: "이미 존재하는 아이디입니다", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("requestErr")
+        case .pathErr:
+            let alertViewController = UIAlertController(title: "이미 존재하는 아이디입니다", message: "이미 존재하는 아이디입니다", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("pathErr")
+        case .serverErr: print("serverErr")
+        case .networkFail: print("networkFail") }
+        }
+        
+    }
+    
+    
     func setUpViews() {
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0.0, y: idTextField.frame.size.height - 1, width: idTextField.frame.size.width, height: 0.8);
         bottomBorder.backgroundColor = UIColor.veryLightPink.cgColor
         idTextField.layer.addSublayer(bottomBorder)
-        
         serviceLabel.textColor = UIColor.brownishGrey
         numberLabel.textColor = UIColor.brownishGrey
         

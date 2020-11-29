@@ -32,6 +32,7 @@ class BottomSheetVC: UIViewController {
         BottomSheetTableView.dataSource = self
         BottomSheetTableView.delegate = self
         start()
+        setListDropDown()
         
         
         
@@ -61,21 +62,25 @@ class BottomSheetVC: UIViewController {
     }
     
     func setClassList(){
-        classlist = ["전체", "수업이름1", "수업이름2"]
+        //classlist = ["전체", "수업이름1", "수업이름2"]
         //Mark: - 서버통신
+        
+        self.classFinalList = self.classlist
+        print(classFinalList)
     }
     
     
     func setListDropDown(){
         // 서버통신: 토글에서 수업리스트 가져오기
         classlist = []
-        ProfileService.shared.getClassLid() { networkResult in
+        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                 for index in 0..<data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls)
+                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                     self.classlist.append(item.lectureName)
+                    
                     //print(self.classlist)
                 }
                 
