@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os
 
 protocol MyClassCellDelegate: class {
     func getRole() -> String
@@ -28,6 +29,7 @@ class MyClassCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         myClassView.layer.cornerRadius = 7
+        os_log("class list view awake", log: .mypage)
     }
     
     func setMyClassInfo(classColor : String, classTitle: String, Tutee: String, classTime: [SchedulesData]){

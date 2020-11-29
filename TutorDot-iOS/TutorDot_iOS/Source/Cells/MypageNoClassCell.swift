@@ -9,7 +9,8 @@
 import UIKit
 
 class MypageNoClassCell: UICollectionViewCell {
-
+    
+    static let identifier: String = "MypageNoClassCell"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

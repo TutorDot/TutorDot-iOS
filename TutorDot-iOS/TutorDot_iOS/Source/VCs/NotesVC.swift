@@ -145,7 +145,7 @@ class NotesVC: UIViewController {
         var idList : [Int] = []
         
         // 서버통신: 토글에서 수업리스트 가져오기
-        ProfileService.shared.getClassLid() { networkResult in
+        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
         switch networkResult {
             case .success(let resultData):
             guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
