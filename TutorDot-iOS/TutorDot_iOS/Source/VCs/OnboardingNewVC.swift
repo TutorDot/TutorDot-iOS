@@ -97,7 +97,7 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-            return 0
+            return 20
         }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -105,6 +105,7 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
     
             
         }
+    
         
     
     

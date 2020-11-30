@@ -40,7 +40,8 @@ struct LoginService {
         let header: HTTPHeaders = ["Content-Type": "application/json"]
         let dataRequest = Alamofire.request(APIConstants.idCheckURL, method: .post, parameters: makeParameter2(email), encoding: JSONEncoding.default, headers: header)
         dataRequest.responseData { dataResponse in
-            switch dataResponse.result { case .success:
+            switch dataResponse.result {
+            case .success:
                 guard let statusCode = dataResponse.response?.statusCode else { return }
                 guard let value = dataResponse.result.value else { return }
                 let networkResult = self.judge2(by: statusCode, value)
@@ -70,9 +71,7 @@ struct LoginService {
             return .requestErr(decodedData.message)
             
         }
-//        let list : [String] = [tokenData.accessToken, tokenData.role, tokenData.userName]
-//        print(list[0], "inputlist")
-        //return .success(tokenData.accessToken)
+
         return .success(tokenData.accessToken)
         
     }
