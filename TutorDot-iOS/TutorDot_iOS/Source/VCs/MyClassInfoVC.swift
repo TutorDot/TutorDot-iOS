@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import os
+import Kingfisher
 
 class MyClassInfoVC: UIViewController {
     
     static let idnetifier: String = "MyClassInfoVC"
     var myRole: String = ""
     var classId: Int = 0
+    var profileUrl: String = ""
+    var classTimeInfo: [String] = []
     
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
@@ -28,11 +32,14 @@ class MyClassInfoVC: UIViewController {
     @IBOutlet weak var tutorIntro: UILabel!
     @IBOutlet weak var tutorName: UILabel!
     @IBOutlet weak var stackList: UIStackView!
+    @IBOutlet weak var classTimeStackView: UIStackView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTimesData()
+        //setTimesData()
         autoLayoutView()
+        setupClassDetail()
         self.tabBarController?.tabBar.isHidden = true
         
     }
@@ -43,26 +50,92 @@ class MyClassInfoVC: UIViewController {
             stackList.subviews[6].isHidden = true
             editButton.isHidden = true
         }
+        
+        TutorProfileImage.layer.cornerRadius = TutorProfileImage.frame.height / 2
     }
     
     func autoLayoutView(){
         headerHeightContraints.constant = self.view.frame.height * 94/812
     }
+    
+    // Mark - 수업 상세 조회 서버 통신
+    func setupClassDetail(){
+        ClassInfoService.classInfoServiceShared.setMypageClassDetail(classId: classId) { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                
+                guard let data = resultData as? ClassDetail else { return print(Error.self)}
+                
+                self.setAllData(data.color, data.lectureName, data.orgLocation, data.bank, data.accountNo, data.depositCycle, data.price, data.userName, data.role, data.intro, data.profileUrl, data.schedules)
+                
+            case .pathErr :
+                os_log("PathErr", log: .mypage)
+            case .serverErr :
+                os_log("ServerErr", log: .mypage)
+            case .requestErr(let message) :
+                print(message)
+            case .networkFail:
+                os_log("networkFail", log: .mypage)
+            }
+        }
+        
+    }
+        
+    func setAllData(_ color: String, _ title: String, _ orgLocation: String, _ bank: String, _ accountNo: String, _ depositCycle: Int, _ price: Int, _ name: String, _ role: String, _ intro: String, _ profileUrl: String, _ schedule: [MySchedulesData]){
+       
+        self.classColorImage.image = UIImage(named: color)
+        self.classTitle.text = title
+        
+        if orgLocation == "" {
+            self.classPlace.text = "지정된 수업 위치가 없습니다."
+            self.classPlace.textColor = UIColor.gray
+        } else {
+            self.classPlace.text = orgLocation
+            self.classPlace.textColor = UIColor.black
+        }
+        
+        self.bankAccountInfo.text = bank + "  " + accountNo
+        self.timeAndPrice.text = "\(depositCycle)" + "시간 / " + "\(price)" + "만원"
+        self.tutorName.text = name
+        
+        if role == "tutor" {
+            self.Role.text = "튜터"
+        } else {
+            self.Role.text = "튜티"
+        }
+        
+        if intro == "" {
+            self.tutorIntro.text = "한 줄 소개"
+            self.tutorIntro.textColor = UIColor.gray
+        } else {
+            self.tutorIntro.text = intro
+            self.tutorIntro.textColor = UIColor.black
+        }
+        
+        self.profileUrl = profileUrl
+        let url = URL(string: self.profileUrl)
+        self.TutorProfileImage.kf.setImage(with: url)
+        
+        for i in 0...schedule.count-1 {
+            let info: String = "\(schedule[i].day)" + " " + "\(schedule[i].orgStartTime)" + " " + "\(schedule[i].orgEndTime)"
+            self.classTimeInfo.append(info)
+        }
+    }
+    
+    
+
     func setTimesData(){
-        let classTimeBasicHeight: CGFloat = 83
+
         var timesList: [String] = []
-        var printtimeList: String = ""
+
         //시간 데이터 받아와서 추가
         timesList.append("월 01:00pm ~ 03:00pm")
         timesList.append("금 01:00pm ~ 03:00pm")
-        for i in timesList {
-            print(i)
-            printtimeList += i
-            printtimeList += "\n"
-        }
-        regularClassTime.text = printtimeList
-        classTimeHeightConstraints.constant = classTimeBasicHeight + CGFloat((timesList.count * 20))
+
+//        classTimeStackView.addSubview(<#T##view: UIView##UIView#>)
+        classTimeHeightConstraints.constant = 83 + CGFloat((timesList.count * 20))
     }
+
     
     @IBAction func editButtonDidTap(_ sender: Any) {
         guard let editVC = self.storyboard?.instantiateViewController(identifier: "MypageClassEditVC") as? MypageClassEditVC else {return}
@@ -70,9 +143,7 @@ class MyClassInfoVC: UIViewController {
         
             editVC.modalPresentationStyle = .currentContext
             editVC.modalTransitionStyle = .crossDissolve
-       
-        
-        
+
         
             editVC.titleEdit = classTitle.text
 //            editVC.color = emailTextField.text
@@ -86,14 +157,14 @@ class MyClassInfoVC: UIViewController {
             self.present(editVC, animated: true, completion: nil)
     }
     
+    
     @IBAction func inviteButtonDidTap(_ sender: Any) {
         //튜터가 튜티를 초대 TuteeInviteCodeVC
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TutorClassInviteVC")
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ClassInviteVC") as? ClassInviteVC else { return }
         
+        nextVC.classId = self.classId
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
   
     }
     

@@ -102,4 +102,50 @@ struct MypageService {
             return .requestErr(decodedData.message)}
     }
     
+    
+    // Mark - GET : 마이페이지 수업 초대코드 받아오기
+    func getInvitaionCode(classId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+    
+        let dataRequest = Alamofire.request(APIConstants.invitationURL + "/" + "\(classId)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.invitationJudge(by: statusCode, value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    private func invitationJudge(by StatusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch StatusCode {
+        case 200 :
+            return isInvitationCode(by: data)
+        case 400 :
+            return .pathErr
+        case 500 :
+            return .serverErr
+        default:
+            return .networkFail
+        }
+    }
+    
+    private func isInvitationCode(by data: Data) -> NetworkResult<Any> {
+
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(InvitationData.self, from: data)
+            else { return .pathErr }
+
+        if decodedData.success {
+            return .success(decodedData.data as Any)
+        } else {
+            return .requestErr(decodedData.message)
+        }
+    }
+    
 }
