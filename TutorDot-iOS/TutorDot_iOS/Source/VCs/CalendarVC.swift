@@ -49,7 +49,7 @@ class CalendarVC: UIViewController {
     
     var firstTimeRunning = true
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
-    //var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyNSwibmFtZSI6Iuy1nOyduOyglSIsImlhdCI6MTYwNjU3NzQwMiwiZXhwIjoxNjA3Nzg3MDAyLCJpc3MiOiJvdXItc29wdCJ9.jM3qzmOGxzwmm3Ut3473TQle5Ym6DofwguRgd8VWeKU"
+    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU"
 
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
@@ -115,7 +115,7 @@ class CalendarVC: UIViewController {
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
         getProfileInfo()
-        if "\(UserDefaults.standard.value(forKey: "token")!)" ==  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU" {
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
             headerUserNameLabel.text = "둘러보기"
         } else {
             headerUserNameLabel.text = ""
@@ -284,8 +284,8 @@ class CalendarVC: UIViewController {
         ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
             switch networkResult {
             case .success(let resultData):
-                guard let data = resultData as? [UserProfile] else { return print(Error.self) }
-                    print(data, "성공")
+//                guard let data = resultData as? [UserProfile] else { return print(Error.self) }
+                    print(resultData, "성공")
                 
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
