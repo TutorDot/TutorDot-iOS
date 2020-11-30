@@ -977,7 +977,7 @@
                     </view>
                     <connections>
                         <outlet property="completeButton" destination="vSj-xg-mff" id="OCO-cD-M5P"/>
-                        <outlet property="place" destination="uaz-nR-K8F" id="erl-hf-X6x"/>
+                        <outlet property="place" destination="uaz-nR-K8F" id="1cg-bf-b9A"/>
                         <outlet property="tableView" destination="r5h-qv-HiS" id="BdJ-MB-6EQ"/>
                         <outlet property="tableViewHeight" destination="MQK-fN-CFX" id="peR-pe-ASv"/>
                         <outlet property="timePlusView" destination="CyM-d3-aWJ" id="jIU-Jk-8i8"/>

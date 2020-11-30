@@ -72,6 +72,7 @@ class MyPageVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         MyClassInfos.removeAll()
+        classId.removeAll()
     }
     
   
@@ -420,9 +421,14 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
             nextVC.hidesBottomBarWhenPushed = true
+            
+            //데이터 전달
+            nextVC.classId = self.classId[indexPath.row]
+            nextVC.Role = self.myRole
+            
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        } 
+        }
             
              
             

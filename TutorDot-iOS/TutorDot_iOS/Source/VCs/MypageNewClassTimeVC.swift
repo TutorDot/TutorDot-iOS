@@ -20,7 +20,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     @IBOutlet weak var timePlusView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var place: UITextField!
     
     let classAddedHeight: CGFloat = 37
     
@@ -34,7 +34,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     
     // 현재 뷰에서 받는 내용
     var defaultClassTime: [String] = []
-    @IBOutlet weak var place: UITextField!
+   
     var schedules: [Schedules] = []
     var classPlace: String = ""
     
@@ -44,7 +44,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        place.delegate = self
+//        place.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 
@@ -133,7 +133,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     }
     
     @IBAction func placeEndEditing(_ sender: Any) {
-        classPlace = place.text ?? ""
+        self.classPlace = place.text ?? ""
     }
     
     
