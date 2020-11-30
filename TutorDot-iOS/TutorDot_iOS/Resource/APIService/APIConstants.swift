@@ -18,6 +18,7 @@ struct APIConstants {
     static let signinURL = APIConstants.baseURL + "/user/signin"
     static let profileURL = APIConstants.baseURL + "/user/profile"
     static let idCheckURL = APIConstants.baseURL + "/user/signin/duplication"
+    static let changePassword = APIConstants.baseURL + "/user/changepassword"
     
     // 수업관리
     static let lectureURL = APIConstants.baseURL + "/lecture"  //수업 추가

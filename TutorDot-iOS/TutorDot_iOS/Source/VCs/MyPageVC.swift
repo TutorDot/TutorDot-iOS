@@ -25,8 +25,11 @@ class MyPageVC: UIViewController {
     @IBOutlet weak var userIntro: UILabel!
     @IBOutlet weak var profileEditButton: UIButton!
     
+    @IBOutlet weak var dummyView: UIView!
     var classId: [Int] = []
     
+    @IBOutlet weak var dummyImageView: UIImageView!
+    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
@@ -53,7 +56,12 @@ class MyPageVC: UIViewController {
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
-        //self.hidesBottomBarWhenPushed = false;
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+            dummyView.isHidden = false
+        } else {
+            dummyView.isHidden = true
+        }
+        
         
     }
     
@@ -89,6 +97,18 @@ class MyPageVC: UIViewController {
         myClassAddButton.layer.cornerRadius = 7
         profileEditButton.layer.cornerRadius = 3
     }
+    
+    func setUpDummy() {
+        dummyImageView.layer.cornerRadius = dummyImageView.frame.height * 0.5
+    }
+    
+    @IBAction func dummyLogin(_ sender: Any) {
+        let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+        guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+        loginVC.modalPresentationStyle = .fullScreen
+        self.present(loginVC, animated: true, completion: nil)
+    }
+    
     
     //상단 콜렉션 뷰에서 쓸 리스트
     private var MyClassInfos: [LidToggleData] = []
@@ -195,18 +215,32 @@ class MyPageVC: UIViewController {
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
         
-        if myRole.text == "튜터"{
-            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
-            self.navigationController?.pushViewController(nextVC, animated: true)
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+            let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
+            alertViewController.addAction(action)
+            alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true, completion: nil)
+            } ))
+            
+            self.present(alertViewController, animated: true, completion: nil)
+        } else {
+            if myRole.text == "튜터"{
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
 
-        } else if myRole.text == "튜티" {
-            let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
-            nextVC.modalPresentationStyle = .currentContext
-            nextVC.modalTransitionStyle = .crossDissolve
-            present(nextVC, animated: true, completion: nil)
+            } else if myRole.text == "튜티" {
+                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
+                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
+                nextVC.modalPresentationStyle = .currentContext
+                nextVC.modalTransitionStyle = .crossDissolve
+                present(nextVC, animated: true, completion: nil)
+            }
         }
-        
        
     }
 
@@ -358,18 +392,48 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
-                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
-                nextVC.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(nextVC, animated: true)
-                
+                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                    let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+                    let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
+                    alertViewController.addAction(action)
+                    alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                        let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                        guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                        loginVC.modalPresentationStyle = .fullScreen
+                        self.present(loginVC, animated: true, completion: nil)
+                    } ))
+                    
+                    self.present(alertViewController, animated: true, completion: nil)
+                } else {
+                    guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "passwordModifyVC") as? passwordModifyVC else {return}
+                    nextVC.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
             } else if indexPath.row == 1 { //로그아웃 클릭 시
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LogoutPopupVC") as? LogoutPopUpVC else {return}
                 nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
-                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
-                nextVC.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(nextVC, animated: true)
+                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                    let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+                    let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
+                    alertViewController.addAction(action)
+                    alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                        let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                        guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                        loginVC.modalPresentationStyle = .fullScreen
+                        self.present(loginVC, animated: true, completion: nil)
+                    } ))
+                    
+                    self.present(alertViewController, animated: true, completion: nil)
+                } else {
+                    guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "LeaveServiceVC") as? LeaveServiceVC else {return}
+                    nextVC.hidesBottomBarWhenPushed = true
+                    self.navigationController?.pushViewController(nextVC, animated: true)
+                }
+                
             }
             
         default:
@@ -423,19 +487,34 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if ClassListDidSelect == true {
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+            let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+            let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
+            alertViewController.addAction(action)
+            alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true, completion: nil)
+            } ))
             
-            guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
-            nextVC.hidesBottomBarWhenPushed = true
-            
-            //데이터 전달
-            print(classId.count)
-            nextVC.classId = self.classId[indexPath.row]
-            nextVC.Role = self.myRole
-            
-            self.navigationController?.pushViewController(nextVC, animated: true)
-            
+            self.present(alertViewController, animated: true, completion: nil)
+        } else {
+            if ClassListDidSelect == true {
+                
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
+                
+                //데이터 전달
+                nextVC.classId = self.classId[indexPath.row]
+                nextVC.Role = self.myRole
+                
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+            }
         }
+        
             
              
             

@@ -4,9 +4,11 @@
 //
 //  Created by Sehwa Ryu on 29/06/2020.
 //  Copyright © 2020 Sehwa Ryu. All rights reserved.
+
 import UIKit
 import DropDown
 import Foundation
+import os
 
 protocol CalendarViewControllerDeleagte {
     func didSelectDate(dateString: String)
@@ -49,12 +51,10 @@ class CalendarVC: UIViewController {
     
     var firstTimeRunning = true
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
-    //var token: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyNSwibmFtZSI6Iuy1nOyduOyglSIsImlhdCI6MTYwNjU3NzQwMiwiZXhwIjoxNjA3Nzg3MDAyLCJpc3MiOiJvdXItc29wdCJ9.jM3qzmOGxzwmm3Ut3473TQle5Ym6DofwguRgd8VWeKU"
-
+    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
-    
     @IBOutlet weak var dateCollectionView: UICollectionView!
     @IBOutlet weak var tutorView: UIView!
     @IBOutlet weak var tutorCollectionView: UICollectionView!
@@ -62,7 +62,6 @@ class CalendarVC: UIViewController {
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var dropDownLabelButton: UIButton!
-    //@IBOutlet weak var topDateButton: UIButton!
     
     @IBOutlet weak var topDateButton: UILabel!
     @IBOutlet weak var plusButton: UIButton!
@@ -114,8 +113,8 @@ class CalendarVC: UIViewController {
         dateCollectionView.dataSource = self
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
-        getProfileInfo()
-        if "\(UserDefaults.standard.value(forKey: "token")!)" ==  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU" {
+        setProfile()
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
             headerUserNameLabel.text = "둘러보기"
         } else {
             headerUserNameLabel.text = ""
@@ -135,7 +134,7 @@ class CalendarVC: UIViewController {
         if firstTimeRunning == false {
             setListDropDown()
             getClassList()
-        
+            
         }
         if firstTimeRunning {
             self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
@@ -143,7 +142,7 @@ class CalendarVC: UIViewController {
             firstTimeRunning = false
         }
     }
-
+    
     func gestureRecognizer() {
         swipeGestureRecognizer.direction = .right
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(CalendarVC.respondToSwipeGesture(_:)))
@@ -162,7 +161,7 @@ class CalendarVC: UIViewController {
                 rightButtonSelected(self)
                 UIView.animate(withDuration: 0.7) {
                 }
-            
+                
             } else if swipeGesture.direction == UISwipeGestureRecognizer.Direction.right{
                 leftButtonSelected(self)
                 UIView.animate(withDuration: 0.7) {
@@ -170,7 +169,7 @@ class CalendarVC: UIViewController {
             }
         }
     }
-
+    
     
     // MARK: - 서버통신: 수업 리스트 가져오기
     func setListDropDown(){
@@ -279,22 +278,29 @@ class CalendarVC: UIViewController {
             }
         }
     }
-    // MARK: - 서버통신: 유저 인포 데이터 가져오기
-    func getProfileInfo() {
+    // Mark - 서버통신 : 간편 프로필 조회
+    func setProfile(){
         ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
             switch networkResult {
             case .success(let resultData):
-                guard let data = resultData as? [UserProfile] else { return print(Error.self) }
-                    print(data, "성공")
+                os_log("profile success", log: .mypage)
+                guard let data = resultData as? UserProfile else { return print(Error.self) }
+                if data.role == "tutor" {
+                    self.headerUserNameLabel.text = "\(data.userName)튜터님의"
+                } else {
+                    self.headerUserNameLabel.text = "\(data.userName)튜티님의"
+                }
                 
-            case .pathErr : print("Patherr")
-            case .serverErr : print("ServerErr")
-            case .requestErr(let message) : print(message)
+            case .pathErr :
+                os_log("PathErr-Profile", log: .mypage)
+            case .serverErr :
+                os_log("ServerErr", log: .mypage)
+            case .requestErr(let message) :
+                os_log(message as! StaticString, log: .mypage)
             case .networkFail:
-                print("networkFail")
+                os_log("networkFail", log: .mypage)
             }
         }
-        
     }
     
     @IBAction func leftButtonSelected(_ sender: Any) {
@@ -351,12 +357,18 @@ class CalendarVC: UIViewController {
     // MARK: -- 서버통신: 일정추가 버튼
     @IBAction func plusButtonSelected(_ sender: Any) {
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" ==  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NjUyMTc4LCJleHAiOjE2MDc4NjE3NzgsImlzcyI6Im91ci1zb3B0In0.-weZwKosrksF-pg_FamGgbFMAxH-wjeuz5ZzXWCt4OU" {
+        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
             let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
             alertViewController.addAction(action)
-            alertViewController.addAction(login)
+            alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                loginVC.modalPresentationStyle = .fullScreen
+                self.present(loginVC, animated: true, completion: nil)
+            } ))
+            
             self.present(alertViewController, animated: true, completion: nil)
             
         } else {
@@ -366,15 +378,6 @@ class CalendarVC: UIViewController {
         }
         
         
-    }
-    
-    @IBAction func testButton(_ sender: Any) {
-        let noteStoryboard = UIStoryboard.init(name: "Notes", bundle : nil)
-        guard let popupVC = noteStoryboard.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else { return }
-        popupVC.modalPresentationStyle = .overCurrentContext
-        popupVC.modalTransitionStyle = .crossDissolve
-        //popupVC.delegate = self
-        present(popupVC, animated: true, completion: nil)
     }
     
     
@@ -472,7 +475,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
         if collectionView == self.dateCollectionView {
             // 다음 달로 넘어가면 선택한 날짜 색 초기화
             calendarCell.dateView.backgroundColor = UIColor.white
-        
+            
             
             // 이전 달 cell 표시
             if indexPath.item <= firstWeekDayOfMonth - 2 {
@@ -570,13 +573,13 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             }
             
             // 점들 가운데 정렬을 위한 분기처리
-//            if calendarCell.image2.image == nil {
-//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
-//            }
-//            else if calendarCell.image3.image == nil {
-//                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
-//            }
+            //            if calendarCell.image2.image == nil {
+            //                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+            //                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image2)
+            //            }
+            //            else if calendarCell.image3.image == nil {
+            //                calendarCell.imageContainer.removeArrangedSubview(calendarCell.image3)
+            //            }
             
             return calendarCell
         }
@@ -606,6 +609,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // 캘린더 컬렉션 뷰
+        
         if collectionView == self.dateCollectionView {
             let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
             // 날짜 선택시 셀 색깔 바뀌기
@@ -641,7 +645,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             if indexPath.item == 6 || (indexPath.item-6) % 7 == 0 {
                 weekDayHeaderLabel.text = weekDays[6]
             }
-        
+            
             if let date = cell?.dateLabel.text! {
                 dateHeaderLabel.text = date
                 
@@ -661,52 +665,64 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             }
             
         } else {
-            let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
-            let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
-            guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassEditVC.identifier) as? ClassEditVC else {return}
-            // 과외 리스트가 있을 때에만
-            if classList2.count > 0 {
+            if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+                let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+                alertViewController.addAction(action)
+                alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                    let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                    guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                    loginVC.modalPresentationStyle = .fullScreen
+                    self.present(loginVC, animated: true, completion: nil)
+                } ))
                 
-                print("클래스 아이디", cell?.classId)
-                
-                // 뷰컨 ClassEditVC로 넘어가기
-                receiveViewController.modalPresentationStyle = .fullScreen
-                self.present(receiveViewController, animated: true, completion: nil)
-
-                // 과외 선택시 상세 페이지 레이블 바뀌기
-                if let className = cell?.classNameLabel.text! {
-                    receiveViewController.classLabel.text = className
-                    receiveViewController.classHeaderLabel.text = className
+                self.present(alertViewController, animated: true, completion: nil)
+            } else {
+                let cell = collectionView.cellForItem(at: indexPath) as? TutorCollectionViewCell
+                let calendarCell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell
+                guard let receiveViewController = self.storyboard?.instantiateViewController(identifier: ClassEditVC.identifier) as? ClassEditVC else {return}
+                // 과외 리스트가 있을 때에만
+                if classList2.count > 0 {
+                    print("클래스 아이디", cell?.classId)
+                    // 뷰컨 ClassEditVC로 넘어가기
+                    receiveViewController.modalPresentationStyle = .fullScreen
+                    self.present(receiveViewController, animated: true, completion: nil)
+                    
+                    // 과외 선택시 상세 페이지 레이블 바뀌기
+                    if let className = cell?.classNameLabel.text! {
+                        receiveViewController.classLabel.text = className
+                        receiveViewController.classHeaderLabel.text = className
+                    }
+                    // CalendarView 선택된 날짜 가쟈오기
+                    if let date = calendarCell?.dateLabel.text! {
+                        // 날짜 선택시 헤더 날짜 레이블 바뀌기
+                        dateHeaderLabel.text = date
+                        //monthHeaderLabel.text = "\(currentMonthIndex+1)월"
+                    }
+                    
+                    // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
+                    if let startHour = cell?.startTimeLabel.text! {
+                        //let date = calendarCell?.dateLabel.text!
+                        receiveViewController.startTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(startHour)"
+                    }
+                    
+                    if let endHour = cell?.endTimeLabel.text! {
+                        receiveViewController.endTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(endHour)"
+                    }
+                    
+                    if let location = cell?.locationLabel.text! {
+                        receiveViewController.locationTextField.text = location
+                    }
+                    
+                    if let imageIcon = cell?.colorImage.image {
+                        receiveViewController.classImage.image = imageIcon
+                    }
+                    
+                    if let classId = cell?.classId {
+                        receiveViewController.classId = classId
+                    }
+                    
                 }
-                // CalendarView 선택된 날짜 가쟈오기
-                if let date = calendarCell?.dateLabel.text! {
-                    // 날짜 선택시 헤더 날짜 레이블 바뀌기
-                    dateHeaderLabel.text = date
-                    //monthHeaderLabel.text = "\(currentMonthIndex+1)월"
-                }
-                
-                // 상세 페이지 과외 시작, 끝, 장소 레이블 업데이트
-                if let startHour = cell?.startTimeLabel.text! {
-                    //let date = calendarCell?.dateLabel.text!
-                    receiveViewController.startTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(startHour)"
-                }
-                
-                if let endHour = cell?.endTimeLabel.text! {
-                    receiveViewController.endTextField.text = "\(currentMonthIndex+1)월 \(dateHeaderLabel.text ?? "")일 \(endHour)"
-                }
-                
-                if let location = cell?.locationLabel.text! {
-                    receiveViewController.locationTextField.text = location
-                }
-                
-                if let imageIcon = cell?.colorImage.image {
-                    receiveViewController.classImage.image = imageIcon
-                }
-                
-                if let classId = cell?.classId {
-                    receiveViewController.classId = classId
-                }
-                
             }
         }
         

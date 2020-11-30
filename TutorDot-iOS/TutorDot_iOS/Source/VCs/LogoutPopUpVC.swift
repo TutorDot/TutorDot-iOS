@@ -22,6 +22,12 @@ class LogoutPopUpVC: UIViewController {
     @IBAction func logoutButtonDidTap(_ sender: Any) {
         let storyBoard = UIStoryboard.init(name: "Login", bundle: nil)
         let popupVC = storyBoard.instantiateViewController(withIdentifier: "LoginVC")
+        // 자동로그인 해제
+        let dataSave = UserDefaults.standard // UserDefaults.standard 정의
+        dataSave.setValue("", forKey: "save_userNm") // save_userNm 키값에 id값 저장
+        dataSave.setValue("", forKey: "save_pw")
+        dataSave.setValue("", forKey: "token")
+        UserDefaults.standard.synchronize() // setValue 실행
         popupVC.modalPresentationStyle = .overCurrentContext
         popupVC.modalTransitionStyle = .crossDissolve
         present(popupVC, animated: true, completion: nil)

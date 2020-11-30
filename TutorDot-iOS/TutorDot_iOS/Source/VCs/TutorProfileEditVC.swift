@@ -11,11 +11,10 @@ import os
 
 class TutorProfileEditVC: UIViewController {
 
-    let introDefault: String = "한 줄 소개"
+    let introDefault: String = ""
     
     // 이전 뷰에서 받을 내용
     @IBOutlet weak var introMention: UITextField?
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var roleLabel: UILabel!
     var profileURL: String = ""
     
@@ -23,6 +22,8 @@ class TutorProfileEditVC: UIViewController {
     private var imagePickerController = UIImagePickerController()
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
+    @IBOutlet weak var introText: UITextField!
+    @IBOutlet weak var nameLabel: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,5 +136,32 @@ extension TutorProfileEditVC: UIImagePickerControllerDelegate, UINavigationContr
         imagePickerController.modalTransitionStyle = .crossDissolve
         self.present(imagePickerController, animated: true, completion: nil)
     }
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
+//            [UIImagePickerController.InfoKey : Any]) {
+//            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let url =
+//                info[UIImagePickerController.InfoKey.imageURL] as? URL {
+//
+//                guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
+//                ProfileService.ProfileServiceShared.uploadImage(token, image, url.lastPathComponent) { networkResult in
+//                    switch networkResult {
+//                    case .success(let profileData):
+//                        guard let profileData = profileData as? [UserProfile] else { return }
+//                        print(profileData)
+//                    case .requestErr(let failMessage):
+//                        guard let message = failMessage as? String else { return }
+//                        print(message)
+//                    case .pathErr:
+//                        print("pathErr")
+//                    case .serverErr:
+//                        print("serverErr")
+//                    case .networkFail:
+//                        print("networkFail")
+//                    }
+//                }
+//                profileImageView.image = image
+//            }
+//            dismiss(animated: true, completion: nil)
+//        }
     
 }

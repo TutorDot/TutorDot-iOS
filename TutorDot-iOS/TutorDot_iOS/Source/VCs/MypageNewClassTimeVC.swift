@@ -36,7 +36,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     var defaultClassTime: [String] = []
    
     var schedules: [Schedules] = []
-    var classPlace: String = ""
+    var classPlace: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,11 +79,11 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
 
-        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
+        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace ?? "", tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
             networkResult in
             switch networkResult {
             case .success(let token) :
-                // 토큰 다시 셋팅
+                print(self.classPlace, "위치")
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
                 // 서버 통신 성공 후 성공 뷰로 이동

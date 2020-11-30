@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0106AA26257501C800EBC28D /* PasswordData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106AA25257501C800EBC28D /* PasswordData.swift */; };
 		011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D6C8B24AEF7DD004056C4 /* Tutor.swift */; };
 		011D6C8E24AF02B8004056C4 /* ClassInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D6C8D24AF02B8004056C4 /* ClassInfoVC.swift */; };
 		011D6C9024AF8D53004056C4 /* ClassAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011D6C8F24AF8D53004056C4 /* ClassAddVC.swift */; };
@@ -144,6 +145,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0106AA25257501C800EBC28D /* PasswordData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordData.swift; sourceTree = "<group>"; };
 		011D6C8B24AEF7DD004056C4 /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		011D6C8D24AF02B8004056C4 /* ClassInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassInfoVC.swift; sourceTree = "<group>"; };
 		011D6C8F24AF8D53004056C4 /* ClassAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassAddVC.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				F4B517DB24C06054007438DE /* AddLectureData.swift */,
 				F4A033232574F39100F46F24 /* MyClassDetailData.swift */,
 				F4A0332625750FA700F46F24 /* InvitationData.swift */,
+				0106AA25257501C800EBC28D /* PasswordData.swift */,
 			);
 			path = NetworkData;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				013B73C024C0BF83002E60C4 /* LidData.swift in Sources */,
 				0187180925715C560021EDD4 /* OnboardingImage.swift in Sources */,
 				F4200E0124BDA57A00EA1D6F /* ProfileData.swift in Sources */,
+				0106AA26257501C800EBC28D /* PasswordData.swift in Sources */,
 				0126398524AA034F009EA0BA /* TabbarVC.swift in Sources */,
 				015097C5255412BA00935DC6 /* FilterDropDownCell.swift in Sources */,
 				F46808FA256FD95100D925F3 /* MypageNewClassTimeVC.swift in Sources */,
