@@ -13,11 +13,12 @@ import Kingfisher
 class MyClassInfoVC: UIViewController {
     
     static let idnetifier: String = "MyClassInfoVC"
-    var myRole: String = ""
+    var userRole: String = ""
     var classId: Int = 0
     var profileUrl: String = ""
     var classTimeInfo: [String] = []
-    
+ 
+    @IBOutlet weak var leaveClassLabel: UILabel!
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
     @IBOutlet weak var classColorImage: UIImageView!
@@ -40,16 +41,21 @@ class MyClassInfoVC: UIViewController {
         //setTimesData()
         autoLayoutView()
         setupClassDetail()
+        isTuteeSet()
         self.tabBarController?.tabBar.isHidden = true
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if myRole == "튜티" {
+    func isTuteeSet(){
+        if userRole == "tutee" {
             //튜티일경우 과외 초대 및 편집버튼 숨기기
             stackList.subviews[6].isHidden = true
+            leaveClassLabel.text = "수업 방 나가기"
             editButton.isHidden = true
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         
         TutorProfileImage.layer.cornerRadius = TutorProfileImage.frame.height / 2
     }

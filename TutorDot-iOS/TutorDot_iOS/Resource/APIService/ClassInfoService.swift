@@ -148,31 +148,6 @@ struct ClassInfoService {
             return .requestErr(decodedData.message)}
     }
     
-    // MARK - GET: 수업 초대코드 가져오기
-//    private func parameterForInvite(_ classId: Int, _ date: String, _ startTime: String, _ endTime: String, _ location: String ) -> Parameters{
-//        return ["classId": classId, "date": date, "startTime": startTime, "endTime": endTime, "location": location]
-//    }
-//    
-//    func getClassInviteCoed(completion: @escaping (NetworkResult<Any>) -> Void) {
-//        // 토큰 가져오기
-//        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
-//
-//        let dataRequest = Alamofire.request(APIConstants.invitationURL+ "/" + "\(classId)", method: .get, pa(classId), headers: header)
-//      
-//        
-//        
-//        dataRequest.responseData { dataResponse in
-//            switch dataResponse.result {
-//            case .success :
-//                guard let statusCode = dataResponse.response?.statusCode else {return}
-//                guard let value = dataResponse.result.value else {return}
-//                let networkResult = self.judge(by: statusCode,value)
-//                completion(networkResult)
-//            case .failure : completion(.networkFail)
-//            }
-//        }
-//    }
-//
     
     // Mark - GET: 마이페이지 수업 목록 조회
     func setMypageClassList(completion: @escaping (NetworkResult<Any>) -> Void) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ROl-ja-p8H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ROl-ja-p8H">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -204,7 +204,7 @@
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myImgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-1p-ytP">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="myImgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-1p-ytP">
                                                                                 <rect key="frame" x="164" y="41" width="28" height="28"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="28" id="K23-QL-Gaq"/>
@@ -215,6 +215,7 @@
                                                                                 <rect key="frame" x="36" y="37" width="115" height="15"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="15" id="Ext-rs-Aid"/>
+                                                                                    <constraint firstAttribute="width" constant="115" id="dzn-3h-TCM"/>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                 <nil key="textColor"/>
@@ -3503,6 +3504,7 @@ TutorDot 서비스를 이용하세요!</string>
                         <outlet property="classTitle" destination="29N-3f-QX5" id="AZX-QU-Pel"/>
                         <outlet property="editButton" destination="cOH-jy-sd1" id="Ye8-k2-VdC"/>
                         <outlet property="headerHeightContraints" destination="tJv-zQ-gBA" id="Sq1-fg-iVy"/>
+                        <outlet property="leaveClassLabel" destination="YUF-rg-fbs" id="zbA-7W-FvE"/>
                         <outlet property="regularClassTime" destination="2uz-x6-6tL" id="U30-6j-Afi"/>
                         <outlet property="stackList" destination="phE-eI-p14" id="E14-n0-Vor"/>
                         <outlet property="timeAndPrice" destination="Uzc-RG-9P7" id="hbb-bm-eEh"/>
@@ -3644,7 +3646,7 @@ TutorDot 서비스를 이용하세요!</string>
         <!--Invite CodeVC-->
         <scene sceneID="elC-RR-UdE">
             <objects>
-                <viewController storyboardIdentifier="TuteeInviteCodeVC" id="3pY-7w-zw8" customClass="InviteCodeVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InviteCodeVC" id="3pY-7w-zw8" customClass="InviteCodeVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kNg-a8-GYy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3773,7 +3775,7 @@ TutorDot 서비스를 이용하세요!</string>
                     </view>
                     <connections>
                         <outlet property="connectButton" destination="XMF-f4-UW9" id="fCF-Qt-bpg"/>
-                        <outlet property="headerHeightContraints" destination="Fuk-Tl-xyO" id="RPN-ZH-GWP"/>
+                        <outlet property="inputCode" destination="IUq-0r-kHM" id="zVg-2x-rdb"/>
                         <outlet property="inviteCodeView" destination="a31-CY-UcK" id="VmR-6t-98U"/>
                     </connections>
                 </viewController>
@@ -3903,10 +3905,10 @@ TutorDot 서비스를 이용하세요!</string>
             </objects>
             <point key="canvasLocation" x="1175" y="-349"/>
         </scene>
-        <!--View Controller-->
+        <!--Mypage Connect SuccessVC-->
         <scene sceneID="3gd-6P-acd">
             <objects>
-                <viewController id="ZQl-1r-ZCw" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MypageConnectSuccessVC" id="ZQl-1r-ZCw" customClass="MypageConnectSuccessVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3se-vz-lUH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3926,6 +3928,9 @@ TutorDot 서비스를 이용하세요!</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DMW-FD-UHv">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
                                         <state key="normal" image="scheduleClassMathBtnBack"/>
+                                        <connections>
+                                            <action selector="backButtonDidTap:" destination="ZQl-1r-ZCw" eventType="touchUpInside" id="R22-ho-HEg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3974,6 +3979,9 @@ TutorDot 서비스를 이용하세요!</string>
                                 <state key="normal" title="이용하러 가기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="serviceStartButtonDidTap:" destination="ZQl-1r-ZCw" eventType="touchUpInside" id="5DE-pK-8mb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DMe-WZ-kq0"/>
@@ -3993,6 +4001,9 @@ TutorDot 서비스를 이용하세요!</string>
                             <constraint firstItem="b92-v0-Cub" firstAttribute="top" secondItem="fOD-JK-hjf" secondAttribute="bottom" constant="6" id="uYK-Sh-zqw"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="startButton" destination="ioy-Ve-f4Z" id="huV-bX-FFK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDZ-TM-RGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

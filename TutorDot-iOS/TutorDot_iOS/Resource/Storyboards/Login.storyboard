@@ -827,6 +827,17 @@
             <point key="canvasLocation" x="3823" y="94"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9cy-iG-L7V">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+        <designable name="g1P-PA-sWI">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+        <designable name="qq2-hq-aeG">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+    </designables>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="agreeBtnBack" width="48" height="48"/>

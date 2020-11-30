@@ -7,41 +7,59 @@
 //
 
 import UIKit
+import os
 
 class InviteCodeVC: UIViewController {
 
     @IBOutlet weak var inviteCodeView: UIView!
     @IBOutlet weak var connectButton: UIButton!
-    @IBOutlet weak var labelTopMarginConstraints: NSLayoutConstraint!
+    @IBOutlet weak var inputCode: UITextField!
+    var invitationCode: String = ""
     
-    @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inviteCodeView.layer.cornerRadius = 5
         connectButton.layer.cornerRadius = 8
-        autoLayoutView()
+        inputCode.addTarget(self, action: #selector(InviteCodeVC.textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        self.invitationCode = inputCode?.text ?? ""
+        print(invitationCode, "초대코드!!")
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    func autoLayoutView(){
-        headerHeightContraints.constant = view.frame.height * 94/812
-        labelTopMarginConstraints.constant = view.frame.height * 203/812
-        
-    }
+   
     
     @IBAction func connectedButtonDidTap(_ sender: Any) {
+        print(invitationCode, "초대코드!!")
+        MypageService.MypageServiceShared.connectInvitaionCode(code: invitationCode) { networkResult in
+            switch networkResult {
+            case .success:
+                os_log("connect success", log: .mypage)
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageConnectSuccessVC") as? MypageConnectSuccessVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
+            case .pathErr:
+                os_log("PathErr", log: .mypage)
+            case .serverErr:
+                os_log("ServerErr", log: .mypage)
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "연결실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            case .networkFail:
+                os_log("networkFail", log: .mypage)
+            }
+            
+        }
         
-        let storyBoard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TabbarVC")
-        
-        nextVC.modalPresentationStyle = .fullScreen
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
         
     }
     
