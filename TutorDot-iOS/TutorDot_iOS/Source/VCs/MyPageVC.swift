@@ -230,15 +230,14 @@ class MyPageVC: UIViewController {
             self.present(alertViewController, animated: true, completion: nil)
         } else {
             if myRole.text == "튜터"{
+                // 튜터일 때, 수업 추가 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
                 self.navigationController?.pushViewController(nextVC, animated: true)
 
             } else if myRole.text == "튜티" {
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
-                nextVC.modalPresentationStyle = .currentContext
-                nextVC.modalTransitionStyle = .crossDissolve
-                present(nextVC, animated: true, completion: nil)
+                // 튜티일 때, 수업 초대코드 입력 뷰로 이동
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InviteCodeVC") as? InviteCodeVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
        
