@@ -160,12 +160,11 @@ class MyClassInfoVC: UIViewController {
     
     @IBAction func inviteButtonDidTap(_ sender: Any) {
         //튜터가 튜티를 초대 TuteeInviteCodeVC
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let nextVC = storyBoard.instantiateViewController(withIdentifier: "TutorClassInviteVC")
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
-        present(nextVC, animated: true, completion: nil)
+        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ClassInviteVC") as? ClassInviteVC else { return }
         
+        nextVC.classId = self.classId
+        
+        self.navigationController?.pushViewController(nextVC, animated: true)
   
     }
     

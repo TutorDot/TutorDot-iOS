@@ -3464,7 +3464,7 @@ TutorDot 서비스를 이용하세요!</string>
         <!--Class InviteVC-->
         <scene sceneID="Qq7-c7-46I">
             <objects>
-                <viewController storyboardIdentifier="TutorClassInviteVC" id="3pz-cX-1JY" customClass="ClassInviteVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ClassInviteVC" id="3pz-cX-1JY" customClass="ClassInviteVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0zi-qy-wPi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3510,10 +3510,11 @@ TutorDot 서비스를 이용하세요!</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSb-NH-Hc9">
                                 <rect key="frame" x="119" y="486" width="176" height="43"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DJFJSHJFKSr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kH-lF-y2j">
-                                        <rect key="frame" x="13" y="11.5" width="95" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kH-lF-y2j">
+                                        <rect key="frame" x="13" y="11.5" width="100" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="31J-f5-cdx"/>
+                                            <constraint firstAttribute="width" constant="100" id="tXy-YJ-4Qc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
