@@ -14,7 +14,7 @@ class MyPageVC: UIViewController {
 
     // 프로필 설정
     var profileURL: String = ""
-    let introDefault: String = "한 줄 소개를 입력할 수 있어요!"
+    let introDefault: String = "한 줄 소개"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
@@ -29,6 +29,7 @@ class MyPageVC: UIViewController {
     
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
+    var firstTimeRuning: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class MyPageVC: UIViewController {
         setMyclassViews()
         setProfile()
         gotoProfileEdit()
+        setMyClassInfos() // 수업 리스트 셋팅
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,11 +65,16 @@ class MyPageVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        os_log("mypage view will appear55", log: .mypage)
-        setMyClassInfos()
         
         classCollectionView.isScrollEnabled = true
         classCollectionView.contentSize = CGSize(width: 206, height: 81)
+        
+        if firstTimeRuning {
+            firstTimeRuning = false
+        } else {
+            setMyClassInfos()
+            setProfile()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -102,7 +109,6 @@ class MyPageVC: UIViewController {
                         self.classId.append(data[index].lectureId)
                         self.MyClassInfos.append(item)
                     }
-
                     self.classCollectionView.reloadData()
                 case .pathErr :
                     os_log("PathErr", log: .mypage)
@@ -423,6 +429,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             nextVC.hidesBottomBarWhenPushed = true
             
             //데이터 전달
+            print(classId.count)
             nextVC.classId = self.classId[indexPath.row]
             nextVC.Role = self.myRole
             
