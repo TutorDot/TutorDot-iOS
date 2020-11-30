@@ -9,16 +9,10 @@
 import UIKit
 import os
 
-protocol MyClassCellDelegate: class {
-    func getRole() -> String
-    func setRole()
-}
 
 class MyClassCell: UICollectionViewCell {
     static let identifier: String = "MyClassCell"
-    var delegate: MyClassCellDelegate?
     var myRoleSet: String? = ""
-    
     @IBOutlet weak var myClassView: UIView!
     @IBOutlet weak var classColor: UIImageView!
     @IBOutlet weak var classTitle: UILabel!
@@ -29,13 +23,15 @@ class MyClassCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         myClassView.layer.cornerRadius = 7
-        os_log("class list view awake", log: .mypage)
+        TuteeImage.layer.cornerRadius = TuteeImage.frame.width / 2
     }
     
     func setMyClassInfo(classColor : String, classTitle: String, Tutee: String, classTime: [SchedulesData]){
         self.classColor.image = UIImage(named: classColor)
         self.classTitle.text = classTitle
-        self.TuteeImage.image = UIImage(named: Tutee)
+        
+        let url = URL(string: Tutee)
+        self.TuteeImage.kf.setImage(with: url)
         
         var timeInfo: String = ""
         for i in 0...classTime.count-1 {
@@ -46,7 +42,6 @@ class MyClassCell: UICollectionViewCell {
         }
         timeInfo += classTime[0].orgStartTime
         timeInfo += "~"
-        
         self.classInfo.text = timeInfo
         
     }
