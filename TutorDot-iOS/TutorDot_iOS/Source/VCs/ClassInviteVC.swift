@@ -7,20 +7,22 @@
 //
 
 import UIKit
+import os
 
 class ClassInviteVC: UIViewController {
 
     @IBOutlet weak var inviteCodeView: UIView!
     @IBOutlet weak var inviteCode: UILabel!
+    var classId: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inviteCodeView.layer.cornerRadius = 5
-
+        getClassInvitationCode()
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -36,5 +38,29 @@ class ClassInviteVC: UIViewController {
         
     }
     
+    func getClassInvitationCode() {
+        MypageService.MypageServiceShared.getInvitaionCode(classId: classId) { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                os_log("초대코드 가져오기 success!!!", log: .mypage)
+                print(resultData)
+                guard let data = resultData as? ClassInvitationCode else { print(Error.self)
+                    return }
+                
+//                let data = resultData as? ClassInvitationCode
+                
+                self.inviteCode.text = data.code
+                
+            case .pathErr :
+                os_log("PathErr-invitationCode", log: .mypage)
+            case .serverErr :
+                os_log("ServerErr", log: .mypage)
+            case .requestErr(let message) :
+                print(message)
+            case .networkFail:
+                os_log("networkFail", log: .mypage)
+            }
+        }
+    }
 
 }
