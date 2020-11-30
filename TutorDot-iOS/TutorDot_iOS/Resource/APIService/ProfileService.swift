@@ -23,7 +23,6 @@ struct ProfileService {
     
         let dataRequest = Alamofire.request(APIConstants.profileURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)
         
-        
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success :
