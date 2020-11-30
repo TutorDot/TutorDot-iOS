@@ -83,11 +83,13 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
             networkResult in
             switch networkResult {
             case .success(let token) :
+                // 토큰 다시 셋팅
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
                 // 서버 통신 성공 후 성공 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AddClassCompleteVC") as? AddClassCompleteVC else {return}
                 self.navigationController?.pushViewController(nextVC, animated: true)
+                
             case .requestErr(let message) :
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "수업추가 실패", message: message, preferredStyle: .alert)

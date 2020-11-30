@@ -25,7 +25,6 @@ class MyClassInfoVC: UIViewController {
     @IBOutlet weak var classTitle: UILabel!
     @IBOutlet weak var tutorIntro: UILabel!
     @IBOutlet weak var tutorName: UILabel!
-    
     @IBOutlet weak var stackList: UIStackView!
     
     override func viewDidLoad() {

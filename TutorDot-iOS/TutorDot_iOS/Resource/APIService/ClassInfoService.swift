@@ -206,15 +206,25 @@ struct ClassInfoService {
     }
     
     private func isClassListData(by data:Data) -> NetworkResult<Any> {
-        let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(LidData.self, from: data)
-            else {return .pathErr}
-        
-        if decodedData.success {
+//        let decoder = JSONDecoder()
+//        guard let decodedData = try? decoder.decode(LidData.self, from: data)
+//            else {return .pathErr}
+//
+//        if decodedData.success {
+//            return .success(decodedData.data)
+//        }
+//        else {
+//            return .requestErr(decodedData.message)
+//        }
+
+        do {
+            let decoder = JSONDecoder()
+            let decodedData = try decoder.decode(LidData.self, from: data)
             return .success(decodedData.data)
         }
-        else {
-            return .requestErr(decodedData.message)}
+        catch {
+            print(error)
+            return .pathErr
         }
-    
+    }
 }
