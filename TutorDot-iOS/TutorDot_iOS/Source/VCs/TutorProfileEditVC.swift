@@ -7,28 +7,37 @@
 //
 
 import UIKit
+import os
 
 class TutorProfileEditVC: UIViewController {
 
-    @IBOutlet weak var introMention: UITextField!
-   
+    let introDefault: String = "한 줄 소개"
+    
+    // 이전 뷰에서 받을 내용
+    @IBOutlet weak var introMention: UITextField?
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var roleLabel: UILabel!
+    var profileURL: String = ""
+    
     @IBOutlet weak var profileImage: UIButton!
     private var imagePickerController = UIImagePickerController()
     @IBOutlet weak var profileImageView: UIImageView!
-    
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        introMention.layer.cornerRadius = 5
-        introMention.placeholder = "글자수 제한 18자 이내"
-        introMention.addLeftPadding()
-       
-        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+        
         imagePickerController.delegate = self
         viewWillAppear(true)
-        //lookupProfile()
+
         autoLayoutView()
+        setUpView()
+        setProfile()
+    }
+    
+    func setUpView(){
+        profileImage.layer.cornerRadius = profileImage.frame.width / 2
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
     }
     
     func autoLayoutView(){
@@ -38,25 +47,9 @@ class TutorProfileEditVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-//        lookupProfile()
     }
     
-//    private func lookupProfile(){
-//        print("lookupProfile start")
-//        guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
-//        ProfileService.ProfileServiceShared.setMyProfile(token) { networkResult in
-//            switch networkResult {
-//            case .success(let profileData):
-//                guard let profileData = profileData as? UserProfile else { return }
-//                self.profileImageView.setImage(from: profileData.profileURL)
-//            case .requestErr(let message): print(message)
-//            case .pathErr: print("pathErr")
-//            case .serverErr: print("ServerErr")
-//            case .networkFail: print("networkReult")
-//
-//            }
-//        }
-//    }
+
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -82,6 +75,47 @@ class TutorProfileEditVC: UIViewController {
         alertController.addAction(photoAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // Mark - 서버통신 : 간편 프로필 조회
+    func setProfile(){
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
+            switch networkResult {
+                case .success(let resultData):
+                    os_log("profile success", log: .mypage)
+                    guard let data = resultData as? UserProfile else { return print(Error.self) }
+                        self.nameLabel.text =  data.userName
+                    
+                    if data.role == "tutor" {
+                        self.roleLabel.text = "튜터"
+                    } else {
+                        self.roleLabel.text = "튜티"
+                    }
+                        
+                    
+                    if data.intro == "" {
+                        self.introMention?.text = self.introDefault
+                        self.introMention?.textColor = UIColor.gray
+                    } else {
+                        self.introMention?.text = data.intro
+                        self.introMention?.textColor = UIColor.black
+                    }
+                    self.profileURL = data.profileUrl
+                    
+                    
+                    let url = URL(string: self.profileURL)
+                    self.profileImageView.kf.setImage(with: url)
+
+                case .pathErr :
+                    os_log("PathErr-Profile", log: .mypage)
+                case .serverErr :
+                    os_log("ServerErr", log: .mypage)
+                case .requestErr(let message) :
+                    print(message)
+                case .networkFail:
+                    os_log("networkFail", log: .mypage)
+            }
+        }
     }
     
 }

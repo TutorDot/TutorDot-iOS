@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kRg-Ji-IGR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uDS-7G-7Jc">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -244,10 +244,10 @@
             </objects>
             <point key="canvasLocation" x="776.79999999999995" y="85.714285714285722"/>
         </scene>
-        <!--Onboarding NewVC-->
+        <!--OnboardingNewVC-->
         <scene sceneID="bJM-0W-uOp">
             <objects>
-                <viewController id="kRg-Ji-IGR" customClass="OnboardingNewVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingNewVC" title="OnboardingNewVC" id="kRg-Ji-IGR" customClass="OnboardingNewVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QlP-By-QnB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,9 +298,9 @@
                                 <rect key="frame" x="127" y="626" width="121.33333333333331" height="28"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tU-EU-Fzp">
-                                <rect key="frame" x="45" y="669" width="285" height="40"/>
+                                <rect key="frame" x="45" y="669" width="285" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Z1T-mN-lmi"/>
+                                    <constraint firstAttribute="height" constant="45" id="Z1T-mN-lmi"/>
                                 </constraints>
                                 <state key="normal" title="시작하기">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

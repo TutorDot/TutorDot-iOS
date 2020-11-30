@@ -19,9 +19,7 @@ class ClassDisconnectionVC: UIViewController {
         super.viewDidLoad()
         cancelButton.layer.cornerRadius = 8
         disconnectionButton.layer.cornerRadius = 8
-        
-//        guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ClassDisconnectionVC") as? ClassDisconnectionVC else { return }
-//        self.navigationController?.pushViewController(nextVC, animated: true)
+        print(classid, "수업 연결 해제")
     }
     
 
