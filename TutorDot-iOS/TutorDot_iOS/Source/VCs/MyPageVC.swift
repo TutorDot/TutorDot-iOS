@@ -14,16 +14,18 @@ class MyPageVC: UIViewController {
 
     // 프로필 설정
     var profileURL: String = ""
-    
+    let introDefault: String = "한 줄 소개를 입력할 수 있어요!"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
     @IBOutlet weak var myClassAddButton: UIButton!
-    
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var myRole: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userIntro: UILabel!
+    @IBOutlet weak var profileEditButton: UIButton!
+    
+    var classId: [Int] = []
     
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
@@ -41,9 +43,6 @@ class MyPageVC: UIViewController {
         
         classCollectionView.delegate = self
         classCollectionView.dataSource = self
-        
-        classCollectionView.isScrollEnabled = true
-        classCollectionView.contentSize = CGSize(width: 206, height: 81)
         
         // scroll refresh
         tableView.refreshControl = refreshControl
@@ -64,18 +63,24 @@ class MyPageVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-
+        os_log("mypage view will appear55", log: .mypage)
         setMyClassInfos()
+        
+        classCollectionView.isScrollEnabled = true
+        classCollectionView.contentSize = CGSize(width: 206, height: 81)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         MyClassInfos.removeAll()
+        classId.removeAll()
     }
     
   
     
     func setMyclassViews(){
+        userProfileImage.layer.cornerRadius = userProfileImage.frame.height / 2
         myClassAddButton.layer.cornerRadius = 7
+        profileEditButton.layer.cornerRadius = 3
     }
     
     //상단 콜렉션 뷰에서 쓸 리스트
@@ -94,7 +99,7 @@ class MyPageVC: UIViewController {
                     guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                     for index in 0..<data.count {
                         let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
-                        
+                        self.classId.append(data[index].lectureId)
                         self.MyClassInfos.append(item)
                     }
 
@@ -135,12 +140,25 @@ class MyPageVC: UIViewController {
                     os_log("profile success", log: .mypage)
                     guard let data = resultData as? UserProfile else { return print(Error.self) }
                         self.usernameLabel.text =  data.userName
-                        self.myRole.text = data.role
-                        self.userIntro.text = data.intro
-                        self.profileURL = data.profileUrl
+                    if data.role == "tutor" {
+                        self.myRole.text = "튜터"
+                    } else {
+                        self.myRole.text = "튜티"
+                    }
+                       
                         
-                        let url = URL(string: self.profileURL)
-                        self.userProfileImage.kf.setImage(with: url)
+                    if data.intro == "" {
+                        self.userIntro.text = self.introDefault
+                        self.userIntro.textColor = UIColor.gray
+                    } else {
+                        self.userIntro.text = data.intro
+                        self.userIntro.textColor = UIColor.black
+                    }
+                    self.profileURL = data.profileUrl
+                    
+                    
+                    let url = URL(string: self.profileURL)
+                    self.userProfileImage.kf.setImage(with: url)
 
                 case .pathErr :
                     os_log("PathErr-Profile", log: .mypage)
@@ -162,11 +180,11 @@ class MyPageVC: UIViewController {
     }
     
     @objc func profileDidTap(){
-        let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-        let TutorProfileEditVC = storyBoard.instantiateViewController(withIdentifier: "TutorProfileEditVC")
-        TutorProfileEditVC.modalPresentationStyle = .currentContext
-        TutorProfileEditVC.modalTransitionStyle = .crossDissolve
-        present(TutorProfileEditVC, animated: true, completion: nil)
+        guard let PresentVC = self.storyboard?.instantiateViewController(
+                        identifier: "TutorProfileEditVC") as? TutorProfileEditVC else { return }
+        PresentVC.modalPresentationStyle = .fullScreen
+        
+        present(PresentVC, animated: true, completion: nil)
     }
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
@@ -185,9 +203,13 @@ class MyPageVC: UIViewController {
         
        
     }
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        segue.destination.hidesBottomBarWhenPushed = true
-//    }
+
+    @IBAction func profileEditButtonDidTap(_ sender: Any) {
+        guard let PresentVC = self.storyboard?.instantiateViewController(
+                        identifier: "TutorProfileEditVC") as? TutorProfileEditVC else { return }
+        PresentVC.modalPresentationStyle = .fullScreen
+        present(PresentVC, animated: true, completion: nil)
+    }
     
     
 }
@@ -399,9 +421,14 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
             nextVC.hidesBottomBarWhenPushed = true
+            
+            //데이터 전달
+            nextVC.classId = self.classId[indexPath.row]
+            nextVC.Role = self.myRole
+            
             self.navigationController?.pushViewController(nextVC, animated: true)
             
-        } 
+        }
             
              
             

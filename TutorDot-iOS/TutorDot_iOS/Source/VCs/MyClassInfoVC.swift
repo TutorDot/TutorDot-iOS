@@ -12,6 +12,8 @@ class MyClassInfoVC: UIViewController {
     
     static let idnetifier: String = "MyClassInfoVC"
     var myRole: String = ""
+    var classId: Int = 0
+    
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
     @IBOutlet weak var classColorImage: UIImageView!
@@ -25,7 +27,6 @@ class MyClassInfoVC: UIViewController {
     @IBOutlet weak var classTitle: UILabel!
     @IBOutlet weak var tutorIntro: UILabel!
     @IBOutlet weak var tutorName: UILabel!
-    
     @IBOutlet weak var stackList: UIStackView!
     
     override func viewDidLoad() {
@@ -99,6 +100,9 @@ class MyClassInfoVC: UIViewController {
     @IBAction func unconnectButtonDidTap(_ sender: Any) {
         
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "ClassDisconnectionVC") as? ClassDisconnectionVC else { return }
+        
+        nextVC.classid = self.classId
+        
         self.navigationController?.pushViewController(nextVC, animated: true)
         
     }
