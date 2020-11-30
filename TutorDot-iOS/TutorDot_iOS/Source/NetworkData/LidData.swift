@@ -34,10 +34,10 @@ struct LidToggleData: Codable {
     var lectureId: Int
     var lectureName: String
     var color: String
-    var profileUrls: [String]
+    var profileUrls: [LidProfileURL]
     var schedules: [SchedulesData]
     
-    init (lectureId: Int, lectureName: String, color: String, profileUrls: [String], schedules: [SchedulesData]) {
+    init (lectureId: Int, lectureName: String, color: String, profileUrls: [LidProfileURL], schedules: [SchedulesData]) {
         self.lectureId = lectureId
         self.lectureName = lectureName
         self.color = color
@@ -55,5 +55,13 @@ struct SchedulesData: Codable {
         self.day = day
         self.orgStartTime = orgStartTime
         self.orgEndTime = orgEndTime
+    }
+}
+
+struct LidProfileURL: Codable {
+    var profileUrl: String
+    
+    init(profileUrl: String){
+        self.profileUrl = profileUrl
     }
 }

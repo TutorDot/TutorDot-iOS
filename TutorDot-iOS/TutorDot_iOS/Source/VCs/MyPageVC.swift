@@ -15,6 +15,7 @@ class MyPageVC: UIViewController {
     // 프로필 설정
     var profileURL: String = ""
     let introDefault: String = "한 줄 소개"
+    var tuteeProfile: [String] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
@@ -27,6 +28,7 @@ class MyPageVC: UIViewController {
     
     @IBOutlet weak var dummyView: UIView!
     var classId: [Int] = []
+    var UserRole: String = ""
     
     @IBOutlet weak var dummyImageView: UIImageView!
     let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
@@ -42,7 +44,6 @@ class MyPageVC: UIViewController {
         setProfile()
         gotoProfileEdit()
         setMyClassInfos() // 수업 리스트 셋팅
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -126,6 +127,8 @@ class MyPageVC: UIViewController {
                     guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
                     for index in 0..<data.count {
                         let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
+                        
+                        self.tuteeProfile.append(data[index].profileUrls[0].profileUrl)
                         self.classId.append(data[index].lectureId)
                         self.MyClassInfos.append(item)
                     }
@@ -171,7 +174,7 @@ class MyPageVC: UIViewController {
                     } else {
                         self.myRole.text = "튜티"
                     }
-                       
+                    self.UserRole = data.role // tutor or tutee
                         
                     if data.intro == "" {
                         self.userIntro.text = self.introDefault
@@ -230,15 +233,14 @@ class MyPageVC: UIViewController {
             self.present(alertViewController, animated: true, completion: nil)
         } else {
             if myRole.text == "튜터"{
+                // 튜터일 때, 수업 추가 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
                 self.navigationController?.pushViewController(nextVC, animated: true)
 
             } else if myRole.text == "튜티" {
-                let storyBoard = UIStoryboard.init(name: "MyPage", bundle: nil)
-                let nextVC = storyBoard.instantiateViewController(withIdentifier: "TuteeInviteCodeVC")
-                nextVC.modalPresentationStyle = .currentContext
-                nextVC.modalTransitionStyle = .crossDissolve
-                present(nextVC, animated: true, completion: nil)
+                // 튜티일 때, 수업 초대코드 입력 뷰로 이동
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InviteCodeVC") as? InviteCodeVC else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }
        
@@ -474,10 +476,10 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
             
-            cell.delegate = self;
+
             
             // Mark: - 프로필 url 꼭 수정!!!
-            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: "myImgProfile", classTime: MyClassInfos[indexPath.row].schedules)
+            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: MyClassInfos[indexPath.row].profileUrls[0].profileUrl, classTime: MyClassInfos[indexPath.row].schedules)
             
             
             return cell
@@ -508,45 +510,16 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
                 
                 //데이터 전달
                 nextVC.classId = self.classId[indexPath.row]
-                nextVC.Role = self.myRole
+                nextVC.userRole = self.UserRole
                 
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
             }
         }
         
-            
-             
-            
-//            if myRole == "튜터" {
-//                let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
-//                popupVC.modalPresentationStyle = .currentContext
-//                popupVC.modalTransitionStyle = .crossDissolve
-//                present(popupVC, animated: true, completion: nil)
-//            }
-//            else if myRole == "튜티" {
-//                let popupVC = storyBoard.instantiateViewController(withIdentifier: "MyClassInfoVC")
-//                popupVC.modalPresentationStyle = .currentContext
-//                popupVC.modalTransitionStyle = .crossDissolve
-//                present(popupVC, animated: true, completion: nil)
-//            }
-    }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        segue.destination.hidesBottomBarWhenPushed = true
-//    }
-}
-
-
-extension MyPageVC: MyClassCellDelegate {
-    func setRole() {
-        print("setRole")
-    }
-    
-    func getRole() -> String{
-        print("vc role", myRole.text)
-        return self.myRole.text ?? "튜터"
     }
     
 
 }
+
+
