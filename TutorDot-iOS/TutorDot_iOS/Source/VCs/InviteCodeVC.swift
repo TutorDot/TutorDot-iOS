@@ -33,7 +33,12 @@ class InviteCodeVC: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-   
+    @IBAction func pasteButtonDidTap(_ sender: Any) {
+        if let pasteStr = UIPasteboard.general.string {
+            inputCode.text = pasteStr
+        }
+    }
+    
     
     @IBAction func connectedButtonDidTap(_ sender: Any) {
         MypageService.MypageServiceShared.connectInvitaionCode(code: invitationCode) { networkResult in

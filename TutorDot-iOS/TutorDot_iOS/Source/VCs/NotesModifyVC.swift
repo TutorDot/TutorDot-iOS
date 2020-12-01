@@ -23,9 +23,13 @@ class NotesModifyVC: UIViewController {
     @IBOutlet weak var lessonTextField: UITextField!
     @IBOutlet weak var homeworkTextField: UITextField!
     @IBOutlet weak var hwCheckButton: UIButton!
+    @IBOutlet weak var clearButton1: UIButton!
+    @IBOutlet weak var clearButton2: UIButton!
+    @IBOutlet weak var EditButton: UIButton!
+    @IBOutlet weak var underline1: UIView!
+    @IBOutlet weak var underline2: UIView!
     
 
-    
     let hwImage: [String] = ["", "hwCheck", "", "hwUnCheck"]
     let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
     let defaultLesson: String  = "진도를 입력해주세요"
@@ -42,24 +46,41 @@ class NotesModifyVC: UIViewController {
     var lectureName: String = ""
     var date: String = ""
     var hwCheckValue: Int = 0  // 수정 서버통신 parameter
+    var role: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
         autoLayoutView()
+        roleCheck()
+        
         hwCheckButton.addTarget(self, action: #selector(onTapHwButton), for: .touchUpInside)
         lessonTextField.addTarget(self, action: #selector(NotesModifyVC.lessonTextFieldDidChange(_:)), for: .editingChanged)
         homeworkTextField.addTarget(self, action: #selector(NotesModifyVC.hwTextFieldDidChange(_:)), for: .editingChanged)
     }
     
-    @objc func onTapHwButton(){
-        if hwCheckValue == 1 {
-            hwCheckValue = 3
-        } else if hwCheckValue == 3 {
-            hwCheckValue = 1
+    func roleCheck(){
+        if role == "tutee"{
+            EditButton.isHidden = true
+            clearButton1.isHidden = true
+            clearButton2.isHidden = true
+            underline1.isHidden = true
+            underline2.isHidden = true
+            self.lessonTextField.isUserInteractionEnabled = false
+            self.homeworkTextField.isUserInteractionEnabled = false
         }
-        
-        hwCheckButton.setImage(UIImage(named: hwImage[hwCheckValue]), for: .normal)
+    }
+    
+    @objc func onTapHwButton(){
+        if role == "tutor" {
+            if hwCheckValue == 1 {
+                hwCheckValue = 3
+            } else if hwCheckValue == 3 {
+                hwCheckValue = 1
+            }
+            
+            hwCheckButton.setImage(UIImage(named: hwImage[hwCheckValue]), for: .normal)
+        }
     }
     
     @objc func lessonTextFieldDidChange(_ textField: UITextField) {
@@ -68,6 +89,14 @@ class NotesModifyVC: UIViewController {
     
     @objc func hwTextFieldDidChange(_ textField: UITextField) {
         self.hw = homeworkTextField?.text ?? ""
+    }
+    
+    @IBAction func lessonClearButtonDidTap(_ sender: Any) {
+        lessonTextField.text = ""
+    }
+    
+    @IBAction func hwClearButtonDidTap(_ sender: Any) {
+        homeworkTextField.text = ""
     }
     
     
@@ -115,6 +144,7 @@ class NotesModifyVC: UIViewController {
     }
     
     @IBAction func CompleteButtonDidTap(_ sender: Any) {
+        
         // Mark - 수업일지 수정 서버 통신(PUT)
         NoteService.Shared.editClassNote(classProgress: lesson, homework: hw, hwPerformance: hwCheckValue, diaryId: diaryID) { networkResult in
             switch networkResult {

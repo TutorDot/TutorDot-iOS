@@ -33,10 +33,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g3b-tX-Qm4">
                                         <rect key="frame" x="299" y="46" width="43" height="48"/>
                                         <state key="normal" image="calenderBtnFillter"/>
+                                        <connections>
+                                            <action selector="listButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="OQs-Mg-N2W"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-ql-lEB">
                                         <rect key="frame" x="347" y="46" width="43" height="48"/>
                                         <state key="normal" image="calenderBtnNotice"/>
+                                        <connections>
+                                            <action selector="alertButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="cKW-Q9-tYu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,7 +330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61L-Eb-pnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4917.6000000000004" y="690.88669950738915"/>
+            <point key="canvasLocation" x="4829" y="690"/>
         </scene>
         <!--Notes ModifyVC-->
         <scene sceneID="0Ue-48-3PF">
@@ -453,10 +459,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAr-jr-gSp">
                                         <rect key="frame" x="308" y="156" width="48" height="48"/>
                                         <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                        <connections>
+                                            <action selector="lessonClearButtonDidTap:" destination="AAV-rs-kee" eventType="touchUpInside" id="Ygd-UD-jfw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfY-Mh-6ST">
                                         <rect key="frame" x="308" y="240" width="48" height="48"/>
                                         <state key="normal" image="scheduleModificationBtnCancel_op"/>
+                                        <connections>
+                                            <action selector="hwClearButtonDidTap:" destination="AAV-rs-kee" eventType="touchUpInside" id="gco-Aa-hvl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-ui-x1R">
                                         <rect key="frame" x="19" y="254" width="17" height="17"/>
@@ -522,20 +534,25 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="EditButton" destination="JAL-1B-eWU" id="HA1-zi-t5X"/>
                         <outlet property="backView" destination="7Eu-Pz-dlH" id="Bo5-PJ-8lh"/>
                         <outlet property="classColor" destination="cGG-K4-CKw" id="eOf-wO-nuu"/>
                         <outlet property="classCount" destination="znW-aj-d8a" id="9OE-2l-tWG"/>
                         <outlet property="classTitle" destination="uCX-RH-I1r" id="QYw-bP-hnT"/>
+                        <outlet property="clearButton1" destination="aAr-jr-gSp" id="Bbm-ds-SCN"/>
+                        <outlet property="clearButton2" destination="XfY-Mh-6ST" id="3zo-vL-py4"/>
                         <outlet property="dateLabel" destination="SJX-pJ-W4Y" id="RcH-iG-fmB"/>
                         <outlet property="headerHeightConstraints" destination="JnM-BJ-X5M" id="dzQ-ov-Fpi"/>
                         <outlet property="homeworkTextField" destination="Seh-3I-dnl" id="xLX-AL-YXp"/>
                         <outlet property="hwCheckButton" destination="f6a-ui-x1R" id="WPU-Ww-vQZ"/>
                         <outlet property="lessonTextField" destination="BEx-sB-Igy" id="sJx-wN-zpc"/>
+                        <outlet property="underline1" destination="bJ4-lf-vDF" id="oBA-Yt-Qd5"/>
+                        <outlet property="underline2" destination="3cN-Ti-63a" id="Nvv-1J-VpN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDg-gb-JIT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5958" y="690"/>
+            <point key="canvasLocation" x="6148" y="690"/>
         </scene>
         <!--Notes MainVC-->
         <scene sceneID="AjC-SD-Lac">
@@ -744,15 +761,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qev-I3-sme">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="6vd-24-RZj">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="390" height="55"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수업선택" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58b-mc-CtC">
-                                            <rect key="frame" x="137.66666666666666" y="21" width="100" height="20"/>
+                                            <rect key="frame" x="145" y="21" width="100" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="236-sr-0vY"/>
                                                 <constraint firstAttribute="width" constant="100" id="ABS-QS-oMA"/>
@@ -771,20 +788,20 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PopUpClassesTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="popUpClassesTableViewCell" rowHeight="78.666664123535156" id="z2Y-J9-Hbc" userLabel="PopUpClassesTableViewCell" customClass="PopUpClassesTableViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="83" width="375" height="78.666664123535156"/>
+                                        <rect key="frame" x="0.0" y="83" width="390" height="78.666664123535156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="z2Y-J9-Hbc" id="QIM-Pb-kHp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="78.666664123535156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="78.666664123535156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eN-3O-BdB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="78.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="78.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="55" id="Woc-2e-R3G"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIF-th-S2g">
-                                                    <rect key="frame" x="47.666666666666657" y="30" width="280" height="19"/>
+                                                    <rect key="frame" x="55" y="30" width="280" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="280" id="RWt-Mg-SwK"/>
                                                         <constraint firstAttribute="height" constant="19" id="yXa-vU-SLu"/>
@@ -819,7 +836,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGs-5g-cnA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2551.1999999999998" y="676.84729064039414"/>
+            <point key="canvasLocation" x="5495" y="1247"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="MMW-FJ-tNk">
