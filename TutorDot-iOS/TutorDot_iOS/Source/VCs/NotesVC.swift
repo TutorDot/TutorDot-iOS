@@ -7,8 +7,6 @@
 //
 import os
 import UIKit
-
-
 import DropDown
 
 class NotesVC: UIViewController {
@@ -17,11 +15,11 @@ class NotesVC: UIViewController {
 
     // MARK: - Views
     
-    @IBOutlet weak var ClassHeaderView: UIView! //class progress bar
+
+    @IBOutlet weak var ClassProgressView: UIView!
     @IBOutlet weak var monthJournalView: UIView!
     @IBOutlet weak var progressViewWrap: UIStackView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dropboxbound: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     
     
@@ -34,23 +32,25 @@ class NotesVC: UIViewController {
     
     // MARK: - UIButton and UILabel
     
-    @IBOutlet weak var listToggleButton: UIButton!
-    @IBOutlet weak var notesTitle: UIButton!
+ 
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
     @IBOutlet weak var totalClassLabel: UILabel!
     @IBOutlet weak var monthLable: UILabel!
+    @IBOutlet weak var NoteTitleLabel: UILabel!
     
     var month: Int = 0
-    var dropDown:DropDown?
-    private var NotesInfos: [NotesInfo] = []
-
+    var monthStr: String = ""
+    let dateFomatter = DateFormatter()
+    var isFirstRunning: Bool = true
+    private var NotesInfos: [NotesContent] = []
+    
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
         if ishide { //true(안보일때)
-            tableViewTopMargin.constant = 191-117
+            tableViewTopMargin.constant = 150-94
         } else { //false (보일때)
-            tableViewTopMargin.constant = 191
+            tableViewTopMargin.constant = 150
         }
     }
     
@@ -58,6 +58,7 @@ class NotesVC: UIViewController {
     // MARK: - Init
     
     func setProgress(){
+        
         progressView.layer.cornerRadius = 9
         progressView.clipsToBounds = true
         progressView.layer.sublayers![1].cornerRadius = 9
@@ -72,6 +73,7 @@ class NotesVC: UIViewController {
     }
    
     func setProgressInfo(progressRate: String, currentClass: String, totalClass:String){
+        
         progressLabel.text = progressRate
         currentClassLabel.text = currentClass
         totalClassLabel.text = totalClass
@@ -108,13 +110,21 @@ class NotesVC: UIViewController {
     }
    
    
+    func MonthInit(){
+        dateFomatter.dateFormat = "MM"
+        print("월 정보: ", dateFomatter.hash)
+        monthStr = dateFomatter.string(from: Date())
+        monthLable.text = monthStr + "월 수업일지"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listDropDown() //드롭다운 박스
+  
+        
+        MonthInit()
+        
         setNotesInfos()
         setProgress()
-        setMonthLabel(7) //5월로 초기 설정
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         
         //기종별 최상단 헤더뷰 높이 조정
@@ -128,88 +138,43 @@ class NotesVC: UIViewController {
         // Do any additional setup after loading the view.
         
         self.tableView.reloadData()
-
+        
+        isFirstRunning = false
     }
     
-
-    // MARK: - Server
-    
-    func listDropDown(){
-        var dropList : [String] = ["전체"]
-        dropDown = DropDown()
-        dropDown?.anchorView = dropboxbound
-        self.dropDown?.width = 275
-        DropDown.appearance().setupCornerRadius(7)
-       
-        
-        var idList : [Int] = []
-        
-        // 서버통신: 토글에서 수업리스트 가져오기
-        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
-        switch networkResult {
-            case .success(let resultData):
-            guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-            print("success")
-            for index in 0..<data.count {
-                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
-                dropList.append(item.lectureName)
-                idList.append(item.lectureId)
-                self.dropDown?.dataSource = dropList
-                print("여기", idList)
-                
-            }
-            
-        case .pathErr: os_log("Patherr", log: .network)
-        case .serverErr: os_log("ServerErr", log: .network)
-        case .requestErr(let message): os_log(message as! StaticString, log: .network)
-        case .networkFail: os_log("networkFail", log: .network)
-                
-            }
-        }
-        
-        // 드롭박스 목록 내역
-        listToggleButton.addTarget(self,
-                                   action: #selector(dropDownToggleButton),
-                                   for: .touchUpInside)
-        notesTitle.addTarget(self,
-                             action: #selector(dropDownToggleButton),
-                             for: .touchUpInside)
-        
-        dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.notesTitle.setTitle(item, for: .normal)
-            if item != "전체" {
-                self.classHeaderHidden(false)
-            } else {
-                self.classHeaderHidden(true)
-            }
-        }
-
-        // 드롭박스 내 text 가운데 정렬
-        dropDown?.customCellConfiguration = { (index: Index,
-                                               item: String,
-                                               cell: DropDownCell) -> Void in
-            cell.optionLabel.textAlignment = .center
+    override func viewWillAppear(_ animated: Bool) {
+        if isFirstRunning == false {
+            setNotesInfos()
         }
     }
-    
-    @objc func dropDownToggleButton(){
-        dropDown?.show()
+
+    override func viewDidDisappear(_ animated: Bool) {
+        NotesInfos.removeAll()
     }
    
     func setNotesInfos(){
-        //dummy data
-        let data1 = NotesInfo(classLog: .yellow, currentClass: "1회차 2시간/16시간", lesson: "수학의정석 1장", homework: "수학의정석 1장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data2 = NotesInfo(classLog: .yellow, currentClass: "2회차 4시간/16시간", lesson: "수학의정석 2장", homework: "수학의정석 2장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data3 = NotesInfo(classLog: .yellow, currentClass: "3회차 6시간/16시간", lesson: "수학의정석 3장", homework: "수학의정석 3장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data4 = NotesInfo(classLog: .yellow, currentClass: "4회차 8시간/16시간", lesson: "수학의정석 4장", homework: "수학의정석 4장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data5 = NotesInfo(classLog: .red, currentClass: "1회차 1시간/16시간", lesson: "통기타 너도 할수 있어! 1장", homework: "수학의정석 4장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data6 = NotesInfo(classLog: .red, currentClass: "2회차 2시간/16시간", lesson: "통기타 너도 할수 있어! 2장", homework: "너에게 난 나에게 넌", lid: 10, classDate: "2020-07-18")
-        let data7 = NotesInfo(classLog: .red, currentClass: "3회차 3시간/16시간", lesson: "통기타 너도 할수 있어! 3장", homework: "제주도의 푸른 밤", lid: 10, classDate: "2020-07-18")
-        let data8 = NotesInfo(classLog: .red, currentClass: "4회차 4시간/16시간", lesson: "통기타 너도 할수 있어! 4장", homework: "징가징가~", lid: 10, classDate: "2020-07-18")
-        let data9 = NotesInfo(classLog: .red, currentClass: "5회차 5시간/16시간", lesson: "통기타 너도 할수 있어! 5장", homework: "붉은 노을", lid: 10, classDate: "2020-07-18")
-        let data10 = NotesInfo(classLog: .red, currentClass: "6회차 6시간/16시간", lesson: "통기타 너도 할수 있어! 6장", homework: "겨울을 걷는다", lid: 10, classDate: "2020-07-18")
-        
-        NotesInfos = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10]
+       // Mark - 수업 일지 전체 조회 서버 통신(GET)
+        NoteService.Shared.getAllClassNotes() { networkResult  in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [NotesContent] else { return print(Error.self) }
+                for index in 0..<data.count {
+                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance)
+           
+                    self.NotesInfos.append(item)
+                }
+                self.tableView.reloadData()
+            case .pathErr :
+                os_log("PathErr", log: .note)
+            case .serverErr :
+                os_log("ServerErr", log: .note)
+            case .requestErr(let message) :
+                print(message)
+            case .networkFail:
+                os_log("networkFail", log: .note)
+                
+            }
+        }
     }
     
 }
@@ -228,11 +193,8 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
-        notesCell.setClassJournalInfo(
-            classLog: NotesInfos[indexPath.row].classLog.getImageName(),
-            currentClass: NotesInfos[indexPath.row].currentClass,
-            lesson: NotesInfos[indexPath.row].lesson,
-            homework: NotesInfos[indexPath.row].homework)
+        notesCell.setNoteCell(NotesInfos[indexPath.row].color,
+                              NotesInfos[indexPath.row].profileUrl, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
         
         return notesCell
     }
@@ -246,18 +208,16 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
         let headerView = JournalDateHeaderView(
-            frame: CGRect(x: 0, y: 0, width: 375, height: 16))
-        headerView.backgroundColor =  UIColor(red: 245 / 255,
-                                              green: 246 / 255,
-                                              blue: 250 / 255,
-                                              alpha: 1.0)
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
+        headerView.backgroundColor =  UIColor.whiteTwo
+
         return headerView
 
     }
    
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
+        return 37
     }
     
     
@@ -266,8 +226,19 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         guard let nextVC = self.storyboard?.instantiateViewController(
                 identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
         
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
+        // 클릭한 수업일지 ID 전달
+        nextVC.diaryID = self.NotesInfos[indexPath.row].diaryId
+        nextVC.color = self.NotesInfos[indexPath.row].color
+        nextVC.lesson = self.NotesInfos[indexPath.row].classProgress
+        nextVC.times = self.NotesInfos[indexPath.row].times
+        nextVC.hour = self.NotesInfos[indexPath.row].hour
+        nextVC.hw = self.NotesInfos[indexPath.row].homework
+        nextVC.totalHours = self.NotesInfos[indexPath.row].depositCycle
+        nextVC.lectureName = self.NotesInfos[indexPath.row].lectureName
+        nextVC.date = self.NotesInfos[indexPath.row].classDate
+        nextVC.hwCheckValue = self.NotesInfos[indexPath.row].hwPerformance
+        
+        nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
     }
    

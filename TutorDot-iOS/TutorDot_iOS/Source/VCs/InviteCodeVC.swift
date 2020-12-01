@@ -27,7 +27,6 @@ class InviteCodeVC: UIViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         self.invitationCode = inputCode?.text ?? ""
-        print(invitationCode, "초대코드!!")
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -37,11 +36,9 @@ class InviteCodeVC: UIViewController {
    
     
     @IBAction func connectedButtonDidTap(_ sender: Any) {
-        print(invitationCode, "초대코드!!")
         MypageService.MypageServiceShared.connectInvitaionCode(code: invitationCode) { networkResult in
             switch networkResult {
             case .success:
-                os_log("connect success", log: .mypage)
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageConnectSuccessVC") as? MypageConnectSuccessVC else {return}
                 self.navigationController?.pushViewController(nextVC, animated: true)
             case .pathErr:
