@@ -335,8 +335,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     // Mark - 특정 수업일지 조회 서버통신
     func getOneNoteInfo(){
-        print(selectClassID, "다이어리 조회")
-        print(NotesInfos.count)
+
         NoteService.Shared.getOneClassNotes(diaryId: selectClassID) { networkResult  in
             switch networkResult {
             case .success(let resultData):
