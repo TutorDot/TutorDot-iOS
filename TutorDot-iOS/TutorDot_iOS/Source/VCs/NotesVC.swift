@@ -13,7 +13,7 @@ class NotesVC: UIViewController {
     
     
 
-    // MARK: - Views
+
     
 
     @IBOutlet weak var ClassProgressView: UIView!
@@ -23,15 +23,11 @@ class NotesVC: UIViewController {
     @IBOutlet weak var progressView: UIProgressView!
     
     
-    // MARK: - Layout Constraint
-    
     @IBOutlet weak var tableViewTopMargin: NSLayoutConstraint!
     @IBOutlet weak var monthJournalViewHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeaderHeight: NSLayoutConstraint!
     
-    
-    // MARK: - UIButton and UILabel
-    
+
  
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
@@ -41,9 +37,12 @@ class NotesVC: UIViewController {
     
     var month: Int = 0
     var monthStr: String = ""
-    let dateFomatter = DateFormatter()
+    let dateFormatter = DateFormatter()
+    let cal = Calendar(identifier: .gregorian)
+//    let dateFomatterDetail = DateFormatter()
     var isFirstRunning: Bool = false
     private var NotesInfos: [NotesContent] = []
+    let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
     
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
@@ -87,10 +86,10 @@ class NotesVC: UIViewController {
     
     func MonthInit(){
         
-        dateFomatter.dateFormat = "MM"
+        dateFormatter.dateFormat = "MM"
         
         //현재 월 String 값으로 가져오기
-        monthStr = dateFomatter.string(from: Date())
+        monthStr = dateFormatter.string(from: Date())
         monthLable.text = monthStr + "월 수업일지"
         month = Int(monthStr) ?? 0
         
@@ -120,6 +119,8 @@ class NotesVC: UIViewController {
             month = 1
         }
         setMonthLabel(month)
+        NotesInfos.removeAll()
+        setNotesInfos()
     }
    
    
@@ -165,13 +166,23 @@ class NotesVC: UIViewController {
         NoteService.Shared.getAllClassNotes() { networkResult  in
             switch networkResult {
             case .success(let resultData):
-                guard let data = resultData as? [NotesContent] else { return print(Error.self) }
+                guard let data = resultData as? [NotesContentServer] else { return print(Error.self) }
                 for index in 0..<data.count {
-                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance)
+                    
+                    // "Date" String ro Date()
+                    self.dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let finalDate: Date = self.dateFormatter.date(from: data[index].classDate)!
+
+                    // 요일 구하기
+                    let comps = self.cal.dateComponents([.weekday], from: finalDate)
+                    let dayAndWeek: String = String(data[index].classDate.substring(from: 8)) + "일 " + self.weekdayStr[comps.weekday!]
+                    
+                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance, dayWeek: dayAndWeek)
                     
                     let cellMonthStr = item.classDate.substring(with: 5..<7)
                     
                     if self.month == Int(cellMonthStr) {
+                        // 해당월의 일지정보만 cell 만들 배열에 append
                         self.NotesInfos.append(item)
                     }
                 }
@@ -206,22 +217,39 @@ class NotesVC: UIViewController {
 extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return NotesInfos.count
+        let days = Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section]
+        print("section lset", self.NotesInfos.filter{ $0.dayWeek == days })
+        
+        return self.NotesInfos.filter{ $0.dayWeek == days }.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        print("section count", Array(Set(self.NotesInfos.map{ $0.dayWeek })).count)
+        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).count
+    }
+    
+ 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
+        
+        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+        
+        
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
-   
-     
-            notesCell.setNoteCell(NotesInfos[indexPath.row].color,
-                                  NotesInfos[indexPath.row].profileUrl, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
-       
+        
+
+        let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+        
+
+        notesCell.setNoteCell(dayItems.color,
+                              dayItems.profileUrl, dayItems.lectureName, dayItems.times, dayItems.hour, dayItems.classProgress, dayItems.homework, dayItems.hwPerformance)
         
         
         return notesCell
     }
+    
+    
     
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -229,12 +257,16 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         return UITableView.automaticDimension
     }
     
+    
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = JournalDateHeaderView(
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
-        headerView.backgroundColor =  UIColor.whiteTwo
-
+        headerView.backgroundColor = UIColor.whiteTwo
+        //Array(Set(self.NotesInfos.map{ $0.dayWeek }))
+        headerView.dateLabel.text = String(Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section])
+        
         return headerView
 
     }
