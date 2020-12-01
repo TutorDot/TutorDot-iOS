@@ -14,110 +14,40 @@ class JournalDataCell: UITableViewCell {
 
     
     @IBOutlet weak var classColorImage: UIImageView!
-    @IBOutlet weak var currentClassTitleLabel: UILabel!
+    @IBOutlet weak var classTitle: UILabel!
     @IBOutlet weak var lessonLabel: UILabel!
     @IBOutlet weak var homeworkLabel: UILabel!
-    
-    @IBOutlet weak var hwIncompleteButton: UIButton!
-    @IBOutlet weak var hwInprogressButton: UIButton!
-    @IBOutlet weak var hwCompleteButton: UIButton!
-    
+    @IBOutlet weak var classCount: UILabel!
     @IBOutlet weak var journalView: UIView!
-    @IBOutlet weak var touchJournalTitle: UIView!
-    
-    var hwStatus: Int = 0
-    var iscompleteBtn: Bool = false
-    var isIncompleteBtn: Bool = false
-    var isInprogress: Bool = false
-    
-    
+    @IBOutlet weak var hwCheckImage: UIButton!
+    var diaryId: Int = 0
+    var classDate: String = ""
+    var homeworkCheck: Int = 0 //1이면 동그라미, 3이면 엑스
+    let hwImage: [String] = ["", "hwUnCheck", "", "hwUnCheck"]
     override func awakeFromNib() {
         super.awakeFromNib()
         setJournalView()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
     func setJournalView(){
-        journalView.layer.cornerRadius = 9
-        touchJournalTitle.layer.cornerRadius = 9
+        journalView.layer.cornerRadius = 13
+       
     }
     
-    func setClassJournalInfo(
-        classLog : String,
-        currentClass: String,
-        lesson: String,
-        homework: String) {
-        classColorImage.image = UIImage(named: classLog)
-        currentClassTitleLabel.text = currentClass
-        lessonLabel.text = "진도 : " + lesson
-        homeworkLabel.text = "숙제 : " + homework
+    func setNoteCell(_ color: String, _ title: String, _ times: Int, _ hour: Int, _ lesson: String, _ homework: String, _ hwCheck: Int){
+        
+        classColorImage.image = UIImage(named: color)
+        classTitle.text = title
+        lessonLabel.text = lesson
+        homeworkLabel.text = homework
+        classCount.text = "\(times)" + "회차" + " / " + "\(hour)" + "시간"
+        homeworkCheck = hwCheck
+        //hwCheckImage.imageView?.image = UIImage(named: hwImage[homeworkCheck])
+        
     }
     
-    func setcompleteBtn(_ status: Bool){
-        if status {
-            hwCompleteButton.setImage(UIImage(named: "classLogModificationBtnCirclePick"), for: .normal)
-            iscompleteBtn = true
-        } else {
-            hwCompleteButton.setImage(UIImage(named: "classLogModificationBtnCircleUnpick"), for: .normal)
-            iscompleteBtn = false
-        }
-    }
-    
-    func setIncompleteBtn(_ status: Bool){
-        if status {
-            hwIncompleteButton.setImage(UIImage(named: "classLogModificationBtnXPick"), for: .normal)
-            isIncompleteBtn = true
-        } else {
-            hwIncompleteButton.setImage(UIImage(named: "classLogModificationBtnXUnpick"), for: .normal)
-            isIncompleteBtn = false
-        }
-    }
 
-    func setInprogressBtn(_ status: Bool){
-        if status {
-           hwInprogressButton.setImage(UIImage(named: "classLogModificationBtnTrianglePick"), for: .normal)
-           isInprogress = true
-        } else {
-           hwInprogressButton.setImage(UIImage(named: "classLogModificationBtnTriangleUnpick"), for: .normal)
-           isInprogress = false
-        }
-    }
     
-    @IBAction func pressCompleteBtn(_ sender: Any) {
-        print("complete")
-        if !iscompleteBtn {
-            setcompleteBtn(true)
-            setInprogressBtn(false)
-            setIncompleteBtn(false)
-        } else {
-            setcompleteBtn(false)
-        }
-    }
-    
-    @IBAction func pressInprogressBtn(_ sender: Any) {
-        print("Inprogress")
-        if !isInprogress {
-            setcompleteBtn(false)
-            setInprogressBtn(true)
-            setIncompleteBtn(false)
-        } else {
-            setInprogressBtn(false)
-        }
-    }
-    
-    @IBAction func pressIncompleteBtn(_ sender: Any) {
-        print("Incomplete")
-        if !isIncompleteBtn {
-            setcompleteBtn(false)
-            setInprogressBtn(false)
-            setIncompleteBtn(true)
-        } else {
-            setIncompleteBtn(false)
-        }
-    }
     
     
     
