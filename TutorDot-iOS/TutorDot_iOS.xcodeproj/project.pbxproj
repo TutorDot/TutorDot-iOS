@@ -92,7 +92,10 @@
 		F437B8B8255BD3160016A575 /* PopUpClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F437B8B7255BD3160016A575 /* PopUpClassesTableViewCell.swift */; };
 		F444D9FD2564E12A002839F4 /* BlankNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444D9FB2564E12A002839F4 /* BlankNoteCell.swift */; };
 		F444D9FE2564E12A002839F4 /* BlankNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */; };
+		F44D885D2576A5DC00FD0942 /* classListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885C2576A5DC00FD0942 /* classListData.swift */; };
 		F45A5EF1257538C60012C447 /* MypageConnectSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */; };
+		F45A5F09257618670012C447 /* NotesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F08257618670012C447 /* NotesData.swift */; };
+		F45A5F0C25761A1A0012C447 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F0B25761A1A0012C447 /* NoteService.swift */; };
 		F46808F4256FD8E800D925F3 /* MypageNewClassNameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46808F3256FD8E800D925F3 /* MypageNewClassNameVC.swift */; };
 		F46808F7256FD91100D925F3 /* MypageNewClassDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46808F6256FD91100D925F3 /* MypageNewClassDetailVC.swift */; };
 		F46808FA256FD95100D925F3 /* MypageNewClassTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46808F9256FD95100D925F3 /* MypageNewClassTimeVC.swift */; };
@@ -235,7 +238,10 @@
 		F437B8B7255BD3160016A575 /* PopUpClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpClassesTableViewCell.swift; sourceTree = "<group>"; };
 		F444D9FB2564E12A002839F4 /* BlankNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankNoteCell.swift; sourceTree = "<group>"; };
 		F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankNoteCell.xib; sourceTree = "<group>"; };
+		F44D885C2576A5DC00FD0942 /* classListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classListData.swift; sourceTree = "<group>"; };
 		F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageConnectSuccessVC.swift; sourceTree = "<group>"; };
+		F45A5F08257618670012C447 /* NotesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesData.swift; sourceTree = "<group>"; };
+		F45A5F0B25761A1A0012C447 /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
 		F46808F3256FD8E800D925F3 /* MypageNewClassNameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageNewClassNameVC.swift; sourceTree = "<group>"; };
 		F46808F6256FD91100D925F3 /* MypageNewClassDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageNewClassDetailVC.swift; sourceTree = "<group>"; };
 		F46808F9256FD95100D925F3 /* MypageNewClassTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageNewClassTimeVC.swift; sourceTree = "<group>"; };
@@ -476,6 +482,8 @@
 				F4A033232574F39100F46F24 /* MyClassDetailData.swift */,
 				F4A0332625750FA700F46F24 /* InvitationData.swift */,
 				0106AA25257501C800EBC28D /* PasswordData.swift */,
+				F45A5F08257618670012C447 /* NotesData.swift */,
+				F44D885C2576A5DC00FD0942 /* classListData.swift */,
 			);
 			path = NetworkData;
 			sourceTree = "<group>";
@@ -491,6 +499,7 @@
 				F4200DFE24BDA33000EA1D6F /* ProfileService.swift */,
 				F4B517D924C05FD8007438DE /* AddLectureService.swift */,
 				F49D9F4125736914003076EA /* MypageService.swift */,
+				F45A5F0B25761A1A0012C447 /* NoteService.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -743,9 +752,11 @@
 				F4B565542536D75200A77C01 /* NotesContentCell.swift in Sources */,
 				013B73BE24C09D0A002E60C4 /* AlertInfo.swift in Sources */,
 				01C8B23524B42F5E00621BA3 /* Extensions+Padding.swift in Sources */,
+				F44D885D2576A5DC00FD0942 /* classListData.swift in Sources */,
 				0193A1D7255A4FCD00175BF7 /* SignUp4VC.swift in Sources */,
 				0193A1D1255A46A200175BF7 /* SignUp2VC.swift in Sources */,
 				011D6C8C24AEF7DD004056C4 /* Tutor.swift in Sources */,
+				F45A5F09257618670012C447 /* NotesData.swift in Sources */,
 				012639A724AB15E7009EA0BA /* SplashVC.swift in Sources */,
 				0166C6BB2566CDA70061E984 /* SignUpAgreeVC.swift in Sources */,
 				011D6C9024AF8D53004056C4 /* ClassAddVC.swift in Sources */,
@@ -815,6 +826,7 @@
 				F4D1A0A024B515D600B13D65 /* MyClassCell.swift in Sources */,
 				0126399524AA0A16009EA0BA /* MyPageVC.swift in Sources */,
 				F4D1A09824B4FCEA00B13D65 /* MypageNoticeSettingCell.swift in Sources */,
+				F45A5F0C25761A1A0012C447 /* NoteService.swift in Sources */,
 				012639AB24ADADE8009EA0BA /* CalendarCollectionViewCell.swift in Sources */,
 				F4D1A0B624B7327800B13D65 /* LogoutPopUpVC.swift in Sources */,
 				0126397324AA00C8009EA0BA /* SceneDelegate.swift in Sources */,

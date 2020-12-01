@@ -3701,6 +3701,9 @@ TutorDot 서비스를 이용하세요!</string>
                                         <state key="normal" title="붙여넣기">
                                             <color key="titleColor" name="Color"/>
                                         </state>
+                                        <connections>
+                                            <action selector="pasteButtonDidTap:" destination="3pY-7w-zw8" eventType="touchUpInside" id="Ff3-wK-WQN"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="초대코드 입력" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IUq-0r-kHM">
                                         <rect key="frame" x="16" y="12" width="110" height="19.5"/>

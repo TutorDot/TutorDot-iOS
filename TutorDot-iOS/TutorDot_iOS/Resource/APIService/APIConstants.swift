@@ -26,6 +26,7 @@ struct APIConstants {
     static let invitationLidURL = APIConstants.baseURL + "/lecture/invitation/:lid" //수업 초대
     static let invitationURL = APIConstants.baseURL + "/lecture/invitation"
     static let toggleURL = APIConstants.baseURL + "/lecture/toggle"
+    static let classListURL = APIConstants.baseURL + "/lecture/name"
     
     // 캘린더
     static let calendarURL = APIConstants.baseURL + "/calander"
@@ -37,7 +38,7 @@ struct APIConstants {
     static let diaryURL = APIConstants.baseURL + "/diary"
     static let diaryLidURL = APIConstants.baseURL + "/diary/:lid"
     static let diaryBarLidURL = APIConstants.baseURL + "/diary/bar/:lid"
-    static let diaryHwDidURL = APIConstants.baseURL + "/diary/hw/:did"
+    static let diaryHwDidURL = APIConstants.baseURL + "/diary/hw"
     
     // 알림
     static let noticeURL = APIConstants.baseURL + "/notice"

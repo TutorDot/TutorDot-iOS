@@ -7,50 +7,53 @@
 //
 import os
 import UIKit
-
-
 import DropDown
 
-class NotesVC: UIViewController {
-    
+class NotesVC: UIViewController, selectClassProtocol {
     
 
-    // MARK: - Views
-    
-    @IBOutlet weak var ClassHeaderView: UIView! //class progress bar
+    @IBOutlet weak var ClassProgressView: UIView!
     @IBOutlet weak var monthJournalView: UIView!
     @IBOutlet weak var progressViewWrap: UIStackView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dropboxbound: UIView!
     @IBOutlet weak var progressView: UIProgressView!
     
-    
-    // MARK: - Layout Constraint
     
     @IBOutlet weak var tableViewTopMargin: NSLayoutConstraint!
     @IBOutlet weak var monthJournalViewHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeaderHeight: NSLayoutConstraint!
     
-    
-    // MARK: - UIButton and UILabel
-    
-    @IBOutlet weak var listToggleButton: UIButton!
-    @IBOutlet weak var notesTitle: UIButton!
+
+ 
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
     @IBOutlet weak var totalClassLabel: UILabel!
     @IBOutlet weak var monthLable: UILabel!
+    @IBOutlet weak var NoteTitleLabel: UILabel!
     
+    
+    let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     var month: Int = 0
-    var dropDown:DropDown?
-    private var NotesInfos: [NotesInfo] = []
-
+    var monthStr: String = ""
+    var selectClassID: Int = 0 // 특정일지 선택 lid
+    let note: String = "수업 일지"
+    let dateFormatter = DateFormatter()
+    let cal = Calendar(identifier: .gregorian)
+//    let dateFomatterDetail = DateFormatter()
+    var isFirstRunning: Bool = false
+    private var NotesInfos: [NotesContent] = []
+    let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
+    var userProfile: String = ""
+    var myRole: String = ""
+    var islistCall: Bool = false
+    
+    
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
         if ishide { //true(안보일때)
-            tableViewTopMargin.constant = 191-117
+            tableViewTopMargin.constant = 150-94
         } else { //false (보일때)
-            tableViewTopMargin.constant = 191
+            tableViewTopMargin.constant = 150
         }
     }
     
@@ -58,6 +61,7 @@ class NotesVC: UIViewController {
     // MARK: - Init
     
     func setProgress(){
+        
         progressView.layer.cornerRadius = 9
         progressView.clipsToBounds = true
         progressView.layer.sublayers![1].cornerRadius = 9
@@ -69,19 +73,37 @@ class NotesVC: UIViewController {
             self.progressView.setProgress(12/16, animated: true)
         }
         progressLabel.text = "75%"
+        
+        if NoteTitleLabel.text == self.userProfile + "전체 " + self.note {
+            classHeaderHidden(true)
+            
+        } else {
+            classHeaderHidden(false)
+        }
     }
    
     func setProgressInfo(progressRate: String, currentClass: String, totalClass:String){
+        
         progressLabel.text = progressRate
         currentClassLabel.text = currentClass
         totalClassLabel.text = totalClass
     }
     
+    // parameter값으로 들어온 숫자로 월 셋팅
     func setMonthLabel(_ monthInput: Int){
-        var monthStr: String
-        monthStr = String(monthInput)
         month = monthInput
-        monthLable.text = monthStr + "월 수업 일지"
+        monthLable.text = String(monthInput) + "월 수업 일지"
+    }
+    
+    func MonthInit(){
+        
+        dateFormatter.dateFormat = "MM"
+        
+        //현재 월 String 값으로 가져오기
+        monthStr = dateFormatter.string(from: Date())
+        monthLable.text = monthStr + "월 수업일지"
+        month = Int(monthStr) ?? 0
+        
     }
     
 
@@ -95,6 +117,9 @@ class NotesVC: UIViewController {
             month = 12
         }
         setMonthLabel(month)
+        
+        NotesInfos.removeAll()
+        setNotesInfos()
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
@@ -105,17 +130,50 @@ class NotesVC: UIViewController {
             month = 1
         }
         setMonthLabel(month)
+        NotesInfos.removeAll()
+        setNotesInfos()
     }
    
    
+    func gestureRecognizer() {
+        swipeGestureRecognizer.direction = .right
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.tableView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.tableView.addGestureRecognizer(swipeRight)
+        
+    }
+    
+    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
+                nextButtonDidTap(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+                
+            } else if swipeGesture.direction == UISwipeGestureRecognizer.Direction.right{
+                previousButtonDidTap(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        listDropDown() //드롭다운 박스
+  
+        
+        MonthInit()
+        
         setNotesInfos()
         setProgress()
-        setMonthLabel(7) //5월로 초기 설정
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
+        setProfile()
+        gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
         viewHeaderHeight.constant = self.view.frame.height * 94/812
@@ -128,88 +186,191 @@ class NotesVC: UIViewController {
         // Do any additional setup after loading the view.
         
         self.tableView.reloadData()
-
+        
+        isFirstRunning = true
     }
     
-
-    // MARK: - Server
-    
-    func listDropDown(){
-        var dropList : [String] = ["전체"]
-        dropDown = DropDown()
-        dropDown?.anchorView = dropboxbound
-        self.dropDown?.width = 275
-        DropDown.appearance().setupCornerRadius(7)
-       
-        
-        var idList : [Int] = []
-        
-        // 서버통신: 토글에서 수업리스트 가져오기
-        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
-        switch networkResult {
-            case .success(let resultData):
-            guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-            print("success")
-            for index in 0..<data.count {
-                let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
-                dropList.append(item.lectureName)
-                idList.append(item.lectureId)
-                self.dropDown?.dataSource = dropList
-                print("여기", idList)
-                
+    override func viewWillAppear(_ animated: Bool) {
+        if isFirstRunning == false {
+            if islistCall == false {
+                setNotesInfos()
             }
-            
-        case .pathErr: os_log("Patherr", log: .network)
-        case .serverErr: os_log("ServerErr", log: .network)
-        case .requestErr(let message): os_log(message as! StaticString, log: .network)
-        case .networkFail: os_log("networkFail", log: .network)
-                
-            }
-        }
-        
-        // 드롭박스 목록 내역
-        listToggleButton.addTarget(self,
-                                   action: #selector(dropDownToggleButton),
-                                   for: .touchUpInside)
-        notesTitle.addTarget(self,
-                             action: #selector(dropDownToggleButton),
-                             for: .touchUpInside)
-        
-        dropDown?.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.notesTitle.setTitle(item, for: .normal)
-            if item != "전체" {
-                self.classHeaderHidden(false)
-            } else {
-                self.classHeaderHidden(true)
-            }
-        }
-
-        // 드롭박스 내 text 가운데 정렬
-        dropDown?.customCellConfiguration = { (index: Index,
-                                               item: String,
-                                               cell: DropDownCell) -> Void in
-            cell.optionLabel.textAlignment = .center
         }
     }
-    
-    @objc func dropDownToggleButton(){
-        dropDown?.show()
+
+    override func viewDidDisappear(_ animated: Bool) {
+        NotesInfos.removeAll()
     }
    
+    
+    // Mark - 서버통신 : 간편 프로필 조회
+    func setProfile(){
+        ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? UserProfile else { return print(Error.self) }
+                
+                self.myRole = data.role
+                
+                if data.role == "tutor" {
+                    self.userProfile = "\(data.userName) 튜터 "
+                    
+                } else {
+                    self.userProfile = "\(data.userName) 튜티 "
+                }
+                
+                self.NoteTitleLabel.text = self.userProfile + "전체 " + self.note
+                
+            case .pathErr :
+                os_log("PathErr-Profile", log: .note)
+            case .serverErr :
+                os_log("ServerErr", log: .note)
+            case .requestErr(let message) :
+                os_log(message as! StaticString, log: .note)
+            case .networkFail:
+                os_log("networkFail", log: .note)
+            }
+        }
+    }
+    
+    // Mark - 수업 일지 전체 조회 서버 통신(GET)
     func setNotesInfos(){
-        //dummy data
-        let data1 = NotesInfo(classLog: .yellow, currentClass: "1회차 2시간/16시간", lesson: "수학의정석 1장", homework: "수학의정석 1장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data2 = NotesInfo(classLog: .yellow, currentClass: "2회차 4시간/16시간", lesson: "수학의정석 2장", homework: "수학의정석 2장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data3 = NotesInfo(classLog: .yellow, currentClass: "3회차 6시간/16시간", lesson: "수학의정석 3장", homework: "수학의정석 3장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data4 = NotesInfo(classLog: .yellow, currentClass: "4회차 8시간/16시간", lesson: "수학의정석 4장", homework: "수학의정석 4장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data5 = NotesInfo(classLog: .red, currentClass: "1회차 1시간/16시간", lesson: "통기타 너도 할수 있어! 1장", homework: "수학의정석 4장 연습문제", lid: 10, classDate: "2020-07-18")
-        let data6 = NotesInfo(classLog: .red, currentClass: "2회차 2시간/16시간", lesson: "통기타 너도 할수 있어! 2장", homework: "너에게 난 나에게 넌", lid: 10, classDate: "2020-07-18")
-        let data7 = NotesInfo(classLog: .red, currentClass: "3회차 3시간/16시간", lesson: "통기타 너도 할수 있어! 3장", homework: "제주도의 푸른 밤", lid: 10, classDate: "2020-07-18")
-        let data8 = NotesInfo(classLog: .red, currentClass: "4회차 4시간/16시간", lesson: "통기타 너도 할수 있어! 4장", homework: "징가징가~", lid: 10, classDate: "2020-07-18")
-        let data9 = NotesInfo(classLog: .red, currentClass: "5회차 5시간/16시간", lesson: "통기타 너도 할수 있어! 5장", homework: "붉은 노을", lid: 10, classDate: "2020-07-18")
-        let data10 = NotesInfo(classLog: .red, currentClass: "6회차 6시간/16시간", lesson: "통기타 너도 할수 있어! 6장", homework: "겨울을 걷는다", lid: 10, classDate: "2020-07-18")
+        NoteService.Shared.getAllClassNotes() { networkResult  in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [NotesContentServer] else { return print(Error.self) }
+                for index in 0..<data.count {
+                    
+                    // "Date" String ro Date()
+                    self.dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let finalDate: Date = self.dateFormatter.date(from: data[index].classDate)!
+
+                    // 요일 구하기
+                    let comps = self.cal.dateComponents([.weekday], from: finalDate)
+                    let dayAndWeek: String = String(data[index].classDate.substring(from: 8)) + "일 " + self.weekdayStr[comps.weekday!]
+                    
+                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance, dayWeek: dayAndWeek)
+                    
+                    let cellMonthStr = item.classDate.substring(with: 5..<7)
+                    
+                    if self.month == Int(cellMonthStr) {
+                        // 해당월의 일지정보만 cell 만들 배열에 append
+                        self.NotesInfos.append(item)
+                    }
+                }
+                self.tableView.reloadData()
+            case .pathErr :
+                os_log("PathErr", log: .note)
+            case .serverErr :
+                os_log("ServerErr", log: .note)
+            case .requestErr(let message) :
+                print(message)
+            case .networkFail:
+                os_log("networkFail", log: .note)
+                
+            }
+        }
+    }
+    
+    
+    @IBAction func listButtonDidTap(_ sender: Any) {
         
-        NotesInfos = [data1, data2, data3, data4, data5, data6, data7, data8, data9, data10]
+        
+        islistCall = true
+        NotesInfos.removeAll()
+        
+        // Mark - 수업리스트 가져오기 서버통신
+        NoteService.Shared.getClassList() { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [ClassList] else { return print(Error.self) }
+                
+                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
+                nextVC.classlist.append("전체")
+                nextVC.lectureId.append(0)
+                for index in 0..<data.count {
+                    let item = ClassList(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color)
+                    
+                    nextVC.classlist.append(item.lectureName)
+                    nextVC.lectureId.append(item.lectureId)
+                }
+                
+                nextVC.modalPresentationStyle = .overFullScreen
+                self.present(nextVC, animated: true, completion: nil)
+
+                nextVC.delegate = self
+                
+            case .pathErr : print("Patherr")
+            case .serverErr : print("ServerErr")
+            case .requestErr(let message) : print(message)
+            case .networkFail:
+                print("networkFail")
+            }
+        }
+        
+        
+        
+    }
+    
+    @IBAction func alertButtonDidTap(_ sender: Any) {
+        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
+        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertServiceVC")
+        uvc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(uvc, animated: true)
+    }
+    
+    func sendClassTitle(_ title: String, _ diaryID: Int) {
+        self.selectClassID = diaryID
+        self.NoteTitleLabel.text = self.userProfile + title + " " + self.note
+        self.setProgress()
+        
+        if diaryID == 0 {
+            setNotesInfos() // 전체수업일지 조회
+        } else {
+            getOneNoteInfo() // 특정수업일지 조회
+        }
+        
+        islistCall = false
+    }
+    
+    // Mark - 특정 수업일지 조회 서버통신
+    func getOneNoteInfo(){
+
+        NoteService.Shared.getOneClassNotes(diaryId: selectClassID) { networkResult  in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [NotesContentServer] else { return print(Error.self) }
+                for index in 0..<data.count {
+                    
+                    // "Date" String ro Date()
+                    self.dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let finalDate: Date = self.dateFormatter.date(from: data[index].classDate)!
+
+                    // 요일 구하기
+                    let comps = self.cal.dateComponents([.weekday], from: finalDate)
+                    let dayAndWeek: String = String(data[index].classDate.substring(from: 8)) + "일 " + self.weekdayStr[comps.weekday!]
+                    
+                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance, dayWeek: dayAndWeek)
+                    
+                    let cellMonthStr = item.classDate.substring(with: 5..<7)
+                    
+                    if self.month == Int(cellMonthStr) {
+                        // 해당월의 일지정보만 cell 만들 배열에 append
+                        self.NotesInfos.append(item)
+                    }
+                }
+                self.tableView.reloadData()
+            case .pathErr :
+                os_log("PathErr", log: .note)
+            case .serverErr :
+                os_log("ServerErr", log: .note)
+            case .requestErr(let message) :
+                print(message)
+            case .networkFail:
+                os_log("networkFail", log: .note)
+                
+            }
+        }
     }
     
 }
@@ -220,22 +381,36 @@ class NotesVC: UIViewController {
 extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        return NotesInfos.count
+        let days = Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section]
+        
+        return self.NotesInfos.filter{ $0.dayWeek == days }.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+
+        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).count
+    }
+    
+ 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
+        
+        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+        
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
-        notesCell.setClassJournalInfo(
-            classLog: NotesInfos[indexPath.row].classLog.getImageName(),
-            currentClass: NotesInfos[indexPath.row].currentClass,
-            lesson: NotesInfos[indexPath.row].lesson,
-            homework: NotesInfos[indexPath.row].homework)
+
+        let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+    
+        notesCell.setNoteCell(dayItems.color,
+                              dayItems.profileUrl, dayItems.lectureName, dayItems.times, dayItems.hour, dayItems.classProgress, dayItems.homework, dayItems.hwPerformance)
+        
         
         return notesCell
     }
+    
+    
     
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -243,31 +418,49 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         return UITableView.automaticDimension
     }
     
+    
     func tableView(_ tableView: UITableView,
                    viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = JournalDateHeaderView(
-            frame: CGRect(x: 0, y: 0, width: 375, height: 16))
-        headerView.backgroundColor =  UIColor(red: 245 / 255,
-                                              green: 246 / 255,
-                                              blue: 250 / 255,
-                                              alpha: 1.0)
+            frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
+        headerView.backgroundColor = UIColor.whiteTwo
+        //Array(Set(self.NotesInfos.map{ $0.dayWeek }))
+        headerView.dateLabel.text = String(Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section])
+        
         return headerView
 
     }
    
     func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
-        return 16
+        return 37
     }
     
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+        
         guard let nextVC = self.storyboard?.instantiateViewController(
                 identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
         
-        nextVC.modalPresentationStyle = .currentContext
-        nextVC.modalTransitionStyle = .crossDissolve
+        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+        let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+        
+        // 클릭한 수업일지 ID 전달
+        nextVC.diaryID = dayItems.diaryId
+        nextVC.color = dayItems.color
+        nextVC.lesson = dayItems.classProgress
+        nextVC.times = dayItems.times
+        nextVC.hour = dayItems.hour
+        nextVC.hw = dayItems.homework
+        nextVC.totalHours = dayItems.depositCycle
+        nextVC.lectureName = dayItems.lectureName
+        nextVC.date = dayItems.classDate
+        nextVC.hwCheckValue = dayItems.hwPerformance
+        nextVC.role = self.myRole
+        
+        nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)
     }
    
