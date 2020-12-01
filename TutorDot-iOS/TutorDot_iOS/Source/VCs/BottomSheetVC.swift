@@ -10,31 +10,31 @@ import UIKit
 import os
 
 protocol selectClassProtocol: class {
-    func sendClassTitle(_ title: String)
+    func sendClassTitle(_ title: String, _ diaryID: Int)
 }
 
 class BottomSheetVC: UIViewController {
     
     @IBOutlet weak var BottomSheetTableView: UITableView!
+  
     weak var delegate: selectClassProtocol?
     
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     let screenWidth: CGFloat = UIScreen.main.bounds.width
+    
     var classlist: [String] = []
-    var classFinalList: [String] = []
+    var lectureId: [Int] = []
+    let headerHeight: CGFloat = 55
     let customHeight: CGFloat = 55
     let bottomSafeArea: CGFloat = 34
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBottomView()
-        setClassList()
+        start()
+        
         BottomSheetTableView.dataSource = self
         BottomSheetTableView.delegate = self
-        start()
-        setListDropDown()
-        
-        
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -47,7 +47,7 @@ class BottomSheetVC: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //Mark: device 분기처리 필요 bottomSafeArea 더할지 말지
-        let heightCalc = (self.customHeight * (CGFloat(classlist.count)+1)) + bottomSafeArea
+        let heightCalc = (self.customHeight * (CGFloat(classlist.count))) + bottomSafeArea + headerHeight
         
         UIView.animate(withDuration: 0.5,
                        delay: 0,
@@ -61,50 +61,20 @@ class BottomSheetVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func setClassList(){
-        //classlist = ["전체", "수업이름1", "수업이름2"]
-        //Mark: - 서버통신
-        
-        self.classFinalList = self.classlist
-        print(classFinalList)
-    }
-    
-    
-    func setListDropDown(){
-        // 서버통신: 토글에서 수업리스트 가져오기
-        classlist = []
-        ProfileService.ProfileServiceShared.getClassLid() { networkResult in
-            switch networkResult {
-            case .success(let resultData):
-                guard let data = resultData as? [LidToggleData] else { return print(Error.self) }
-                for index in 0..<data.count {
-                    let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
-                    self.classlist.append(item.lectureName)
-                    
-                    //print(self.classlist)
-                }
-                
-            case .pathErr : print("Patherr")
-            case .serverErr : print("ServerErr")
-            case .requestErr(let message) : print(message)
-            case .networkFail:
-                print("networkFail")
-            }
-        }
-    }
-    
     
     func setupBottomView(){
         BottomSheetTableView.layer.cornerRadius = 13.0
     }
     
     func start(){
-        BottomSheetTableView.separatorStyle = .none
-        let heightCalc = self.customHeight * (CGFloat(classlist.count)+1) + bottomSafeArea
         
+        BottomSheetTableView.separatorStyle = .none
+        let heightCalc = self.customHeight * (CGFloat(classlist.count)) + bottomSafeArea + headerHeight
+        
+               
         //init position
         BottomSheetTableView.frame = CGRect(x: 0, y: screenHeight, width: screenWidth, height: heightCalc)
-        
+
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,
@@ -123,6 +93,7 @@ extension BottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         return classlist.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let Cell = tableView.dequeueReusableCell(withIdentifier: PopUpClassesTableViewCell.identifier, for: indexPath) as? PopUpClassesTableViewCell
         else { return UITableViewCell() }
@@ -135,12 +106,13 @@ extension BottomSheetVC: UITableViewDelegate, UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        
+        return customHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var classTitle: String = classlist[indexPath.row]
-        delegate?.sendClassTitle(classTitle)
+        
+        delegate?.sendClassTitle(classlist[indexPath.row], lectureId[indexPath.row])
         self.dismiss(animated: true, completion: nil)
     }
 }

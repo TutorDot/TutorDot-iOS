@@ -9,7 +9,7 @@
 import UIKit
 import os
 
-class NotesMainVC: UIViewController, selectClassProtocol {
+class NotesMainVC: UIViewController {
 
     let deviceHeight: CGFloat = UIScreen.main.bounds.height / 812
     var progressViewHeight: CGFloat = 115
@@ -118,14 +118,14 @@ class NotesMainVC: UIViewController, selectClassProtocol {
     @IBAction func selectClassButtonDidtap(_ sender: Any) {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
         self.navigationController?.pushViewController(nextVC, animated: true)
-        print("tap???")
-        nextVC.delegate = self
+
+        
     }
     
-    func sendClassTitle(_ title: String) {
-        titleLabel.text = title
-        setProgressView()
-    }
+//    func sendClassTitle(_ title: String) {
+//        titleLabel.text = title
+//        setProgressView()
+//    }
     
     
 }
