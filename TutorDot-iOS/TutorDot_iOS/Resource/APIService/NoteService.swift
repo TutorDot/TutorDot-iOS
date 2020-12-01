@@ -70,6 +70,7 @@ struct NoteService {
         
         let dataRequest = Alamofire.request(APIConstants.diaryHwDidURL + "/" + "\(diaryId)", method: .put, parameters: makeParameter(classProgress, homework, hwPerformance), headers: header)
         
+        
         dataRequest.responseData { dataResponse in
             switch dataResponse.result {
             case .success :
@@ -94,14 +95,13 @@ struct NoteService {
     
     private func isNoteData(by data:Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(SignUpData.self, from: data)
+        guard let decodedData = try? decoder.decode(NotesData.self, from: data)
             else {return .pathErr}
         
-        if decodedData.success { return .success(data) }
+        if decodedData.success { return .success(decodedData.data) }
         else {
             return .requestErr(decodedData.message)}
-        }
-    
+    }
     
     
 }

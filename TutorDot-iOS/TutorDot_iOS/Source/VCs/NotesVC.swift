@@ -42,7 +42,7 @@ class NotesVC: UIViewController {
     var month: Int = 0
     var monthStr: String = ""
     let dateFomatter = DateFormatter()
-  
+    var isFirstRunning: Bool = true
     private var NotesInfos: [NotesContent] = []
     
     func classHeaderHidden(_ ishide: Bool){
@@ -138,10 +138,19 @@ class NotesVC: UIViewController {
         // Do any additional setup after loading the view.
         
         self.tableView.reloadData()
-
+        
+        isFirstRunning = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if isFirstRunning == false {
+            setNotesInfos()
+        }
+    }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        NotesInfos.removeAll()
+    }
    
     func setNotesInfos(){
        // Mark - 수업 일지 전체 조회 서버 통신(GET)

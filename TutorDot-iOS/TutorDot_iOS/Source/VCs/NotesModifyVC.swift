@@ -42,6 +42,7 @@ class NotesModifyVC: UIViewController {
     var lectureName: String = ""
     var date: String = ""
     var hwCheckValue: Int = 0  // 수정 서버통신 parameter
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
@@ -54,10 +55,11 @@ class NotesModifyVC: UIViewController {
     @objc func onTapHwButton(){
         if hwCheckValue == 1 {
             hwCheckValue = 3
-        } else {
+        } else if hwCheckValue == 3 {
             hwCheckValue = 1
         }
-        hwCheckButton.imageView?.image = UIImage(named: hwImage[hwCheckValue])
+        
+        hwCheckButton.setImage(UIImage(named: hwImage[hwCheckValue]), for: .normal)
     }
     
     @objc func lessonTextFieldDidChange(_ textField: UITextField) {
@@ -86,7 +88,7 @@ class NotesModifyVC: UIViewController {
             homeworkTextField.text = hw
         }
         
-        hwCheckButton.imageView?.image = UIImage(named: hwImage[hwCheckValue])
+        hwCheckButton.setImage(UIImage(named: hwImage[hwCheckValue]), for: .normal)
         
         // "Date" String ro Date()
         let dateFormatter = DateFormatter()
@@ -116,14 +118,11 @@ class NotesModifyVC: UIViewController {
         // Mark - 수업일지 수정 서버 통신(PUT)
         NoteService.Shared.editClassNote(classProgress: lesson, homework: hw, hwPerformance: hwCheckValue, diaryId: diaryID) { networkResult in
             switch networkResult {
-            case .success(let token):
-                guard let token = token as? String else { return }
-                UserDefaults.standard.set(token, forKey: "token")
-                
+            case .success:
                 self.dismiss(animated: true, completion: nil)
             case .pathErr:
                 os_log("PathErr-EditClass", log: .note)
-            case .serverErr :
+            case .serverErr:
                 os_log("ServerErr", log: .mypage)
             case .requestErr(let message) :
                 os_log(message as! StaticString, log: .mypage)
