@@ -7,8 +7,6 @@
 //
 import os
 import UIKit
-
-
 import DropDown
 
 class NotesVC: UIViewController {
@@ -46,7 +44,7 @@ class NotesVC: UIViewController {
     let dateFomatter = DateFormatter()
   
     private var NotesInfos: [NotesContent] = []
-
+    
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
         if ishide { //true(안보일때)
@@ -127,7 +125,6 @@ class NotesVC: UIViewController {
         
         setNotesInfos()
         setProgress()
-        setMonthLabel(7) //5월로 초기 설정
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         
         //기종별 최상단 헤더뷰 높이 조정
@@ -152,10 +149,9 @@ class NotesVC: UIViewController {
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [NotesContent] else { return print(Error.self) }
-                os_log("수업일지 조회 통신 success2", log: .note)
                 for index in 0..<data.count {
-                    let item = NotesContent(diaryId: data[index].diaryId, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance)
-                    
+                    let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance)
+           
                     self.NotesInfos.append(item)
                 }
                 self.tableView.reloadData()
@@ -188,7 +184,8 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
-        notesCell.setNoteCell(NotesInfos[indexPath.row].color, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
+        notesCell.setNoteCell(NotesInfos[indexPath.row].color,
+                              NotesInfos[indexPath.row].profileUrl, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
         
         return notesCell
     }
@@ -220,6 +217,16 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         guard let nextVC = self.storyboard?.instantiateViewController(
                 identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
         
+        // 클릭한 수업일지 ID 전달
+        nextVC.diaryID = self.NotesInfos[indexPath.row].diaryId
+        nextVC.color = self.NotesInfos[indexPath.row].color
+        nextVC.lesson = self.NotesInfos[indexPath.row].classProgress
+        nextVC.times = self.NotesInfos[indexPath.row].times
+        nextVC.hour = self.NotesInfos[indexPath.row].hour
+        nextVC.hw = self.NotesInfos[indexPath.row].homework
+        nextVC.totalHours = self.NotesInfos[indexPath.row].depositCycle
+        nextVC.lectureName = self.NotesInfos[indexPath.row].lectureName
+        nextVC.date = self.NotesInfos[indexPath.row].classDate
         
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)

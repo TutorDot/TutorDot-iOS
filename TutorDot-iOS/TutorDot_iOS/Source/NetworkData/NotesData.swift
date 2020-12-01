@@ -32,6 +32,7 @@ struct NotesData: Codable {
 
 struct NotesContent: Codable {
     var diaryId: Int
+    var profileUrl: String
     var lectureName: String
     var classDate: String
     var color: String
@@ -42,8 +43,9 @@ struct NotesContent: Codable {
     var homework: String
     var hwPerformance:Int
     
-    init (diaryId: Int, lectureName: String, classDate: String, color: String, times: Int, hour: Int, depositCycle: Int, classProgress: String, homework:String, hwPerformance: Int) {
+    init (diaryId: Int, profileUrl: String, lectureName: String, classDate: String, color: String, times: Int, hour: Int, depositCycle: Int, classProgress: String, homework:String, hwPerformance: Int) {
         self.diaryId = diaryId
+        self.profileUrl = profileUrl
         self.lectureName = lectureName
         self.classDate = classDate
         self.color = color

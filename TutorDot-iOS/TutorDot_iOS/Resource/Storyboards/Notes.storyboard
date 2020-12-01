@@ -230,8 +230,15 @@
                                                                 <constraint firstAttribute="width" constant="13" id="a7B-YY-Lh4"/>
                                                                 <constraint firstAttribute="width" secondItem="RrR-DN-HlM" secondAttribute="height" multiplier="1:1" id="kff-fC-PBR"/>
                                                             </constraints>
-                                                            <state key="normal" image="classlogImgPick"/>
+                                                            <state key="normal" image="hwCheck"/>
                                                         </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bIf-hy-fPs">
+                                                            <rect key="frame" x="296" y="20" width="42" height="42"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="42" id="mXt-SI-RX5"/>
+                                                                <constraint firstAttribute="width" secondItem="bIf-hy-fPs" secondAttribute="height" multiplier="1:1" id="mdx-si-0Uz"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -247,8 +254,10 @@
                                                         <constraint firstItem="Z7W-A4-yKH" firstAttribute="top" secondItem="kBf-hA-HHA" secondAttribute="bottom" constant="22" id="eCL-wR-zVe"/>
                                                         <constraint firstItem="RrR-DN-HlM" firstAttribute="centerY" secondItem="am3-Ac-UYP" secondAttribute="centerY" id="hfr-dH-QpD"/>
                                                         <constraint firstItem="7Hn-g2-iyf" firstAttribute="leading" secondItem="Z7W-A4-yKH" secondAttribute="trailing" constant="13.5" id="ijj-K5-rno"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bIf-hy-fPs" secondAttribute="trailing" constant="20" id="oqB-qV-23K"/>
                                                         <constraint firstItem="F2p-Od-0BY" firstAttribute="top" secondItem="0Qo-uF-NjZ" secondAttribute="bottom" constant="17" id="p88-aH-H02"/>
                                                         <constraint firstItem="am3-Ac-UYP" firstAttribute="top" secondItem="F2p-Od-0BY" secondAttribute="bottom" constant="8" id="pTz-3n-rtx"/>
+                                                        <constraint firstItem="bIf-hy-fPs" firstAttribute="top" secondItem="rrk-uY-Lqq" secondAttribute="top" constant="20" id="pWY-ud-nwv"/>
                                                         <constraint firstItem="kBf-hA-HHA" firstAttribute="leading" secondItem="rrk-uY-Lqq" secondAttribute="leading" constant="20" id="q3I-77-VQ6"/>
                                                         <constraint firstItem="NgU-Jc-Qp7" firstAttribute="leading" secondItem="kBf-hA-HHA" secondAttribute="trailing" constant="10" id="udg-YF-dfz"/>
                                                         <constraint firstItem="0Qo-uF-NjZ" firstAttribute="leading" secondItem="rrk-uY-Lqq" secondAttribute="leading" constant="19.5" id="vJE-pV-vVS"/>
@@ -274,6 +283,7 @@
                                             <outlet property="hwCheckImage" destination="RrR-DN-HlM" id="ql3-Di-5dT"/>
                                             <outlet property="journalView" destination="rrk-uY-Lqq" id="pT4-AN-3nT"/>
                                             <outlet property="lessonLabel" destination="dpB-R4-IVn" id="VfF-RT-Obu"/>
+                                            <outlet property="tuteeImageView" destination="bIf-hy-fPs" id="JtG-i7-NFJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -839,7 +849,7 @@
         <image name="classlogBtnNextMonthPick" width="54" height="37"/>
         <image name="classlogBtnNextMonthUnpick" width="54" height="37"/>
         <image name="classlogBtnNotice" width="43" height="48"/>
-        <image name="classlogImgPick" width="13" height="13"/>
+        <image name="hwCheck" width="13" height="13"/>
         <image name="scheduleModificationBtnCancel" width="48" height="48"/>
         <image name="scheduleModificationBtnCancel_op" width="48" height="48"/>
         <image name="scheduleModificationBtnSave" width="48" height="48"/>

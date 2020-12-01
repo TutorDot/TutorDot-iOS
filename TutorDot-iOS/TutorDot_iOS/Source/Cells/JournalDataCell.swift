@@ -7,42 +7,71 @@
 //
 
 import UIKit
+import Kingfisher
 
 class JournalDataCell: UITableViewCell {
 
     static let identifier: String = "JournalDataCell"
-
+    let defaultLesson: String  = "진도를 입력해주세요"
+    let defaultHW: String  = "숙제를 입력해주세요"
     
     @IBOutlet weak var classColorImage: UIImageView!
     @IBOutlet weak var classTitle: UILabel!
     @IBOutlet weak var lessonLabel: UILabel!
     @IBOutlet weak var homeworkLabel: UILabel!
     @IBOutlet weak var classCount: UILabel!
-    @IBOutlet weak var journalView: UIView!
+    
+    @IBOutlet weak var tuteeImageView: UIImageView!
+    @IBOutlet weak var journalView: UIView! {
+        didSet {
+            journalView.layer.cornerRadius = 13
+            journalView.layer.shadowRadius = 13
+            journalView.layer.masksToBounds = false
+            journalView.layer.shadowColor = UIColor.gray.cgColor
+            journalView.layer.shadowOffset = CGSize(width: 2, height: 2)
+            journalView.layer.shadowOpacity = 0.2
+           
+        }
+    }
     @IBOutlet weak var hwCheckImage: UIButton!
     var diaryId: Int = 0
     var classDate: String = ""
     var homeworkCheck: Int = 0 //1이면 동그라미, 3이면 엑스
-    let hwImage: [String] = ["", "hwUnCheck", "", "hwUnCheck"]
+    let hwImage: [String] = ["", "hwCheck", "", "hwUnCheck"]
     override func awakeFromNib() {
         super.awakeFromNib()
-        setJournalView()
+        tuteeImageView.layer.cornerRadius  = tuteeImageView.frame.width / 2
     }
 
-    func setJournalView(){
-        journalView.layer.cornerRadius = 13
-       
-    }
+
     
-    func setNoteCell(_ color: String, _ title: String, _ times: Int, _ hour: Int, _ lesson: String, _ homework: String, _ hwCheck: Int){
+    func setNoteCell(_ color: String, _ profileUrl: String, _ title: String, _ times: Int, _ hour: Int, _ lesson: String, _ homework: String, _ hwCheck: Int){
         
         classColorImage.image = UIImage(named: color)
         classTitle.text = title
-        lessonLabel.text = lesson
-        homeworkLabel.text = homework
+        if lesson == defaultLesson {
+            lessonLabel.text = defaultLesson
+            lessonLabel.textColor = UIColor.gray
+        } else {
+            lessonLabel.text = lesson
+            lessonLabel.textColor = UIColor.black
+        }
+        
+        if homework == defaultHW {
+            homeworkLabel.text = defaultHW
+            homeworkLabel.textColor = UIColor.gray
+        } else {
+            homeworkLabel.text = homework
+            homeworkLabel.textColor = UIColor.black
+        }
+        
         classCount.text = "\(times)" + "회차" + " / " + "\(hour)" + "시간"
         homeworkCheck = hwCheck
-        //hwCheckImage.imageView?.image = UIImage(named: hwImage[homeworkCheck])
+        hwCheckImage.imageView?.image = UIImage(named: hwImage[homeworkCheck])
+        
+        let url = URL(string: profileUrl)
+        self.tuteeImageView.kf.setImage(with: url)
+        
         
     }
     
