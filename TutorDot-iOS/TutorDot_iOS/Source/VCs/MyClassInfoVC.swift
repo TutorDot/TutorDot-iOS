@@ -144,25 +144,34 @@ class MyClassInfoVC: UIViewController {
 
     
     @IBAction func editButtonDidTap(_ sender: Any) {
-        guard let editVC = self.storyboard?.instantiateViewController(identifier: "MypageClassEditVC") as? MypageClassEditVC else {return}
+        let alert: UIAlertController
         
+        alert = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         
-            editVC.modalPresentationStyle = .currentContext
-            editVC.modalTransitionStyle = .crossDissolve
-
+        var cancelAction: UIAlertAction
+        var editAll: UIAlertAction
         
-            editVC.titleEdit = classTitle.text
-//            editVC.color = emailTextField.text
-            editVC.price = "80 만원"
-            editVC.hours = "16 시간"
-            editVC.bank = "카카오뱅크"
-            editVC.account = "83191012665607"
-            editVC.place = classPlace.text
-            
+        cancelAction = UIAlertAction(title: "취소", style: UIAlertAction.Style.cancel, handler: { (action: UIAlertAction) in
+        })
+        editAll = UIAlertAction(title: "편집하기", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction) in
+            self.editClicked()
+        })
         
-            self.present(editVC, animated: true, completion: nil)
+        alert.addAction(cancelAction)
+        alert.addAction(editAll)
+        self.present(alert,animated: true){
+        
+        }
+        
     }
     
+    func editClicked() {
+        
+        guard let editVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageClassEditVC") as? MypageClassEditVC else { return }
+        
+        self.navigationController?.pushViewController(editVC, animated: true)
+        
+    }
     
     @IBAction func inviteButtonDidTap(_ sender: Any) {
         //튜터가 튜티를 초대 TuteeInviteCodeVC

@@ -1270,7 +1270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfY-jo-G51" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-99" y="358"/>
+            <point key="canvasLocation" x="1016" y="366"/>
         </scene>
         <!--Developer InfoVC-->
         <scene sceneID="slZ-v6-cbf">
@@ -2132,13 +2132,13 @@ jjungminyy@gmail.com</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="수업 설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziK-Bz-B5h">
-                                        <rect key="frame" x="152.5" y="60" width="70" height="21"/>
+                                        <rect key="frame" x="152.5" y="59" width="70" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="0he-lb-7Yv"/>
                                             <constraint firstAttribute="width" constant="70" id="g5w-M7-vCE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvy-rU-E8u">
@@ -2147,7 +2147,7 @@ jjungminyy@gmail.com</string>
                                             <constraint firstAttribute="width" constant="53" id="X8N-Vv-G0L"/>
                                             <constraint firstAttribute="height" constant="50" id="ybg-9q-fWZ"/>
                                         </constraints>
-                                        <state key="normal" image="437"/>
+                                        <state key="normal" image="scheduleModificationBtnCancel"/>
                                         <connections>
                                             <action selector="backButtonDidTap:" destination="Yym-fx-kJj" eventType="touchUpInside" id="pfu-sy-vgP"/>
                                         </connections>
@@ -2158,16 +2158,16 @@ jjungminyy@gmail.com</string>
                                             <constraint firstAttribute="width" constant="55" id="Qak-DO-XSV"/>
                                             <constraint firstAttribute="height" constant="50" id="VuY-n1-X7W"/>
                                         </constraints>
-                                        <state key="normal" image="436"/>
+                                        <state key="normal" image="scheduleModificationBtnSave"/>
                                         <connections>
                                             <action selector="commitButtonDidTap:" destination="Yym-fx-kJj" eventType="touchUpInside" id="eMP-nE-yBr"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="Color"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ziK-Bz-B5h" firstAttribute="centerX" secondItem="cls-K4-P4F" secondAttribute="centerX" id="8pb-Zt-TEH"/>
-                                    <constraint firstAttribute="bottom" secondItem="ziK-Bz-B5h" secondAttribute="bottom" constant="13" id="J4D-JG-qOB"/>
+                                    <constraint firstAttribute="bottom" secondItem="ziK-Bz-B5h" secondAttribute="bottom" constant="14" id="J4D-JG-qOB"/>
                                     <constraint firstAttribute="trailing" secondItem="V9o-dq-lls" secondAttribute="trailing" id="PVz-9q-aGZ"/>
                                     <constraint firstItem="Vvy-rU-E8u" firstAttribute="leading" secondItem="cls-K4-P4F" secondAttribute="leading" id="Rc0-be-zG1"/>
                                     <constraint firstAttribute="bottom" secondItem="V9o-dq-lls" secondAttribute="bottom" id="Yue-mK-fVw"/>
@@ -2563,7 +2563,7 @@ jjungminyy@gmail.com</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4z-Zw-MXD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3457.5" y="982"/>
+            <point key="canvasLocation" x="-220" y="400"/>
         </scene>
         <!--My Class AddVC-->
         <scene sceneID="NFi-eo-X8E">
@@ -3641,7 +3641,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WSt-RK-Oc2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="535" y="358"/>
+            <point key="canvasLocation" x="1651" y="366"/>
         </scene>
         <!--Invite CodeVC-->
         <scene sceneID="elC-RR-UdE">
@@ -3781,7 +3781,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxX-cd-2fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1174" y="358"/>
+            <point key="canvasLocation" x="2290" y="366"/>
         </scene>
         <!--Class DisconnectionVC-->
         <scene sceneID="6aN-da-eyJ">
@@ -4007,7 +4007,7 @@ TutorDot 서비스를 이용하세요!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HDZ-TM-RGa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1829" y="358"/>
+            <point key="canvasLocation" x="2945" y="366"/>
         </scene>
         <!--Mypage Navigation Controller-->
         <scene sceneID="W9f-lJ-yaz">

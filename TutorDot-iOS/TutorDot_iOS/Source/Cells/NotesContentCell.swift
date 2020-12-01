@@ -18,16 +18,11 @@ class NotesContentCell: UICollectionViewCell {
     @IBOutlet weak var classColor: UIImageView!
     @IBOutlet weak var classTitle: UILabel!
     @IBOutlet weak var classTimes: UILabel!
-    @IBOutlet weak var classLesson1: UILabel!
-    @IBOutlet weak var classLesson2: UILabel!
-    @IBOutlet weak var classHW1: UILabel!
-    @IBOutlet weak var classHW2: UILabel!
-    @IBOutlet weak var classHW3: UILabel!
+    @IBOutlet weak var classLesson: UILabel!
+    @IBOutlet weak var classHW: UILabel!
     @IBOutlet weak var tutorProfile: UIImageView!
     @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var hwCheckButton1: UIButton!
-    @IBOutlet weak var hwCheckButton2: UIButton!
-    @IBOutlet weak var hwCheckButton3: UIButton!
+    @IBOutlet weak var hwCheckButton: UIButton!
     
     // MARK: variables and constant
     var lesson: [String] = []
@@ -37,11 +32,12 @@ class NotesContentCell: UICollectionViewCell {
     let unpick: String = "classlogImgUnpick"
     
     class func cellForCollectionView(collectionView: UICollectionView, indexPath: IndexPath) -> NotesContentCell {
-        let noteContentCollectionViewCellIdentifier = "NotesContentCell"
+        let noteContentCellIdentifier = "NotesContentCell"
         
-        collectionView.register(UINib(nibName: "NotesContentCell", bundle: Bundle.main), forCellWithReuseIdentifier: noteContentCollectionViewCellIdentifier)
+        collectionView.register(UINib(nibName: "NotesContentCell", bundle: Bundle.main), forCellWithReuseIdentifier: noteContentCellIdentifier)
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noteContentCollectionViewCellIdentifier, for: indexPath) as! NotesContentCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: noteContentCellIdentifier, for: indexPath) as! NotesContentCell
+    
         return cell
     }
 
@@ -63,10 +59,10 @@ class NotesContentCell: UICollectionViewCell {
     
     @IBAction func homeworkCheckButtonDidTap(_ sender: Any) {
         os_log("select button", log: .note)
-        if hwCheckButton1.currentImage == UIImage(named: pick) {
-            hwCheckButton1.setImage(UIImage(named: unpick), for: .normal)
+        if hwCheckButton.currentImage == UIImage(named: pick) {
+            hwCheckButton.setImage(UIImage(named: unpick), for: .normal)
         } else {
-            hwCheckButton1.setImage(UIImage(named: pick), for: .normal)
+            hwCheckButton.setImage(UIImage(named: pick), for: .normal)
         }
     }
     

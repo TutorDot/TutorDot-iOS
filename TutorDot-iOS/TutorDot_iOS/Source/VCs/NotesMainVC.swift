@@ -54,7 +54,8 @@ class NotesMainVC: UIViewController, selectClassProtocol {
         monthLabel.text = month! + "월 수업일지"
         
         //Dummy Data
-        //notelist = ["hihi","hoho"]
+        notelist = ["hihi","hoho"]
+        print("notelist - ", notelist.count)
     }
     
     func setLayout(){
@@ -71,7 +72,6 @@ class NotesMainVC: UIViewController, selectClassProtocol {
             infoStackView.isHidden = true
             infoStackViewHeight.constant = 0
         }
-        
         
     }
     // 프로그래스 바 전체일 때만 보이도록 셋팅
@@ -111,11 +111,14 @@ class NotesMainVC: UIViewController, selectClassProtocol {
         self.noteCollectionView.collectionViewLayout = flowLayout
     }
     
+    @IBAction func test(_ sender: Any) {
+        print("tap!!!!")
+    }
     
     @IBAction func selectClassButtonDidtap(_ sender: Any) {
         guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
         self.navigationController?.pushViewController(nextVC, animated: true)
-        
+        print("tap???")
         nextVC.delegate = self
     }
     
@@ -161,7 +164,10 @@ extension NotesMainVC: UICollectionViewDelegate, UICollectionViewDataSource, UIC
 //
 //    }
 
-   
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            
+        return CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+    }
    
     
 }
