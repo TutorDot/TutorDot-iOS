@@ -24,12 +24,18 @@ class JournalDataCell: UITableViewCell {
     @IBOutlet weak var tuteeImageView: UIImageView!
     @IBOutlet weak var journalView: UIView! {
         didSet {
+            let radius: CGFloat = journalView.frame.width / 2.1
+            let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.1 * radius, height: journalView.frame.height), cornerRadius: 13)
+            
             journalView.layer.cornerRadius = 13
-            journalView.layer.shadowRadius = 13
+            
             journalView.layer.masksToBounds = false
-            journalView.layer.shadowColor = UIColor.gray.cgColor
-            journalView.layer.shadowOffset = CGSize(width: 2, height: 2)
-            journalView.layer.shadowOpacity = 0.2
+            journalView.layer.shadowColor = UIColor.lightGray.cgColor
+            journalView.layer.shadowOffset = CGSize(width: 4, height: 4)
+            journalView.layer.shadowRadius = 3
+            journalView.layer.shadowOpacity = 0.3
+            journalView.layer.shadowPath = shadowPath.cgPath
+            
            
         }
     }

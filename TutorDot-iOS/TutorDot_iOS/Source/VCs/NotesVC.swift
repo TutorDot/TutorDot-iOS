@@ -11,10 +11,6 @@ import DropDown
 
 class NotesVC: UIViewController {
     
-    
-
-
-    
 
     @IBOutlet weak var ClassProgressView: UIView!
     @IBOutlet weak var monthJournalView: UIView!
@@ -35,6 +31,7 @@ class NotesVC: UIViewController {
     @IBOutlet weak var monthLable: UILabel!
     @IBOutlet weak var NoteTitleLabel: UILabel!
     
+    let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     var month: Int = 0
     var monthStr: String = ""
     let dateFormatter = DateFormatter()
@@ -43,6 +40,7 @@ class NotesVC: UIViewController {
     var isFirstRunning: Bool = false
     private var NotesInfos: [NotesContent] = []
     let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
+    var userName: String = ""
     
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
@@ -124,7 +122,33 @@ class NotesVC: UIViewController {
     }
    
    
-  
+    func gestureRecognizer() {
+        swipeGestureRecognizer.direction = .right
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.tableView.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(NotesVC.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.tableView.addGestureRecognizer(swipeRight)
+        
+    }
+    
+    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
+                nextButtonDidTap(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+                
+            } else if swipeGesture.direction == UISwipeGestureRecognizer.Direction.right{
+                previousButtonDidTap(self)
+                UIView.animate(withDuration: 0.7) {
+                }
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,6 +159,8 @@ class NotesVC: UIViewController {
         setNotesInfos()
         setProgress()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
+        
+        gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
         viewHeaderHeight.constant = self.view.frame.height * 94/812
