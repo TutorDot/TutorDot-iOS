@@ -37,6 +37,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s8o-ql-lEB">
                                         <rect key="frame" x="347" y="46" width="43" height="48"/>
                                         <state key="normal" image="calenderBtnNotice"/>
+                                        <connections>
+                                            <action selector="alertButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="cKW-Q9-tYu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -324,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61L-Eb-pnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4917.6000000000004" y="690.88669950738915"/>
+            <point key="canvasLocation" x="4800" y="781"/>
         </scene>
         <!--Notes ModifyVC-->
         <scene sceneID="0Ue-48-3PF">

@@ -42,7 +42,7 @@ class NotesVC: UIViewController {
     var month: Int = 0
     var monthStr: String = ""
     let dateFomatter = DateFormatter()
-    var isFirstRunning: Bool = true
+    var isFirstRunning: Bool = false
     private var NotesInfos: [NotesContent] = []
     
     func classHeaderHidden(_ ishide: Bool){
@@ -79,11 +79,21 @@ class NotesVC: UIViewController {
         totalClassLabel.text = totalClass
     }
     
+    // parameter값으로 들어온 숫자로 월 셋팅
     func setMonthLabel(_ monthInput: Int){
-        var monthStr: String
-        monthStr = String(monthInput)
         month = monthInput
-        monthLable.text = monthStr + "월 수업 일지"
+        monthLable.text = String(monthInput) + "월 수업 일지"
+    }
+    
+    func MonthInit(){
+        
+        dateFomatter.dateFormat = "MM"
+        
+        //현재 월 String 값으로 가져오기
+        monthStr = dateFomatter.string(from: Date())
+        monthLable.text = monthStr + "월 수업일지"
+        month = Int(monthStr) ?? 0
+        
     }
     
 
@@ -97,6 +107,9 @@ class NotesVC: UIViewController {
             month = 12
         }
         setMonthLabel(month)
+        
+        NotesInfos.removeAll()
+        setNotesInfos()
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
@@ -110,12 +123,7 @@ class NotesVC: UIViewController {
     }
    
    
-    func MonthInit(){
-        dateFomatter.dateFormat = "MM"
-        print("월 정보: ", dateFomatter.hash)
-        monthStr = dateFomatter.string(from: Date())
-        monthLable.text = monthStr + "월 수업일지"
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,7 +147,7 @@ class NotesVC: UIViewController {
         
         self.tableView.reloadData()
         
-        isFirstRunning = false
+        isFirstRunning = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,8 +168,12 @@ class NotesVC: UIViewController {
                 guard let data = resultData as? [NotesContent] else { return print(Error.self) }
                 for index in 0..<data.count {
                     let item = NotesContent(diaryId: data[index].diaryId, profileUrl: data[index].profileUrl, lectureName: data[index].lectureName, classDate: data[index].classDate, color: data[index].color, times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classProgress: data[index].classProgress, homework: data[index].homework, hwPerformance: data[index].hwPerformance)
-           
-                    self.NotesInfos.append(item)
+                    
+                    let cellMonthStr = item.classDate.substring(with: 5..<7)
+                    
+                    if self.month == Int(cellMonthStr) {
+                        self.NotesInfos.append(item)
+                    }
                 }
                 self.tableView.reloadData()
             case .pathErr :
@@ -176,6 +188,15 @@ class NotesVC: UIViewController {
             }
         }
     }
+    
+    
+    @IBAction func alertButtonDidTap(_ sender: Any) {
+        let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
+        let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertServiceVC")
+        uvc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(uvc, animated: true)
+    }
+    
     
 }
 
@@ -192,9 +213,12 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
+   
+     
+            notesCell.setNoteCell(NotesInfos[indexPath.row].color,
+                                  NotesInfos[indexPath.row].profileUrl, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
+       
         
-        notesCell.setNoteCell(NotesInfos[indexPath.row].color,
-                              NotesInfos[indexPath.row].profileUrl, NotesInfos[indexPath.row].lectureName, NotesInfos[indexPath.row].times, NotesInfos[indexPath.row].hour, NotesInfos[indexPath.row].classProgress, NotesInfos[indexPath.row].homework, NotesInfos[indexPath.row].hwPerformance)
         
         return notesCell
     }
