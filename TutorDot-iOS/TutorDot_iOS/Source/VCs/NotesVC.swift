@@ -227,6 +227,7 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         nextVC.totalHours = self.NotesInfos[indexPath.row].depositCycle
         nextVC.lectureName = self.NotesInfos[indexPath.row].lectureName
         nextVC.date = self.NotesInfos[indexPath.row].classDate
+        nextVC.hwCheckValue = self.NotesInfos[indexPath.row].hwPerformance
         
         nextVC.modalPresentationStyle = .fullScreen
         self.present(nextVC, animated: true, completion: nil)

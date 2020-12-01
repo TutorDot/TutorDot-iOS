@@ -58,4 +58,50 @@ struct NoteService {
             return .requestErr(decodedData.message)
         }
     }
+    
+    // Mark - PUT : 특정 수업일지 수정하기
+    private func makeParameter(_ classProgress: String, _ homework: String, _ hwPerformance: Int) -> Parameters{
+        return ["classProgress": classProgress, "homework": homework, "hwPerformance": hwPerformance]
+    }
+    
+    func editClassNote(classProgress: String, homework: String, hwPerformance: Int, diaryId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        // 토큰 가져오기
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+        
+        let dataRequest = Alamofire.request(APIConstants.diaryHwDidURL + "/" + "\(diaryId)", method: .put, parameters: makeParameter(classProgress, homework, hwPerformance), headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judge(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+        case 200, 204:
+            return isNoteData(by: data)
+        case 400, 401: return .pathErr
+        case 500: return .serverErr
+        default: return .networkFail
+        }
+    }
+    
+    private func isNoteData(by data:Data) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(SignUpData.self, from: data)
+            else {return .pathErr}
+        
+        if decodedData.success { return .success(data) }
+        else {
+            return .requestErr(decodedData.message)}
+        }
+    
+    
+    
 }

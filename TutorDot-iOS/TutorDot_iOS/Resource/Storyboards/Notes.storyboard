@@ -355,6 +355,9 @@
                                             <constraint firstAttribute="height" constant="50" id="qJG-6X-TmA"/>
                                         </constraints>
                                         <state key="normal" image="scheduleModificationBtnSave"/>
+                                        <connections>
+                                            <action selector="CompleteButtonDidTap:" destination="AAV-rs-kee" eventType="touchUpInside" id="27r-a8-vcQ"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일지 수정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61f-Ia-8H6">
                                         <rect key="frame" x="155" y="62" width="80" height="18"/>
@@ -417,16 +420,16 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="진도를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEx-sB-Igy">
-                                        <rect key="frame" x="19" y="172" width="117" height="17"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="진도를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEx-sB-Igy">
+                                        <rect key="frame" x="19" y="172" width="301" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="tAW-1w-OAM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="숙제를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Seh-3I-dnl">
-                                        <rect key="frame" x="19" y="254" width="117" height="17"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="숙제를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Seh-3I-dnl">
+                                        <rect key="frame" x="41" y="254" width="279" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="lRc-Gh-XhF"/>
                                         </constraints>
@@ -455,10 +458,19 @@
                                         <rect key="frame" x="308" y="240" width="48" height="48"/>
                                         <state key="normal" image="scheduleModificationBtnCancel_op"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-ui-x1R">
+                                        <rect key="frame" x="19" y="254" width="17" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="f6a-ui-x1R" secondAttribute="height" multiplier="1:1" id="Xqb-ot-jWm"/>
+                                            <constraint firstAttribute="width" constant="17" id="p03-GF-qGX"/>
+                                        </constraints>
+                                        <state key="normal" image="hwUnCheck"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="jKP-KQ-42c" firstAttribute="top" secondItem="znW-aj-d8a" secondAttribute="bottom" constant="32" id="2Od-E6-naZ"/>
+                                    <constraint firstItem="f6a-ui-x1R" firstAttribute="top" secondItem="RQP-CS-f8O" secondAttribute="bottom" constant="8" id="47V-Ud-RH7"/>
                                     <constraint firstItem="3cN-Ti-63a" firstAttribute="top" secondItem="Seh-3I-dnl" secondAttribute="bottom" constant="7" id="48d-Sv-e8y"/>
                                     <constraint firstAttribute="bottom" secondItem="XfY-Mh-6ST" secondAttribute="bottom" constant="18" id="6J2-4r-4lG"/>
                                     <constraint firstItem="Seh-3I-dnl" firstAttribute="top" secondItem="RQP-CS-f8O" secondAttribute="bottom" constant="8" id="82c-ue-5kL"/>
@@ -467,6 +479,7 @@
                                     <constraint firstAttribute="height" constant="306" id="EeW-z5-qM2"/>
                                     <constraint firstAttribute="trailing" secondItem="3cN-Ti-63a" secondAttribute="trailing" constant="20" id="I2O-8w-epb"/>
                                     <constraint firstItem="uCX-RH-I1r" firstAttribute="top" secondItem="7Eu-Pz-dlH" secondAttribute="top" constant="21" id="MhI-0u-rl2"/>
+                                    <constraint firstItem="f6a-ui-x1R" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="Ow0-eg-zLs"/>
                                     <constraint firstAttribute="trailing" secondItem="aAr-jr-gSp" secondAttribute="trailing" constant="2" id="Oxe-bK-b8U"/>
                                     <constraint firstItem="aAr-jr-gSp" firstAttribute="top" secondItem="7Eu-Pz-dlH" secondAttribute="top" constant="156" id="Vn3-Ll-R1h"/>
                                     <constraint firstItem="bJ4-lf-vDF" firstAttribute="top" secondItem="BEx-sB-Igy" secondAttribute="bottom" constant="7" id="aEe-UL-EbA"/>
@@ -478,13 +491,13 @@
                                     <constraint firstItem="3cN-Ti-63a" firstAttribute="top" secondItem="7Eu-Pz-dlH" secondAttribute="bottom" constant="-28" id="fBp-AU-4y6"/>
                                     <constraint firstItem="BEx-sB-Igy" firstAttribute="top" secondItem="jKP-KQ-42c" secondAttribute="bottom" constant="8" id="hTy-HW-2Ag"/>
                                     <constraint firstItem="cGG-K4-CKw" firstAttribute="top" secondItem="7Eu-Pz-dlH" secondAttribute="top" constant="24" id="iPM-7c-b6S"/>
-                                    <constraint firstItem="Seh-3I-dnl" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="ilV-vd-oOh"/>
                                     <constraint firstItem="hDU-Mx-4u2" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="kdn-b0-I06"/>
                                     <constraint firstItem="znW-aj-d8a" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="krW-PX-YdD"/>
                                     <constraint firstItem="BEx-sB-Igy" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="mtW-mA-Lkv"/>
                                     <constraint firstAttribute="trailing" secondItem="bJ4-lf-vDF" secondAttribute="trailing" constant="20" id="qEf-Ph-TXQ"/>
                                     <constraint firstItem="RQP-CS-f8O" firstAttribute="top" secondItem="bJ4-lf-vDF" secondAttribute="bottom" constant="32" id="r9A-23-7sk"/>
                                     <constraint firstItem="jKP-KQ-42c" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="19" id="ryh-qP-hSt"/>
+                                    <constraint firstItem="Seh-3I-dnl" firstAttribute="leading" secondItem="f6a-ui-x1R" secondAttribute="trailing" constant="5" id="tBP-n2-GkT"/>
                                     <constraint firstItem="bJ4-lf-vDF" firstAttribute="leading" secondItem="7Eu-Pz-dlH" secondAttribute="leading" constant="20" id="uab-bt-Vas"/>
                                 </constraints>
                             </view>
@@ -516,12 +529,13 @@
                         <outlet property="dateLabel" destination="SJX-pJ-W4Y" id="RcH-iG-fmB"/>
                         <outlet property="headerHeightConstraints" destination="JnM-BJ-X5M" id="dzQ-ov-Fpi"/>
                         <outlet property="homeworkTextField" destination="Seh-3I-dnl" id="xLX-AL-YXp"/>
+                        <outlet property="hwCheckButton" destination="f6a-ui-x1R" id="WPU-Ww-vQZ"/>
                         <outlet property="lessonTextField" destination="BEx-sB-Igy" id="sJx-wN-zpc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NDg-gb-JIT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5538.3999999999996" y="690.88669950738915"/>
+            <point key="canvasLocation" x="5536.9230769230771" y="690.28436018957348"/>
         </scene>
         <!--Notes MainVC-->
         <scene sceneID="AjC-SD-Lac">
@@ -850,6 +864,7 @@
         <image name="classlogBtnNextMonthUnpick" width="54" height="37"/>
         <image name="classlogBtnNotice" width="43" height="48"/>
         <image name="hwCheck" width="13" height="13"/>
+        <image name="hwUnCheck" width="13" height="13"/>
         <image name="scheduleModificationBtnCancel" width="48" height="48"/>
         <image name="scheduleModificationBtnCancel_op" width="48" height="48"/>
         <image name="scheduleModificationBtnSave" width="48" height="48"/>
