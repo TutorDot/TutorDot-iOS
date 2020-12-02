@@ -9,12 +9,11 @@
 import UIKit
 import os
 import Kingfisher
-<<<<<<< HEAD
+
 import SafariServices
 
-=======
 import Lottie
->>>>>>> note
+
 
 class MyPageVC: UIViewController {
 
