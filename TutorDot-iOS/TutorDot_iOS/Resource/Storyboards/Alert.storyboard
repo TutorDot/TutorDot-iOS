@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WaC-xl-qdQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WaC-xl-qdQ">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -114,8 +114,8 @@
                                         <color key="tintColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" image="calenderBtnFillter"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="세화 튜터의 전체 알람" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki7-0V-YrT">
-                                        <rect key="frame" x="114.66666666666669" y="62" width="146" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki7-0V-YrT">
+                                        <rect key="frame" x="155.66666666666666" y="62" width="64" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -140,22 +140,22 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alarmBlankImgService" translatesAutoresizingMaskIntoConstraints="NO" id="kvX-lm-dcc">
-                                <rect key="frame" x="67" y="315" width="241" height="120"/>
+                                <rect key="frame" x="67" y="294" width="241" height="120"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 준비중입니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cn2-1b-poz">
-                                <rect key="frame" x="127" y="441" width="121" height="18"/>
+                                <rect key="frame" x="127" y="420" width="121" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="더 나은 서비스로 찾아올게요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m6l-tq-Ccg">
-                                <rect key="frame" x="109" y="469" width="157" height="17"/>
+                                <rect key="frame" x="109" y="448" width="157" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="조금만 기다려주세요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duD-UK-tub">
-                                <rect key="frame" x="129" y="491" width="117" height="17"/>
+                                <rect key="frame" x="129" y="470" width="117" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -167,7 +167,7 @@
                             <constraint firstItem="4It-hS-FKH" firstAttribute="leading" secondItem="qfK-SU-b1h" secondAttribute="leading" id="19d-sA-46v"/>
                             <constraint firstAttribute="trailing" secondItem="4It-hS-FKH" secondAttribute="trailing" id="BQi-VA-eAZ"/>
                             <constraint firstItem="cn2-1b-poz" firstAttribute="centerX" secondItem="kvX-lm-dcc" secondAttribute="centerX" id="Cwy-On-Cbq"/>
-                            <constraint firstItem="kvX-lm-dcc" firstAttribute="top" secondItem="4It-hS-FKH" secondAttribute="bottom" constant="221" id="G91-vW-Uag"/>
+                            <constraint firstItem="kvX-lm-dcc" firstAttribute="top" secondItem="4It-hS-FKH" secondAttribute="bottom" constant="200" id="G91-vW-Uag"/>
                             <constraint firstItem="duD-UK-tub" firstAttribute="top" secondItem="m6l-tq-Ccg" secondAttribute="bottom" constant="5" id="Ttv-KX-jxc"/>
                             <constraint firstItem="m6l-tq-Ccg" firstAttribute="centerX" secondItem="cn2-1b-poz" secondAttribute="centerX" id="Z66-GV-uXx"/>
                             <constraint firstItem="kvX-lm-dcc" firstAttribute="leading" secondItem="qfK-SU-b1h" secondAttribute="leading" constant="67" id="dbx-OC-loR"/>

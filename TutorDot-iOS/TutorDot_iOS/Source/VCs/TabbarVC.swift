@@ -25,7 +25,6 @@ class TabbarVC: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         var tabFrame = self.tabBar.frame
-        //        // - 40 is editable , the default value is 49 px, below lowers the tabbar and above increases the tab bar size
         if self.view.frame.size.height > 800 {
             tabFrame.size.height = 80
             tabFrame.origin.y = self.view.frame.size.height - 80
@@ -84,7 +83,6 @@ class TabbarVC: UITabBarController {
         
         fourthTab.tabBarItem.image = UIImage(named: "myPageUnPick")
         fourthTab.tabBarItem.selectedImage = UIImage(named: "myIcnPick")?.withRenderingMode(.alwaysOriginal)
-        
         
         if self.view.frame.size.height > 800 {
             firstTab.tabBarItem.imageInsets = UIEdgeInsets(top: 15, left: 0, bottom: -15, right: 0);

@@ -9,6 +9,8 @@
 import UIKit
 import os
 import Kingfisher
+import SafariServices
+
 
 class MyPageVC: UIViewController {
 
@@ -62,6 +64,7 @@ class MyPageVC: UIViewController {
         } else {
             dummyView.isHidden = true
         }
+        var appdelegate = UIApplication.shared.delegate as? AppDelegate
         
         
     }
@@ -388,9 +391,15 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
         case 1:
              if indexPath.row == 1 { //개발자정보 클릭 시
 
-                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
-                nextVC.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(nextVC, animated: true)
+//                guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "DeveloperInfoVC") as? DeveloperInfoVC else {return}
+//                nextVC.hidesBottomBarWhenPushed = true
+//                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+                guard let url = URL(string: "https://sites.google.com/view/tutordot/%ED%8A%9C%ED%84%B0%EB%8B%B7?authuser=0") else { return }
+
+                    let safariViewController = SFSafariViewController(url: url)
+
+                    present(safariViewController, animated: true, completion: nil)
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시

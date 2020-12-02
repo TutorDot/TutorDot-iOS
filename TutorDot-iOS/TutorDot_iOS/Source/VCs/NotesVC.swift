@@ -52,6 +52,15 @@ class NotesVC: UIViewController, selectClassProtocol {
     var barCurrentTimes: Int = 0
     var barCurrentHour: Int = 0
     
+    // 드랍다운
+    var dropDown: DropDown?
+    var classList: [CalendarData] = [] // 수업 더미 데이터
+    var classDateList: [CalendarData] = [] // 날짜별 일정 리턴 데이터
+    var classList2: [CalendarData] = [] // 서버에서 받아오는 날짜 데이터
+    var dropDownList: [String] = [] // 서버에서 받아오는 수업정보 데이터: 드랍다운 리스트
+    var classListToggle: [CalendarData] = [] // 토글 버튼 누르면 새로 수업 정보 데이터 저장되는 리스트
+    var classList2Copy: [CalendarData] = [] // 서버에서 받아오는 날짜 데이터 백업
+    
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
         if ishide { //true(안보일때)
@@ -345,27 +354,29 @@ class NotesVC: UIViewController, selectClassProtocol {
         classHeaderHidden(true) // 프로그래스바 숨기기
         self.progressView.setProgress(0.0, animated: false)
         
+        
+        
         // Mark - 수업리스트 가져오기 서버통신
         NoteService.Shared.getClassList() { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [ClassList] else { return print(Error.self) }
-                
+
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
                 nextVC.classlist.append("전체")
                 nextVC.lectureId.append(0)
                 for index in 0..<data.count {
                     let item = ClassList(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color)
-                    
+
                     nextVC.classlist.append(item.lectureName)
                     nextVC.lectureId.append(item.lectureId)
                 }
-                
+
                 nextVC.modalPresentationStyle = .overFullScreen
                 self.present(nextVC, animated: false, completion: nil)
 
                 nextVC.delegate = self
-                
+
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)
