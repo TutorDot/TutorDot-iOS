@@ -165,19 +165,43 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         let inputID = "dummy"
         let inputPWD = "dummy"
         
-        let dataSave = UserDefaults.standard //
-        dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
-        dataSave.setValue(inputPWD, forKey: "save_pw") // save_pw 키값에 pw값 저장
-        UserDefaults.standard.synchronize() // setValue 실행
+        LoginService.shared.login(email: inputID, password: inputPWD) { networkResult in switch networkResult {
+        case .success(let token):
+            // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
+            let dataSave = UserDefaults.standard // UserDefaults.standard 정의
+            dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
+            dataSave.setValue(inputPWD, forKey: "save_pw") // save_pw 키값에 pw값 저장
+            UserDefaults.standard.synchronize() // setValue 실행
+            
+            guard let token = token as? String else { return }
+            UserDefaults.standard.set(token, forKey: "token")
+            print("myToken:",token)
+            print("\(UserDefaults.standard.value(forKey: "save_userNm")!)")
+            print("\(UserDefaults.standard.value(forKey: "save_pw")!)")
+            // 로그인 성공시 뷰 전환
+            let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
+            guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
+                    TabbarVC else { return }
+            mainView.modalPresentationStyle = .fullScreen
+            self.present(mainView, animated: true, completion: nil)
+            
+        case .requestErr(let message):
+            let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("requestErr")
+        case .pathErr:
+            let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+            alertViewController.addAction(action)
+            self.present(alertViewController, animated: true, completion: nil)
+            print("pathErr")
+        case .serverErr: print("serverErr")
+        case .networkFail: print("networkFail") }
+        }
         
-        let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
-        UserDefaults.standard.set(token, forKey: "token")
         
-        let tabbarStoryboard = UIStoryboard.init(name: "MainTab", bundle: nil)
-        guard let mainView = tabbarStoryboard.instantiateViewController(identifier:"TabbarVC") as?
-                TabbarVC else { return }
-        mainView.modalPresentationStyle = .fullScreen
-        self.present(mainView, animated: true, completion: nil)
         
     }
     
