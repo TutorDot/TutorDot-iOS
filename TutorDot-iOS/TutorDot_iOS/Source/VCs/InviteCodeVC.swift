@@ -11,6 +11,8 @@ import os
 
 class InviteCodeVC: UIViewController {
 
+    let defaultTopConstant: CGFloat = 122
+    @IBOutlet weak var imageTopConstraints: NSLayoutConstraint!
     @IBOutlet weak var inviteCodeView: UIView!
     @IBOutlet weak var connectButton: UIButton!
     @IBOutlet weak var inputCode: UITextField!
@@ -23,8 +25,21 @@ class InviteCodeVC: UIViewController {
         inviteCodeView.layer.cornerRadius = 5
         connectButton.layer.cornerRadius = 8
         inputCode.addTarget(self, action: #selector(InviteCodeVC.textFieldDidChange(_:)), for: .editingChanged)
+        
+        inputCode.addTarget(self, action: #selector(InviteCodeVC.textfieldDidTap(_:)), for: .touchDown)
+        
+    
+    }
+    @objc func textfieldDidTap(_ textField: UITextField) {
+        self.imageTopConstraints.constant = 20
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+       
     }
     
+ 
     @objc func textFieldDidChange(_ textField: UITextField) {
         self.invitationCode = inputCode?.text ?? ""
     }
@@ -39,6 +54,14 @@ class InviteCodeVC: UIViewController {
         }
     }
     
+    // 화면 터치 시, 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        imageTopConstraints.constant = self.defaultTopConstant
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     @IBAction func connectedButtonDidTap(_ sender: Any) {
         MypageService.MypageServiceShared.connectInvitaionCode(code: invitationCode) { networkResult in

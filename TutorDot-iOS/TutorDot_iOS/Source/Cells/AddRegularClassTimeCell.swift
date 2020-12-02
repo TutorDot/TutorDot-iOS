@@ -140,7 +140,7 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
         days = weekdays[pickerView.selectedRow(inComponent: 0)]
         
         //시작 시간을 선택했으면 끝나는 시간도 똑같이 셋팅해주기 (사용자 편의)
-        if row == 1 && startHours[pickerView.selectedRow(inComponent: 1)] != "00" {
+        if component == 1 && startHours[pickerView.selectedRow(inComponent: 1)] != "00" {
             startH = startHours[pickerView.selectedRow(inComponent: 1)]
             pickerView.selectRow(row, inComponent: 3, animated: true)
             endH = endHours[pickerView.selectedRow(inComponent: 3)]

@@ -466,7 +466,6 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        
         let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
         
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
