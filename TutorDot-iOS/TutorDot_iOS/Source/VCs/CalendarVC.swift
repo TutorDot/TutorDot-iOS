@@ -51,7 +51,7 @@ class CalendarVC: UIViewController {
     
     var firstTimeRunning = true
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
-    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
+    let dummyUser = "dummy"
     
     @IBOutlet weak var headerUserNameLabel: UILabel!
     @IBOutlet weak var headerClassNameLabel: UILabel!
@@ -114,11 +114,11 @@ class CalendarVC: UIViewController {
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
         setProfile()
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
-            headerUserNameLabel.text = "둘러보기"
-        } else {
-            headerUserNameLabel.text = ""
-        }
+//        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyUser {
+//            headerUserNameLabel.text = "둘러보기"
+//        } else {
+//            headerUserNameLabel.text = ""
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -357,10 +357,9 @@ class CalendarVC: UIViewController {
     // MARK: -- 서버통신: 일정추가 버튼
     @IBAction func plusButtonSelected(_ sender: Any) {
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
-            let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
             alertViewController.addAction(action)
             alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
                 let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
@@ -665,7 +664,7 @@ extension CalendarVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSo
             }
             
         } else {
-            if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+            if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
                 let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
                 let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                 alertViewController.addAction(action)

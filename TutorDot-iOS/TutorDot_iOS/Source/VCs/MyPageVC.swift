@@ -31,7 +31,7 @@ class MyPageVC: UIViewController {
     var UserRole: String = ""
     
     @IBOutlet weak var dummyImageView: UIImageView!
-    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
+    let dummyUser = "dummy"
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
@@ -57,7 +57,7 @@ class MyPageVC: UIViewController {
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             dummyView.isHidden = false
         } else {
             dummyView.isHidden = true
@@ -218,7 +218,7 @@ class MyPageVC: UIViewController {
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
             let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -394,7 +394,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
-                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
                     let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
                     let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                     let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -417,7 +417,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
                 nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
-                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
                     let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
                     let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                     let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -489,7 +489,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
             let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
