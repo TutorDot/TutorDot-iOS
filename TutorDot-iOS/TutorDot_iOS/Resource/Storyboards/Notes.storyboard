@@ -71,7 +71,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KOi-HZ-6k6">
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KOi-HZ-6k6">
                                                 <rect key="frame" x="16" y="41" width="358" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="13" id="ea9-iF-K80"/>
@@ -93,10 +93,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4UN-hv-E3Y">
-                                                <rect key="frame" x="337.33333333333331" y="41" width="26.666666666666686" height="13.333333333333336"/>
+                                                <rect key="frame" x="336.33333333333331" y="40.333333333333343" width="27.666666666666686" height="14.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                                <color key="textColor" red="0.40784313729999999" green="0.45882352939999999" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
+                                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.21891505281690141" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <size key="shadowOffset" width="1" height="1"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -122,27 +124,27 @@
                                                 <rect key="frame" x="97.000000000000014" y="9.6666666666666572" width="196.33333333333337" height="37"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3b-6F-RxP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="37"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="58" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="37" id="Emx-FA-Y7A"/>
                                                         </constraints>
-                                                        <state key="normal" image="classlogBtnNextMonthPick"/>
+                                                        <state key="normal" image="classlogBtnPickL"/>
                                                         <connections>
                                                             <action selector="previousButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="cDA-DX-aVC"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="7월 수업일지" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C0x-f2-rzd">
-                                                        <rect key="frame" x="70" y="0.0" width="72.333333333333314" height="37"/>
+                                                        <rect key="frame" x="63.999999999999993" y="0.0" width="72.333333333333314" height="37"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kh5-SH-hIR">
-                                                        <rect key="frame" x="148.33333333333334" y="0.0" width="48" height="37"/>
+                                                        <rect key="frame" x="142.33333333333334" y="0.0" width="54" height="37"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="37" id="ErV-q0-C2z"/>
                                                         </constraints>
-                                                        <state key="normal" image="calenderBtnNextMonth"/>
+                                                        <state key="normal" image="classlogBtnPickR"/>
                                                         <connections>
                                                             <action selector="nextButtonDidTap:" destination="Er3-Nc-HXA" eventType="touchUpInside" id="p6c-ID-Pok"/>
                                                         </connections>
@@ -760,6 +762,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yzl-UO-5Kl">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qev-I3-sme">
                                 <rect key="frame" x="0.0" y="44" width="390" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -828,30 +834,22 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Qcy-IF-DAb"/>
-                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Yzl-UO-5Kl" secondAttribute="trailing" id="Emh-om-drD"/>
+                            <constraint firstItem="Yzl-UO-5Kl" firstAttribute="leading" secondItem="CCa-Tw-pvb" secondAttribute="leading" id="j2r-2x-Cbv"/>
+                            <constraint firstItem="Yzl-UO-5Kl" firstAttribute="top" secondItem="CCa-Tw-pvb" secondAttribute="top" id="j5X-kk-Wah"/>
+                            <constraint firstAttribute="bottom" secondItem="Yzl-UO-5Kl" secondAttribute="bottom" id="o4D-vQ-VSy"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="BottomSheetTableView" destination="Qev-I3-sme" id="PlM-7Z-M30"/>
+                        <outlet property="bgView" destination="Yzl-UO-5Kl" id="flQ-ru-QU3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HGs-5g-cnA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5495" y="1247"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="MMW-FJ-tNk">
-            <objects>
-                <viewController id="udS-j5-CLB" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="i6z-tn-HRx">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="4yC-IU-PiO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t7b-Ik-fzy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3191.1999999999998" y="676.84729064039414"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pku-Xj-4je">
@@ -873,13 +871,14 @@
     </scenes>
     <resources>
         <image name="calenderBtnFillter" width="43" height="48"/>
-        <image name="calenderBtnNextMonth" width="48" height="32"/>
         <image name="calenderBtnNotice" width="43" height="48"/>
         <image name="calenderImgYellow" width="15" height="15"/>
         <image name="classlogBtnFillter" width="43" height="48"/>
         <image name="classlogBtnNextMonthPick" width="54" height="37"/>
         <image name="classlogBtnNextMonthUnpick" width="54" height="37"/>
         <image name="classlogBtnNotice" width="43" height="48"/>
+        <image name="classlogBtnPickL" width="54" height="37"/>
+        <image name="classlogBtnPickR" width="54" height="37"/>
         <image name="hwCheck" width="13" height="13"/>
         <image name="hwUnCheck" width="13" height="13"/>
         <image name="scheduleModificationBtnCancel" width="48" height="48"/>

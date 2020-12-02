@@ -149,7 +149,7 @@ class MyPageVC: UIViewController {
     
     func setSettingView(){
         let alert1 = MypageInfo(title: "수업료 알림 (서비스 준비 중)")
-        let alert2 = MypageInfo(title: "수업 시작 전 알림")
+        let alert2 = MypageInfo(title: "수업 시작 전 알림 (서비스 준비 중)")
         let info1 = MypageInfo(title: "버전정보")
         let info2 = MypageInfo(title: "개발자정보")
         let service1 = MypageInfo(title: "비밀번호 변경")
@@ -297,6 +297,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: MypageNoticeSettingCell.identifier, for: indexPath) as? MypageNoticeSettingCell else { return UITableViewCell()}
                 
                 cell.setTitleInfo(Alert[indexPath.row].title)
+                cell.hiddenSwitch()
                 
                 return cell
             }

@@ -93,6 +93,7 @@
 		F444D9FD2564E12A002839F4 /* BlankNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F444D9FB2564E12A002839F4 /* BlankNoteCell.swift */; };
 		F444D9FE2564E12A002839F4 /* BlankNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */; };
 		F44D885D2576A5DC00FD0942 /* classListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885C2576A5DC00FD0942 /* classListData.swift */; };
+		F44D8860257735D800FD0942 /* ProgressBarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885F257735D800FD0942 /* ProgressBarData.swift */; };
 		F45A5EF1257538C60012C447 /* MypageConnectSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */; };
 		F45A5F09257618670012C447 /* NotesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F08257618670012C447 /* NotesData.swift */; };
 		F45A5F0C25761A1A0012C447 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F0B25761A1A0012C447 /* NoteService.swift */; };
@@ -239,6 +240,7 @@
 		F444D9FB2564E12A002839F4 /* BlankNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlankNoteCell.swift; sourceTree = "<group>"; };
 		F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankNoteCell.xib; sourceTree = "<group>"; };
 		F44D885C2576A5DC00FD0942 /* classListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classListData.swift; sourceTree = "<group>"; };
+		F44D885F257735D800FD0942 /* ProgressBarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarData.swift; sourceTree = "<group>"; };
 		F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageConnectSuccessVC.swift; sourceTree = "<group>"; };
 		F45A5F08257618670012C447 /* NotesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesData.swift; sourceTree = "<group>"; };
 		F45A5F0B25761A1A0012C447 /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				0106AA25257501C800EBC28D /* PasswordData.swift */,
 				F45A5F08257618670012C447 /* NotesData.swift */,
 				F44D885C2576A5DC00FD0942 /* classListData.swift */,
+				F44D885F257735D800FD0942 /* ProgressBarData.swift */,
 			);
 			path = NetworkData;
 			sourceTree = "<group>";
@@ -766,6 +769,7 @@
 				019D11362560270900A88195 /* LoginNagivationVC.swift in Sources */,
 				01CAC66124BB525300400654 /* SignUpData.swift in Sources */,
 				01EFFF2224B9E73D00518DE6 /* NetworkResult.swift in Sources */,
+				F44D8860257735D800FD0942 /* ProgressBarData.swift in Sources */,
 				01EFFF1924B9D78100518DE6 /* OnBoardingImageInfo.swift in Sources */,
 				F4D1A0CA24B7C69700B13D65 /* VersionInfoVC.swift in Sources */,
 				01CAC65724BB4D7700400654 /* SignInData.swift in Sources */,
