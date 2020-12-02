@@ -3545,13 +3545,14 @@ TutorDot 서비스를 이용하세요!</string>
                     </view>
                     <connections>
                         <outlet property="connectButton" destination="XMF-f4-UW9" id="fCF-Qt-bpg"/>
+                        <outlet property="imageTopConstraints" destination="wSO-t5-FAk" id="vvo-sn-4Ez"/>
                         <outlet property="inputCode" destination="IUq-0r-kHM" id="zVg-2x-rdb"/>
                         <outlet property="inviteCodeView" destination="a31-CY-UcK" id="VmR-6t-98U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxX-cd-2fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2290" y="366"/>
+            <point key="canvasLocation" x="2289.8550724637685" y="365.625"/>
         </scene>
         <!--Class DisconnectionVC-->
         <scene sceneID="6aN-da-eyJ">

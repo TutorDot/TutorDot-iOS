@@ -217,9 +217,9 @@ class NotesVC: UIViewController, selectClassProtocol {
         if isFirstRunning == false {
             if islistCall == false {
                 classHeaderHidden(true)
-                setNotesInfos()
+                setNotesInfos() // 전체수업일지 조회
             } else {
-                setProgressInfos()
+                setProgressInfos() //특정수업일지 프로그래스
                 getOneNoteInfo() // 특정수업일지 조회
             }
             
@@ -466,7 +466,6 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        
         let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
         
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}

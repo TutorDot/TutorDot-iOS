@@ -13,9 +13,27 @@ class NotesModifyVC: UIViewController {
 
     static let identifier: String = "NotesModifyVC"
     
-    
+    let widthDefault: CGFloat = 375 // 레이아웃 기준 아이폰11Pro
     @IBOutlet weak var headerHeightConstraints: NSLayoutConstraint!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var backView: UIView! {
+        didSet {
+            //그림자 divice별 밸런스 맞추기
+            let weight: CGFloat = 2.02 * (UIScreen.main.bounds.width / widthDefault)
+            let radius: CGFloat = backView.frame.width / 2.1
+            let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: weight * radius, height: backView.frame.height), cornerRadius: 13)
+            
+            backView.layer.cornerRadius = 13
+            
+            backView.layer.masksToBounds = false
+            backView.layer.shadowColor = UIColor.lightGray.cgColor
+            backView.layer.shadowOffset = CGSize(width: 4, height: 4)
+            backView.layer.shadowRadius = 3
+            backView.layer.shadowOpacity = 0.3
+            backView.layer.shadowPath = shadowPath.cgPath
+            
+           
+        }
+    }
     @IBOutlet weak var classColor: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var classTitle: UILabel!
@@ -133,7 +151,7 @@ class NotesModifyVC: UIViewController {
     }
     
     func autoLayoutView(){
-        backView.layer.cornerRadius = 13
+       
         headerHeightConstraints.constant = view.frame.height * 94/812
         
     }

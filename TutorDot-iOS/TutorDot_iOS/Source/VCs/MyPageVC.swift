@@ -15,7 +15,7 @@ class MyPageVC: UIViewController {
     // 프로필 설정
     var profileURL: String = ""
     let introDefault: String = "한 줄 소개"
-    var tuteeProfile: [String] = []
+    let defaultURL: String = "https://sopt-26-usy.s3.ap-northeast-2.amazonaws.com/1606475856445.png"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
@@ -31,7 +31,7 @@ class MyPageVC: UIViewController {
     var UserRole: String = ""
     
     @IBOutlet weak var dummyImageView: UIImageView!
-    let dummyToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEzNCwibmFtZSI6ImR1bW15IiwiaWF0IjoxNjA2NzEyNzgyLCJleHAiOjE2MDc5MjIzODIsImlzcyI6Im91ci1zb3B0In0.ucxbnmOLlvw06fFQyCTamymx6ZxB3wcuiZtRwUmvFkM"
+    let dummyUser = "dummy"
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
@@ -57,7 +57,7 @@ class MyPageVC: UIViewController {
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             dummyView.isHidden = false
         } else {
             dummyView.isHidden = true
@@ -128,7 +128,6 @@ class MyPageVC: UIViewController {
                     for index in 0..<data.count {
                         let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                         
-                        self.tuteeProfile.append(data[index].profileUrls[0].profileUrl)
                         self.classId.append(data[index].lectureId)
                         self.MyClassInfos.append(item)
                     }
@@ -218,7 +217,7 @@ class MyPageVC: UIViewController {
     
     @IBAction func addClassButtonDidTap(_ sender: Any) {
         
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
             let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -395,7 +394,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
             }
         case 2:
             if indexPath.row == 0 { //비밀번호 변경 클릭 시
-                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
                     let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
                     let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                     let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -418,7 +417,7 @@ extension MyPageVC: UITableViewDelegate, UITableViewDataSource {
                 nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             } else if indexPath.row == 2 { //서비스탈퇴 클릭 시
-                if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+                if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
                     let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
                     let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
                     let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
@@ -478,9 +477,12 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
             
 
+            if MyClassInfos[indexPath.row].profileUrls.isEmpty {
+                cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: self.defaultURL, classTime: MyClassInfos[indexPath.row].schedules)
+            } else {
+                cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: MyClassInfos[indexPath.row].profileUrls[0].profileUrl, classTime: MyClassInfos[indexPath.row].schedules)
+            }
             
-            // Mark: - 프로필 url 꼭 수정!!!
-            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: MyClassInfos[indexPath.row].profileUrls[0].profileUrl, classTime: MyClassInfos[indexPath.row].schedules)
             
             
             return cell
@@ -490,7 +492,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyToken {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
             let login = UIAlertAction(title: "로그인", style: .default, handler: nil)
