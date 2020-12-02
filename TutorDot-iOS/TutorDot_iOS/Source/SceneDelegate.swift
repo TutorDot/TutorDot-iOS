@@ -21,33 +21,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-//        if !UserDefaults.standard.bool(forKey: "didSee") {
-//            UserDefaults.standard.set(true, forKey: "didSee")
-//            print("donedone")
-//            self.window = UIWindow(windowScene: windowScene)
-//            let storyboard = UIStoryboard(name: "Splash", bundle: nil)
-//            guard let rootVC = storyboard.instantiateViewController(identifier: "SplashVC") as? SplashVC else {
-//                print("ViewController not found")
-//                return
-//            }
-//            let rootNC = UINavigationController(rootViewController: rootVC)
-//            rootNC.isNavigationBarHidden = true
-//            self.window?.rootViewController = rootNC
-//            self.window?.makeKeyAndVisible()
-//
-//        } else if UserDefaults.standard.bool(forKey: "didSee") == true {
-//            self.window = UIWindow(windowScene: windowScene)
-//            print("yay")
-//            let storyboard = UIStoryboard(name: "Login", bundle: nil)
-//            guard let rootVC = storyboard.instantiateViewController(identifier: "LoginVC") as? LoginVC else {
-//                print("ViewController not found")
-//                return
-//            }
-//            let rootNC = UINavigationController(rootViewController: rootVC)
-//            rootNC.isNavigationBarHidden = true
-//            self.window?.rootViewController = rootNC
-//            self.window?.makeKeyAndVisible()
-//        }
+        if !UserDefaults.standard.bool(forKey: "didSee") {
+            UserDefaults.standard.set(true, forKey: "didSee")
+            print("donedone")
+            self.window = UIWindow(windowScene: windowScene)
+            let storyboard = UIStoryboard(name: "Splash", bundle: nil)
+            guard let rootVC = storyboard.instantiateViewController(identifier: "SplashVC") as? SplashVC else {
+                print("ViewController not found")
+                return
+            }
+            let rootNC = UINavigationController(rootViewController: rootVC)
+            rootNC.isNavigationBarHidden = true
+            self.window?.rootViewController = rootNC
+            self.window?.makeKeyAndVisible()
+
+        } else if UserDefaults.standard.bool(forKey: "didSee") == true {
+            self.window = UIWindow(windowScene: windowScene)
+            print("yay")
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            guard let rootVC = storyboard.instantiateViewController(identifier: "LoginVC") as? LoginVC else {
+                print("ViewController not found")
+                return
+            }
+            let rootNC = UINavigationController(rootViewController: rootVC)
+            rootNC.isNavigationBarHidden = true
+            self.window?.rootViewController = rootNC
+            self.window?.makeKeyAndVisible()
+        }
         
         
     }
