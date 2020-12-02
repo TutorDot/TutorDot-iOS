@@ -12,7 +12,7 @@
         <!--QuestionVC-->
         <scene sceneID="6aE-fQ-bzY">
             <objects>
-                <viewController storyboardIdentifier="QuestionVC" id="mtJ-cl-ylB" customClass="QuestionVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mtJ-cl-ylB" customClass="QuestionVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n4v-8o-GtX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,26 +320,15 @@
                             <constraint firstItem="Y4B-tP-JiN" firstAttribute="leading" secondItem="2Vp-UA-FKK" secondAttribute="leading" id="w4p-JM-vpb"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="answerCount" destination="33z-OU-Wti" id="QPj-Sl-yhI"/>
-                        <outlet property="barview" destination="M0s-7d-DBa" id="IhQ-9g-edN"/>
-                        <outlet property="blindView" destination="Y4B-tP-JiN" id="NjX-1d-gFx"/>
-                        <outlet property="questionBox" destination="dgj-Bh-H4R" id="ZoA-0A-fkB"/>
-                        <outlet property="questionBoxView" destination="VnK-W2-h3E" id="mEW-xy-0s2"/>
-                        <outlet property="questionCount" destination="jfG-H5-xkU" id="1yT-kf-nQ1"/>
-                        <outlet property="questionHeaderView" destination="UNd-St-o40" id="hqk-Zv-pv3"/>
-                        <outlet property="questionTabView" destination="Lly-71-R7Z" id="l27-Qt-B7w"/>
-                        <outlet property="questionTableView" destination="Ouy-Uj-Hoi" id="D29-Jf-uGc"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJl-rP-k0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-13.043478260869566" y="70.982142857142847"/>
         </scene>
-        <!--View Controller-->
+        <!--QuestionVC-->
         <scene sceneID="rnj-NM-VNV">
             <objects>
-                <viewController id="fBA-GP-kTF" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QuestionVC" id="fBA-GP-kTF" customClass="QuestionVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Pn-Lz-VbK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
