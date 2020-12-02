@@ -94,7 +94,8 @@
 		F444D9FE2564E12A002839F4 /* BlankNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */; };
 		F44D885D2576A5DC00FD0942 /* classListData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885C2576A5DC00FD0942 /* classListData.swift */; };
 		F44D8860257735D800FD0942 /* ProgressBarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885F257735D800FD0942 /* ProgressBarData.swift */; };
-		F44D88E125778CAA00FD0942 /* loadingData.json in Resources */ = {isa = PBXBuildFile; fileRef = F44D88E025778CAA00FD0942 /* loadingData.json */; };
+		F44D88E42577C8E000FD0942 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = F44D88E32577C8E000FD0942 /* loading.json */; };
+		F44D88EB2577E63C00FD0942 /* NotesNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D88EA2577E63C00FD0942 /* NotesNavigationVC.swift */; };
 		F45A5EF1257538C60012C447 /* MypageConnectSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */; };
 		F45A5F09257618670012C447 /* NotesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F08257618670012C447 /* NotesData.swift */; };
 		F45A5F0C25761A1A0012C447 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F0B25761A1A0012C447 /* NoteService.swift */; };
@@ -242,7 +243,8 @@
 		F444D9FC2564E12A002839F4 /* BlankNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlankNoteCell.xib; sourceTree = "<group>"; };
 		F44D885C2576A5DC00FD0942 /* classListData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classListData.swift; sourceTree = "<group>"; };
 		F44D885F257735D800FD0942 /* ProgressBarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarData.swift; sourceTree = "<group>"; };
-		F44D88E025778CAA00FD0942 /* loadingData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingData.json; sourceTree = "<group>"; };
+		F44D88E32577C8E000FD0942 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		F44D88EA2577E63C00FD0942 /* NotesNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesNavigationVC.swift; sourceTree = "<group>"; };
 		F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageConnectSuccessVC.swift; sourceTree = "<group>"; };
 		F45A5F08257618670012C447 /* NotesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesData.swift; sourceTree = "<group>"; };
 		F45A5F0B25761A1A0012C447 /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				F49D9EF9257159BF003076EA /* MypageNavigationController.swift */,
 				01871801257156CD0021EDD4 /* OnboardingNewVC.swift */,
 				F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */,
+				F44D88EA2577E63C00FD0942 /* NotesNavigationVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -564,7 +567,7 @@
 		F4D1A0AE24B5C8EA00B13D65 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				F44D88E025778CAA00FD0942 /* loadingData.json */,
+				F44D88E32577C8E000FD0942 /* loading.json */,
 				01B49D5E24C21F6F00B3A322 /* data3.json */,
 				01EFFF1E24B9E71600518DE6 /* APIService */,
 				F4D1A0B024B5C95500B13D65 /* Nibs */,
@@ -661,6 +664,7 @@
 				012639AC24ADADE8009EA0BA /* CalendarCollectionViewCell.xib in Resources */,
 				F49825F1255D2B4800E2FA5A /* Question.storyboard in Resources */,
 				0126399D24AB1558009EA0BA /* Splash.storyboard in Resources */,
+				F44D88E42577C8E000FD0942 /* loading.json in Resources */,
 				F4A032F52573AED300F46F24 /* NotesContentCell.xib in Resources */,
 				014703C224B2CB4B0074D4E2 /* AlertTableViewCell.xib in Resources */,
 				012E887F24B5D30700EF81FB /* TutorCollectionViewCell.xib in Resources */,
@@ -672,7 +676,6 @@
 				F4A032EB2573AB0100F46F24 /* noteHeaderViewCell.xib in Resources */,
 				0126399124AA09DD009EA0BA /* Alert.storyboard in Resources */,
 				0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */,
-				F44D88E125778CAA00FD0942 /* loadingData.json in Resources */,
 				015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */,
 				0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */,
 				012E888324B5D3FA00EF81FB /* Calendar.storyboard in Resources */,
@@ -745,6 +748,7 @@
 				F4F13DF525610D5A00115FD4 /* QuestionListCell.swift in Sources */,
 				01E4A840252619DC00B5B485 /* testVC.swift in Sources */,
 				F471772C24B2036B0098C827 /* MonthJournalCell.swift in Sources */,
+				F44D88EB2577E63C00FD0942 /* NotesNavigationVC.swift in Sources */,
 				F4A032EA2573AB0100F46F24 /* noteHeaderViewCell.swift in Sources */,
 				F4200E0724BE4FFA00EA1D6F /* ClassConnectCell.swift in Sources */,
 				F4200E0524BE09D700EA1D6F /* AddRegularClassTimeCell.swift in Sources */,

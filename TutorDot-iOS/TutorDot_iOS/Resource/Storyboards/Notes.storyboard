@@ -317,7 +317,9 @@
                     <connections>
                         <outlet property="ClassProgressView" destination="Wqa-MG-Nu8" id="1v8-mA-rEW"/>
                         <outlet property="NoteTitleLabel" destination="6GU-xH-Ihu" id="tAE-nd-kK7"/>
+                        <outlet property="alertButton" destination="s8o-ql-lEB" id="Wll-Gb-7mV"/>
                         <outlet property="currentClassLabel" destination="q1i-Kb-Jod" id="y6p-nm-3hR"/>
+                        <outlet property="listButton" destination="g3b-tX-Qm4" id="oeE-d5-EaV"/>
                         <outlet property="monthJournalView" destination="5zZ-eP-SYD" id="pf5-BC-Z5I"/>
                         <outlet property="monthJournalViewHeight" destination="rJ7-M4-gBV" id="Fiq-dh-aeg"/>
                         <outlet property="monthLable" destination="C0x-f2-rzd" id="d9Q-Lr-nva"/>
@@ -852,10 +854,10 @@
             </objects>
             <point key="canvasLocation" x="5495" y="1247"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Notes NavigationVC-->
         <scene sceneID="pku-Xj-4je">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="r3f-Zk-wKk" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NotesNavigationVC" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="r3f-Zk-wKk" customClass="NotesNavigationVC" customModule="TutorDot_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lle-gC-BSf">
                         <autoresizingMask key="autoresizingMask"/>

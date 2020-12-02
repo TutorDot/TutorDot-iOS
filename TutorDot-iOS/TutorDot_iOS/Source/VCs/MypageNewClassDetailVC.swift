@@ -59,7 +59,7 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
         time.keyboardType = .numberPad
         price.keyboardType = .numberPad
         bank.keyboardType = .default
-        bankAccount.keyboardType = .phonePad
+        bankAccount.keyboardType = .numberPad
     }
     
     
