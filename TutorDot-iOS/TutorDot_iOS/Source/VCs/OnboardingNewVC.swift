@@ -19,9 +19,17 @@ class OnboardingNewVC: UIViewController {
     @IBOutlet weak var collectionViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewToTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var pageControltoCollectionView: NSLayoutConstraint!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonToPageControlConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelToSignUpButton: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var alreadyUserLabel: UILabel!
+    
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +40,20 @@ class OnboardingNewVC: UIViewController {
         pageControl.currentPageIndicatorTintColor = UIColor.battleshipGrey
         setHeight()
         setView()
+        signUpButton.isHidden = true
+        checkLastPage()
     }
     
     func setHeight() {
+        // SE
         if (self.view.frame.size.height) < 700 {
-            collectionViewToTopConstraint.constant = 30
-            signUpButtonHeight.constant = 40
-            
+            collectionViewHeightConstraint.constant = 510
+            collectionViewToTopConstraint.constant = 60
         } else {
-            //signUpButtonHeight.constant = 40
-            collectionViewToTopConstraint.constant = 70
+            // PRO
+            collectionViewHeightConstraint.constant = 510
+            collectionViewToTopConstraint.constant = 100
+            pageControltoCollectionView.constant = 40
             
         }
     }
@@ -83,6 +95,11 @@ class OnboardingNewVC: UIViewController {
     
     @IBAction func loginButton(_ sender: Any) {
         
+        
+    }
+    
+    func checkLastPage(){
+        
     }
     
     
@@ -112,12 +129,37 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
         
-//        var currentCellOffset = onboardingCollectionView.contentOffset
-//        currentCellOffset.x += onboardingCollectionView.frame.width / 3
-//        if let indexPath = onboardingCollectionView.indexPathForItem(at: currentCellOffset) {
-//            onboardingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-//        }
+        print(pageControl.currentPage, "지금 페이지")
+        // 마지막 페이지일때
+        if pageControl.currentPage == pageControl.numberOfPages - 1 {
+            signUpButton.isHidden = false
+            // pro
+            if (self.view.frame.size.height) > 700 {
+                //collectionViewHeightConstraint.constant = 450
+                collectionViewToTopConstraint.constant = 60
+                pageControltoCollectionView.constant = 20
+            } else {
+                collectionViewToTopConstraint.constant = 20
+                pageControltoCollectionView.constant = 5
+                signUpButtonToPageControlConstraint.constant = 7
+            }
+        } else {
+            signUpButton.isHidden = true
+            //pro
+            if (self.view.frame.size.height) > 700 {
+                collectionViewHeightConstraint.constant = 510
+                collectionViewToTopConstraint.constant = 100
+                pageControltoCollectionView.constant = 40
+            } else {
+                collectionViewHeightConstraint.constant = 510
+                collectionViewToTopConstraint.constant = 60
+                
+            }
+        }
         
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0, options: [], animations: {
+            self.view.layoutIfNeeded()
+        })
         
     }
     

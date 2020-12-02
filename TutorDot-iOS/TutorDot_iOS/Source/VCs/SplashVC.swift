@@ -11,6 +11,7 @@ import UIKit
 import Lottie
 
 class SplashVC: UIViewController {
+    static let identifier: String = "SplashVC"
 
     let animationView = AnimationView()
 

@@ -1,18 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "myPageUnPick.png",
+      "idiom" : "universal",
       "scale" : "1x",
-      "idiom" : "universal"
+      "filename" : "myPageUnPick.png"
     },
     {
       "scale" : "2x",
-      "filename" : "myPageUnPick@2x.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "myPageUnPick@2x.png"
     },
     {
-      "idiom" : "universal",
       "scale" : "3x",
+      "idiom" : "universal",
       "filename" : "myPageUnPick@3x.png"
     }
   ],

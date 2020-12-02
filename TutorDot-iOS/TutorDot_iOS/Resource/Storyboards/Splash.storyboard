@@ -253,7 +253,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rta-27-Y8Q">
-                                <rect key="frame" x="0.0" y="114" width="375" height="502"/>
+                                <rect key="frame" x="0.0" y="144" width="375" height="502"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="502" id="5sj-oe-5XV"/>
@@ -269,7 +269,7 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OnboardingNewCollectionViewCell" id="DcE-5J-HS8" customClass="OnboardingNewCollectionViewCell" customModule="TutorDot_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="-4" width="375" height="510"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Wka-AK-ryX">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JjA-d3-PFj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -282,9 +282,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="g7K-fl-gXX" secondAttribute="trailing" id="1JZ-LK-Ii2"/>
-                                                <constraint firstItem="g7K-fl-gXX" firstAttribute="top" secondItem="Wka-AK-ryX" secondAttribute="top" id="88a-db-Mns"/>
-                                                <constraint firstAttribute="bottom" secondItem="g7K-fl-gXX" secondAttribute="bottom" constant="20" symbolic="YES" id="qcL-Wt-6jy"/>
-                                                <constraint firstItem="g7K-fl-gXX" firstAttribute="leading" secondItem="Wka-AK-ryX" secondAttribute="leading" id="sMC-WU-lpA"/>
+                                                <constraint firstItem="g7K-fl-gXX" firstAttribute="top" secondItem="JjA-d3-PFj" secondAttribute="top" id="88a-db-Mns"/>
+                                                <constraint firstAttribute="bottom" secondItem="g7K-fl-gXX" secondAttribute="bottom" id="qcL-Wt-6jy"/>
+                                                <constraint firstItem="g7K-fl-gXX" firstAttribute="leading" secondItem="JjA-d3-PFj" secondAttribute="leading" id="sMC-WU-lpA"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="375" height="510"/>
@@ -295,10 +295,13 @@
                                 </cells>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="SrP-JF-KTl">
-                                <rect key="frame" x="127" y="626" width="121.33333333333331" height="28"/>
+                                <rect key="frame" x="127" y="656" width="121.33333333333331" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="rtQ-Ue-cco"/>
+                                </constraints>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tU-EU-Fzp">
-                                <rect key="frame" x="45" y="669" width="285" height="45"/>
+                                <rect key="frame" x="45" y="691" width="285" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="Z1T-mN-lmi"/>
                                 </constraints>
@@ -313,7 +316,7 @@
                         <viewLayoutGuide key="safeArea" id="TCw-it-OPy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Rta-27-Y8Q" firstAttribute="top" secondItem="TCw-it-OPy" secondAttribute="top" constant="70" id="3N8-8E-eDO"/>
+                            <constraint firstItem="Rta-27-Y8Q" firstAttribute="top" secondItem="TCw-it-OPy" secondAttribute="top" constant="100" id="3N8-8E-eDO"/>
                             <constraint firstItem="SrP-JF-KTl" firstAttribute="top" secondItem="Rta-27-Y8Q" secondAttribute="bottom" constant="10" id="4rl-Tc-AD0"/>
                             <constraint firstItem="0tU-EU-Fzp" firstAttribute="centerX" secondItem="SrP-JF-KTl" secondAttribute="centerX" id="DcC-1q-r3A"/>
                             <constraint firstItem="SrP-JF-KTl" firstAttribute="centerX" secondItem="TCw-it-OPy" secondAttribute="centerX" id="G2h-76-zl4"/>
@@ -326,11 +329,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionViewHeightConstraint" destination="5sj-oe-5XV" id="dUa-ko-m3K"/>
                         <outlet property="collectionViewLeftConstraint" destination="sn8-cg-jxX" id="dI9-ON-t4N"/>
                         <outlet property="collectionViewRightConstraint" destination="sev-6F-1Uv" id="e4c-YT-4Fb"/>
                         <outlet property="collectionViewToTopConstraint" destination="3N8-8E-eDO" id="oOW-2J-5gz"/>
                         <outlet property="onboardingCollectionView" destination="Rta-27-Y8Q" id="aY7-yc-Ynf"/>
                         <outlet property="pageControl" destination="SrP-JF-KTl" id="LOE-SS-IK9"/>
+                        <outlet property="pageControltoCollectionView" destination="4rl-Tc-AD0" id="4Q8-8Z-Hxo"/>
                         <outlet property="signUpButton" destination="0tU-EU-Fzp" id="gvm-gP-2AI"/>
                         <outlet property="signUpButtonHeight" destination="Z1T-mN-lmi" id="ugC-Qq-XXl"/>
                         <outlet property="signUpButtonToPageControlConstraint" destination="tPc-1B-5bd" id="f3N-8m-hFL"/>
