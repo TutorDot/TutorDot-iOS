@@ -84,8 +84,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="GKF-Pf-9Ea" firstAttribute="leading" secondItem="MmY-l1-8zM" secondAttribute="trailing" constant="3" id="00q-tW-m2g"/>
+                                    <constraint firstItem="4hX-GT-WOX" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="3Z6-at-iqb"/>
                                     <constraint firstAttribute="trailing" secondItem="40f-vH-b7O" secondAttribute="trailing" id="6UQ-Fv-00a"/>
                                     <constraint firstItem="Wrn-6R-Jo3" firstAttribute="centerY" secondItem="UqY-oM-TFv" secondAttribute="centerY" id="8of-p9-nSg"/>
+                                    <constraint firstAttribute="bottom" secondItem="UqY-oM-TFv" secondAttribute="bottom" constant="7" id="Ip1-fa-Vuc"/>
                                     <constraint firstItem="OME-fv-ddV" firstAttribute="centerY" secondItem="UqY-oM-TFv" secondAttribute="centerY" id="S9l-5O-F6x"/>
                                     <constraint firstItem="Wrn-6R-Jo3" firstAttribute="leading" secondItem="UqY-oM-TFv" secondAttribute="trailing" constant="12" id="Vcc-nG-xeN"/>
                                     <constraint firstItem="4hX-GT-WOX" firstAttribute="leading" secondItem="GKF-Pf-9Ea" secondAttribute="trailing" constant="3" id="WXG-rg-JWW"/>
@@ -94,11 +96,9 @@
                                     <constraint firstItem="GKF-Pf-9Ea" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="fhB-lD-W1f"/>
                                     <constraint firstItem="40f-vH-b7O" firstAttribute="leading" secondItem="BX6-GH-RmG" secondAttribute="trailing" constant="3" id="fxk-ZP-dme"/>
                                     <constraint firstItem="OME-fv-ddV" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" id="jDR-b4-wSp"/>
-                                    <constraint firstItem="UqY-oM-TFv" firstAttribute="top" secondItem="MmY-l1-8zM" secondAttribute="bottom" constant="10" id="l2r-LL-Ewh"/>
                                     <constraint firstItem="MmY-l1-8zM" firstAttribute="leading" secondItem="bAc-Oh-INb" secondAttribute="leading" constant="20" id="n7e-s1-Vm7"/>
                                     <constraint firstAttribute="height" constant="130" id="qaW-1K-SR8"/>
-                                    <constraint firstItem="4hX-GT-WOX" firstAttribute="centerY" secondItem="GKF-Pf-9Ea" secondAttribute="centerY" id="twm-Ag-6TT"/>
-                                    <constraint firstItem="MmY-l1-8zM" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="top" constant="65" id="vbv-XP-bL9"/>
+                                    <constraint firstItem="UqY-oM-TFv" firstAttribute="top" secondItem="MmY-l1-8zM" secondAttribute="bottom" constant="10" id="qrk-ON-ARo"/>
                                     <constraint firstItem="BX6-GH-RmG" firstAttribute="centerY" secondItem="MmY-l1-8zM" secondAttribute="centerY" id="wuo-BW-Pud"/>
                                 </constraints>
                             </view>
@@ -301,7 +301,6 @@
                             <constraint firstItem="90q-SI-Dnx" firstAttribute="trailing" secondItem="slI-iF-jnc" secondAttribute="trailing" id="aBq-9h-Eiw"/>
                             <constraint firstItem="90q-SI-Dnx" firstAttribute="trailing" secondItem="sYc-1k-x0p" secondAttribute="trailing" id="e5N-o4-5io"/>
                             <constraint firstItem="bAc-Oh-INb" firstAttribute="top" secondItem="Zt4-lF-jPS" secondAttribute="top" id="hVP-vf-J3w"/>
-                            <constraint firstItem="o2t-nI-yDl" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="bottom" id="ohx-j4-24N"/>
                             <constraint firstItem="sYc-1k-x0p" firstAttribute="top" secondItem="bAc-Oh-INb" secondAttribute="bottom" constant="345" id="psk-fE-s8A"/>
                             <constraint firstItem="sYc-1k-x0p" firstAttribute="leading" secondItem="90q-SI-Dnx" secondAttribute="leading" id="yrD-jN-d0o"/>
                         </constraints>
@@ -337,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wjm-xV-vyE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3858" y="107"/>
+            <point key="canvasLocation" x="3856.8000000000002" y="106.40394088669952"/>
         </scene>
         <!--TestVC-->
         <scene sceneID="tOf-qy-Smx">

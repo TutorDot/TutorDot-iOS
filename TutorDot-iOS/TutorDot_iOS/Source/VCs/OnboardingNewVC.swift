@@ -10,7 +10,7 @@ import UIKit
 
 class OnboardingNewVC: UIViewController {
     static let identifier: String = "OnboardingNewVC"
-
+    
     @IBOutlet weak var onboardingCollectionView: UICollectionView!
     
     @IBOutlet weak var pageControl: UIPageControl!
@@ -42,7 +42,7 @@ class OnboardingNewVC: UIViewController {
         } else {
             //signUpButtonHeight.constant = 40
             collectionViewToTopConstraint.constant = 70
-
+            
         }
     }
     
@@ -50,6 +50,15 @@ class OnboardingNewVC: UIViewController {
         signUpButton.backgroundColor = UIColor.softBlue
         signUpButton.titleLabel?.textColor = UIColor.white
         signUpButton.layer.cornerRadius = 10
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let width = onboardingCollectionView.frame.width
+        let height = onboardingCollectionView.frame.height
+        layout.itemSize = CGSize(width: width, height: height)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.scrollDirection = .horizontal
+        onboardingCollectionView.collectionViewLayout = layout
     }
     
     func setImage() {
@@ -76,7 +85,7 @@ class OnboardingNewVC: UIViewController {
         
     }
     
-
+    
 }
 
 extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -93,20 +102,26 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-            return 20
-        }
+        return 0
+    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-            pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
-    
-            
-        }
-    
+        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
         
+//        var currentCellOffset = onboardingCollectionView.contentOffset
+//        currentCellOffset.x += onboardingCollectionView.frame.width / 3
+//        if let indexPath = onboardingCollectionView.indexPathForItem(at: currentCellOffset) {
+//            onboardingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+//        }
+        
+        
+    }
+    
+    
     
     
 }
