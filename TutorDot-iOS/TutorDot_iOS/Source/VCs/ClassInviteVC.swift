@@ -15,6 +15,7 @@ class ClassInviteVC: UIViewController {
     @IBOutlet weak var inviteCode: UILabel!
     var classId: Int = 0
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         inviteCodeView.layer.cornerRadius = 5

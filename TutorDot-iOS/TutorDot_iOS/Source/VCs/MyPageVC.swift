@@ -15,7 +15,7 @@ class MyPageVC: UIViewController {
     // 프로필 설정
     var profileURL: String = ""
     let introDefault: String = "한 줄 소개"
-    var tuteeProfile: [String] = []
+    let defaultURL: String = "https://sopt-26-usy.s3.ap-northeast-2.amazonaws.com/1606475856445.png"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     
@@ -128,7 +128,6 @@ class MyPageVC: UIViewController {
                     for index in 0..<data.count {
                         let item = LidToggleData(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color, profileUrls: data[index].profileUrls, schedules: data[index].schedules)
                         
-                        self.tuteeProfile.append(data[index].profileUrls[0].profileUrl)
                         self.classId.append(data[index].lectureId)
                         self.MyClassInfos.append(item)
                     }
@@ -478,9 +477,12 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyClassCell.identifier, for: indexPath) as? MyClassCell else { return UICollectionViewCell() }
             
 
+            if MyClassInfos[indexPath.row].profileUrls.isEmpty {
+                cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: self.defaultURL, classTime: MyClassInfos[indexPath.row].schedules)
+            } else {
+                cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: MyClassInfos[indexPath.row].profileUrls[0].profileUrl, classTime: MyClassInfos[indexPath.row].schedules)
+            }
             
-            // Mark: - 프로필 url 꼭 수정!!!
-            cell.setMyClassInfo(classColor: MyClassInfos[indexPath.row].color, classTitle: MyClassInfos[indexPath.row].lectureName, Tutee: MyClassInfos[indexPath.row].profileUrls[0].profileUrl, classTime: MyClassInfos[indexPath.row].schedules)
             
             
             return cell
