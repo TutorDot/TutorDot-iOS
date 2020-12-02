@@ -114,11 +114,6 @@ class CalendarVC: UIViewController {
         tutorCollectionView.delegate = self
         tutorCollectionView.dataSource = self
         setProfile()
-//        if "\(UserDefaults.standard.value(forKey: "token")!)" == dummyUser {
-//            headerUserNameLabel.text = "둘러보기"
-//        } else {
-//            headerUserNameLabel.text = ""
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -137,9 +132,15 @@ class CalendarVC: UIViewController {
             
         }
         if firstTimeRunning {
-            self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
-            self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
-            firstTimeRunning = false
+            
+               
+           
+                self.dateCollectionView.selectItem(at: index, animated: true, scrollPosition: [])
+                self.collectionView(self.dateCollectionView, didSelectItemAt: index ?? [0,0])
+                firstTimeRunning = false
+                
+            
+            
         }
     }
     
