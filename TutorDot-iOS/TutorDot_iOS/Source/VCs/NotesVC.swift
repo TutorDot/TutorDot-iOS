@@ -218,6 +218,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("note view will appear")
         if isFirstRunning == false {
             if islistCall == false {
                 classHeaderHidden(true)
@@ -226,7 +227,6 @@ class NotesVC: UIViewController, selectClassProtocol {
                 setProgressInfos() //특정수업일지 프로그래스
                 getOneNoteInfo() // 특정수업일지 조회
             }
-            
         }
     }
 

@@ -21,7 +21,7 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
     
     let pickerView = UIPickerView()
     let toolbar = UIToolbar()
-    let weekdays: [String] = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    let weekdays: [String] = ["월", "화", "수", "목", "금", "토", "일"]
     let startHours: [String] = ["00", "01", "02", "03", "04", "05", "06","07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
     let startMins: [String] = ["00","30"]
     let endHours: [String] = ["00", "01", "02", "03", "04", "05", "06","07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]

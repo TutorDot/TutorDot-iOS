@@ -83,7 +83,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
             networkResult in
             switch networkResult {
             case .success(let token) :
-                print(self.classPlace, "위치")
+               
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
                 // 서버 통신 성공 후 성공 뷰로 이동

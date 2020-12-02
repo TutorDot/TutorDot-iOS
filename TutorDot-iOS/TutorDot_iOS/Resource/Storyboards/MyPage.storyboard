@@ -2025,7 +2025,7 @@
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="24" id="WSl-ok-mDq"/>
                                                                         </constraints>
-                                                                        <state key="normal" image="yellow"/>
+                                                                        <state key="normal" image="red"/>
                                                                         <connections>
                                                                             <action selector="yellowButtonDidTap:" destination="Yym-fx-kJj" eventType="touchUpInside" id="nSt-Qd-GMr"/>
                                                                         </connections>
