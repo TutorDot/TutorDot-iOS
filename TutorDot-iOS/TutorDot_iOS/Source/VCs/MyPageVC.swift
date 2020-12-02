@@ -9,6 +9,7 @@
 import UIKit
 import os
 import Kingfisher
+import Lottie
 
 class MyPageVC: UIViewController {
 
@@ -36,8 +37,21 @@ class MyPageVC: UIViewController {
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
     
+    @IBOutlet var mainView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let animationView = AnimationView()
+        animationView.animation = Animation.named("loadingData")
+
+        animationView.frame = CGRect(x:0, y:0, width:400, height:400)
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .playOnce
+        self.mainView.addSubview(animationView)
+
+        animationView.play()
         
         setSettingView()
         setMyclassViews()
