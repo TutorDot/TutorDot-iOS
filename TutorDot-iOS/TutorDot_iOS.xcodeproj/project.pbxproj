@@ -96,6 +96,7 @@
 		F44D8860257735D800FD0942 /* ProgressBarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D885F257735D800FD0942 /* ProgressBarData.swift */; };
 		F44D88E42577C8E000FD0942 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = F44D88E32577C8E000FD0942 /* loading.json */; };
 		F44D88EB2577E63C00FD0942 /* NotesNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44D88EA2577E63C00FD0942 /* NotesNavigationVC.swift */; };
+		F44D88EF2577ECBB00FD0942 /* loading_re.json in Resources */ = {isa = PBXBuildFile; fileRef = F44D88EE2577ECBB00FD0942 /* loading_re.json */; };
 		F45A5EF1257538C60012C447 /* MypageConnectSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */; };
 		F45A5F09257618670012C447 /* NotesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F08257618670012C447 /* NotesData.swift */; };
 		F45A5F0C25761A1A0012C447 /* NoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45A5F0B25761A1A0012C447 /* NoteService.swift */; };
@@ -245,6 +246,7 @@
 		F44D885F257735D800FD0942 /* ProgressBarData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarData.swift; sourceTree = "<group>"; };
 		F44D88E32577C8E000FD0942 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		F44D88EA2577E63C00FD0942 /* NotesNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesNavigationVC.swift; sourceTree = "<group>"; };
+		F44D88EE2577ECBB00FD0942 /* loading_re.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading_re.json; sourceTree = "<group>"; };
 		F45A5EF0257538C60012C447 /* MypageConnectSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageConnectSuccessVC.swift; sourceTree = "<group>"; };
 		F45A5F08257618670012C447 /* NotesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesData.swift; sourceTree = "<group>"; };
 		F45A5F0B25761A1A0012C447 /* NoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteService.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 			isa = PBXGroup;
 			children = (
 				F44D88E32577C8E000FD0942 /* loading.json */,
+				F44D88EE2577ECBB00FD0942 /* loading_re.json */,
 				01B49D5E24C21F6F00B3A322 /* data3.json */,
 				01EFFF1E24B9E71600518DE6 /* APIService */,
 				F4D1A0B024B5C95500B13D65 /* Nibs */,
@@ -678,6 +681,7 @@
 				0154D9EA256BB910000953E4 /* AlertBlankTableViewCell.xib in Resources */,
 				015097C6255412BA00935DC6 /* FilterDropDownCell.xib in Resources */,
 				0157927F255FE97C00DE55F0 /* GoogleService-Info.plist in Resources */,
+				F44D88EF2577ECBB00FD0942 /* loading_re.json in Resources */,
 				012E888324B5D3FA00EF81FB /* Calendar.storyboard in Resources */,
 				F4B517E124C0B009007438DE /* data2.json in Resources */,
 			);
