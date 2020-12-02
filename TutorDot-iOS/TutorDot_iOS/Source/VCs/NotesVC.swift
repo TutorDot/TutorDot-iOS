@@ -34,6 +34,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
+    let dummyUser = "dummy"
     var month: Int = 0
     var monthStr: String = ""
     var selectClassID: Int = 0 // 특정일지 선택 lid
@@ -51,6 +52,15 @@ class NotesVC: UIViewController, selectClassProtocol {
     var barTotal: Int = 0
     var barCurrentTimes: Int = 0
     var barCurrentHour: Int = 0
+    
+    // 드랍다운
+    var dropDown: DropDown?
+    var classList: [CalendarData] = [] // 수업 더미 데이터
+    var classDateList: [CalendarData] = [] // 날짜별 일정 리턴 데이터
+    var classList2: [CalendarData] = [] // 서버에서 받아오는 날짜 데이터
+    var dropDownList: [String] = [] // 서버에서 받아오는 수업정보 데이터: 드랍다운 리스트
+    var classListToggle: [CalendarData] = [] // 토글 버튼 누르면 새로 수업 정보 데이터 저장되는 리스트
+    var classList2Copy: [CalendarData] = [] // 서버에서 받아오는 날짜 데이터 백업
     
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
@@ -345,27 +355,29 @@ class NotesVC: UIViewController, selectClassProtocol {
         classHeaderHidden(true) // 프로그래스바 숨기기
         self.progressView.setProgress(0.0, animated: false)
         
+        
+        
         // Mark - 수업리스트 가져오기 서버통신
         NoteService.Shared.getClassList() { networkResult in
             switch networkResult {
             case .success(let resultData):
                 guard let data = resultData as? [ClassList] else { return print(Error.self) }
-                
+
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
                 nextVC.classlist.append("전체")
                 nextVC.lectureId.append(0)
                 for index in 0..<data.count {
                     let item = ClassList(lectureId: data[index].lectureId, lectureName: data[index].lectureName, color: data[index].color)
-                    
+
                     nextVC.classlist.append(item.lectureName)
                     nextVC.lectureId.append(item.lectureId)
                 }
-                
+
                 nextVC.modalPresentationStyle = .overFullScreen
                 self.present(nextVC, animated: false, completion: nil)
 
                 nextVC.delegate = self
-                
+
             case .pathErr : print("Patherr")
             case .serverErr : print("ServerErr")
             case .requestErr(let message) : print(message)
@@ -510,29 +522,44 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+        if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
+                        let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
+                        alertViewController.addAction(action)
+                        alertViewController.addAction(UIAlertAction(title: "로그인", style: .default, handler: { (action) in
+                            let loginStoryboard = UIStoryboard.init(name: "Login", bundle : nil)
+                            guard let loginVC = loginStoryboard.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC else { return }
+                            loginVC.modalPresentationStyle = .fullScreen
+                            self.present(loginVC, animated: true, completion: nil)
+                        } ))
+                        
+                        self.present(alertViewController, animated: true, completion: nil)
+        } else {
+            guard let nextVC = self.storyboard?.instantiateViewController(
+                    identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
+            
+            let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+            let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+            
+            // 클릭한 수업일지 ID 전달
+            nextVC.diaryID = dayItems.diaryId
+            nextVC.color = dayItems.color
+            nextVC.lesson = dayItems.classProgress
+            nextVC.times = dayItems.times
+            nextVC.hour = dayItems.hour
+            nextVC.hw = dayItems.homework
+            nextVC.totalHours = dayItems.depositCycle
+            nextVC.lectureName = dayItems.lectureName
+            nextVC.date = dayItems.classDate
+            nextVC.hwCheckValue = dayItems.hwPerformance
+            nextVC.role = self.myRole
+            
+            nextVC.modalPresentationStyle = .fullScreen
+            self.present(nextVC, animated: true, completion: nil)
+        }
+       
+        }
         
-        guard let nextVC = self.storyboard?.instantiateViewController(
-                identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
         
-        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
-        let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
-        
-        // 클릭한 수업일지 ID 전달
-        nextVC.diaryID = dayItems.diaryId
-        nextVC.color = dayItems.color
-        nextVC.lesson = dayItems.classProgress
-        nextVC.times = dayItems.times
-        nextVC.hour = dayItems.hour
-        nextVC.hw = dayItems.homework
-        nextVC.totalHours = dayItems.depositCycle
-        nextVC.lectureName = dayItems.lectureName
-        nextVC.date = dayItems.classDate
-        nextVC.hwCheckValue = dayItems.hwPerformance
-        nextVC.role = self.myRole
-        
-        nextVC.modalPresentationStyle = .fullScreen
-        self.present(nextVC, animated: true, completion: nil)
-    }
-   
 }
 

@@ -53,7 +53,8 @@ struct LoginService {
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
-        case 200: return isUser(by: data)
+        case 200:
+            return isUser(by: data)
         case 400: return .pathErr
         case 500: return .serverErr
         default: return .networkFail
@@ -71,7 +72,7 @@ struct LoginService {
             return .requestErr(decodedData.message)
             
         }
-
+        
         return .success(tokenData.accessToken)
         
     }

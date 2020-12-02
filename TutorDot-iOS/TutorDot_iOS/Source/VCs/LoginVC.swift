@@ -11,11 +11,13 @@ import BEMCheckBox
 
 class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier : String = "LoginVC"
+    static let loginShared = LoginVC()
     
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var popUpView: UIView!
     
     var emailText = ""
     var passwordText = ""
@@ -24,11 +26,16 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
+        popUpView.isHidden = true
         
     }
     
     override func viewWillAppear(_ animated: Bool) { //
         registerForKeyboardNotifications()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //fadeViewInThenOut(view: popUpView, delay: 0)
     }
     
     func viewSetUp() {
@@ -106,6 +113,15 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         self.view.layoutIfNeeded()
     }
     
+    func fadeViewInThenOut(view : UIView, delay: TimeInterval) {
+        self.popUpView.isHidden = false
+        let animationDuration = 1.5
+        UIView.animate(withDuration: animationDuration, delay: delay, options: [UIView.AnimationOptions.curveEaseIn, UIView.AnimationOptions.curveEaseOut], animations: {
+            view.alpha = 0
+        }, completion: nil)
+
+    }
+    
     
     @IBAction func loginButtontapped(_ sender: Any) {
         
@@ -115,6 +131,12 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         
         LoginService.shared.login(email: inputID, password: inputPWD) { networkResult in switch networkResult {
         case .success(let token):
+            //self.fadeViewInThenOut(view: self.popUpView, delay: 0)
+            
+//            UIView.animate(withDuration: 1.0, delay: 0, options: [UIView.AnimationOptions.curveEaseIn, UIView.AnimationOptions.curveEaseOut], animations: {
+//                self.popUpView.alpha = 0
+//            }, completion: nil)
+            
             // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
             let dataSave = UserDefaults.standard // UserDefaults.standard 정의
             dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장

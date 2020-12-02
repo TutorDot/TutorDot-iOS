@@ -8,7 +8,7 @@
 
 import UIKit
 
-class passwordModifyVC: UIViewController {
+class passwordModifyVC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -22,7 +22,12 @@ class passwordModifyVC: UIViewController {
         super.viewDidLoad()
         ModifyButton.layer.cornerRadius = 8
         correctLabel.isHidden = true
+        initGestureRecognizer()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerForKeyboardNotifications()
     }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
@@ -82,4 +87,72 @@ class passwordModifyVC: UIViewController {
         case .networkFail: print("networkFail") }
         }
 }
+    
+    func initGestureRecognizer() { //
+        let textFieldTap = UITapGestureRecognizer(target: self, action: #selector(handleTapTextField(_:)))
+        textFieldTap.delegate = self
+        self.view.addGestureRecognizer(textFieldTap)
+    }
+    
+    // 다른 위치 탭했을 때 키보드 없어지는 코드
+    @objc func handleTapTextField(_ sender: UITapGestureRecognizer) { //
+        self.idTextField.resignFirstResponder()
+        self.passwordTextField.resignFirstResponder()
+        self.newpasswordTextField.resignFirstResponder()
+        self.newpasswordCheckTextField.resignFirstResponder()
+        
+        
+    }
+    
+    func registerForKeyboardNotifications() { //
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // 키보드가 생길 떄 텍스트 필드 위로 밀기
+    @objc func keyboardWillShow(_ notification: NSNotification) { //
+        
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
+        
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        
+        let keyboardHeight: CGFloat // 키보드의 높이
+        
+        if #available(iOS 11.0, *) {
+            keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+        } else {
+            keyboardHeight = keyboardFrame.cgRectValue.height
+        }
+        UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
+            
+//            self.classInfoButton.alpha = 0
+//            self.classInfoImage.alpha = 0
+//            self.dropDownButton.alpha = 0
+//
+//            // +로 갈수록 y값이 내려가고 -로 갈수록 y값이 올라간다.
+//            self.classNametoHeaderConstraint.constant = 0
+//            self.startTimeToClassLabelConstraint.constant = 0
+        })
+        
+        self.view.layoutIfNeeded()
+    }
+    
+    // 키보드가 사라질 때 어떤 동작을 수행
+    @objc func keyboardWillHide(_ notification: NSNotification) { //
+        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else {return}
+        guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else {return}
+        
+        UIView.animate(withDuration: duration, delay: 0.0, options: .init(rawValue: curve), animations: {
+            
+            // 원래대로 돌아가도록
+//            self.classInfoButton.alpha = 1.0
+//            self.classInfoImage.alpha = 1.0
+//            self.dropDownButton.alpha = 1.0
+//            self.classNametoHeaderConstraint.constant = 30
+//            self.startTimeToClassLabelConstraint.constant = 25
+        })
+        
+        self.view.layoutIfNeeded()
+    }
 }
