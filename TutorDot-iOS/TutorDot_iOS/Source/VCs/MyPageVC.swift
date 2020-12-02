@@ -47,26 +47,26 @@ class MyPageVC: UIViewController {
     
     func loadingAnimation(){
         
-        animationView.animation = Animation.named("loading") // 로티 이름으로 애니메이션 등록
-        
-        animationView.frame = view.bounds //animationView 크기가 view와 같게
-        animationView.center = self.view.center
+        animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
+        animationView.frame = view.bounds
+        print(self.view.frame.size.height / 2, "눂이")
+        if self.view.frame.size.height > 700 {
+            animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 100, width: animationView.frame.size.width, height: animationView.frame.size.height)
+        } else {
+            animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
+        }
         animationView.contentMode = .scaleAspectFill
-        animationView.loopMode = .loop
+        animationView.loopMode = .playOnce
         self.mainView.addSubview(animationView)
-
         animationView.play()
     }
     
     func loadingAnimationStop(){
-
         
         animationView.stop()
-
         animationView.removeFromSuperview()
 //        animationView.layer.removeAllAnimations()
        
-
     }
     
     override func viewDidLoad() {
@@ -86,7 +86,6 @@ class MyPageVC: UIViewController {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
-        
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
         if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
@@ -94,6 +93,7 @@ class MyPageVC: UIViewController {
         } else {
             dummyView.isHidden = true
         }
+        loadingAnimation()
         var appdelegate = UIApplication.shared.delegate as? AppDelegate
         
         
@@ -167,18 +167,24 @@ class MyPageVC: UIViewController {
                         self.MyClassInfos.append(item)
                     }
                     self.classCollectionView.reloadData()
+                    self.loadingAnimationStop()
                 case .pathErr :
                     os_log("PathErr", log: .mypage)
+                    self.loadingAnimationStop()
                 case .serverErr :
                     os_log("ServerErr", log: .mypage)
+                    self.loadingAnimationStop()
                 case .requestErr(let message) :
                     print(message)
+                    self.loadingAnimationStop()
                 case .networkFail:
                     os_log("networkFail", log: .mypage)
+                    self.loadingAnimationStop()
             }
             
             
         }
+        
         
       
     }

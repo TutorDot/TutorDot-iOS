@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kRg-Ji-IGR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kRg-Ji-IGR">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -257,10 +257,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="502" id="5sj-oe-5XV"/>
+                                    <constraint firstAttribute="width" constant="375" id="jnr-6k-rav"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="30" id="pif-tG-yuS">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="pif-tG-yuS">
                                     <size key="itemSize" width="375" height="510"/>
-                                    <size key="estimatedItemSize" width="375" height="510"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -274,7 +274,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingImgStart" translatesAutoresizingMaskIntoConstraints="NO" id="g7K-fl-gXX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="490"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="g7K-fl-gXX" secondAttribute="height" multiplier="125:166" id="Tlr-22-lbO"/>
                                                     </constraints>
@@ -333,6 +333,7 @@
                         <outlet property="collectionViewLeftConstraint" destination="sn8-cg-jxX" id="dI9-ON-t4N"/>
                         <outlet property="collectionViewRightConstraint" destination="sev-6F-1Uv" id="e4c-YT-4Fb"/>
                         <outlet property="collectionViewToTopConstraint" destination="3N8-8E-eDO" id="oOW-2J-5gz"/>
+                        <outlet property="collectionViewWidthConstraint" destination="jnr-6k-rav" id="ENN-Zc-TbX"/>
                         <outlet property="onboardingCollectionView" destination="Rta-27-Y8Q" id="aY7-yc-Ynf"/>
                         <outlet property="pageControl" destination="SrP-JF-KTl" id="LOE-SS-IK9"/>
                         <outlet property="pageControltoCollectionView" destination="4rl-Tc-AD0" id="4Q8-8Z-Hxo"/>

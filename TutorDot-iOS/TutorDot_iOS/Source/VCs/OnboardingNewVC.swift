@@ -25,7 +25,6 @@ class OnboardingNewVC: UIViewController {
     @IBOutlet weak var collectionViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonToPageControlConstraint: NSLayoutConstraint!
-    @IBOutlet weak var labelToSignUpButton: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var alreadyUserLabel: UILabel!
     
@@ -33,6 +32,7 @@ class OnboardingNewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비")
         onboardingCollectionView.delegate = self
         onboardingCollectionView.dataSource = self
         setImage()
@@ -42,6 +42,23 @@ class OnboardingNewVC: UIViewController {
         setView()
         signUpButton.isHidden = true
         checkLastPage()
+        print(self.view.frame.size.height, "11 pro max")
+        
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if self.view.frame.size.height > 850 {
+            onboardingCollectionView.frame.size.height = 551
+            onboardingCollectionView.frame.size.width = 414
+        } else {
+//            collectionViewWidthConstraint.constant = 375
+//            collectionViewHeightConstraint.constant = 502
+            onboardingCollectionView.frame.size.height = 502
+            onboardingCollectionView.frame.size.width = 375
+        }
+        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비")
     }
     
     func setHeight() {
@@ -49,12 +66,15 @@ class OnboardingNewVC: UIViewController {
         if (self.view.frame.size.height) < 700 {
             collectionViewHeightConstraint.constant = 510
             collectionViewToTopConstraint.constant = 60
-        } else {
+        } else if (self.view.frame.size.height) > 700 && (self.view.frame.size.height) < 800 {
             // PRO
             collectionViewHeightConstraint.constant = 510
             collectionViewToTopConstraint.constant = 100
             pageControltoCollectionView.constant = 40
             
+        } else {
+            onboardingCollectionView.frame.size.height = 551
+            onboardingCollectionView.frame.size.width = 414
         }
     }
     
@@ -63,8 +83,17 @@ class OnboardingNewVC: UIViewController {
         signUpButton.titleLabel?.textColor = UIColor.white
         signUpButton.layer.cornerRadius = 10
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        let width = onboardingCollectionView.frame.width
-        let height = onboardingCollectionView.frame.height
+        if self.view.frame.size.height > 850 {
+            onboardingCollectionView.frame.size.height = 551
+            onboardingCollectionView.frame.size.width = 414
+            
+        } else {
+            onboardingCollectionView.frame.size.height = 502
+            onboardingCollectionView.frame.size.width = 375
+        }
+        let width = onboardingCollectionView.frame.size.width
+        let height = onboardingCollectionView.frame.size.height
+        print(width, height, "높이너비 셀")
         layout.itemSize = CGSize(width: width, height: height)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
@@ -127,7 +156,14 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+        if self.view.frame.size.height > 850 {
+            pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+            print(scrollView.contentOffset.x, scrollView.frame.width, self.view.frame.size.height, "여기")
+        } else {
+            pageControl?.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+            print(scrollView.contentOffset.x, scrollView.frame.width, self.view.frame.size.height, "여기")
+        }
+        
         
         print(pageControl.currentPage, "지금 페이지")
         // 마지막 페이지일때

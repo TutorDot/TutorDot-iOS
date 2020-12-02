@@ -7,6 +7,8 @@
 //
 import UIKit
 import DropDown
+import Lottie
+
 
 class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     
@@ -23,6 +25,8 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     let startMins: [String] = ["00", "01", "02", "03", "04", "05", "06","07", "08", "09", "10", "11", "12"]
     let endHours: [String] =  ["00","30"]
     var ampm: [String] = ["am", "pm"]
+    let animationView = AnimationView()
+
     
     var classStartDate: String?
     var classStartTime: String?
@@ -112,9 +116,31 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
+    func loadingAnimation(){
+            
+            animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
+            animationView.frame = view.bounds
+            print(self.view.frame.size.height / 2, "눂이")
+            if self.view.frame.size.height > 700 {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 100, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            } else {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            }
+            animationView.contentMode = .scaleAspectFill
+            animationView.loopMode = .playOnce
+            self.view.addSubview(animationView)
+            animationView.play()
+        }
+        
+        func loadingAnimationStop(){
+            
+            animationView.stop()
+            animationView.removeFromSuperview()
+           
+        }
+    
     // 수정 반영 버튼: 서버 통신
     @IBAction func editButtonSelected(_ sender: Any) {
-        // 데이터 추가하기
         
         // 위치 정보 비어있을 경우
         if locationTexField.text!.isEmpty {
@@ -135,6 +161,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
     
     // POST : 수업 일정 추가
     func addClassSchedule() {
+        loadingAnimation()
         guard let inputStartTime = classStartTime else { return }
         guard let inputEndTime = classEndTime else { return }
         guard let inputLocation = locationTexField.text else { return }
@@ -148,7 +175,7 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
                 self.dismiss(animated: true, completion: nil)
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
-                
+                self.loadingAnimationStop()
             // 일정추가 실패시 AlertViewcon 열기
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -156,8 +183,11 @@ class ClassAddVC: UIViewController, UIGestureRecognizerDelegate {
                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
                 alertViewController.addAction(action)
                 self.present(alertViewController, animated: true, completion: nil)
+                self.loadingAnimationStop()
             case .pathErr: print("path")
+                self.loadingAnimationStop()
             case .serverErr: print("serverErr") case .networkFail: print("networkFail")
+                self.loadingAnimationStop()
                 
             }
         }

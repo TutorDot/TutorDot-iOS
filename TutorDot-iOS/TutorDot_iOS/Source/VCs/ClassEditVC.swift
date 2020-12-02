@@ -6,6 +6,7 @@
 //  Copyright © 2020 Sehwa Ryu. All rights reserved.
 //
 import UIKit
+import Lottie
 
 class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier:String = "ClassEditVC"
@@ -28,6 +29,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     let pickerViewEnd = UIPickerView()
     let toolbar = UIToolbar()
     let toolbar2 = UIToolbar()
+    let animationView = AnimationView()
     
     let weekdays: [String] = ["20년 12월", "21년 1월", "21년 2월", "21년 3월", "21년 4월", "21년 5월", "21년 6월", "21년 7월", "21년 8월", "21년 9월", "21년 10월", "21년 11월", "21년 12월", "22년 1월", "22년 2월", "22년 3월", "22년 4월", "22년 5월", "22년 6월", "22년 7월", "22년 8월", "22년 9월", "22년 10월", "22년 11월", "22년 12월"]
     let startHours: [String] = ["01일", "02일", "03일", "04일", "05일", "06일","07일", "08일", "09일", "10일", "11일", "12일", "13일", "14일", "15일", "16일", "17일", "18일", "19일", "20일", "21일", "22일", "23일", "24일", "25일", "26일", "27일", "28일", "29일","30일","31일"]
@@ -73,6 +75,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         createDatePicker()
     }
     
+    
     @IBAction func editButton(_ sender: Any) {
         // 편집 확인하는 actionsheet 열기
         if editSelected == false {
@@ -89,9 +92,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
             
             delete = UIAlertAction(title: "삭제하기", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction) in
                 self.deleteOneClass()
-                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
                 
-                // ** 서버 리로드 필요
                 
             })
             
@@ -126,8 +127,33 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    // MARK -- animation
+    func loadingAnimation(){
+            
+            animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
+            animationView.frame = view.bounds
+            print(self.view.frame.size.height / 2, "눂이")
+            if self.view.frame.size.height > 700 {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 100, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            } else {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            }
+            animationView.contentMode = .scaleAspectFill
+            animationView.loopMode = .playOnce
+            self.view.addSubview(animationView)
+            animationView.play()
+        }
+        
+        func loadingAnimationStop(){
+            
+            animationView.stop()
+            animationView.removeFromSuperview()
+           
+    }
+    
     // MARK: -- DELETE: one class
     func deleteOneClass() {
+        loadingAnimation()
         let classId = self.classId
         ClassInfoService.classInfoServiceShared.deleteOneClassInfo(classId: classId ?? 0) { networkResult in
             switch networkResult {
@@ -135,10 +161,14 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
                 guard let data = resultData as? [CalendarData] else { return print(Error.self) }
                 print("delete success", classId)
                 self.dismiss(animated: true, completion: nil)
+                self.loadingAnimationStop()
 
             case .pathErr : print("Patherr")
+                self.loadingAnimationStop()
             case .serverErr : print("ServerErr")
+                self.loadingAnimationStop()
             case .requestErr(let message) : print(message)
+                self.loadingAnimationStop()
             case .networkFail:
                 print("networkFail")
             }
@@ -147,6 +177,7 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: -- PUT : one class
     func editClassSchedule() {
+        loadingAnimation()
         guard let inputStartTime = classStartTime else { return }
         guard let inputEndTime = classEndTime else { return }
         guard let inputLocation = locationTextField.text else { return }
@@ -162,14 +193,18 @@ class ClassEditVC: UIViewController, UIGestureRecognizerDelegate {
                 self.dismiss(animated: true, completion: nil)
                 guard let token = token as? String else { return }
                 UserDefaults.standard.set(token, forKey: "token")
+                self.loadingAnimationStop()
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "일정수정 실패", message: message, preferredStyle: .alert)
                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
                 alertViewController.addAction(action)
                 self.present(alertViewController, animated: true, completion: nil)
+                self.loadingAnimationStop()
             case .pathErr: print("path")
+                self.loadingAnimationStop()
             case .serverErr: print("serverErr") case .networkFail: print("networkFail")
+                self.loadingAnimationStop()
                 
             }
         }

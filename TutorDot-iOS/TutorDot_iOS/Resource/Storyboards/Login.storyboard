@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -425,16 +424,18 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="아이디" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LaN-1H-Tw9">
-                                <rect key="frame" x="41" y="312.33333333333331" width="293" height="38"/>
+                                <rect key="frame" x="37.666666666666657" y="312.33333333333331" width="300" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="3Hf-hU-CcG"/>
+                                    <constraint firstAttribute="width" constant="300" id="WPB-Ek-KbP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="username"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="비밀번호" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1HB-bJ-MHY">
-                                <rect key="frame" x="41" y="380.33333333333331" width="293" height="38"/>
+                                <rect key="frame" x="37.666666666666657" y="380.33333333333331" width="300" height="38"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="ioO-5c-WOm"/>
                                     <constraint firstAttribute="height" constant="38" id="kxZ-MA-hVv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -490,47 +491,25 @@
                                     <action selector="previewButtonSelected:" destination="q2Q-aw-xjB" eventType="touchUpInside" id="Lgv-2U-z8c"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3E-Gs-F2J">
-                                <rect key="frame" x="83.666666666666686" y="635" width="208" height="38"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그인 성공!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6b-eY-OeW">
-                                        <rect key="frame" x="62.333333333333329" y="8.6666666666666288" width="82.999999999999986" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" name="SwitchColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="38" id="Gsv-uu-pZ9"/>
-                                    <constraint firstItem="O6b-eY-OeW" firstAttribute="centerX" secondItem="Z3E-Gs-F2J" secondAttribute="centerX" id="j9D-di-Ge5"/>
-                                    <constraint firstAttribute="width" constant="208" id="pGF-ZJ-yZY"/>
-                                    <constraint firstItem="O6b-eY-OeW" firstAttribute="centerY" secondItem="Z3E-Gs-F2J" secondAttribute="centerY" id="xUx-ay-Fbd"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="16T-jz-0qE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="opY-m9-pco" firstAttribute="leading" secondItem="Sx0-dl-pA6" secondAttribute="trailing" constant="15" id="3nf-HY-DJM"/>
-                            <constraint firstItem="LaN-1H-Tw9" firstAttribute="leading" secondItem="16T-jz-0qE" secondAttribute="leading" constant="41" id="5Pj-PW-mnv"/>
                             <constraint firstItem="1HB-bJ-MHY" firstAttribute="top" secondItem="LaN-1H-Tw9" secondAttribute="bottom" constant="30" id="5pY-8T-MtR"/>
                             <constraint firstItem="16T-jz-0qE" firstAttribute="bottom" secondItem="6UQ-09-mMB" secondAttribute="bottom" constant="25" id="6ea-cs-9on"/>
-                            <constraint firstItem="Z3E-Gs-F2J" firstAttribute="centerX" secondItem="Y1c-vH-2g0" secondAttribute="centerX" id="Co6-dB-YMG"/>
                             <constraint firstItem="Sx0-dl-pA6" firstAttribute="top" secondItem="Y1c-vH-2g0" secondAttribute="bottom" constant="30" id="D2p-9c-1xT"/>
                             <constraint firstItem="LaN-1H-Tw9" firstAttribute="top" secondItem="y19-Ab-AJE" secondAttribute="bottom" constant="80" id="ETS-B5-nfM"/>
-                            <constraint firstItem="16T-jz-0qE" firstAttribute="trailing" secondItem="1HB-bJ-MHY" secondAttribute="trailing" constant="41" id="EvG-J0-yhr"/>
-                            <constraint firstItem="16T-jz-0qE" firstAttribute="trailing" secondItem="LaN-1H-Tw9" secondAttribute="trailing" constant="41" id="Gjh-qp-dPU"/>
                             <constraint firstItem="Y1c-vH-2g0" firstAttribute="top" secondItem="1HB-bJ-MHY" secondAttribute="bottom" constant="50" id="M28-rh-fbS"/>
                             <constraint firstItem="Y1c-vH-2g0" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="ShH-la-1R8"/>
                             <constraint firstItem="eSQ-cf-8xx" firstAttribute="top" secondItem="16T-jz-0qE" secondAttribute="top" constant="117" id="TEz-Bs-sS4"/>
                             <constraint firstItem="opY-m9-pco" firstAttribute="centerY" secondItem="Sx0-dl-pA6" secondAttribute="centerY" id="VX7-yP-aHg"/>
-                            <constraint firstItem="6UQ-09-mMB" firstAttribute="top" secondItem="Z3E-Gs-F2J" secondAttribute="bottom" constant="51" id="YA3-kW-6OK"/>
+                            <constraint firstItem="1HB-bJ-MHY" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="htg-Oc-Nbv"/>
                             <constraint firstItem="Sx0-dl-pA6" firstAttribute="leading" secondItem="16T-jz-0qE" secondAttribute="leading" constant="80" id="ioB-MQ-4Mf"/>
                             <constraint firstItem="6UQ-09-mMB" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="llm-ck-dwJ"/>
-                            <constraint firstItem="1HB-bJ-MHY" firstAttribute="leading" secondItem="16T-jz-0qE" secondAttribute="leading" constant="41" id="t4U-NO-UfM"/>
                             <constraint firstItem="eSQ-cf-8xx" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="vfF-gq-8kJ"/>
                             <constraint firstItem="y19-Ab-AJE" firstAttribute="centerX" secondItem="eSQ-cf-8xx" secondAttribute="centerX" id="xsc-Ls-eS5"/>
+                            <constraint firstItem="LaN-1H-Tw9" firstAttribute="centerX" secondItem="16T-jz-0qE" secondAttribute="centerX" id="zWo-Hv-otu"/>
                             <constraint firstItem="y19-Ab-AJE" firstAttribute="top" secondItem="eSQ-cf-8xx" secondAttribute="bottom" constant="16" id="zbM-Ph-hBQ"/>
                         </constraints>
                     </view>
@@ -538,7 +517,6 @@
                         <outlet property="emailTextField" destination="LaN-1H-Tw9" id="bez-s0-mHw"/>
                         <outlet property="loginButton" destination="Y1c-vH-2g0" id="3z0-hZ-7hn"/>
                         <outlet property="passWordTextField" destination="1HB-bJ-MHY" id="EED-d8-08q"/>
-                        <outlet property="popUpView" destination="Z3E-Gs-F2J" id="EyK-I8-vVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="89X-v3-OjS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -849,6 +827,17 @@
             <point key="canvasLocation" x="3823" y="94"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="9cy-iG-L7V">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+        <designable name="g1P-PA-sWI">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+        <designable name="qq2-hq-aeG">
+            <size key="intrinsicContentSize" width="18" height="18"/>
+        </designable>
+    </designables>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="agreeBtnBack" width="48" height="48"/>
@@ -859,9 +848,6 @@
         <image name="signupBtnTuteeUnpick" width="136" height="175"/>
         <image name="signupBtnTutorUnpick" width="136" height="175"/>
         <image name="signupNameBtnBack" width="48" height="48"/>
-        <namedColor name="SwitchColor">
-            <color red="0.92941176470588238" green="0.93725490196078431" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -8,6 +8,8 @@
 
 import UIKit
 import BEMCheckBox
+import Lottie
+
 
 class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     static let identifier : String = "LoginVC"
@@ -17,16 +19,16 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var popUpView: UIView!
     
     var emailText = ""
     var passwordText = ""
+    let animationView = AnimationView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
-        popUpView.isHidden = true
         
     }
     
@@ -35,7 +37,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        //fadeViewInThenOut(view: popUpView, delay: 0)
     }
     
     func viewSetUp() {
@@ -57,6 +58,28 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         passWordTextField.text = passwordText
     
         
+    }
+    func loadingAnimation(){
+            
+            animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
+            animationView.frame = view.bounds
+            print(self.view.frame.size.height / 2, "눂이")
+            if self.view.frame.size.height > 700 {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 100, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            } else {
+                animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
+            }
+            animationView.contentMode = .scaleAspectFill
+            animationView.loopMode = .playOnce
+            self.view.addSubview(animationView)
+            animationView.play()
+        }
+        
+        func loadingAnimationStop(){
+            
+            animationView.stop()
+            animationView.removeFromSuperview()
+           
     }
     
     // 탭했을 때 키보드 action
@@ -113,17 +136,11 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         self.view.layoutIfNeeded()
     }
     
-    func fadeViewInThenOut(view : UIView, delay: TimeInterval) {
-        self.popUpView.isHidden = false
-        let animationDuration = 1.5
-        UIView.animate(withDuration: animationDuration, delay: delay, options: [UIView.AnimationOptions.curveEaseIn, UIView.AnimationOptions.curveEaseOut], animations: {
-            view.alpha = 0
-        }, completion: nil)
 
-    }
     
     
     @IBAction func loginButtontapped(_ sender: Any) {
+        loadingAnimation()
         
         // 로그인 서비스
         guard let inputID = emailTextField.text else { return }
@@ -131,12 +148,6 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         
         LoginService.shared.login(email: inputID, password: inputPWD) { networkResult in switch networkResult {
         case .success(let token):
-            //self.fadeViewInThenOut(view: self.popUpView, delay: 0)
-            
-//            UIView.animate(withDuration: 1.0, delay: 0, options: [UIView.AnimationOptions.curveEaseIn, UIView.AnimationOptions.curveEaseOut], animations: {
-//                self.popUpView.alpha = 0
-//            }, completion: nil)
-            
             // 자동로그인이 선택되어 있으면 id,pwd를 공유객체에 저장함
             let dataSave = UserDefaults.standard // UserDefaults.standard 정의
             dataSave.setValue(inputID, forKey: "save_userNm") // save_userNm 키값에 id값 저장
@@ -155,6 +166,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
                     TabbarVC else { return }
             mainView.modalPresentationStyle = .fullScreen
             self.present(mainView, animated: true, completion: nil)
+            self.loadingAnimationStop()
             
         case .requestErr(let message):
             let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
@@ -162,13 +174,16 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
             print("requestErr")
+            self.loadingAnimationStop()
         case .pathErr:
             let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
             print("pathErr")
+            self.loadingAnimationStop()
         case .serverErr: print("serverErr")
+            self.loadingAnimationStop()
         case .networkFail: print("networkFail") }
         }
         
@@ -183,7 +198,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     @IBAction func previewButtonSelected(_ sender: Any) {
-        
+        loadingAnimation()
         let inputID = "dummy"
         let inputPWD = "dummy"
         
@@ -206,19 +221,21 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
                     TabbarVC else { return }
             mainView.modalPresentationStyle = .fullScreen
             self.present(mainView, animated: true, completion: nil)
-            
+            self.loadingAnimationStop()
         case .requestErr(let message):
             let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
             print("requestErr")
+            self.loadingAnimationStop()
         case .pathErr:
             let alertViewController = UIAlertController(title: "로그인 실패", message: "아이디와 비밀번호를 확인해주세요", preferredStyle: .alert)
             let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
             alertViewController.addAction(action)
             self.present(alertViewController, animated: true, completion: nil)
             print("pathErr")
+            self.loadingAnimationStop()
         case .serverErr: print("serverErr")
         case .networkFail: print("networkFail") }
         }

@@ -297,7 +297,8 @@ class CalendarVC: UIViewController {
             case .serverErr :
                 os_log("ServerErr", log: .mypage)
             case .requestErr(let message) :
-                os_log(message as! StaticString, log: .mypage)
+                print("")
+                //os_log(message as! StaticString, log: .mypage)
             case .networkFail:
                 os_log("networkFail", log: .mypage)
             }
