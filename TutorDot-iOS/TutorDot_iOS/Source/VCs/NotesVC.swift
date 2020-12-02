@@ -25,6 +25,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     
 
  
+    @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
     @IBOutlet weak var totalClassLabel: UILabel!
@@ -47,6 +48,9 @@ class NotesVC: UIViewController, selectClassProtocol {
     var myRole: String = ""
     var islistCall: Bool = false
     
+    var barTotal: Int = 0
+    var barCurrentTimes: Int = 0
+    var barCurrentHour: Int = 0
     
     func classHeaderHidden(_ ishide: Bool){
         progressViewWrap.subviews[0].isHidden = ishide
@@ -55,6 +59,10 @@ class NotesVC: UIViewController, selectClassProtocol {
         } else { //false (보일때)
             tableViewTopMargin.constant = 150
         }
+        
+        UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: [], animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     
@@ -62,32 +70,32 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     func setProgress(){
         
-        progressView.layer.cornerRadius = 9
+        classHeaderHidden(false) //프로그래스바 보이기
+        self.progressView.setProgress(0.0, animated: false)
+        
+        progressView.layer.cornerRadius = 7
         progressView.clipsToBounds = true
-        progressView.layer.sublayers![1].cornerRadius = 9
+        
+        progressView.layer.sublayers![1].cornerRadius = 7
         progressView.subviews[1].clipsToBounds = true
         
-        progressView.tintColor = UIColor.init(named: "Color")
+        progressView.tintColor = UIColor.cornflowerBlue
         progressView.progressViewStyle = .default
-        UIView.animate(withDuration: 4.0) {
-            self.progressView.setProgress(12/16, animated: true)
-        }
-        progressLabel.text = "75%"
         
-        if NoteTitleLabel.text == self.userProfile + "전체 " + self.note {
-            classHeaderHidden(true)
-            
-        } else {
-            classHeaderHidden(false)
-        }
-    }
-   
-    func setProgressInfo(progressRate: String, currentClass: String, totalClass:String){
+        var rate: Float = Float(Double(self.barCurrentHour) / Double(self.barTotal))
+        print("rate", "\(self.barCurrentHour / self.barTotal))")
         
-        progressLabel.text = progressRate
-        currentClassLabel.text = currentClass
-        totalClassLabel.text = totalClass
+        UIView.animate(withDuration: 1.0) {
+            if rate > 1.0 { rate = 1.0 }
+            self.progressView.setProgress(rate, animated: true)
+        }
+        
+        progressLabel.text = String(format: "%.f", rate*100) + "%"
+        currentClassLabel.text = "\(self.barCurrentTimes)" + "회차, " + "\(self.barCurrentHour)" + "시간"
+        totalClassLabel.text =  "총 " + "\(self.barTotal)" + "시간"
+        
     }
+    
     
     // parameter값으로 들어온 숫자로 월 셋팅
     func setMonthLabel(_ monthInput: Int){
@@ -119,7 +127,15 @@ class NotesVC: UIViewController, selectClassProtocol {
         setMonthLabel(month)
         
         NotesInfos.removeAll()
-        setNotesInfos()
+        
+        if selectClassID == 0 {
+            classHeaderHidden(true) // 프로그래스바 숨기기
+            setNotesInfos() // 전체수업일지 조회
+            islistCall = false
+        } else {
+            setProgressInfos()
+            getOneNoteInfo() // 특정수업일지 조회
+        }
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
@@ -131,7 +147,15 @@ class NotesVC: UIViewController, selectClassProtocol {
         }
         setMonthLabel(month)
         NotesInfos.removeAll()
-        setNotesInfos()
+        
+        if selectClassID == 0 {
+            classHeaderHidden(true) // 프로그래스바 숨기기
+            setNotesInfos() // 전체수업일지 조회
+            islistCall = false
+        } else {
+            setProgressInfos()
+            getOneNoteInfo() // 특정수업일지 조회
+        }
     }
    
    
@@ -168,15 +192,14 @@ class NotesVC: UIViewController, selectClassProtocol {
   
         
         MonthInit()
-        
         setNotesInfos()
-        setProgress()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         setProfile()
         gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
         viewHeaderHeight.constant = self.view.frame.height * 94/812
+        self.view.bringSubviewToFront(self.topHeaderView)
         
         //스크롤 시 0월 수업일지 부분 숨기기
        // swipeAction()
@@ -193,8 +216,13 @@ class NotesVC: UIViewController, selectClassProtocol {
     override func viewWillAppear(_ animated: Bool) {
         if isFirstRunning == false {
             if islistCall == false {
+                classHeaderHidden(true)
                 setNotesInfos()
+            } else {
+                setProgressInfos()
+                getOneNoteInfo() // 특정수업일지 조회
             }
+            
         }
     }
 
@@ -202,6 +230,42 @@ class NotesVC: UIViewController, selectClassProtocol {
         NotesInfos.removeAll()
     }
    
+    // Mark - 서버통신 : 수업 프로그래스바 정보 조회
+    func setProgressInfos(){
+        NoteService.Shared.getProgressBarInfo(lectureID: selectClassID) { networkResult in
+            switch networkResult {
+            case .success(let resultData):
+                guard let data = resultData as? [BarInfo] else { return print(Error.self) }
+                
+                // 해당 월의 마지막 수업 일정 기준, 프로그래스 바 표시
+                for index in 0..<data.count {
+                    let item = BarInfo(times: data[index].times, hour: data[index].hour, depositCycle: data[index].depositCycle, classDate: data[index].classDate)
+
+                    // Month 구하기
+                    let cellMonthStr = item.classDate.substring(with: 5..<7)
+                    
+                    if self.month == Int(cellMonthStr) {
+                        // 해당월의 일지정보만 progress 정보에 계속 덮어 씀
+                        // 해당월의 마지막 일자의 정보가 최종적으로 들어가게 됨
+                        self.barTotal = item.depositCycle
+                        self.barCurrentHour = item.hour
+                        self.barCurrentTimes  = item.times
+                    }
+                }
+                
+                self.setProgress()
+            
+            case .pathErr :
+                os_log("PathErr-Profile", log: .note)
+            case .serverErr :
+                os_log("ServerErr", log: .note)
+            case .requestErr(let message) :
+                os_log(message as! StaticString, log: .note)
+            case .networkFail:
+                os_log("networkFail", log: .note)
+            }
+        }
+    }
     
     // Mark - 서버통신 : 간편 프로필 조회
     func setProfile(){
@@ -278,6 +342,8 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         islistCall = true
         NotesInfos.removeAll()
+        classHeaderHidden(true) // 프로그래스바 숨기기
+        self.progressView.setProgress(0.0, animated: false)
         
         // Mark - 수업리스트 가져오기 서버통신
         NoteService.Shared.getClassList() { networkResult in
@@ -296,7 +362,7 @@ class NotesVC: UIViewController, selectClassProtocol {
                 }
                 
                 nextVC.modalPresentationStyle = .overFullScreen
-                self.present(nextVC, animated: true, completion: nil)
+                self.present(nextVC, animated: false, completion: nil)
 
                 nextVC.delegate = self
                 
@@ -319,18 +385,23 @@ class NotesVC: UIViewController, selectClassProtocol {
         self.navigationController?.pushViewController(uvc, animated: true)
     }
     
-    func sendClassTitle(_ title: String, _ diaryID: Int) {
-        self.selectClassID = diaryID
+    func sendClassTitle(_ title: String, _ lctureId: Int) {
+        self.selectClassID = lctureId
         self.NoteTitleLabel.text = self.userProfile + title + " " + self.note
-        self.setProgress()
         
-        if diaryID == 0 {
+        
+        
+        if lctureId == 0 {
+            classHeaderHidden(true) // 프로그래스바 숨기기
             setNotesInfos() // 전체수업일지 조회
+            islistCall = false
         } else {
+            setProgressInfos()
             getOneNoteInfo() // 특정수업일지 조회
+            islistCall = true // 특정수업일지
         }
         
-        islistCall = false
+        
     }
     
     // Mark - 특정 수업일지 조회 서버통신

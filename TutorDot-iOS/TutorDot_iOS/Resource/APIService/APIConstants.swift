@@ -37,7 +37,7 @@ struct APIConstants {
     // 수업일지
     static let diaryURL = APIConstants.baseURL + "/diary"
     static let diaryLidURL = APIConstants.baseURL + "/diary/:lid"
-    static let diaryBarLidURL = APIConstants.baseURL + "/diary/bar/:lid"
+    static let diaryBarLidURL = APIConstants.baseURL + "/diary/bar"
     static let diaryHwDidURL = APIConstants.baseURL + "/diary/hw"
     
     // 알림

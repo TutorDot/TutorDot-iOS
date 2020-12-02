@@ -10,13 +10,14 @@ import UIKit
 import os
 
 protocol selectClassProtocol: class {
-    func sendClassTitle(_ title: String, _ diaryID: Int)
+    func sendClassTitle(_ title: String, _ lctureId: Int)
 }
 
 class BottomSheetVC: UIViewController {
     
     @IBOutlet weak var BottomSheetTableView: UITableView!
-  
+    @IBOutlet weak var bgView: UIView!
+    
     weak var delegate: selectClassProtocol?
     
     let screenHeight: CGFloat = UIScreen.main.bounds.height
@@ -30,6 +31,9 @@ class BottomSheetVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.bgView.alpha = 0.0
+        
         setupBottomView()
         start()
         
@@ -50,15 +54,18 @@ class BottomSheetVC: UIViewController {
         let heightCalc = (self.customHeight * (CGFloat(classlist.count))) + bottomSafeArea + headerHeight
         
         UIView.animate(withDuration: 0.5,
-                       delay: 0,
+                       delay: 0.0,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 1.0,
                        options: .curveEaseInOut, animations: { [self] in
                         
                         self.BottomSheetTableView.frame = CGRect(x: 0, y: self.screenHeight, width: self.screenWidth, height: heightCalc)
+                        self.bgView.alpha = 0.0
                        }, completion: nil)
         
-        self.dismiss(animated: true, completion: nil)
+
+        
+        self.dismiss(animated: false, completion: nil)
     }
     
     
@@ -78,11 +85,16 @@ class BottomSheetVC: UIViewController {
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,
-                       initialSpringVelocity: 0.5,
+                       initialSpringVelocity: 1,
                        options: .curveEaseInOut, animations: { [self] in
+                        
+                        self.bgView.alpha = 0.37
+                        
                         self.BottomSheetTableView.frame = CGRect(x: 0, y: self.screenHeight - heightCalc, width: self.screenWidth, height: heightCalc)
+                        
                        }, completion: nil)
         
+       
     }
     
 }
