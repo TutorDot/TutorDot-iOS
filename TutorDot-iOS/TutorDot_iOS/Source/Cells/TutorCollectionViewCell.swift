@@ -11,6 +11,7 @@ import UIKit
 class TutorCollectionViewCell: UICollectionViewCell {
 
     static let identifier: String = "TutorCollectionViewCell"
+    let widthDefault: CGFloat = 375
     
     @IBOutlet weak var infoView: UIView! {
         didSet {
@@ -19,9 +20,21 @@ class TutorCollectionViewCell: UICollectionViewCell {
             infoView.layer.shadowColor = UIColor.gray.cgColor
             infoView.layer.shadowOffset = CGSize(width: 0.3, height: 0.3)
             infoView.layer.shadowOpacity = 0.1
-            //infoView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+//            didSet {
+//                let weight: CGFloat = 1 * (UIScreen.main.bounds.width / widthDefault)
+//                let radius: CGFloat = infoView.frame.width / 1.1
+//                let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: weight * radius, height: infoView.frame.height), cornerRadius: 13)
+//
+//                infoView.layer.cornerRadius = 13
+//                infoView.layer.masksToBounds = false
+//                infoView.layer.shadowColor = UIColor.lightGray.cgColor
+//                infoView.layer.shadowOffset = CGSize(width: 3, height: 3)
+//                infoView.layer.shadowRadius = 3
+//                infoView.layer.shadowOpacity = 0.3
+//                infoView.layer.shadowPath = shadowPath.cgPath
+//
+            }
             
-        }
     }
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
