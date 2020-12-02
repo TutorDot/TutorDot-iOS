@@ -62,6 +62,7 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
         bankAccount.keyboardType = .phonePad
     }
     
+    
     @IBAction func timeEndEditing(_ sender: Any) {
         if time.text != "" {
             timeValue = Int(time.text ?? "0")
