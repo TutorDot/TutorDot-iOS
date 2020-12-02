@@ -13,7 +13,8 @@ class JournalDataCell: UITableViewCell {
 
     static let identifier: String = "JournalDataCell"
     let defaultLesson: String  = "진도를 입력해주세요"
-    let defaultHW: String  = "숙제를 입력해주세요"
+    let defaultHW: String = "숙제를 입력해주세요"
+    let widthDefault: CGFloat = 375 //아이폰 11 Pro 기준 가로 길이
     
     @IBOutlet weak var classColorImage: UIImageView!
     @IBOutlet weak var classTitle: UILabel!
@@ -24,8 +25,10 @@ class JournalDataCell: UITableViewCell {
     @IBOutlet weak var tuteeImageView: UIImageView!
     @IBOutlet weak var journalView: UIView! {
         didSet {
+            //그림자 divice별 밸런스 맞추기
+            let weight: CGFloat = 2.02 * (UIScreen.main.bounds.width / widthDefault)
             let radius: CGFloat = journalView.frame.width / 2.1
-            let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 2.1 * radius, height: journalView.frame.height), cornerRadius: 13)
+            let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: weight * radius, height: journalView.frame.height), cornerRadius: 13)
             
             journalView.layer.cornerRadius = 13
             
