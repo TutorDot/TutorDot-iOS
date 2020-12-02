@@ -104,6 +104,7 @@ struct NoteService {
         }
     }
     
+    
     // Mark - PUT : 특정 수업일지 수정하기
     private func makeParameter(_ classProgress: String, _ homework: String, _ hwPerformance: Int) -> Parameters{
         return ["classProgress": classProgress, "homework": homework, "hwPerformance": hwPerformance]
@@ -183,6 +184,50 @@ struct NoteService {
     private func isClassListData(by data:Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(classListData.self, from: data)
+            else {return .pathErr}
+
+        if decodedData.success {
+            return .success(decodedData.data)
+        }
+        else {
+            return .requestErr(decodedData.message)
+        }
+    }
+    
+    // Mark - Get : 수업별 프로그래스 바 정보 가져오기 (진행률 계산)
+    func getProgressBarInfo(lectureID: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+    
+        let dataRequest = Alamofire.request(APIConstants.diaryBarLidURL + "/" + "\(lectureID)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: header)
+        
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judgeBarInfo(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
+    private func judgeBarInfo(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch statusCode {
+            case 200:
+                return isBarData(by: data)
+            case 400, 401: return .pathErr
+            case 500: return .serverErr
+            default: return .networkFail
+        }
+    }
+    
+    private func isBarData(by data:Data) -> NetworkResult<Any> {
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(ProgressBarData.self, from: data)
             else {return .pathErr}
 
         if decodedData.success {
