@@ -3055,32 +3055,27 @@ TutorDot 서비스를 이용하세요!</string>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정기 수업시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wec-ic-h6d">
                                                                 <rect key="frame" x="20" y="30" width="82" height="18"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="18" id="3Me-sd-F1T"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.38" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="J23-AW-yQu">
-                                                                <rect key="frame" x="20" y="58" width="300" height="19"/>
-                                                                <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uz-x6-6tL">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="19"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="height" constant="19" id="8gK-lZ-IaG"/>
-                                                                            <constraint firstAttribute="width" constant="300" id="Rc6-SR-Goc"/>
-                                                                        </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <nil key="highlightedColor"/>
-                                                                    </label>
-                                                                </subviews>
+                                                                <rect key="frame" x="20" y="58" width="335" height="19"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="19" id="vhq-hO-P2f"/>
+                                                                </constraints>
                                                             </stackView>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="J23-AW-yQu" firstAttribute="top" secondItem="Wec-ic-h6d" secondAttribute="bottom" constant="10" id="3Gf-am-Y40"/>
                                                             <constraint firstItem="Wec-ic-h6d" firstAttribute="leading" secondItem="9Xg-yz-yyn" secondAttribute="leading" constant="20" id="btg-iu-I9r"/>
-                                                            <constraint firstItem="J23-AW-yQu" firstAttribute="leading" secondItem="9Xg-yz-yyn" secondAttribute="leading" constant="20" id="eC6-ey-VHB"/>
+                                                            <constraint firstAttribute="trailing" secondItem="J23-AW-yQu" secondAttribute="trailing" constant="20" id="dbX-db-j39"/>
                                                             <constraint firstAttribute="height" constant="77" id="l24-Fc-OxZ"/>
+                                                            <constraint firstItem="J23-AW-yQu" firstAttribute="leading" secondItem="9Xg-yz-yyn" secondAttribute="leading" constant="20" id="mpD-h5-4Db"/>
                                                             <constraint firstItem="Wec-ic-h6d" firstAttribute="top" secondItem="9Xg-yz-yyn" secondAttribute="top" constant="30" id="uf2-Vf-C77"/>
                                                         </constraints>
                                                     </view>
@@ -3272,13 +3267,12 @@ TutorDot 서비스를 이용하세요!</string>
                         <outlet property="bankAccountInfo" destination="pGU-M6-v1i" id="JqL-5e-O3y"/>
                         <outlet property="classColorImage" destination="wjI-Ij-J4u" id="aPY-Qx-QI3"/>
                         <outlet property="classPlace" destination="fe4-Cn-UKF" id="DpT-g8-gRV"/>
-                        <outlet property="classTimeHeightConstraints" destination="8gK-lZ-IaG" id="hV7-3t-nvO"/>
+                        <outlet property="classTimeHeightConstraints" destination="l24-Fc-OxZ" id="dsv-0i-eYW"/>
                         <outlet property="classTimeStackView" destination="J23-AW-yQu" id="mSF-EV-uJ5"/>
                         <outlet property="classTitle" destination="29N-3f-QX5" id="AZX-QU-Pel"/>
                         <outlet property="editButton" destination="cOH-jy-sd1" id="Ye8-k2-VdC"/>
                         <outlet property="headerHeightContraints" destination="tJv-zQ-gBA" id="Sq1-fg-iVy"/>
                         <outlet property="leaveClassLabel" destination="YUF-rg-fbs" id="zbA-7W-FvE"/>
-                        <outlet property="regularClassTime" destination="2uz-x6-6tL" id="U30-6j-Afi"/>
                         <outlet property="stackList" destination="phE-eI-p14" id="E14-n0-Vor"/>
                         <outlet property="timeAndPrice" destination="Uzc-RG-9P7" id="hbb-bm-eEh"/>
                         <outlet property="tutorIntro" destination="ZZN-oI-TGF" id="9ri-2y-kmJ"/>

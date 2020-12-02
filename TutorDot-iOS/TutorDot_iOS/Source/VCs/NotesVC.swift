@@ -25,6 +25,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     
 
  
+    @IBOutlet weak var topHeaderView: UIView!
     @IBOutlet weak var progressLabel: UILabel!
     @IBOutlet weak var currentClassLabel: UILabel!
     @IBOutlet weak var totalClassLabel: UILabel!
@@ -58,6 +59,10 @@ class NotesVC: UIViewController, selectClassProtocol {
         } else { //false (보일때)
             tableViewTopMargin.constant = 150
         }
+        
+        UIView.animate(withDuration: 1, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 0.0, options: [], animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
     
@@ -65,7 +70,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     func setProgress(){
         
-        progressHide(false) //프로그래스바 보이기
+        classHeaderHidden(false) //프로그래스바 보이기
         self.progressView.setProgress(0.0, animated: false)
         
         progressView.layer.cornerRadius = 7
@@ -87,13 +92,8 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         progressLabel.text = String(format: "%.f", rate*100) + "%"
         currentClassLabel.text = "\(self.barCurrentTimes)" + "회차, " + "\(self.barCurrentHour)" + "시간"
-        totalClassLabel.text =  "\(self.barTotal)" + "시간"
+        totalClassLabel.text =  "총 " + "\(self.barTotal)" + "시간"
         
-    }
-   
-    func progressHide(_ status: Bool){
-        
-        classHeaderHidden(status)
     }
     
     
@@ -127,8 +127,15 @@ class NotesVC: UIViewController, selectClassProtocol {
         setMonthLabel(month)
         
         NotesInfos.removeAll()
-        setNotesInfos()
-        setProgressInfos()
+        
+        if selectClassID == 0 {
+            classHeaderHidden(true) // 프로그래스바 숨기기
+            setNotesInfos() // 전체수업일지 조회
+            islistCall = false
+        } else {
+            setProgressInfos()
+            getOneNoteInfo() // 특정수업일지 조회
+        }
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
@@ -140,8 +147,15 @@ class NotesVC: UIViewController, selectClassProtocol {
         }
         setMonthLabel(month)
         NotesInfos.removeAll()
-        setNotesInfos()
-        setProgressInfos()
+        
+        if selectClassID == 0 {
+            classHeaderHidden(true) // 프로그래스바 숨기기
+            setNotesInfos() // 전체수업일지 조회
+            islistCall = false
+        } else {
+            setProgressInfos()
+            getOneNoteInfo() // 특정수업일지 조회
+        }
     }
    
    
@@ -178,7 +192,6 @@ class NotesVC: UIViewController, selectClassProtocol {
   
         
         MonthInit()
-        
         setNotesInfos()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         setProfile()
@@ -186,6 +199,7 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         //기종별 최상단 헤더뷰 높이 조정
         viewHeaderHeight.constant = self.view.frame.height * 94/812
+        self.view.bringSubviewToFront(self.topHeaderView)
         
         //스크롤 시 0월 수업일지 부분 숨기기
        // swipeAction()
@@ -233,11 +247,9 @@ class NotesVC: UIViewController, selectClassProtocol {
                         self.barCurrentTimes  = item.times
                     }
                 }
-                print("progress set", self.barTotal, self.barCurrentTimes, self.barCurrentHour)
                 
                 self.setProgress()
-                
-                
+            
             case .pathErr :
                 os_log("PathErr-Profile", log: .note)
             case .serverErr :
@@ -325,7 +337,7 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         islistCall = true
         NotesInfos.removeAll()
-        progressHide(true) // 프로그래스바 숨기기
+        classHeaderHidden(true) // 프로그래스바 숨기기
         self.progressView.setProgress(0.0, animated: false)
         
         // Mark - 수업리스트 가져오기 서버통신
@@ -375,14 +387,15 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         
         if lctureId == 0 {
-            progressHide(true) // 프로그래스바 숨기기
+            classHeaderHidden(true) // 프로그래스바 숨기기
             setNotesInfos() // 전체수업일지 조회
+            islistCall = false
         } else {
             setProgressInfos()
             getOneNoteInfo() // 특정수업일지 조회
         }
         
-        islistCall = false
+        
     }
     
     // Mark - 특정 수업일지 조회 서버통신

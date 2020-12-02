@@ -78,7 +78,7 @@
                                                 </constraints>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6회차, 12시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q1i-Kb-Jod">
-                                                <rect key="frame" x="225" y="63" width="69" height="15"/>
+                                                <rect key="frame" x="20" y="63" width="69" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="d5M-zF-I6D"/>
                                                 </constraints>
@@ -86,8 +86,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16시간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ur9-lg-OcA">
-                                                <rect key="frame" x="333" y="62.000000000000007" width="34" height="14.333333333333336"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="16시간" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ur9-lg-OcA">
+                                                <rect key="frame" x="313" y="62" width="54" height="14"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -103,7 +103,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="q1i-Kb-Jod" firstAttribute="leading" secondItem="Wqa-MG-Nu8" secondAttribute="leading" constant="225" id="6qj-50-3bc"/>
+                                            <constraint firstItem="q1i-Kb-Jod" firstAttribute="leading" secondItem="Wqa-MG-Nu8" secondAttribute="leading" constant="20" id="6qj-50-3bc"/>
                                             <constraint firstAttribute="trailing" secondItem="KOi-HZ-6k6" secondAttribute="trailing" constant="16" id="8rt-Uu-dZg"/>
                                             <constraint firstItem="4UN-hv-E3Y" firstAttribute="centerY" secondItem="KOi-HZ-6k6" secondAttribute="centerY" id="BMX-6B-5gU"/>
                                             <constraint firstItem="KOi-HZ-6k6" firstAttribute="leading" secondItem="Wqa-MG-Nu8" secondAttribute="leading" constant="16" id="MzF-Ur-r3J"/>
@@ -326,13 +326,14 @@
                         <outlet property="progressViewWrap" destination="0FM-gv-Njd" id="Cjl-ZE-dk1"/>
                         <outlet property="tableView" destination="M9O-bg-GAs" id="wwN-qd-mrB"/>
                         <outlet property="tableViewTopMargin" destination="Kqi-qC-1eC" id="Quq-gG-B7k"/>
+                        <outlet property="topHeaderView" destination="zeE-ma-jPS" id="kRj-Oa-Geq"/>
                         <outlet property="totalClassLabel" destination="ur9-lg-OcA" id="pC1-2N-LSb"/>
                         <outlet property="viewHeaderHeight" destination="sNg-Hg-bLB" id="q2E-9j-HXc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="61L-Eb-pnc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4829" y="690"/>
+            <point key="canvasLocation" x="4827.6923076923076" y="688.86255924170609"/>
         </scene>
         <!--Notes ModifyVC-->
         <scene sceneID="0Ue-48-3PF">

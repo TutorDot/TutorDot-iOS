@@ -17,7 +17,16 @@ class MyClassInfoVC: UIViewController {
     var classId: Int = 0
     var profileUrl: String = ""
     var classTimeInfo: [String] = []
- 
+    
+    
+    //최대 다섯개 시간 라벨 넣을 수 있음
+    let timeLabel00 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
+    let timeLabel01 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
+    let timeLabel02 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
+    let timeLabel03 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
+    let timeLabel04 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
+    var timeLabels = [UILabel]()
+    
     @IBOutlet weak var leaveClassLabel: UILabel!
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
@@ -26,7 +35,6 @@ class MyClassInfoVC: UIViewController {
     @IBOutlet weak var TutorProfileImage: UIImageView!
     @IBOutlet weak var timeAndPrice: UILabel!
     @IBOutlet weak var bankAccountInfo: UILabel!
-    @IBOutlet weak var regularClassTime: UILabel!
     @IBOutlet weak var classPlace: UILabel!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var classTitle: UILabel!
@@ -44,6 +52,11 @@ class MyClassInfoVC: UIViewController {
         isTuteeSet()
         self.tabBarController?.tabBar.isHidden = true
         
+        timeLabels.append(timeLabel00)
+        timeLabels.append(timeLabel01)
+        timeLabels.append(timeLabel02)
+        timeLabels.append(timeLabel03)
+        timeLabels.append(timeLabel04)
     }
     
     func isTuteeSet(){
@@ -124,23 +137,17 @@ class MyClassInfoVC: UIViewController {
         
         for i in 0...schedule.count-1 {
             let info: String = "\(schedule[i].day)" + " " + "\(schedule[i].orgStartTime)" + " " + "\(schedule[i].orgEndTime)"
+            
+            self.timeLabels[i].text = info
+            self.timeLabels[i].font = UIFont.systemFont(ofSize: 15, weight: .medium)
+            classTimeStackView.addSubview(self.timeLabels[i])
             self.classTimeInfo.append(info)
         }
+
+        classTimeHeightConstraints.constant = 58 + CGFloat((self.classTimeInfo.count * 19))
     }
     
-    
 
-    func setTimesData(){
-
-        var timesList: [String] = []
-
-        //시간 데이터 받아와서 추가
-        timesList.append("월 01:00pm ~ 03:00pm")
-        timesList.append("금 01:00pm ~ 03:00pm")
-
-//        classTimeStackView.addSubview(<#T##view: UIView##UIView#>)
-        classTimeHeightConstraints.constant = 83 + CGFloat((timesList.count * 20))
-    }
 
     
     @IBAction func editButtonDidTap(_ sender: Any) {
