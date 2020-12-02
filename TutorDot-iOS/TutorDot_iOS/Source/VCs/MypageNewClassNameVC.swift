@@ -56,6 +56,7 @@ class MypageNewClassNameVC: UIViewController {
         
         newColor = "yellow"
     }
+    
     @IBAction func greenColorDidTap(_ sender: Any) {
         redColor.setImage(UIImage(named: defaultImages[0]), for: .normal)
         yellowColor.setImage(UIImage(named: defaultImages[1]), for: .normal)
@@ -75,6 +76,7 @@ class MypageNewClassNameVC: UIViewController {
         
         newColor = "blue"
     }
+    
     @IBAction func purpleColorDidTap(_ sender: Any) {
         redColor.setImage(UIImage(named: defaultImages[0]), for: .normal)
         yellowColor.setImage(UIImage(named: defaultImages[1]), for: .normal)
@@ -91,7 +93,7 @@ class MypageNewClassNameVC: UIViewController {
     }
     
     @IBAction func closeButtonDidTap(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @IBAction func nextButtonDidTap(_ sender: Any) {

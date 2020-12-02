@@ -141,11 +141,12 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
         
         //시작 시간을 선택했으면 끝나는 시간도 똑같이 셋팅해주기 (사용자 편의)
         if component == 1 && startHours[pickerView.selectedRow(inComponent: 1)] != "00" {
-            startH = startHours[pickerView.selectedRow(inComponent: 1)]
+            
             pickerView.selectRow(row, inComponent: 3, animated: true)
-            endH = endHours[pickerView.selectedRow(inComponent: 3)]
+
         }
         
+        startH = startHours[pickerView.selectedRow(inComponent: 1)]
         startM = startMins[pickerView.selectedRow(inComponent: 2)]
         endH = endHours[pickerView.selectedRow(inComponent: 3)]
         endM = endMins[pickerView.selectedRow(inComponent: 4)]
@@ -189,6 +190,7 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
                 startH = "0" + startH
             }
         }
+        
         // 13~23시 가공
         if Int(endH)! > 12 {
             let newEndH: Int = Int(endH)! - 12
@@ -201,7 +203,7 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
         // 최종 시간 format 맞추기
         startTime = startH + ":" + startM + ampm1
         endTime = endH + ":" + endM + ampm2
-        classTimes.text = days + " " + startH + ":" + startM + ampm1 + " ~ " + endH + ":" + endM + ampm2
+        classTimes.text = days + " " + startTime + " ~ " + endTime
         
         
     }

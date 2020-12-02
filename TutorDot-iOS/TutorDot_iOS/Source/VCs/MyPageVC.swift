@@ -9,8 +9,12 @@
 import UIKit
 import os
 import Kingfisher
+<<<<<<< HEAD
 import SafariServices
 
+=======
+import Lottie
+>>>>>>> note
 
 class MyPageVC: UIViewController {
 
@@ -38,6 +42,34 @@ class MyPageVC: UIViewController {
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
     
+    
+    @IBOutlet var mainView: UIView! // VC 최상위뷰
+    let animationView = AnimationView()
+    
+    func loadingAnimation(){
+        
+        animationView.animation = Animation.named("loading") // 로티 이름으로 애니메이션 등록
+        
+        animationView.frame = view.bounds //animationView 크기가 view와 같게
+        animationView.center = self.view.center
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .loop
+        self.mainView.addSubview(animationView)
+
+        animationView.play()
+    }
+    
+    func loadingAnimationStop(){
+
+        
+        animationView.stop()
+
+        animationView.removeFromSuperview()
+//        animationView.layer.removeAllAnimations()
+       
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +80,6 @@ class MyPageVC: UIViewController {
         setMyClassInfos() // 수업 리스트 셋팅
         tableView.delegate = self
         tableView.dataSource = self
-        
         classCollectionView.delegate = self
         classCollectionView.dataSource = self
         
@@ -123,6 +154,8 @@ class MyPageVC: UIViewController {
     
     func setMyClassInfos(){
         
+//        loadingAnimation()
+        
         // MARK - 수업 리스트 서버통신
         ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
             switch networkResult {
@@ -147,7 +180,11 @@ class MyPageVC: UIViewController {
             
             
         }
+        
+      
     }
+    
+    
     
     func setSettingView(){
         let alert1 = MypageInfo(title: "수업료 알림 (서비스 준비 중)")
@@ -237,11 +274,13 @@ class MyPageVC: UIViewController {
             if myRole.text == "튜터"{
                 // 튜터일 때, 수업 추가 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MypageNewClassNameVC") as? MypageNewClassNameVC else {return}
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
 
             } else if myRole.text == "튜티" {
                 // 튜티일 때, 수업 초대코드 입력 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InviteCodeVC") as? InviteCodeVC else {return}
+                
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

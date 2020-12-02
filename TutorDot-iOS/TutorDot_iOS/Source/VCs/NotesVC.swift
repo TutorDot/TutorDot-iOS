@@ -31,7 +31,8 @@ class NotesVC: UIViewController, selectClassProtocol {
     @IBOutlet weak var totalClassLabel: UILabel!
     @IBOutlet weak var monthLable: UILabel!
     @IBOutlet weak var NoteTitleLabel: UILabel!
-    
+    @IBOutlet weak var listButton: UIButton!
+    @IBOutlet weak var alertButton: UIButton!
     
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     let dummyUser = "dummy"
@@ -209,7 +210,10 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         //기종별 최상단 헤더뷰 높이 조정
         viewHeaderHeight.constant = self.view.frame.height * 94/812
+        
         self.view.bringSubviewToFront(self.topHeaderView)
+        self.view.bringSubviewToFront(self.listButton)
+        self.view.bringSubviewToFront(self.alertButton)
         
         //스크롤 시 0월 수업일지 부분 숨기기
        // swipeAction()
@@ -224,6 +228,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("note view will appear")
         if isFirstRunning == false {
             if islistCall == false {
                 classHeaderHidden(true)
@@ -232,7 +237,6 @@ class NotesVC: UIViewController, selectClassProtocol {
                 setProgressInfos() //특정수업일지 프로그래스
                 getOneNoteInfo() // 특정수업일지 조회
             }
-            
         }
     }
 
@@ -293,7 +297,7 @@ class NotesVC: UIViewController, selectClassProtocol {
                     self.userProfile = "\(data.userName) 튜티 "
                 }
                 
-                self.NoteTitleLabel.text = self.userProfile + "전체 " + self.note
+                self.NoteTitleLabel.text = "전체 " + self.note
                 
             case .pathErr :
                 os_log("PathErr-Profile", log: .note)
@@ -391,15 +395,20 @@ class NotesVC: UIViewController, selectClassProtocol {
     }
     
     @IBAction func alertButtonDidTap(_ sender: Any) {
+        
+        
         let alertStoryboard = UIStoryboard.init(name: "Alert", bundle : nil)
         let uvc = alertStoryboard.instantiateViewController(withIdentifier: "AlertServiceVC")
+        
         uvc.hidesBottomBarWhenPushed = true
+        
         self.navigationController?.pushViewController(uvc, animated: true)
+
     }
     
     func sendClassTitle(_ title: String, _ lctureId: Int) {
         self.selectClassID = lctureId
-        self.NoteTitleLabel.text = self.userProfile + title + " " + self.note
+        self.NoteTitleLabel.text = title + " " + self.note
         
         
         
@@ -467,11 +476,12 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
         let days = Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section]
         
         return self.NotesInfos.filter{ $0.dayWeek == days }.count
+//        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
 
-        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).count
+        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count
     }
     
  

@@ -59,8 +59,9 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
         time.keyboardType = .numberPad
         price.keyboardType = .numberPad
         bank.keyboardType = .default
-        bankAccount.keyboardType = .phonePad
+        bankAccount.keyboardType = .numberPad
     }
+    
     
     @IBAction func timeEndEditing(_ sender: Any) {
         if time.text != "" {
