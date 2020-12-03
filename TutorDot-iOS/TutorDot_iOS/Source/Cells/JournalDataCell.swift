@@ -58,6 +58,7 @@ class JournalDataCell: UITableViewCell {
         
         classColorImage.image = UIImage(named: color)
         classTitle.text = title
+        
         if lesson == defaultLesson {
             lessonLabel.text = defaultLesson
             lessonLabel.textColor = UIColor.gray

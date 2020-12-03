@@ -58,6 +58,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     var barCurrentHour: Int = 0
     let animationView = AnimationView()
     var isAnimationRunning: Bool = false
+ 
     
     // 드랍다운
     var dropDown: DropDown?
@@ -232,10 +233,14 @@ class NotesVC: UIViewController, selectClassProtocol {
   
         
         MonthInit()
-        setNotesInfos()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         setProfile()
        
+        if isFirstRunning {
+            classHeaderHidden(true)
+            setNotesInfos()
+        }
+        
         gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
@@ -269,8 +274,9 @@ class NotesVC: UIViewController, selectClassProtocol {
         }
         
         if isFirstRunning {
-            isFirstRunning = false
+            self.isFirstRunning = false
         }
+        
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -548,19 +554,17 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate {
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
         
-        if isAnimationRunning == false {
-            print(indexPath.count, "인덱스패스 개수", indexPath.section, "section", indexPath.row, "row", NotesInfos.count, "데이터 개수")
-            
-            let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
-            
-            
-            
-            let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+                 
+        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
         
-            notesCell.setNoteCell(dayItems.color,
-                                  dayItems.profileUrl, dayItems.lectureName, dayItems.times, dayItems.hour, dayItems.classProgress, dayItems.homework, dayItems.hwPerformance)
-            
-        }
+        
+        
+        let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+    
+        notesCell.setNoteCell(dayItems.color,
+                              dayItems.profileUrl, dayItems.lectureName, dayItems.times, dayItems.hour, dayItems.classProgress, dayItems.homework, dayItems.hwPerformance)
+        
+        
         
         return notesCell
         
