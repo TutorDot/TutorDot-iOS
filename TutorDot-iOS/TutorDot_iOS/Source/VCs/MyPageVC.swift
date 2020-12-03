@@ -47,6 +47,7 @@ class MyPageVC: UIViewController {
     
     func loadingAnimation(){
         
+<<<<<<< HEAD
         animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
         animationView.frame = view.bounds
         print(self.view.frame.size.height / 2, "눂이")
@@ -55,6 +56,11 @@ class MyPageVC: UIViewController {
         } else {
             animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
         }
+=======
+        animationView.animation = Animation.named("loading_re") // 로티 이름으로 애니메이션 등록
+        animationView.frame = view.bounds //animationView 크기가 view와 같게
+//        animationView.center = self.view.center
+>>>>>>> note
         animationView.contentMode = .scaleAspectFill
         animationView.loopMode = .playOnce
         self.mainView.addSubview(animationView)
@@ -72,6 +78,9 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
         setSettingView()
         setMyclassViews()
         setProfile()
@@ -82,9 +91,7 @@ class MyPageVC: UIViewController {
         classCollectionView.delegate = self
         classCollectionView.dataSource = self
         
-        // scroll refresh
-        tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
         
         classCollectionView.register(UINib.init(nibName: "MypageNoClassCell", bundle: nil), forCellWithReuseIdentifier: "MypageNoClassCell")
         
@@ -93,21 +100,20 @@ class MyPageVC: UIViewController {
         } else {
             dummyView.isHidden = true
         }
+<<<<<<< HEAD
         loadingAnimation()
+=======
+        
+>>>>>>> note
         var appdelegate = UIApplication.shared.delegate as? AppDelegate
         
         
     }
     
-    @objc func refresh(){
-        // refresh Action
-        MyClassInfos.removeAll()
-        setMyClassInfos()
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         
+        loadingAnimation()
         classCollectionView.isScrollEnabled = true
         classCollectionView.contentSize = CGSize(width: 206, height: 81)
         
@@ -152,9 +158,6 @@ class MyPageVC: UIViewController {
     private var Service: [MypageInfo] = []
     
     func setMyClassInfos(){
-        
-//        loadingAnimation()
-        
         // MARK - 수업 리스트 서버통신
         ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
             switch networkResult {
@@ -169,15 +172,19 @@ class MyPageVC: UIViewController {
                     self.classCollectionView.reloadData()
                     self.loadingAnimationStop()
                 case .pathErr :
+                    self.loadingAnimationStop()
                     os_log("PathErr", log: .mypage)
                     self.loadingAnimationStop()
                 case .serverErr :
+                    self.loadingAnimationStop()
                     os_log("ServerErr", log: .mypage)
                     self.loadingAnimationStop()
                 case .requestErr(let message) :
+                    self.loadingAnimationStop()
                     print(message)
                     self.loadingAnimationStop()
                 case .networkFail:
+                    self.loadingAnimationStop()
                     os_log("networkFail", log: .mypage)
                     self.loadingAnimationStop()
             }
@@ -186,7 +193,10 @@ class MyPageVC: UIViewController {
         }
         
         
+<<<<<<< HEAD
       
+=======
+>>>>>>> note
     }
     
     
@@ -210,7 +220,7 @@ class MyPageVC: UIViewController {
         ProfileService.ProfileServiceShared.setMyProfile() { networkResult in
             switch networkResult {
                 case .success(let resultData):
-                    os_log("profile success", log: .mypage)
+                    os_log("1....profile success", log: .mypage)
                     guard let data = resultData as? UserProfile else { return print(Error.self) }
                         self.usernameLabel.text =  data.userName
                     if data.role == "tutor" {
@@ -238,7 +248,7 @@ class MyPageVC: UIViewController {
                 case .serverErr :
                     os_log("ServerErr", log: .mypage)
                 case .requestErr(let message) :
-                    os_log(message as! StaticString, log: .mypage)
+                    print(message)
                 case .networkFail:
                     os_log("networkFail", log: .mypage)
             }

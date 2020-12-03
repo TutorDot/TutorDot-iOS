@@ -35,26 +35,88 @@ struct ProfileService {
         }
     }
     
-//    func uploadImage(_ token: String, _ userName: String, _ role: String,_ intro: String, _ image: UIImage, _ imageName: String, completion: @escaping (NetworkResult<Any>) -> Void) { let headers: HTTPHeaders = ["Content-Type" : "multipart/form-data", "jwt" : token]
-//
-//            Alamofire.upload(multipartFormData: { multipartFormData in
-//                let imageData = image.jpegData(compressionQuality: 1.0)!
-//                multipartFormData.append(imageData, withName: "profile", fileName: imageName, mimeType: "image/jpeg")
-//            }, usingThreshold: UInt64.init(), to: APIConstants.profileURL, method: .post, headers: headers, encodingCompletion: { (result) in switch result {
-//            case .success(let upload, _, _): upload.uploadProgress(closure: { (progress) in
-//                print(progress.fractionCompleted) })
-//            upload.responseData { response in
-//                guard let statusCode = response.response?.statusCode,
-//                let data = response.result.value else { return }
-//                let networkResult = self.judge(by: statusCode, data)
-//                completion(networkResult)
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//                completion(.networkFail) }
-//            })
-//
-//        }
+    // Mark - 이미지 url 업로드 서버통신
+    private func makeParameterImage(_ userName: String, _ role: String, _ intro:  String) -> Parameters{
+        return ["userName": userName, "role": role,  "intro": intro]
+    }
+    
+    func uploadImage(_ image: UIImage, _ imageName: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let headers: HTTPHeaders = ["Content-Type" : "multipart/form-data", "jwt" : UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+
+            Alamofire.upload(multipartFormData: { multipartFormData in
+                let imageData = image.jpegData(compressionQuality: 1.0)!
+                multipartFormData.append(imageData, withName: "profile", fileName: imageName, mimeType: "image/jpeg")
+            }, usingThreshold: UInt64.init(), to: APIConstants.profileURL, method: .post, headers: headers, encodingCompletion: { (result) in switch result {
+            case .success(let upload, _, _): upload.uploadProgress(closure: { (progress) in
+                print(progress.fractionCompleted) })
+            upload.responseData { response in
+                guard let statusCode = response.response?.statusCode,
+                let data = response.result.value else { return }
+                let networkResult = self.judgeUpload(by: statusCode, data)
+                completion(networkResult)
+                }
+                print("프로필 사진 등록 성공")
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(.networkFail) }
+            })
+
+    }
+    
+    
+    private func judgeUpload(by StatusCode: Int, _ data: Data) -> NetworkResult<Any> {
+        switch StatusCode {
+        case 200 :
+            print("프로필 사진 등록 성공 200")
+            return isUpdating(by: data)
+        case 400 :
+            return .pathErr
+        case 500 :
+            return .serverErr
+        default:
+            return .networkFail
+        }
+    }
+    
+    private func isUpdating(by data: Data) -> NetworkResult<Any> {
+        
+        let decoder = JSONDecoder()
+        guard let decodedData = try? decoder.decode(ProfileData.self, from: data)
+        else { return .pathErr }
+        
+        if decodedData.success {
+            guard let profileData = decodedData.data else { return .requestErr(decodedData.message) }
+            print("프로필 사진 등록 성공", profileData.profileUrl)
+            return .success(profileData)
+        } else {
+            return .requestErr(decodedData.message)
+        }
+    }
+    
+    // Mark - Put : 프로필 수정 - 자기소개
+    private func makeParameterIntro(_ intro: String) -> Parameters{
+        return ["intro": intro]
+    }
+    
+    func editProfile(intro: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        // 토큰 가져오기
+        let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
+        
+        let dataRequest = Alamofire.request(APIConstants.profileintroURL, method: .put, parameters: makeParameterIntro(intro), headers: header)
+        
+        dataRequest.responseData { dataResponse in
+            switch dataResponse.result {
+            case .success :
+                guard let statusCode = dataResponse.response?.statusCode else {return}
+                guard let value = dataResponse.result.value else {return}
+                let networkResult = self.judge(by: statusCode,value)
+                completion(networkResult)
+            case .failure : completion(.networkFail)
+            }
+        }
+    }
+    
     
     private func judge(by StatusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch StatusCode {
@@ -68,6 +130,7 @@ struct ProfileService {
             return .networkFail
         }
     }
+    
     
     private func isLookup(by data: Data) -> NetworkResult<Any> {
         

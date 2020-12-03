@@ -23,7 +23,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     @IBOutlet weak var place: UITextField!
     
     let classAddedHeight: CGFloat = 37
-    
+    var currentRow: Int = 0
     // 이전 뷰에서 받을 내용들
     var className: String = ""
     var classColor: String = ""
@@ -36,7 +36,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     var defaultClassTime: [String] = []
    
     var schedules: [Schedules] = []
-    var classPlace: String?
+    var classPlace: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,14 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        place.addTarget(self, action: #selector(InviteCodeVC.textFieldDidChange(_:)), for: .editingChanged)
+        
+        
+        
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        self.classPlace = place?.text ?? ""
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
@@ -78,17 +86,20 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     @IBAction func completeButtonDidTap(_ sender: Any) {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
-
-        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace ?? "", tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
+        print(classTime)
+        print("수업 추가 - 수업 시간목록")
+        AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
             networkResult in
             switch networkResult {
             case .success(let token) :
-               
-                guard let token = token as? String else { return }
-                UserDefaults.standard.set(token, forKey: "token")
+
                 // 서버 통신 성공 후 성공 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "AddClassCompleteVC") as? AddClassCompleteVC else {return}
                 self.navigationController?.pushViewController(nextVC, animated: true)
+                
+                guard let token = token as? String else { return }
+                UserDefaults.standard.set(token, forKey: "token")
+                
                 
             case .requestErr(let message) :
                 guard let message = message as? String else { return }
@@ -132,9 +143,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
         }
     }
     
-    @IBAction func placeEndEditing(_ sender: Any) {
-        self.classPlace = place.text ?? ""
-    }
+
     
     
 
@@ -163,8 +172,8 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         
         return cell
-
     }
+    
 }
 
 
@@ -173,4 +182,11 @@ extension MypageNewClassTimeVC: TimeSendDelegate {
         let schedule = Schedules(days, startTime, endTime)
         schedules.append(schedule)
     }
+    
+    func classTimeDelete(){
+        if schedules.count > 0 {
+            schedules.removeLast()
+        }
+    }
+    
 }

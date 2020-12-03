@@ -26,7 +26,7 @@ class JournalDataCell: UITableViewCell {
     @IBOutlet weak var journalView: UIView! {
         didSet {
             //그림자 divice별 밸런스 맞추기
-            let weight: CGFloat = 2.02 * (UIScreen.main.bounds.width / widthDefault)
+            let weight: CGFloat = 2.5 * (UIScreen.main.bounds.width / widthDefault)
             let radius: CGFloat = journalView.frame.width / 2.1
             let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: weight * radius, height: journalView.frame.height), cornerRadius: 13)
             

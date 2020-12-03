@@ -43,7 +43,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     let dateFormatter = DateFormatter()
     let cal = Calendar(identifier: .gregorian)
 //    let dateFomatterDetail = DateFormatter()
-    var isFirstRunning: Bool = false
+    var isFirstRunning: Bool = true
     private var NotesInfos: [NotesContent] = []
     let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
     var userProfile: String = ""
@@ -206,6 +206,7 @@ class NotesVC: UIViewController, selectClassProtocol {
         setNotesInfos()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         setProfile()
+       
         gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
@@ -224,11 +225,10 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         self.tableView.reloadData()
         
-        isFirstRunning = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("note view will appear")
+    
         if isFirstRunning == false {
             if islistCall == false {
                 classHeaderHidden(true)
@@ -237,6 +237,10 @@ class NotesVC: UIViewController, selectClassProtocol {
                 setProgressInfos() //특정수업일지 프로그래스
                 getOneNoteInfo() // 특정수업일지 조회
             }
+        }
+        
+        if isFirstRunning {
+            isFirstRunning = false
         }
     }
 

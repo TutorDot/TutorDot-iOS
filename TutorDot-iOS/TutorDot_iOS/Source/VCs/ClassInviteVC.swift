@@ -43,8 +43,7 @@ class ClassInviteVC: UIViewController {
         MypageService.MypageServiceShared.getInvitaionCode(classId: classId) { networkResult in
             switch networkResult {
             case .success(let resultData):
-                os_log("초대코드 가져오기 success!!!", log: .mypage)
-                print(resultData)
+               
                 guard let data = resultData as? ClassInvitationCode else { print(Error.self)
                     return }
                 

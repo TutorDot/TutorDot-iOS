@@ -17,6 +17,7 @@ struct APIConstants {
     static let signupURL = APIConstants.baseURL + "/user/signup"
     static let signinURL = APIConstants.baseURL + "/user/signin"
     static let profileURL = APIConstants.baseURL + "/user/profile"
+    static let profileintroURL = APIConstants.baseURL + "/user/intro"
     static let idCheckURL = APIConstants.baseURL + "/user/signin/duplication"
     static let changePassword = APIConstants.baseURL + "/user/changepassword"
     
