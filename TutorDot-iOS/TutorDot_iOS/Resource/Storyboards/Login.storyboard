@@ -515,6 +515,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="LaN-1H-Tw9" id="bez-s0-mHw"/>
+                        <outlet property="labelToLeftConstraint" destination="ioB-MQ-4Mf" id="hMU-6l-va9"/>
                         <outlet property="loginButton" destination="Y1c-vH-2g0" id="3z0-hZ-7hn"/>
                         <outlet property="passWordTextField" destination="1HB-bJ-MHY" id="EED-d8-08q"/>
                     </connections>

@@ -26,13 +26,11 @@ class OnboardingNewVC: UIViewController {
     @IBOutlet weak var signUpButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var signUpButtonToPageControlConstraint: NSLayoutConstraint!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var alreadyUserLabel: UILabel!
     
-    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비")
+        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비1")
         onboardingCollectionView.delegate = self
         onboardingCollectionView.dataSource = self
         setImage()
@@ -43,8 +41,25 @@ class OnboardingNewVC: UIViewController {
         signUpButton.isHidden = true
         checkLastPage()
         print(self.view.frame.size.height, "11 pro max")
-        
-        
+        // promax
+        if self.view.frame.size.height > 850 {
+            onboardingCollectionView.frame.size.height = 551
+            onboardingCollectionView.frame.size.width = 414
+            collectionViewHeightConstraint.constant = 551
+            collectionViewWidthConstraint.constant = 414
+            pageControltoCollectionView.constant = 60
+        // se
+        } else if self.view.frame.size.height < 700 {
+            onboardingCollectionView.frame.size.height = 502
+            onboardingCollectionView.frame.size.width = 375
+            pageControltoCollectionView.constant = 15
+        // 11 pro
+        } else {
+            onboardingCollectionView.frame.size.height = 502
+            onboardingCollectionView.frame.size.width = 375
+            pageControltoCollectionView.constant = 40
+        }
+        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비2")
         
     }
     
@@ -53,22 +68,29 @@ class OnboardingNewVC: UIViewController {
             onboardingCollectionView.frame.size.height = 551
             onboardingCollectionView.frame.size.width = 414
         } else {
-//            collectionViewWidthConstraint.constant = 375
-//            collectionViewHeightConstraint.constant = 502
             onboardingCollectionView.frame.size.height = 502
             onboardingCollectionView.frame.size.width = 375
         }
-        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if self.view.frame.size.height > 850 {
+            onboardingCollectionView.frame.size.height = 551
+            onboardingCollectionView.frame.size.width = 414
+        } else {
+            onboardingCollectionView.frame.size.height = 502
+            onboardingCollectionView.frame.size.width = 375
+        }
+        print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비3")
     }
     
     func setHeight() {
         // SE
         if (self.view.frame.size.height) < 700 {
-            collectionViewHeightConstraint.constant = 510
+            onboardingCollectionView.frame.size.height = 510
             collectionViewToTopConstraint.constant = 60
         } else if (self.view.frame.size.height) > 700 && (self.view.frame.size.height) < 800 {
-            // PRO
-            collectionViewHeightConstraint.constant = 510
+            onboardingCollectionView.frame.size.height = 510
             collectionViewToTopConstraint.constant = 100
             pageControltoCollectionView.constant = 40
             
@@ -120,12 +142,7 @@ class OnboardingNewVC: UIViewController {
         mainView.modalPresentationStyle = .fullScreen
         self.present(mainView, animated: true, completion: nil)
     }
-    
-    
-    @IBAction func loginButton(_ sender: Any) {
-        
-        
-    }
+
     
     func checkLastPage(){
         
@@ -170,26 +187,34 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
         if pageControl.currentPage == pageControl.numberOfPages - 1 {
             signUpButton.isHidden = false
             // pro
-            if (self.view.frame.size.height) > 700 {
-                //collectionViewHeightConstraint.constant = 450
+            if (self.view.frame.size.height) > 700 && self.view.frame.size.height < 840 {
                 collectionViewToTopConstraint.constant = 60
                 pageControltoCollectionView.constant = 20
+            //pro max
+            } else if self.view.frame.size.height > 850 {
+                collectionViewToTopConstraint.constant = 80
+                pageControltoCollectionView.constant = 20
+            // SE
             } else {
-                collectionViewToTopConstraint.constant = 20
+                collectionViewToTopConstraint.constant = 30
                 pageControltoCollectionView.constant = 5
                 signUpButtonToPageControlConstraint.constant = 7
             }
         } else {
             signUpButton.isHidden = true
             //pro
-            if (self.view.frame.size.height) > 700 {
-                collectionViewHeightConstraint.constant = 510
+            if (self.view.frame.size.height) > 700 && (self.view.frame.size.height) < 840 {
+                onboardingCollectionView.frame.size.height = 510
                 collectionViewToTopConstraint.constant = 100
                 pageControltoCollectionView.constant = 40
+            } else if self.view.frame.size.height > 850{
+                onboardingCollectionView.frame.size.height = 551
+                collectionViewToTopConstraint.constant = 100
+                pageControltoCollectionView.constant = 60
             } else {
-                collectionViewHeightConstraint.constant = 510
+                onboardingCollectionView.frame.size.height = 510
                 collectionViewToTopConstraint.constant = 60
-                
+                pageControltoCollectionView.constant = 15
             }
         }
         

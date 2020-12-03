@@ -110,7 +110,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-6c-z2M">
-                                        <rect key="frame" x="324" y="48.666666666666657" width="43" height="48"/>
+                                        <rect key="frame" x="319" y="48.666666666666657" width="43" height="48"/>
                                         <color key="tintColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" image="calenderBtnFillter"/>
                                     </button>
@@ -134,7 +134,7 @@
                                     <constraint firstItem="kIM-6c-z2M" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="7aY-fx-J55"/>
                                     <constraint firstAttribute="height" constant="94" id="8Ai-k1-gZp"/>
                                     <constraint firstItem="CVU-rY-a8n" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="JPd-fE-GWJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="kIM-6c-z2M" secondAttribute="trailing" constant="8" id="LGO-2E-7Ro"/>
+                                    <constraint firstAttribute="trailing" secondItem="kIM-6c-z2M" secondAttribute="trailing" constant="13" id="LGO-2E-7Ro"/>
                                     <constraint firstItem="Ki7-0V-YrT" firstAttribute="centerX" secondItem="4It-hS-FKH" secondAttribute="centerX" id="mrs-lf-sSl"/>
                                     <constraint firstAttribute="bottom" secondItem="Ki7-0V-YrT" secondAttribute="bottom" constant="11" id="xLi-qG-Lfj"/>
                                 </constraints>

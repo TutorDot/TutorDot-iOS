@@ -19,6 +19,7 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var labelToLeftConstraint: NSLayoutConstraint!
     
     var emailText = ""
     var passwordText = ""
@@ -29,6 +30,9 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         viewSetUp()
         initGestureRecognizer()
+        if self.view.frame.size.height > 850 {
+            labelToLeftConstraint.constant = 100
+        }
         
     }
     
