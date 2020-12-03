@@ -27,6 +27,7 @@ class MyClassInfoVC: UIViewController {
     let timeLabel04 = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 19))
     var timeLabels = [UILabel]()
     
+    
     @IBOutlet weak var leaveClassLabel: UILabel!
     @IBOutlet weak var classTimeHeightConstraints: NSLayoutConstraint!
     @IBOutlet weak var headerHeightContraints: NSLayoutConstraint!
@@ -51,6 +52,7 @@ class MyClassInfoVC: UIViewController {
         setupClassDetail()
         isTuteeSet()
         self.tabBarController?.tabBar.isHidden = true
+        editButton.isHidden = true
         
         timeLabels.append(timeLabel00)
         timeLabels.append(timeLabel01)
@@ -142,6 +144,7 @@ class MyClassInfoVC: UIViewController {
             self.timeLabels[i].font = UIFont.systemFont(ofSize: 15, weight: .medium)
             classTimeStackView.addSubview(self.timeLabels[i])
             self.classTimeInfo.append(info)
+            
         }
 
         classTimeHeightConstraints.constant = 58 + CGFloat((self.classTimeInfo.count * 19))

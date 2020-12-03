@@ -17,6 +17,7 @@ class TutorProfileEditVC: UIViewController {
     @IBOutlet weak var introMention: UITextField?
     @IBOutlet weak var roleLabel: UILabel!
     var profileURL: String = ""
+    var introStr: String = ""
     
     @IBOutlet weak var profileImage: UIButton!
     private var imagePickerController = UIImagePickerController()
@@ -34,6 +35,16 @@ class TutorProfileEditVC: UIViewController {
         autoLayoutView()
         setUpView()
         setProfile()
+        
+        profileImage.isHidden = true // 프로필 수정버튼 숨기기
+        
+        introMention?.addTarget(self, action: #selector(TutorProfileEditVC.textFieldDidChange(_:)), for: .editingChanged)
+        
+        
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        self.introStr = introMention?.text ?? ""
     }
     
     func setUpView(){
@@ -51,12 +62,39 @@ class TutorProfileEditVC: UIViewController {
     }
     
 
+    // 화면 터치 시, 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        
+    }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func submitButton(_ sender: Any) {
+        ProfileService.ProfileServiceShared.editProfile(intro: introStr){ networkResult in
+            switch networkResult {
+            case .success:
+                // 수업연결 해제 성공 alert
+                let alert = UIAlertController(title: "완료", message: "프로필 수정이 완료되었습니다.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: {_ in self.dismiss(animated: true, completion: nil)}))
+                self.present(alert, animated: true, completion: nil)
+            case .pathErr:
+                os_log("PathErr", log: .mypage)
+            case .serverErr:
+                os_log("ServerErr", log: .mypage)
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "프로필 수정 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            case .networkFail:
+                os_log("networkFail", log: .mypage)
+            }
+            
+        }
         
     }
     
@@ -137,31 +175,31 @@ extension TutorProfileEditVC: UIImagePickerControllerDelegate, UINavigationContr
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
-//            [UIImagePickerController.InfoKey : Any]) {
-//            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let url =
-//                info[UIImagePickerController.InfoKey.imageURL] as? URL {
-//
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
+            [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let url =
+                info[UIImagePickerController.InfoKey.imageURL] as? URL {
+
 //                guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
-//                ProfileService.ProfileServiceShared.uploadImage(token, image, url.lastPathComponent) { networkResult in
-//                    switch networkResult {
-//                    case .success(let profileData):
-//                        guard let profileData = profileData as? [UserProfile] else { return }
-//                        print(profileData)
-//                    case .requestErr(let failMessage):
-//                        guard let message = failMessage as? String else { return }
-//                        print(message)
-//                    case .pathErr:
-//                        print("pathErr")
-//                    case .serverErr:
-//                        print("serverErr")
-//                    case .networkFail:
-//                        print("networkFail")
-//                    }
-//                }
-//                profileImageView.image = image
-//            }
-//            dismiss(animated: true, completion: nil)
-//        }
+                ProfileService.ProfileServiceShared.uploadImage(image, url.lastPathComponent) { networkResult in
+                    switch networkResult {
+                    case .success(let profileData):
+                        guard let profileData = profileData as? UserProfile else { return }
+                        print(profileData.profileUrl)
+                    case .requestErr(let failMessage):
+                        guard let message = failMessage as? String else { return }
+                        print(message)
+                    case .pathErr:
+                        print("pathErr")
+                    case .serverErr:
+                        print("serverErr")
+                    case .networkFail:
+                        print("networkFail")
+                    }
+                }
+                profileImageView.image = image
+            }
+            dismiss(animated: true, completion: nil)
+        }
     
 }

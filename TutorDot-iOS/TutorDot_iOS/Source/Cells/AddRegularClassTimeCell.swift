@@ -10,6 +10,7 @@ import UIKit
 
 protocol TimeSendDelegate: class {
     func classTimesend(_ days: String, _ startTime: String, _ endTime: String)
+    func classTimeDelete()
 }
 
 class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -78,9 +79,17 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
     
     
     @IBAction func timeFieldEndEditing(_ sender: Any) {
+        print("endEditting")
         if let delegate = delegate {
                 delegate.classTimesend(days, startTime, endTime)
         }
+    }
+    
+    @IBAction func startEditing(_ sender: Any) {
+        if let delegate = delegate {
+            delegate.classTimeDelete()
+        }
+        print("startEditting")
     }
     
     //toolbar actions

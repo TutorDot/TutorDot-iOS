@@ -926,9 +926,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
-                                <connections>
-                                    <action selector="placeEndEditing:" destination="l3e-cu-Mta" eventType="editingDidEnd" id="5Vg-Rc-hV7"/>
-                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ytm-Aa-CYn">
                                 <rect key="frame" x="36" y="498.5" width="342" height="1"/>
@@ -959,6 +956,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <action selector="startEditing:" destination="lXv-Z3-gt9" eventType="editingDidBegin" id="4mn-wc-eO3"/>
                                                         <action selector="timeFieldEndEditing:" destination="lXv-Z3-gt9" eventType="editingDidEnd" id="WAR-Fb-TYv"/>
                                                     </connections>
                                                 </textField>
@@ -1500,6 +1498,9 @@
                             <constraint firstItem="F7j-C3-kvI" firstAttribute="leading" secondItem="4Fq-lF-TBN" secondAttribute="leading" constant="36" id="zj9-tN-892"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="logoutButton" destination="F7j-C3-kvI" id="VNm-d5-ATC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5BY-pd-Aed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

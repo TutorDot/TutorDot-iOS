@@ -37,7 +37,7 @@ class ClassDisconnectionVC: UIViewController {
             case .success :
                 // 수업연결 해제 성공 alert
                 let alert = UIAlertController(title: "완료", message: "수업 연결이 해제되었습니다.", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: {_ in self.navigationController?.popViewController(animated: true)}))
+                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: {_ in self.navigationController?.popToRootViewController(animated: true)}))
                 self.present(alert, animated: true, completion: nil)
                 
                 os_log("success", log: .mypage)

@@ -38,6 +38,7 @@ struct AddLectureService{
     func addLecture(_ lectureName: String, _ color: String, _ schedules: [Schedules], _ orgLocation: String, _ bank : String, _ accountNumber : String, _ totalHours: Int, _ price: Int, _ count: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         
         // 헤더 - 토큰 가져오기
+        
         let header: HTTPHeaders = ["jwt": UserDefaults.standard.object(forKey: "token") as? String ?? " "]
         
         let dataRequest = Alamofire.request(APIConstants.lectureURL, method: .post, parameters: makeParameter(lectureName, color, schedules, orgLocation, bank, accountNumber, totalHours, price, count), encoding: JSONEncoding.default, headers: header)
@@ -56,9 +57,10 @@ struct AddLectureService{
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         switch statusCode {
-        case 200:
+        case 200, 204:
             return islectureadd(by: data)
-        case 400: return .pathErr
+        case 400, 401:
+            return islectureadd(by: data)
         case 500: return .serverErr
         default: return .networkFail
         }
@@ -69,10 +71,14 @@ struct AddLectureService{
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(AddLectureData.self, from: data)
             else { return .pathErr }
-        if decodedData.success {return .success(decodedData.message)}
+        if decodedData.success {
+            return .success(decodedData.data)
+            
+        }
         else {return .requestErr(decodedData.message)}
         
     }
+   
     
 }
 

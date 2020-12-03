@@ -24,6 +24,7 @@ class InviteCodeVC: UIViewController {
         super.viewDidLoad()
         inviteCodeView.layer.cornerRadius = 5
         connectButton.layer.cornerRadius = 8
+        
         inputCode.addTarget(self, action: #selector(InviteCodeVC.textFieldDidChange(_:)), for: .editingChanged)
         
         inputCode.addTarget(self, action: #selector(InviteCodeVC.textfieldDidTap(_:)), for: .touchDown)
@@ -39,7 +40,7 @@ class InviteCodeVC: UIViewController {
        
     }
     
- 
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         self.invitationCode = inputCode?.text ?? ""
     }

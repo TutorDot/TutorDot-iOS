@@ -11,11 +11,12 @@ import UIKit
 class LogoutPopUpVC: UIViewController {
 
     
+    @IBOutlet weak var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
-       
+        logoutButton.layer.cornerRadius = 8
         
     }
     
