@@ -26,7 +26,7 @@ class BottomSheetVC: UIViewController {
     var classlist: [String] = []
     var lectureId: [Int] = []
     let headerHeight: CGFloat = 55
-    let customHeight: CGFloat = 55
+    let customHeight: CGFloat = 45
     let bottomSafeArea: CGFloat = 34
     
     override func viewDidLoad() {

@@ -8,6 +8,7 @@
 import os
 import UIKit
 import DropDown
+import Lottie
 
 class NotesVC: UIViewController, selectClassProtocol {
     
@@ -34,6 +35,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var alertButton: UIButton!
     
+    
     let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: Selector(("swipe:")));
     let dummyUser = "dummy"
     var month: Int = 0
@@ -49,10 +51,14 @@ class NotesVC: UIViewController, selectClassProtocol {
     var userProfile: String = ""
     var myRole: String = ""
     var islistCall: Bool = false
+
     
     var barTotal: Int = 0
     var barCurrentTimes: Int = 0
     var barCurrentHour: Int = 0
+    let animationView = AnimationView()
+    var isAnimationRunning: Bool = false
+ 
     
     // 드랍다운
     var dropDown: DropDown?
@@ -197,16 +203,44 @@ class NotesVC: UIViewController, selectClassProtocol {
         }
     }
     
+    func loadingAnimation(){
+        isAnimationRunning = true
+        
+        animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
+        animationView.frame = view.bounds
+        print(self.view.frame.size.height / 2, "눂이")
+        if self.view.frame.size.height > 700 {
+            animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 100, width: animationView.frame.size.width, height: animationView.frame.size.height)
+        } else {
+            animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
+        }
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .playOnce
+        self.view.addSubview(animationView)
+        animationView.play()
+    }
+    
+    func loadingAnimationStop(){
+        
+        animationView.stop()
+        animationView.removeFromSuperview()
+        isAnimationRunning = false
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
   
         
         MonthInit()
-        setNotesInfos()
         classHeaderHidden(true) // 처음엔 수업진행률 안보이도록 설정
         setProfile()
        
+        if isFirstRunning {
+            classHeaderHidden(true)
+            setNotesInfos()
+        }
+        
         gestureRecognizer()
         
         //기종별 최상단 헤더뷰 높이 조정
@@ -240,8 +274,9 @@ class NotesVC: UIViewController, selectClassProtocol {
         }
         
         if isFirstRunning {
-            isFirstRunning = false
+            self.isFirstRunning = false
         }
+        
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -317,6 +352,9 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     // Mark - 수업 일지 전체 조회 서버 통신(GET)
     func setNotesInfos(){
+        
+        self.loadingAnimation()
+        
         NoteService.Shared.getAllClassNotes() { networkResult  in
             switch networkResult {
             case .success(let resultData):
@@ -341,13 +379,18 @@ class NotesVC: UIViewController, selectClassProtocol {
                     }
                 }
                 self.tableView.reloadData()
+                self.loadingAnimationStop()
             case .pathErr :
+                self.loadingAnimationStop()
                 os_log("PathErr", log: .note)
             case .serverErr :
+                self.loadingAnimationStop()
                 os_log("ServerErr", log: .note)
             case .requestErr(let message) :
+                self.loadingAnimationStop()
                 print(message)
             case .networkFail:
+                self.loadingAnimationStop()
                 os_log("networkFail", log: .note)
                 
             }
@@ -357,18 +400,19 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     @IBAction func listButtonDidTap(_ sender: Any) {
         
-        
+        loadingAnimation()
         islistCall = true
-        NotesInfos.removeAll()
+//        NotesInfos.removeAll()
         classHeaderHidden(true) // 프로그래스바 숨기기
         self.progressView.setProgress(0.0, animated: false)
         
         
-        
+        print("listtap")
         // Mark - 수업리스트 가져오기 서버통신
         NoteService.Shared.getClassList() { networkResult in
             switch networkResult {
             case .success(let resultData):
+                self.NotesInfos.removeAll()
                 guard let data = resultData as? [ClassList] else { return print(Error.self) }
 
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "BottomSheetVC") as? BottomSheetVC else {return}
@@ -385,12 +429,17 @@ class NotesVC: UIViewController, selectClassProtocol {
                 self.present(nextVC, animated: false, completion: nil)
 
                 nextVC.delegate = self
-
+                self.loadingAnimationStop()
+                
             case .pathErr : print("Patherr")
+                self.loadingAnimationStop()
             case .serverErr : print("ServerErr")
+                self.loadingAnimationStop()
             case .requestErr(let message) : print(message)
+                self.loadingAnimationStop()
             case .networkFail:
                 print("networkFail")
+                self.loadingAnimationStop()
             }
         }
         
@@ -431,7 +480,8 @@ class NotesVC: UIViewController, selectClassProtocol {
     
     // Mark - 특정 수업일지 조회 서버통신
     func getOneNoteInfo(){
-
+        
+        self.loadingAnimation()
         NoteService.Shared.getOneClassNotes(diaryId: selectClassID) { networkResult  in
             switch networkResult {
             case .success(let resultData):
@@ -456,14 +506,19 @@ class NotesVC: UIViewController, selectClassProtocol {
                     }
                 }
                 self.tableView.reloadData()
+                self.loadingAnimationStop()
             case .pathErr :
                 os_log("PathErr", log: .note)
+                self.loadingAnimationStop()
             case .serverErr :
                 os_log("ServerErr", log: .note)
+                self.loadingAnimationStop()
             case .requestErr(let message) :
                 print(message)
+                self.loadingAnimationStop()
             case .networkFail:
                 os_log("networkFail", log: .note)
+                self.loadingAnimationStop()
                 
             }
         }
@@ -474,10 +529,14 @@ class NotesVC: UIViewController, selectClassProtocol {
 
 // MARK: - Extension
 
-extension NotesVC: UITableViewDataSource, UITableViewDelegate{
+extension NotesVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         let days = Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section]
+        
+        print("섹션개수", Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count)
+        print("섹션별 로우개수", self.NotesInfos.filter{ $0.dayWeek == days }.count)
+        print(NotesInfos.count, "데이터 개수 header section")
         
         return self.NotesInfos.filter{ $0.dayWeek == days }.count
 //        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count
@@ -492,18 +551,23 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
-        
         guard let notesCell = tableView.dequeueReusableCell(withIdentifier: JournalDataCell.identifier, for: indexPath) as? JournalDataCell else { return UITableViewCell()}
         
-
+        
+                 
+        let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+        
+        
+        
         let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
     
         notesCell.setNoteCell(dayItems.color,
                               dayItems.profileUrl, dayItems.lectureName, dayItems.times, dayItems.hour, dayItems.classProgress, dayItems.homework, dayItems.hwPerformance)
         
         
+        
         return notesCell
+        
     }
     
     
@@ -522,6 +586,9 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
         headerView.backgroundColor = UIColor.whiteTwo
         //Array(Set(self.NotesInfos.map{ $0.dayWeek }))
+        
+        
+        print(NotesInfos.count, "데이터 개수 header section")
         headerView.dateLabel.text = String(Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section])
         
         return headerView
@@ -549,30 +616,35 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate{
                         
                         self.present(alertViewController, animated: true, completion: nil)
         } else {
-            guard let nextVC = self.storyboard?.instantiateViewController(
-                    identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
             
-            let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
-            let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
-            
-            // 클릭한 수업일지 ID 전달
-            nextVC.diaryID = dayItems.diaryId
-            nextVC.color = dayItems.color
-            nextVC.lesson = dayItems.classProgress
-            nextVC.times = dayItems.times
-            nextVC.hour = dayItems.hour
-            nextVC.hw = dayItems.homework
-            nextVC.totalHours = dayItems.depositCycle
-            nextVC.lectureName = dayItems.lectureName
-            nextVC.date = dayItems.classDate
-            nextVC.hwCheckValue = dayItems.hwPerformance
-            nextVC.role = self.myRole
-            
-            nextVC.modalPresentationStyle = .fullScreen
-            self.present(nextVC, animated: true, completion: nil)
+            if isAnimationRunning == false {
+                guard let nextVC = self.storyboard?.instantiateViewController(
+                        identifier: NotesModifyVC.identifier) as? NotesModifyVC else { return }
+                
+                let date = Array(Set(self.NotesInfos.map{$0.dayWeek})).sorted()[indexPath.section]
+                let dayItems = self.NotesInfos.filter{ $0.dayWeek == date}[indexPath.row]
+                
+                print("section", indexPath.section, "index", indexPath.row, "index path 개수", indexPath.count)
+                // 클릭한 수업일지 ID 전달
+                nextVC.diaryID = dayItems.diaryId
+                nextVC.color = dayItems.color
+                nextVC.lesson = dayItems.classProgress
+                nextVC.times = dayItems.times
+                nextVC.hour = dayItems.hour
+                nextVC.hw = dayItems.homework
+                nextVC.totalHours = dayItems.depositCycle
+                nextVC.lectureName = dayItems.lectureName
+                nextVC.date = dayItems.classDate
+                nextVC.hwCheckValue = dayItems.hwPerformance
+                nextVC.role = self.myRole
+                
+                nextVC.modalPresentationStyle = .fullScreen
+                self.present(nextVC, animated: true, completion: nil)
+            }
+           
         }
        
-        }
+    }
         
         
 }

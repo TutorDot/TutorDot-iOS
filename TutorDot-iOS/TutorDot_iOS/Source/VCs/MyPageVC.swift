@@ -40,13 +40,14 @@ class MyPageVC: UIViewController {
     private var refreshControl = UIRefreshControl()
     var ClassListDidSelect: Bool = true
     var firstTimeRuning: Bool = true
-    
+    var isAnimationRunning: Bool = false
     
     @IBOutlet var mainView: UIView! // VC 최상위뷰
     let animationView = AnimationView()
     
     func loadingAnimation(){
         
+        isAnimationRunning = true
         animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
         animationView.frame = view.bounds
         print(self.view.frame.size.height / 2, "눂이")
@@ -57,7 +58,7 @@ class MyPageVC: UIViewController {
         }
         animationView.contentMode = .scaleAspectFill
         animationView.loopMode = .playOnce
-        self.mainView.addSubview(animationView)
+        self.view.addSubview(animationView)
         animationView.play()
     }
     
@@ -66,7 +67,7 @@ class MyPageVC: UIViewController {
         animationView.stop()
         animationView.removeFromSuperview()
 //        animationView.layer.removeAllAnimations()
-       
+        isAnimationRunning = false
     }
     
     override func viewDidLoad() {
@@ -94,7 +95,8 @@ class MyPageVC: UIViewController {
         } else {
             dummyView.isHidden = true
         }
-        loadingAnimation()
+
+
         var appdelegate = UIApplication.shared.delegate as? AppDelegate
         
         
@@ -103,7 +105,7 @@ class MyPageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        loadingAnimation()
+        
         classCollectionView.isScrollEnabled = true
         classCollectionView.contentSize = CGSize(width: 206, height: 81)
         
@@ -149,6 +151,7 @@ class MyPageVC: UIViewController {
     
     func setMyClassInfos(){
         // MARK - 수업 리스트 서버통신
+        loadingAnimation()
         ClassInfoService.classInfoServiceShared.setMypageClassList() { networkResult in
             switch networkResult {
                 case .success(let resultData):
@@ -183,7 +186,6 @@ class MyPageVC: UIViewController {
         }
         
         
-      
     }
     
     
@@ -541,7 +543,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         if "\(UserDefaults.standard.value(forKey: "save_userNm")!)" == dummyUser {
             let alertViewController = UIAlertController(title: nil, message: "로그인 후 튜터닷의 튜터링 서비스를 만나보세요!", preferredStyle: .alert)
             let action = UIAlertAction(title: "취소", style: .destructive, handler: nil)
@@ -556,14 +558,17 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource {
             
             self.present(alertViewController, animated: true, completion: nil)
         } else {
-            if ClassListDidSelect == true {
+            if ClassListDidSelect == true && isAnimationRunning == false { //애니메이션 실행 아닐때만 select 가능하도록
                 
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "MyClassInfoVC") as? MyClassInfoVC else {return}
                 nextVC.hidesBottomBarWhenPushed = true
                 
                 //데이터 전달
-                nextVC.classId = self.classId[indexPath.row]
-                nextVC.userRole = self.UserRole
+                print("indexpaht.count", indexPath.count, "rowitem", indexPath.row)
+                if indexPath.count > 0 {
+                    nextVC.classId = self.classId[indexPath.row]
+                    nextVC.userRole = self.UserRole
+                }
                 
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 

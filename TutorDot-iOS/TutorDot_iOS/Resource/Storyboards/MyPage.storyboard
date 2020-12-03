@@ -3080,9 +3080,64 @@ TutorDot 서비스를 이용하세요!</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="J23-AW-yQu">
-                                                                <rect key="frame" x="20" y="58" width="335" height="19"/>
+                                                                <rect key="frame" x="20" y="58" width="335" height="123"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-th-8B9">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="wfX-LF-1Pm"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-ih-p3G">
+                                                                        <rect key="frame" x="0.0" y="26" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="giC-1M-v5n"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yx0-4P-FPb">
+                                                                        <rect key="frame" x="0.0" y="52" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="Uq1-pI-63v"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-aA-phz">
+                                                                        <rect key="frame" x="0.0" y="78" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="avV-E4-gvt"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eug-Kb-XyG">
+                                                                        <rect key="frame" x="0.0" y="104" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="wOh-Sn-OyB"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="19" id="vhq-hO-P2f"/>
+                                                                    <constraint firstItem="OFN-aA-phz" firstAttribute="top" secondItem="yx0-4P-FPb" secondAttribute="bottom" id="2Nk-dP-Kzm"/>
+                                                                    <constraint firstItem="yx0-4P-FPb" firstAttribute="top" secondItem="r2R-ih-p3G" secondAttribute="bottom" id="7ue-mH-GZk"/>
+                                                                    <constraint firstItem="r2R-ih-p3G" firstAttribute="top" secondItem="jhl-th-8B9" secondAttribute="bottom" id="7wQ-gc-PN0"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="jhl-th-8B9" secondAttribute="trailing" id="9M3-Ad-FkH"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="eug-Kb-XyG" secondAttribute="trailing" id="Fek-z0-HcH"/>
+                                                                    <constraint firstItem="r2R-ih-p3G" firstAttribute="top" secondItem="jhl-th-8B9" secondAttribute="bottom" id="NG4-Vn-0gn"/>
+                                                                    <constraint firstItem="jhl-th-8B9" firstAttribute="top" secondItem="J23-AW-yQu" secondAttribute="top" id="NN2-Em-ejE"/>
+                                                                    <constraint firstItem="eug-Kb-XyG" firstAttribute="leading" secondItem="J23-AW-yQu" secondAttribute="leading" id="RNd-TF-cpF"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="OFN-aA-phz" secondAttribute="trailing" id="S6F-SX-qau"/>
+                                                                    <constraint firstItem="r2R-ih-p3G" firstAttribute="leading" secondItem="J23-AW-yQu" secondAttribute="leading" id="VlT-Fr-s5Y"/>
+                                                                    <constraint firstItem="jhl-th-8B9" firstAttribute="leading" secondItem="J23-AW-yQu" secondAttribute="leading" id="W0r-ZO-Pc6"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="yx0-4P-FPb" secondAttribute="trailing" id="YcL-X4-KvQ"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="eug-Kb-XyG" secondAttribute="bottom" id="cHl-Fv-Mh8"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="r2R-ih-p3G" secondAttribute="trailing" id="dLh-iA-xHu"/>
+                                                                    <constraint firstItem="OFN-aA-phz" firstAttribute="top" secondItem="yx0-4P-FPb" secondAttribute="bottom" id="dlr-Na-CmO"/>
+                                                                    <constraint firstItem="eug-Kb-XyG" firstAttribute="top" secondItem="OFN-aA-phz" secondAttribute="bottom" id="dtp-yq-zVu"/>
+                                                                    <constraint firstItem="yx0-4P-FPb" firstAttribute="leading" secondItem="J23-AW-yQu" secondAttribute="leading" id="g13-JD-YBk"/>
+                                                                    <constraint firstItem="yx0-4P-FPb" firstAttribute="top" secondItem="r2R-ih-p3G" secondAttribute="bottom" id="rmi-NC-pMM"/>
+                                                                    <constraint firstItem="OFN-aA-phz" firstAttribute="leading" secondItem="J23-AW-yQu" secondAttribute="leading" id="yCs-0D-zOO"/>
                                                                 </constraints>
                                                             </stackView>
                                                         </subviews>

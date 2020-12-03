@@ -1010,7 +1010,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.injeongfinal1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tutordotv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1023,7 +1023,6 @@
 			baseConfigurationReference = 2316F30522401B1086C23B6D /* Pods-TutorDot_iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = TutorDot_iOS/TutorDot_iOSRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M2BP76V5D4;
 				INFOPLIST_FILE = "$(SRCROOT)/TutorDot_iOS/Source/Info.plist";
@@ -1031,7 +1030,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ysehwatest233;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tutordotv1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
