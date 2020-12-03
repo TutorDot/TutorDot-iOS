@@ -304,7 +304,6 @@ extension ClassEditVC: UIPickerViewDelegate, UIPickerViewDataSource {
         toolbar.setItems(buttons, animated: true)
         startTextField.inputAccessoryView = toolbar
         startTextField.inputView = pickerViewStart
-        
     }
     
     func createDatePicker2(){
