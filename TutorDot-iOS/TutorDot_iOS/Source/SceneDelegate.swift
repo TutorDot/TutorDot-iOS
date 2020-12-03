@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         //guard let _ = (scene as? UIWindowScene) else { return }
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
+
         if !UserDefaults.standard.bool(forKey: "didSee") {
             UserDefaults.standard.set(true, forKey: "didSee")
             print("donedone")

@@ -47,7 +47,6 @@ class MyPageVC: UIViewController {
     
     func loadingAnimation(){
         
-<<<<<<< HEAD
         animationView.animation = Animation.named("final") // 로티 이름으로 애니메이션 등록
         animationView.frame = view.bounds
         print(self.view.frame.size.height / 2, "눂이")
@@ -56,11 +55,6 @@ class MyPageVC: UIViewController {
         } else {
             animationView.frame = CGRect(x: 0, y: self.view.frame.size.height / 2 - 60, width: animationView.frame.size.width, height: animationView.frame.size.height)
         }
-=======
-        animationView.animation = Animation.named("loading_re") // 로티 이름으로 애니메이션 등록
-        animationView.frame = view.bounds //animationView 크기가 view와 같게
-//        animationView.center = self.view.center
->>>>>>> note
         animationView.contentMode = .scaleAspectFill
         animationView.loopMode = .playOnce
         self.mainView.addSubview(animationView)
@@ -100,11 +94,7 @@ class MyPageVC: UIViewController {
         } else {
             dummyView.isHidden = true
         }
-<<<<<<< HEAD
         loadingAnimation()
-=======
-        
->>>>>>> note
         var appdelegate = UIApplication.shared.delegate as? AppDelegate
         
         
@@ -193,10 +183,7 @@ class MyPageVC: UIViewController {
         }
         
         
-<<<<<<< HEAD
       
-=======
->>>>>>> note
     }
     
     
@@ -295,7 +282,7 @@ class MyPageVC: UIViewController {
             } else if myRole.text == "튜티" {
                 // 튜티일 때, 수업 초대코드 입력 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InviteCodeVC") as? InviteCodeVC else {return}
-                
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

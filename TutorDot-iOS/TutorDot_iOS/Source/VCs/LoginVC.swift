@@ -32,6 +32,8 @@ class LoginVC: UIViewController, UIGestureRecognizerDelegate {
         initGestureRecognizer()
         if self.view.frame.size.height > 850 {
             labelToLeftConstraint.constant = 100
+        } else if self.view.frame.size.height == 844 && self.view.frame.size.width == 390 {
+            labelToLeftConstraint.constant = 105
         }
         
     }

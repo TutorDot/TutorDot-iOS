@@ -40,7 +40,9 @@ class OnboardingNewVC: UIViewController {
         setView()
         signUpButton.isHidden = true
         checkLastPage()
-        print(self.view.frame.size.height, "11 pro max")
+        print(self.view.frame.size.height,self.view.frame.size.width, "11 pro max")
+        // 11 pro max : 896
+        // 12 pro : 844, 390
         // promax
         if self.view.frame.size.height > 850 {
             onboardingCollectionView.frame.size.height = 551
@@ -53,12 +55,21 @@ class OnboardingNewVC: UIViewController {
             onboardingCollectionView.frame.size.height = 502
             onboardingCollectionView.frame.size.width = 375
             pageControltoCollectionView.constant = 15
+        // 12 pro
+        } else if self.view.frame.size.height == 844 && self.view.frame.size.width == 390 {
+            print("success")
+            onboardingCollectionView.frame.size.height = 521
+            onboardingCollectionView.frame.size.width = 390
+            collectionViewHeightConstraint.constant = 521
+            collectionViewWidthConstraint.constant = 390
+            pageControltoCollectionView.constant = 40
         // 11 pro
         } else {
             onboardingCollectionView.frame.size.height = 502
             onboardingCollectionView.frame.size.width = 375
             pageControltoCollectionView.constant = 40
         }
+        //
         print(onboardingCollectionView.frame.size.width, onboardingCollectionView.frame.size.height, "높이 너비2")
         
     }
@@ -105,10 +116,15 @@ class OnboardingNewVC: UIViewController {
         signUpButton.titleLabel?.textColor = UIColor.white
         signUpButton.layer.cornerRadius = 10
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        // 11 pro max
         if self.view.frame.size.height > 850 {
             onboardingCollectionView.frame.size.height = 551
             onboardingCollectionView.frame.size.width = 414
-            
+        // 12 pro
+        } else if self.view.frame.size.height == 844 && self.view.frame.size.width == 390 {
+            onboardingCollectionView.frame.size.height = 521
+            onboardingCollectionView.frame.size.width = 390
+        // SE, 11 pro
         } else {
             onboardingCollectionView.frame.size.height = 502
             onboardingCollectionView.frame.size.width = 375
@@ -194,6 +210,10 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
             } else if self.view.frame.size.height > 850 {
                 collectionViewToTopConstraint.constant = 80
                 pageControltoCollectionView.constant = 20
+            // 12 pro
+            } else if self.view.frame.size.height == 844 && self.view.frame.size.width == 390 {
+                collectionViewToTopConstraint.constant = 100
+                pageControltoCollectionView.constant = 30
             // SE
             } else {
                 collectionViewToTopConstraint.constant = 30
@@ -211,6 +231,11 @@ extension OnboardingNewVC: UICollectionViewDelegate, UICollectionViewDataSource 
                 onboardingCollectionView.frame.size.height = 551
                 collectionViewToTopConstraint.constant = 100
                 pageControltoCollectionView.constant = 60
+            // 12 pro
+            } else if self.view.frame.size.height == 844 && self.view.frame.size.width == 390{
+                onboardingCollectionView.frame.size.height = 521
+                collectionViewToTopConstraint.constant = 120
+                pageControltoCollectionView.constant = 40
             } else {
                 onboardingCollectionView.frame.size.height = 510
                 collectionViewToTopConstraint.constant = 60

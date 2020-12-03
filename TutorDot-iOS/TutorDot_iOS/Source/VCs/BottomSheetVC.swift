@@ -53,7 +53,7 @@ class BottomSheetVC: UIViewController {
         //Mark: device 분기처리 필요 bottomSafeArea 더할지 말지
         let heightCalc = (self.customHeight * (CGFloat(classlist.count))) + bottomSafeArea + headerHeight
         
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 1.0,
                        delay: 0.0,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 1.0,
