@@ -142,11 +142,15 @@ class MyClassInfoVC: UIViewController {
             
             self.timeLabels[i].text = info
             self.timeLabels[i].font = UIFont.systemFont(ofSize: 15, weight: .medium)
-            classTimeStackView.addSubview(self.timeLabels[i])
+            classTimeStackView.subviews[i].addSubview(self.timeLabels[i])
+//             classTimeStackView.addArrangedSubview(self.timeLabels[0])
             self.classTimeInfo.append(info)
             
         }
+        
+        
 
+        classTimeStackView.translatesAutoresizingMaskIntoConstraints = false
         classTimeHeightConstraints.constant = 58 + CGFloat((self.classTimeInfo.count * 19))
     }
     

@@ -3081,6 +3081,43 @@ TutorDot 서비스를 이용하세요!</string>
                                                             </label>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="J23-AW-yQu">
                                                                 <rect key="frame" x="20" y="58" width="335" height="19"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-th-8B9">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="wfX-LF-1Pm"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2R-ih-p3G">
+                                                                        <rect key="frame" x="0.0" y="26" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="giC-1M-v5n"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yx0-4P-FPb">
+                                                                        <rect key="frame" x="0.0" y="52" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="Uq1-pI-63v"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFN-aA-phz">
+                                                                        <rect key="frame" x="0.0" y="78" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="avV-E4-gvt"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ya-rA-ht8">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="19"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="19" id="42X-oD-ml6"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="19" id="vhq-hO-P2f"/>
                                                                 </constraints>
