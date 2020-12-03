@@ -284,7 +284,7 @@ class MyPageVC: UIViewController {
             } else if myRole.text == "튜티" {
                 // 튜티일 때, 수업 초대코드 입력 뷰로 이동
                 guard let nextVC = self.storyboard?.instantiateViewController(withIdentifier: "InviteCodeVC") as? InviteCodeVC else {return}
-                
+                nextVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(nextVC, animated: true)
             }
         }

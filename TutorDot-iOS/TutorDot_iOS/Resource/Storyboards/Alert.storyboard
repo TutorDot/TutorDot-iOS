@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WaC-xl-qdQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WaC-xl-qdQ">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -109,19 +109,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4It-hS-FKH">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIM-6c-z2M">
-                                        <rect key="frame" x="319" y="48.666666666666657" width="43" height="48"/>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <state key="normal" image="calenderBtnFillter"/>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 알림" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ki7-0V-YrT">
-                                        <rect key="frame" x="155.66666666666666" y="62" width="64" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="159.66666666666666" y="65" width="56" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVU-rY-a8n">
-                                        <rect key="frame" x="8" y="48.666666666666657" width="102" height="48"/>
+                                        <rect key="frame" x="8" y="50" width="102" height="48"/>
                                         <state key="normal" title="Button" image="alarmBtnBack"/>
                                         <connections>
                                             <action selector="backButtonSelected:" destination="WaC-xl-qdQ" eventType="touchUpInside" id="P9q-cR-0S7"/>
@@ -131,10 +126,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="CVU-rY-a8n" firstAttribute="leading" secondItem="4It-hS-FKH" secondAttribute="leading" constant="8" id="0X0-50-lB0"/>
-                                    <constraint firstItem="kIM-6c-z2M" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="7aY-fx-J55"/>
                                     <constraint firstAttribute="height" constant="94" id="8Ai-k1-gZp"/>
                                     <constraint firstItem="CVU-rY-a8n" firstAttribute="centerY" secondItem="Ki7-0V-YrT" secondAttribute="centerY" id="JPd-fE-GWJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="kIM-6c-z2M" secondAttribute="trailing" constant="13" id="LGO-2E-7Ro"/>
                                     <constraint firstItem="Ki7-0V-YrT" firstAttribute="centerX" secondItem="4It-hS-FKH" secondAttribute="centerX" id="mrs-lf-sSl"/>
                                     <constraint firstAttribute="bottom" secondItem="Ki7-0V-YrT" secondAttribute="bottom" constant="11" id="xLi-qG-Lfj"/>
                                 </constraints>

@@ -368,7 +368,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 질문" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LtK-Gy-uDM">
-                                                <rect key="frame" x="67" y="60" width="280" height="22"/>
+                                                <rect key="frame" x="67" y="62" width="280" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="280" id="6d6-zx-dLa"/>
                                                 </constraints>
@@ -376,24 +376,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnN-Pr-hDE">
-                                                <rect key="frame" x="323" y="46" width="43" height="48"/>
-                                                <state key="normal" image="questionBtnFillter"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubu-Mo-me1">
-                                                <rect key="frame" x="371" y="46" width="43" height="48"/>
-                                                <state key="normal" image="questionBtnNotice"/>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="FnN-Pr-hDE" secondAttribute="bottom" id="3yB-hn-lA4"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ubu-Mo-me1" secondAttribute="trailing" id="LOO-vn-Fzi"/>
-                                            <constraint firstAttribute="bottom" secondItem="Ubu-Mo-me1" secondAttribute="bottom" id="WJU-NK-3D9"/>
-                                            <constraint firstAttribute="bottom" secondItem="LtK-Gy-uDM" secondAttribute="bottom" constant="12" id="Xl4-Dg-oxO"/>
+                                            <constraint firstAttribute="bottom" secondItem="LtK-Gy-uDM" secondAttribute="bottom" constant="14" id="Xl4-Dg-oxO"/>
                                             <constraint firstAttribute="height" constant="94" id="bVv-4r-3ov"/>
-                                            <constraint firstItem="Ubu-Mo-me1" firstAttribute="leading" secondItem="FnN-Pr-hDE" secondAttribute="trailing" constant="5" id="gWv-aR-XLw"/>
-                                            <constraint firstItem="LtK-Gy-uDM" firstAttribute="top" secondItem="peo-Zd-QZy" secondAttribute="top" constant="60" id="lRU-Ek-JMS"/>
                                             <constraint firstItem="LtK-Gy-uDM" firstAttribute="centerX" secondItem="peo-Zd-QZy" secondAttribute="centerX" id="pgr-Xu-3Xq"/>
                                         </constraints>
                                     </view>
@@ -424,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzM-oe-xuf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="907" y="71"/>
+            <point key="canvasLocation" x="905.79710144927549" y="70.982142857142847"/>
         </scene>
     </scenes>
     <resources>
