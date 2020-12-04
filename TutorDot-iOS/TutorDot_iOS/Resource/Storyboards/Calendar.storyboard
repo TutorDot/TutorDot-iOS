@@ -154,7 +154,7 @@
                                             <constraint firstAttribute="height" constant="30" id="hKJ-Gh-o5F"/>
                                         </constraints>
                                     </stackView>
-                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-rm-NLU" userLabel="DateCollectionView">
+                                    <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N3n-rm-NLU" userLabel="DateCollectionView">
                                         <rect key="frame" x="5" y="30" width="365" height="300"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
