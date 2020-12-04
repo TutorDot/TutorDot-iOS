@@ -174,6 +174,7 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.index = indexPath.row
         cell.delegate = self
+        cell.selectionStyle = .none
         
         return cell
     }
