@@ -56,6 +56,7 @@ struct SchedulesData: Codable {
         self.orgStartTime = orgStartTime
         self.orgEndTime = orgEndTime
     }
+    
 }
 
 struct LidProfileURL: Codable {

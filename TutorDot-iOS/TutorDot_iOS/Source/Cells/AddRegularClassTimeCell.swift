@@ -9,8 +9,8 @@
 import UIKit
 
 protocol TimeSendDelegate: class {
-    func classTimesend(_ days: String, _ startTime: String, _ endTime: String)
-    func classTimeDelete()
+    func classTimesend(_ days: String, _ startTime: String, _ endTime: String, _ index: Int)
+
 }
 
 class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -27,7 +27,7 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
     let startMins: [String] = ["00","30"]
     let endHours: [String] = ["00", "01", "02", "03", "04", "05", "06","07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"]
     let endMins: [String] = ["00","30"]
-
+    var index: Int = 0 //해당 셀의 인덱스
     
     //서버로 넘기고 + 텍스트 창에 띄울 String
     public var days: String = ""
@@ -79,18 +79,12 @@ class AddRegularClassTimeCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
     
     
     @IBAction func timeFieldEndEditing(_ sender: Any) {
-        print("endEditting")
         if let delegate = delegate {
-                delegate.classTimesend(days, startTime, endTime)
+                delegate.classTimesend(days, startTime, endTime, index)
         }
     }
     
-    @IBAction func startEditing(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.classTimeDelete()
-        }
-        print("startEditting")
-    }
+  
     
     //toolbar actions
     @objc func donePressed(){
