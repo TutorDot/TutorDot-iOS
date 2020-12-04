@@ -70,6 +70,15 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func timeStartEditing(_ sender: Any) {
+        if time.text != "" { // 비어있지 않으면
+            let str = time.text
+            let index: Int = (str!.length)-4
+            time.text = str?.substring(to: index)
+        }
+    }
+    
+    
     @IBAction func priceEndEditing(_ sender: Any) {
         if price.text != "" {
             priceValue = Int(price.text ?? "0")
@@ -77,6 +86,13 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func priceStartEditing(_ sender: Any) {
+        if price.text != "" { // 비어있지 않으면
+            let str = price.text
+            let index: Int = (str!.length)-4
+            price.text = str?.substring(to: index)
+        }
+    }
     
     @IBAction func backButtonDidTap(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -97,8 +113,7 @@ class MypageNewClassDetailVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextButtonDidTap(_ sender: Any) {
         
-        print("hihi", bank.text, " ", bankAccount.text, " ", timeValue)
-        
+       
         if bank.text == "" || bankAccount.text == "" || timeValue == 0 || priceValue == 0 {
             
             var inputMessage: String = ""

@@ -686,6 +686,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="timeEndEditing:" destination="T6m-WI-w6W" eventType="editingDidEnd" id="Imm-vJ-lmi"/>
+                                    <action selector="timeStartEditing:" destination="T6m-WI-w6W" eventType="editingDidBegin" id="lFD-f7-4V9"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="00  만원  (숫자만 입력해주세요)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oHH-uL-6nH">
@@ -697,6 +698,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="priceEndEditing:" destination="T6m-WI-w6W" eventType="editingDidEnd" id="dQO-eF-oXz"/>
+                                    <action selector="priceStartEditing:" destination="T6m-WI-w6W" eventType="editingDidBegin" id="hqO-CA-5B7"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="은행명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SCt-Uw-2Xd">
@@ -956,7 +958,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="startEditing:" destination="lXv-Z3-gt9" eventType="editingDidBegin" id="4mn-wc-eO3"/>
                                                         <action selector="timeFieldEndEditing:" destination="lXv-Z3-gt9" eventType="editingDidEnd" id="WAR-Fb-TYv"/>
                                                     </connections>
                                                 </textField>

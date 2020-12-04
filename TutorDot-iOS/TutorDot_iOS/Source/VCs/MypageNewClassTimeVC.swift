@@ -34,7 +34,6 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     
     // 현재 뷰에서 받는 내용
     var defaultClassTime: [String] = []
-   
     var schedules: [Schedules] = []
     var classPlace: String = ""
     
@@ -86,7 +85,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     @IBAction func completeButtonDidTap(_ sender: Any) {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
-        print(classTime)
+        print(schedules)
         print("수업 추가 - 수업 시간목록")
         AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
             networkResult in
@@ -126,10 +125,14 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     }
     
     @IBAction func classTimeAddedDidTap(_ sender: Any) {
-        if defaultClassTime.count < 5 {
-            defaultClassTime.append("append Cell")
+        
+
+        if schedules.count < 5 {
+            var schedule = Schedules("", "", "") // 빈 배열 추가
+            schedules.append(schedule)
+            
             tableView.reloadData()
-            tableViewHeight.constant = classAddedHeight * CGFloat(defaultClassTime.count)
+            tableViewHeight.constant = classAddedHeight * CGFloat(schedules.count)
             
             UIView.animate(withDuration: 0.3) {
                     self.view.layoutIfNeeded()
@@ -153,7 +156,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
 extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.defaultClassTime.count == 0 {
+        if self.schedules.count == 0 {
             return 0
         } else {
             return classAddedHeight
@@ -163,12 +166,13 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             
-        return defaultClassTime.count
+        return schedules.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        guard let cell = tableView.dequeueReusableCell(withIdentifier: AddRegularClassTimeCell.identifier, for: indexPath) as? AddRegularClassTimeCell else { return UITableViewCell()}
         
+        cell.index = indexPath.row
         cell.delegate = self
         
         return cell
@@ -178,15 +182,11 @@ extension MypageNewClassTimeVC: UITableViewDelegate, UITableViewDataSource {
 
 
 extension MypageNewClassTimeVC: TimeSendDelegate {
-    func classTimesend(_ days: String, _ startTime: String, _ endTime: String) {
-        let schedule = Schedules(days, startTime, endTime)
-        schedules.append(schedule)
+    func classTimesend(_ days: String, _ startTime: String, _ endTime: String, _ index: Int) {
+//        let schedule = Schedules(days, startTime, endTime)
+//        schedules.append(schedule)
+        schedules[index].day = days
+        schedules[index].orgStartTime = startTime
+        schedules[index].orgEndTime = endTime
     }
-    
-    func classTimeDelete(){
-        if schedules.count > 0 {
-            schedules.removeLast()
-        }
-    }
-    
 }
