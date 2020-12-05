@@ -18,7 +18,7 @@ class NotesModifyVC: UIViewController {
     @IBOutlet weak var backView: UIView! {
         didSet {
             //그림자 divice별 밸런스 맞추기
-            let weight: CGFloat = 2.02 * (UIScreen.main.bounds.width / widthDefault)
+            let weight: CGFloat = 1.89 * (UIScreen.main.bounds.width / widthDefault)
             let radius: CGFloat = backView.frame.width / 2.1
             let shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: weight * radius, height: backView.frame.height), cornerRadius: 13)
             
@@ -179,6 +179,12 @@ class NotesModifyVC: UIViewController {
             }
         }
     }
+    
+    // 화면 터치 시, 키보드 내리기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+
     
 
 }
