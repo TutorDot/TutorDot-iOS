@@ -20,7 +20,7 @@ class MyPageVC: UIViewController {
     // 프로필 설정
     var profileURL: String = ""
     let introDefault: String = "한 줄 소개"
-    let defaultURL: String = "https://sopt-26-usy.s3.ap-northeast-2.amazonaws.com/1606475856445.png"
+    let defaultURL: String = "https://sopt-26-usy.s3.ap-northeast-2.amazonaws.com/1606889769097.png"
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var classCollectionView: UICollectionView!
     

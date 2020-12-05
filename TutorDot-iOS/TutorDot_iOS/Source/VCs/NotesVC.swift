@@ -41,7 +41,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     var month: Int = 0
     var monthStr: String = ""
     var selectClassID: Int = 0 // 특정일지 선택 lid
-    let note: String = "수업 일지"
+    let note: String = "수업일지"
     let dateFormatter = DateFormatter()
     let cal = Calendar(identifier: .gregorian)
 //    let dateFomatterDetail = DateFormatter()
