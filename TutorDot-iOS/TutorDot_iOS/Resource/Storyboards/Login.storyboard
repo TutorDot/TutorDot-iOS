@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q2Q-aw-xjB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q2Q-aw-xjB">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,20 +39,6 @@
                                     <constraint firstAttribute="height" constant="177" id="5BS-6f-bhR"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbp-t1-LDM">
-                                <rect key="frame" x="36" y="694" width="303" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="303" id="QvT-YH-ARn"/>
-                                    <constraint firstAttribute="height" constant="48" id="dh8-L2-i6N"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="회원가입">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButton:" destination="hwN-nk-fcn" eventType="touchUpInside" id="tbI-1L-7sZ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Is-XG-CUD">
                                 <rect key="frame" x="15" y="64" width="30" height="30"/>
                                 <constraints>
@@ -103,9 +89,7 @@
                             <constraint firstItem="fTZ-kf-IlR" firstAttribute="centerY" secondItem="1Is-XG-CUD" secondAttribute="centerY" id="OrI-uf-YXZ"/>
                             <constraint firstItem="1Is-XG-CUD" firstAttribute="leading" secondItem="TwO-ZF-qs2" secondAttribute="leading" constant="15" id="UFU-0Z-V3S"/>
                             <constraint firstItem="zpK-eo-66l" firstAttribute="top" secondItem="TwO-ZF-qs2" secondAttribute="top" constant="76" id="ZHb-aP-WFJ"/>
-                            <constraint firstItem="TwO-ZF-qs2" firstAttribute="bottom" secondItem="sbp-t1-LDM" secondAttribute="bottom" constant="36" id="amo-hr-wr1"/>
                             <constraint firstItem="bsT-bg-MN1" firstAttribute="top" secondItem="zpK-eo-66l" secondAttribute="bottom" constant="15" id="cbw-W4-D0V"/>
-                            <constraint firstItem="sbp-t1-LDM" firstAttribute="centerX" secondItem="TwO-ZF-qs2" secondAttribute="centerX" id="dya-gy-ASR"/>
                             <constraint firstItem="cGI-HZ-OHE" firstAttribute="leading" secondItem="TwO-ZF-qs2" secondAttribute="leading" id="jVZ-6E-8V6"/>
                             <constraint firstItem="cGI-HZ-OHE" firstAttribute="top" secondItem="bsT-bg-MN1" secondAttribute="bottom" constant="80" id="ku7-jM-JZJ"/>
                             <constraint firstItem="bsT-bg-MN1" firstAttribute="leading" secondItem="TwO-ZF-qs2" secondAttribute="leading" constant="36" id="pnk-ga-DQk"/>
@@ -115,14 +99,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="2VT-pr-gJO"/>
                     <connections>
-                        <outlet property="bottomViewConstraint" destination="amo-hr-wr1" id="reK-fA-nqA"/>
                         <outlet property="buttonStackView" destination="cGI-HZ-OHE" id="KuT-OF-Vwr"/>
                         <outlet property="isTuteeButton" destination="J3G-xj-ODF" id="KYh-2w-mig"/>
                         <outlet property="isTutorButton" destination="cNU-Kd-hZt" id="wL6-0O-Q9e"/>
                         <outlet property="nextButton" destination="fTZ-kf-IlR" id="yUN-rX-5YO"/>
                         <outlet property="noticeLabel" destination="bsT-bg-MN1" id="vUp-KY-gAz"/>
                         <outlet property="numberLabel" destination="e7R-oy-N6n" id="H3o-l4-4p7"/>
-                        <outlet property="signUpButton" destination="sbp-t1-LDM" id="Z2N-jh-z24"/>
                         <outlet property="stackHeightConstraint" destination="5BS-6f-bhR" id="YwU-ci-05a"/>
                     </connections>
                 </viewController>

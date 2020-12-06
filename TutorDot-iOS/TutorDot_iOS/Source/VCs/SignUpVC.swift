@@ -17,11 +17,9 @@ class SignUpVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var isTutorButton: UIButton!
     @IBOutlet weak var isTuteeButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
     
     // Constraint outlets
     @IBOutlet weak var stackHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomViewConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var nextButton: UIButton!
     
