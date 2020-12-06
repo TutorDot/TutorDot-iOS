@@ -17,28 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        FirebaseApp.configure()
-//        Messaging.messaging().delegate = self
-//        UNUserNotificationCenter.current().delegate = self
-//        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//        UNUserNotificationCenter.current().requestAuthorization(options: authOptions,completionHandler: {_, _ in })
-//        application.registerForRemoteNotifications()
-        
-        
-//
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        // In project directory storyboard looks like Main.storyboard,
-//        // you should use only part before ".storyboard" as it's name,
-//        // so in this example name is "Main".
-//        let storyboard = UIStoryboard.init(name: "Login", bundle: nil)
-//
-//        // controller identifier sets up in storyboard utilities
-//        // panel (on the right), it called Storyboard ID
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-//        self.window?.rootViewController = viewController
-//        self.window?.makeKeyAndVisible()
-//        return true
+
         return true
         
     }
