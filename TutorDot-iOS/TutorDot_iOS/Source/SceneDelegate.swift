@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         //guard let _ = (scene as? UIWindowScene) else { return }
-        window?.overrideUserInterfaceStyle = .light
+       
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         if !UserDefaults.standard.bool(forKey: "didSee") {
@@ -48,6 +49,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window?.rootViewController = rootNC
             self.window?.makeKeyAndVisible()
         }
+        
+        #if compiler(>=5.1)
+            if #available(iOS 13.0, *) {
+              // Always adopt a light interface style.
+              window?.overrideUserInterfaceStyle = .light
+            }
+            #endif
         
         
     }
