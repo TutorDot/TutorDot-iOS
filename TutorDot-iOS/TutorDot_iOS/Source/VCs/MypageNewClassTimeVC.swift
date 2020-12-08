@@ -85,8 +85,7 @@ class MypageNewClassTimeVC: UIViewController, UITextFieldDelegate  {
     @IBAction func completeButtonDidTap(_ sender: Any) {
         // AddClassCompleteVC
         // Mark - 수업 추가 서버 통신
-        print(schedules)
-        print("수업 추가 - 수업 시간목록")
+        
         AddLectureService.AddLectureServiceshared.addLecture(className, classColor, schedules, classPlace, tutorBank, tutorBanckAccout, classTime, classPrice, schedules.count) {
             networkResult in
             switch networkResult {

@@ -180,12 +180,12 @@ extension TutorProfileEditVC: UIImagePickerControllerDelegate, UINavigationContr
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let url =
                 info[UIImagePickerController.InfoKey.imageURL] as? URL {
 
-//                guard let token = UserDefaults.standard.object(forKey: "token") as? String else { return }
+
                 ProfileService.ProfileServiceShared.uploadImage(image, url.lastPathComponent) { networkResult in
                     switch networkResult {
                     case .success(let profileData):
                         guard let profileData = profileData as? UserProfile else { return }
-                        print(profileData.profileUrl)
+                        
                     case .requestErr(let failMessage):
                         guard let message = failMessage as? String else { return }
                         print(message)

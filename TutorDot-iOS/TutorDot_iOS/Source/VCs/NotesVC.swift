@@ -44,7 +44,7 @@ class NotesVC: UIViewController, selectClassProtocol {
     let note: String = "수업일지"
     let dateFormatter = DateFormatter()
     let cal = Calendar(identifier: .gregorian)
-//    let dateFomatterDetail = DateFormatter()
+
     var isFirstRunning: Bool = true
     private var NotesInfos: [NotesContent] = []
     let weekdayStr: [String] = ["","일", "월", "화", "수", "목", "금", "토"]
@@ -402,7 +402,6 @@ class NotesVC: UIViewController, selectClassProtocol {
         
         loadingAnimation()
         islistCall = true
-//        NotesInfos.removeAll()
         classHeaderHidden(true) // 프로그래스바 숨기기
         self.progressView.setProgress(0.0, animated: false)
         
@@ -534,10 +533,7 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate {
                    numberOfRowsInSection section: Int) -> Int {
         let days = Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section]
         
-        print("섹션개수", Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count)
-        print("섹션별 로우개수", self.NotesInfos.filter{ $0.dayWeek == days }.count)
-        print(NotesInfos.count, "데이터 개수 header section")
-        
+
         return self.NotesInfos.filter{ $0.dayWeek == days }.count
 //        return Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted().count
     }
@@ -585,10 +581,9 @@ extension NotesVC: UITableViewDataSource, UITableViewDelegate {
         let headerView = JournalDateHeaderView(
             frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 37))
         headerView.backgroundColor = UIColor.whiteTwo
-        //Array(Set(self.NotesInfos.map{ $0.dayWeek }))
+
         
         
-        print(NotesInfos.count, "데이터 개수 header section")
         headerView.dateLabel.text = String(Array(Set(self.NotesInfos.map{ $0.dayWeek })).sorted()[section])
         
         return headerView
